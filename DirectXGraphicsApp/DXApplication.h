@@ -1,0 +1,24 @@
+#pragma once
+
+#ifndef _DX_APPLICATION_H_
+#define _DX_APPLICATION_H_
+
+#include "DXAPI.h"
+#include "DXConfig.h"
+#include "DXWindow.h"
+
+class DX_API DXApplication
+{
+public:
+	DXApplication();
+	~DXApplication();
+
+	static void Setup(const DXEngineConfig::DXConfig& config);
+	static bool Init();
+	static void Run(std::unique_ptr<DXWindow> window);
+
+private:
+	DXWindow window;
+};
+
+#endif _DX_APPLICATION_H_

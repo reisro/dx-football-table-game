@@ -1,3 +1,5 @@
 ﻿  DXAppTemplate.cpp
+D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.h(21,31): warning C4251: 'DXWindow::dxRendering': class 'std::unique_ptr<DXRendering,std::default_delete<DXRendering>>' precisa ter dll-interface para ser usado por clientes de class 'DXWindow'
+D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.h(21): message : consulte a declaração de 'std::unique_ptr<DXRendering,std::default_delete<DXRendering>>'
      Criando biblioteca D:\DirectX\DirectXGraphicsApp\x64\Debug\DXAppTemplate.lib e objeto D:\DirectX\DirectXGraphicsApp\x64\Debug\DXAppTemplate.exp
   DXAppTemplate.vcxproj -> D:\DirectX\DirectXGraphicsApp\x64\Debug\DXAppTemplate.exe

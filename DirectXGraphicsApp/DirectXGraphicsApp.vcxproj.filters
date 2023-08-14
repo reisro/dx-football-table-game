@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Arquivos de Origem">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Recurso">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Application">
+      <UniqueIdentifier>{b2198341-9460-46b5-838d-b2ceb7bed34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Application">
+      <UniqueIdentifier>{7a50b23d-762f-434f-a891-a6fb983c8b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Core">
+      <UniqueIdentifier>{ffb54b4a-1849-4719-9cc5-97971ebdd1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Core">
+      <UniqueIdentifier>{0ea53ca5-c825-4c71-ba99-224b39a7d2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Rendering">
+      <UniqueIdentifier>{cca42875-eea4-486d-8b7f-11abb51069e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Rendering">
+      <UniqueIdentifier>{ddd23ef7-b574-4cc2-9310-f72a439eb623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Rendering\DirectX">
+      <UniqueIdentifier>{e5980b0e-b59d-4f03-bec7-fdc8caffc560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Rendering\DirectX">
+      <UniqueIdentifier>{ac34bfca-3969-4422-bf1b-2d654a342d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Core\Subsystem">
+      <UniqueIdentifier>{77b146b2-18bb-41f0-8863-9d03c797144d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Core\Subsystem">
+      <UniqueIdentifier>{8bb9a994-8850-4afb-9b77-7992adaa7d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\System">
+      <UniqueIdentifier>{d914c028-0ff2-4085-89bd-36c7132f8523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\System">
+      <UniqueIdentifier>{e6d83e73-f03b-4353-8770-75ac92a5bfa6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DXAPI.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="DXApplication.h">
+      <Filter>Arquivos de Cabeçalho\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="DXWindow.h">
+      <Filter>Arquivos de Cabeçalho\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="DXTypes.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGame.h">
+      <Filter>Arquivos de Cabeçalho\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DXRendering.h">
+      <Filter>Arquivos de Cabeçalho\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="DXRenderingDirectX11.h">
+      <Filter>Arquivos de Cabeçalho\Rendering\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DXSubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Core\Subsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="DXConfig.h">
+      <Filter>Arquivos de Cabeçalho\System</Filter>
+    </ClInclude>
+    <ClInclude Include="DXTimer.h">
+      <Filter>Arquivos de Cabeçalho\System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DXApplication.cpp">
+      <Filter>Arquivos de Origem\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="DXWindow.cpp">
+      <Filter>Arquivos de Origem\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="DXGame.cpp">
+      <Filter>Arquivos de Origem\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DXRendering.cpp">
+      <Filter>Arquivos de Origem\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="DXRenderingDirectX11.cpp">
+      <Filter>Arquivos de Origem\Rendering\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="DXTimer.cpp">
+      <Filter>Arquivos de Origem\System</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

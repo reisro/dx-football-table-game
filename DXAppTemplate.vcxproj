@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)\Include;..\DirectXGraphicsApp\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)\Include;DirectXGraphicsApp</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,7 +145,7 @@
     <ClCompile Include="DXAppTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectXGraphicsApp\DirectXGraphicsApp.vcxproj">
+    <ProjectReference Include="DirectXGraphicsApp\DirectXGraphicsApp.vcxproj">
       <Project>{f25278e2-c8e8-4683-a2c1-83a4d431804b}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -1,0 +1,13 @@
+﻿  DXApplication.cpp
+D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.h(21,31): warning C4251: 'DXWindow::dxRendering': class 'std::unique_ptr<DXRendering,std::default_delete<DXRendering>>' precisa ter dll-interface para ser usado por clientes de class 'DXWindow'
+D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.h(21): message : consulte a declaração de 'std::unique_ptr<DXRendering,std::default_delete<DXRendering>>'
+  DXGame.cpp
+  DXRendering.cpp
+  DXRenderingDirectX11.cpp
+  DXTimer.cpp
+  DXWindow.cpp
+D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.h(21,31): warning C4251: 'DXWindow::dxRendering': class 'std::unique_ptr<DXRendering,std::default_delete<DXRendering>>' precisa ter dll-interface para ser usado por clientes de class 'DXWindow'
+D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.h(21): message : consulte a declaração de 'std::unique_ptr<DXRendering,std::default_delete<DXRendering>>'
+  Gerando Código...
+     Criando biblioteca D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.lib e objeto D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.exp
+  DirectXGraphicsApp.vcxproj -> D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.dll
