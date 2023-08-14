@@ -9,19 +9,31 @@
 class DX_API DXWindow
 {
 public:
-	DXWindow();
-	DXWindow(int width, int height);
-	DXWindow(const DXWindow& rhs);
-	virtual ~DXWindow();
+				  DXWindow();
+				  DXWindow(int width, int height);
+				  DXWindow(const DXWindow& rhs);
+	virtual		 ~DXWindow();
 
-	virtual void Create();
+	virtual void  Create();
 
 protected:
 
 	DXRendering* dxRendering;
 
-private:
+	HINSTANCE	 hInstance;
+	LPCSTR		 windowName;
+	HWND		 hWnd;
+	WNDCLASS	 wndClass;
+	LPCSTR		 titleName;
 
+	int          cmdShow;
+
+private:
+	dxInt        width;
+	dxInt        height;
+
+	// windows callback event handler 
+	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 
 #endif _DXWINDOW_H
