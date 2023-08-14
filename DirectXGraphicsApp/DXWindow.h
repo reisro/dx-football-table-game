@@ -18,7 +18,7 @@ public:
 
 protected:
 
-	std::unique_ptr<DXRendering> dxRendering;
+	DXRendering* dxRendering;
 
 private:
 

@@ -6,7 +6,7 @@
 #include "DXAPI.h"
 #include "DXSubsystem.h"
 
-class DXRendering: public DXSubsystem
+class DX_API DXRendering: public DXSubsystem
 {
 public:
 	DXRendering();
