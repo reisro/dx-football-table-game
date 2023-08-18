@@ -1,1 +1,0 @@
-D:\DirectX\DXAppTemplate\DirectXGraphicsApp\Debug\DirectXGraphicsApp.dll

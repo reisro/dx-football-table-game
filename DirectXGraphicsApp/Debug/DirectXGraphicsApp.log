@@ -1,9 +1,0 @@
-﻿  DXApplication.cpp
-  DXGame.cpp
-  DXRendering.cpp
-  DXRenderingDirectX11.cpp
-  DXTimer.cpp
-  DXWindow.cpp
-  Gerando Código...
-     Criando biblioteca D:\DirectX\DXAppTemplate\DirectXGraphicsApp\Debug\DirectXGraphicsApp.lib e objeto D:\DirectX\DXAppTemplate\DirectXGraphicsApp\Debug\DirectXGraphicsApp.exp
-  DirectXGraphicsApp.vcxproj -> D:\DirectX\DXAppTemplate\DirectXGraphicsApp\Debug\DirectXGraphicsApp.dll

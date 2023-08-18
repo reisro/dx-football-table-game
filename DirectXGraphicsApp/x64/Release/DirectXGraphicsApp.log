@@ -1,8 +1,0 @@
-﻿  DXApplication.cpp
-  DXGame.cpp
-  DXRendering.cpp
-  DXRenderingDirectX11.cpp
-  DXTimer.cpp
-  DXWindow.cpp
-D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.cpp(51,39): error C2440: '=': não é possível converter de 'LPCSTR' para 'LPCWSTR'
-D:\DirectX\DXAppTemplate\DirectXGraphicsApp\DXWindow.cpp(51,30): message : Tipos apontados não são relacionados; conversão requer reinterpret_cast, conversão C-style ou conversão function-style

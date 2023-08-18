@@ -25,6 +25,7 @@ protected:
 	HWND		 hWnd;
 	WNDCLASS	 wndClass;
 	LPCSTR		 titleName;
+	MSG			 msg;
 
 	int          cmdShow;
 
