@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.dll</FullPath>
+      <FullPath>D:\DirectX\DXAppTemplate\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

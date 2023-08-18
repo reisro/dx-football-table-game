@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXGraphicsApp", "DirectXGraphicsApp.vcxproj", "{F25278E2-C8E8-4683-A2C1-83A4D431804B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXAppTemplate", "..\DXAppTemplate\DXAppTemplate.vcxproj", "{E9266694-6C62-4E3D-8F23-21959E0D6919}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DXAppTemplate", "..\DXAppTemplate.vcxproj", "{E9266694-6C62-4E3D-8F23-21959E0D6919}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

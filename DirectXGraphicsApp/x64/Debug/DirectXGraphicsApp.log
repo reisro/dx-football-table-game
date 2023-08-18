@@ -5,5 +5,5 @@
   DXTimer.cpp
   DXWindow.cpp
   Gerando Código...
-     Criando biblioteca D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.lib e objeto D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.exp
-  DirectXGraphicsApp.vcxproj -> D:\DirectX\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.dll
+     Criando biblioteca D:\DirectX\DXAppTemplate\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.lib e objeto D:\DirectX\DXAppTemplate\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.exp
+  DirectXGraphicsApp.vcxproj -> D:\DirectX\DXAppTemplate\DirectXGraphicsApp\x64\Debug\DirectXGraphicsApp.dll

@@ -22,7 +22,7 @@ bool DXApplication::Init()
 
 void DXApplication::Run(std::unique_ptr<DXWindow> window)
 {
-	DebugLog("\n Application running...");
+	DXLog("\n Application running...");
 
 	window->Create();
 }
