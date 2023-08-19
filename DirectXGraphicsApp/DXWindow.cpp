@@ -71,7 +71,7 @@ void DXWindow::Create()
         DispatchMessage(&msg);
     }
 
-    DXLog("	\n Created Window...");
+    DXLog("	\n Created Window....");
 }
 
 LRESULT DXWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
