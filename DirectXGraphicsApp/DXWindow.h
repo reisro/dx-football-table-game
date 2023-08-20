@@ -7,7 +7,6 @@
 
 #include "DXAPI.h"
 #include "DXRendering.h"
-#include "resource.h"
 
 class DX_API DXWindow
 {
