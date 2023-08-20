@@ -159,6 +159,7 @@
     <ClInclude Include="dear_imgui\imstb_rectpack.h" />
     <ClInclude Include="dear_imgui\imstb_textedit.h" />
     <ClInclude Include="dear_imgui\imstb_truetype.h" />
+    <ClInclude Include="dear_imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="DXAPI.h" />
     <ClInclude Include="DXApplication.h" />
     <ClInclude Include="DXConfig.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="dear_imgui\imgui_draw.cpp" />
     <ClCompile Include="dear_imgui\imgui_tables.cpp" />
     <ClCompile Include="dear_imgui\imgui_widgets.cpp" />
+    <ClCompile Include="dear_imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="DXApplication.cpp" />
     <ClCompile Include="DXGame.cpp" />
     <ClCompile Include="DXRendering.cpp" />

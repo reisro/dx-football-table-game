@@ -61,6 +61,9 @@
     <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc">
       <UniqueIdentifier>{b566e3b6-f41c-413c-985d-73a4fb4d6044}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp">
+      <UniqueIdentifier>{03f27e7a-e5aa-4636-ad90-4c4ef14ddeba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXAPI.h">
@@ -126,6 +129,9 @@
     <ClInclude Include="dear_imgui\backends\imgui_impl_dx12.h">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
     </ClInclude>
+    <ClInclude Include="dear_imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXApplication.cpp">
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
