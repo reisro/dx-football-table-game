@@ -80,6 +80,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(DXSDK_DIR)\Utilities\bin\x64;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -127,7 +129,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;d3dx11.lib;D3DCompiler.lib;dxerr.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,6 +149,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx10.h" />
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx12.h" />
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx9.h" />
+    <ClInclude Include="dear_imgui\imconfig.h" />
+    <ClInclude Include="dear_imgui\imgui.h" />
+    <ClInclude Include="dear_imgui\imgui_internal.h" />
+    <ClInclude Include="dear_imgui\imstb_rectpack.h" />
+    <ClInclude Include="dear_imgui\imstb_textedit.h" />
+    <ClInclude Include="dear_imgui\imstb_truetype.h" />
     <ClInclude Include="DXAPI.h" />
     <ClInclude Include="DXApplication.h" />
     <ClInclude Include="DXConfig.h" />
@@ -160,6 +172,15 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx10.cpp" />
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp" />
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx9.cpp" />
+    <ClCompile Include="dear_imgui\imgui.cpp" />
+    <ClCompile Include="dear_imgui\imgui_demo.cpp" />
+    <ClCompile Include="dear_imgui\imgui_draw.cpp" />
+    <ClCompile Include="dear_imgui\imgui_tables.cpp" />
+    <ClCompile Include="dear_imgui\imgui_widgets.cpp" />
     <ClCompile Include="DXApplication.cpp" />
     <ClCompile Include="DXGame.cpp" />
     <ClCompile Include="DXRendering.cpp" />

@@ -49,6 +49,15 @@
     <Filter Include="Arquivos de Origem\System">
       <UniqueIdentifier>{e6d83e73-f03b-4353-8770-75ac92a5bfa6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\ThirdParty">
+      <UniqueIdentifier>{6deb2a86-0d73-45fc-8c65-2dacc405d3d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui">
+      <UniqueIdentifier>{e920e3b8-c8ee-46bb-838d-04495e7425a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends">
+      <UniqueIdentifier>{a1b012a9-e407-43f1-b05b-182d00bd4e9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXAPI.h">
@@ -84,6 +93,36 @@
     <ClInclude Include="resource.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="dear_imgui\imconfig.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\imgui.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\imgui_internal.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\imstb_rectpack.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\imstb_textedit.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\imstb_truetype.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx9.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx10.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx11.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\backends\imgui_impl_dx12.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXApplication.cpp">
@@ -103,6 +142,33 @@
     </ClCompile>
     <ClCompile Include="DXTimer.cpp">
       <Filter>Arquivos de Origem\System</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_demo.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_draw.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_tables.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\imgui_widgets.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx9.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx10.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx11.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
