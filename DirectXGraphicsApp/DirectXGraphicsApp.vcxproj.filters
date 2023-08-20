@@ -81,6 +81,9 @@
     <ClInclude Include="DXTimer.h">
       <Filter>Arquivos de Cabeçalho\System</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXApplication.cpp">

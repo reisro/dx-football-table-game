@@ -17,7 +17,6 @@
 #include <queue>
 #include <map>
 #include <set>
-#include <memory>
 
 // PhysicX define to suppress windows global min.max macros
 #define NOMINMAX
