@@ -188,6 +188,12 @@
     <ClCompile Include="DXTimer.cpp" />
     <ClCompile Include="DXWindow.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dear_imgui\misc\imgui.natstepfilter" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="dear_imgui\misc\imgui.natvis" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

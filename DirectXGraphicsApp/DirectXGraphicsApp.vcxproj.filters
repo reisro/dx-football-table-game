@@ -58,6 +58,9 @@
     <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends">
       <UniqueIdentifier>{a1b012a9-e407-43f1-b05b-182d00bd4e9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc">
+      <UniqueIdentifier>{b566e3b6-f41c-413c-985d-73a4fb4d6044}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXAPI.h">
@@ -170,5 +173,15 @@
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dear_imgui\misc\imgui.natstepfilter">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="dear_imgui\misc\imgui.natvis">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc</Filter>
+    </Natvis>
   </ItemGroup>
 </Project>
