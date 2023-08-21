@@ -24,3 +24,8 @@ bool DXRendering::Init()
 void DXRendering::PostInit()
 {
 }
+
+DXRendering* DXRendering::GetInstance()
+{
+    return NULL;
+}

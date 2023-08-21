@@ -18,11 +18,20 @@ public:
 						 DXWindow(const DXWindow& rhs);
 	virtual		        ~DXWindow();
 
+	virtual void		 Setup();
 	virtual void         Create();
+
+	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 protected:
 
+	HWND				 hWnd;
+	WNDCLASSEX			 wc;
+	MSG					 msg;
+
 private:
+
+	DXRendering*		 dxRendering;
 
 	dxInt				 width;
 	dxInt                height;

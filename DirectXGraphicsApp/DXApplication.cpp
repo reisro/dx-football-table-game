@@ -23,6 +23,8 @@ bool DXApplication::Init()
 void DXApplication::Run(std::unique_ptr<DXWindow> window)
 {
 	DXLog("\n Application running...");
+
+	window->Create();
 }
 
 DX_API DXApplication* createDXApplication()

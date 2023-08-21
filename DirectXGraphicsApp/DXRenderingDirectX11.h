@@ -29,6 +29,11 @@ public:
 
 	virtual ~DXRenderingDirectX11();
 
+	static ID3D11Device*           d3dDevice;
+	static ID3D11DeviceContext*    d3dDeviceContext;
+	static IDXGISwapChain*         swapChain;
+	static ID3D11RenderTargetView* mainRenderTargetView;
+
 protected:
 
 private:

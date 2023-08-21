@@ -19,9 +19,9 @@ public:
 	bool Init()  override;
 	void PostInit() override;
 
-protected:
+	virtual DXRendering* GetInstance();
 
-	static DXRendering* instance;
+protected:
 
 private:
 
