@@ -153,6 +153,7 @@
     <ClInclude Include="dear_imgui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="dear_imgui\backends\imgui_impl_dx12.h" />
     <ClInclude Include="dear_imgui\backends\imgui_impl_dx9.h" />
+    <ClInclude Include="dear_imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="dear_imgui\imconfig.h" />
     <ClInclude Include="dear_imgui\imgui.h" />
     <ClInclude Include="dear_imgui\imgui_internal.h" />
@@ -170,13 +171,13 @@
     <ClInclude Include="DXTypes.h" />
     <ClInclude Include="DXWindow.h" />
     <ClInclude Include="DXSubsystem.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx10.cpp" />
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp" />
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx9.cpp" />
+    <ClCompile Include="dear_imgui\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="dear_imgui\imgui.cpp" />
     <ClCompile Include="dear_imgui\imgui_demo.cpp" />
     <ClCompile Include="dear_imgui\imgui_draw.cpp" />

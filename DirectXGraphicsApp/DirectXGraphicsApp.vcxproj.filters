@@ -96,9 +96,6 @@
     <ClInclude Include="DXTimer.h">
       <Filter>Arquivos de Cabeçalho\System</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="dear_imgui\imconfig.h">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
     </ClInclude>
@@ -131,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="dear_imgui\misc\cpp\imgui_stdlib.h">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="dear_imgui\backends\imgui_impl_win32.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="dear_imgui\misc\cpp\imgui_stdlib.cpp">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="dear_imgui\backends\imgui_impl_win32.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

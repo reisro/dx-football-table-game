@@ -5,6 +5,8 @@
 
 #include "DXAPI.h"
 #include "DXSubsystem.h"
+#include "dear_imgui/backends/imgui_impl_dx11.h"
+#include <d3d11.h>
 
 class DX_API DXRendering: public DXSubsystem
 {
