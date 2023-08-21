@@ -5,6 +5,10 @@
 
 int main()
 {
+	DXLog("-----------------------");
+	DXLog("Rain Forest Engine v1.1");
+	DXLog("-----------------------");
+
 	std::unique_ptr<DXWindow> appWindow = std::make_unique<DXWindow>();
 
 	DXApplication::Run(std::move(appWindow));
