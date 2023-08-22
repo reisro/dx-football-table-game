@@ -5,13 +5,20 @@
 
 int main()
 {
-	DXLog("-----------------------");
-	DXLog("Rain Forest Engine v1.1");
-	DXLog("-----------------------");
+	DXLog("----------------------------------------------");
+	DXLog("\tRain Forest Engine v1.1");
+	DXLog("----------------------------------------------");
+
+	DXEngineConfig::DXConfig appConfig;
 
 	std::unique_ptr<DXWindow> appWindow = std::make_unique<DXWindow>();
 
-	DXApplication::Run(std::move(appWindow));
+	RFE::DXApplication::Setup(appConfig);
+	RFE::DXApplication::Run(std::move(appWindow));
+
+	DXLog("\nFinished Application...");
+
+	return 0;
 }
 
 // Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração

@@ -2,6 +2,8 @@
 
 DXEngineConfig::DXConfig DXEngineConfig::DXConfig::instance;
 
+using namespace RFE;
+
 DXApplication::DXApplication()
 {
 }

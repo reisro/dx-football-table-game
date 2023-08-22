@@ -31,7 +31,7 @@ protected:
 
 private:
 
-	DXRendering*		 dxRendering;
+	DXRendering			 dxRendering;
 
 	dxInt				 width;
 	dxInt                height;

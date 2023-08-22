@@ -7,18 +7,21 @@
 #include "DXConfig.h"
 #include "DXWindow.h"
 
-class DX_API DXApplication
+namespace RFE
 {
-public:
-	DXApplication();
-	~DXApplication();
+	class DX_API DXApplication
+	{
+	public:
+		DXApplication();
+		~DXApplication();
 
-	static void Setup(const DXEngineConfig::DXConfig& config);
-	static bool Init();
-	static void Run(std::unique_ptr<DXWindow> window);
+		static void Setup(const DXEngineConfig::DXConfig& config);
+		static bool Init();
+		static void Run(std::unique_ptr<DXWindow> window);
 
-private:
-	DXWindow window;
-};
+	private:
+		DXWindow window;
+	};
+}
 
 #endif _DX_APPLICATION_H_
