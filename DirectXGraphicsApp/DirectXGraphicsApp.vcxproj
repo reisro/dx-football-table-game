@@ -171,6 +171,8 @@
     <ClInclude Include="DXTypes.h" />
     <ClInclude Include="DXWindow.h" />
     <ClInclude Include="DXSubsystem.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="RainForestEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dear_imgui\backends\imgui_impl_dx10.cpp" />
