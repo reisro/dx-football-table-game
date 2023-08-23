@@ -81,7 +81,7 @@
     <ClInclude Include="DXGame.h">
       <Filter>Arquivos de Cabeçalho\Core</Filter>
     </ClInclude>
-    <ClInclude Include="DXRendering.h">
+    <ClInclude Include="DXRenderer.h">
       <Filter>Arquivos de Cabeçalho\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="DXRenderingDirectX11.h">
@@ -149,7 +149,7 @@
     <ClCompile Include="DXGame.cpp">
       <Filter>Arquivos de Origem\Core</Filter>
     </ClCompile>
-    <ClCompile Include="DXRendering.cpp">
+    <ClCompile Include="DXRenderer.cpp">
       <Filter>Arquivos de Origem\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="DXRenderingDirectX11.cpp">

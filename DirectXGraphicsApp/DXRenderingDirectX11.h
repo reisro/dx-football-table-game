@@ -3,7 +3,10 @@
 #ifndef DX_RENDERINGDX11_H
 #define DX_RENDERINGDX11_H
 
-#include "DXRendering.h"
+#include "DXRenderer.h"
+#include <d3d11.h>
+#include <d3dx11.h>
+#include <d3dx10.h>
 
 //-----------------------------------------------------------------------------
 // Enum (Vertex Processing)
@@ -16,7 +19,7 @@ enum class D3DVERTEXPROCESSING
 	HARDWARE = 2
 };
 
-class DXRenderingDirectX11: public RFE::DXRendering
+class DXRenderingDirectX11: public DXRenderer
 {
 public:
 	DXRenderingDirectX11();
@@ -26,13 +29,16 @@ public:
 	void Setup()    override;
 	bool Init()     override;
 	void PostInit() override;
+	void Clean() override;
 
 	virtual ~DXRenderingDirectX11();
 
-	static ID3D11Device*           d3dDevice;
-	static ID3D11DeviceContext*    d3dDeviceContext;
-	static IDXGISwapChain*         swapChain;
-	static ID3D11RenderTargetView* mainRenderTargetView;
+	ID3D11Device*           d3dDevice;
+	ID3D11DeviceContext*    d3dDeviceContext;
+	IDXGISwapChain*         swapChain;
+	ID3D11RenderTargetView* mainRenderTargetView;
+	DXGI_SWAP_CHAIN_DESC    swapChainDesc;
+	ID3D11RenderTargetView* backBuffer;
 
 protected:
 
