@@ -15,6 +15,9 @@ public:
 
 	// Operations needed after initialization
 	virtual void PostInit() = 0;
+	
+	// Clean resources before shutting down
+	virtual void Clean() = 0;
 };
 
 #endif _DX_SUBSYSTEM_H

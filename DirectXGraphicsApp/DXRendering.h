@@ -8,26 +8,25 @@
 #include "dear_imgui/backends/imgui_impl_dx11.h"
 #include <d3d11.h>
 
-namespace RFE
+class DX_API DXRendering : public DXSubsystem
 {
-	class DX_API DXRendering : public DXSubsystem
-	{
-	public:
-		DXRendering();
-		DXRendering(const DXRendering& rhs);
-		virtual ~DXRendering();
+public:
+	DXRendering();
+	DXRendering(const DXRendering& rhs);
+	virtual ~DXRendering();
 
-		void Setup() override;
-		bool Init()  override;
-		void PostInit() override;
+	void Setup() override;
+	bool Init()  override;
+	void PostInit() override;
+	void Clean() override;
 
-		virtual DXRendering* GetInstance();
+	virtual DXRendering* GetInstance();
 
-	protected:
+protected:
 
-	private:
+private:
 
-	};
-}
+};
+
 
 #endif _DX_RENDERING_H

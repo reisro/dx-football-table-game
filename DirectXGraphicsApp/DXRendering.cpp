@@ -1,7 +1,5 @@
 #include "DXRendering.h"
 
-using  namespace RFE;
-
 DXRendering::DXRendering()
 {
 }
@@ -24,6 +22,10 @@ bool DXRendering::Init()
 }
 
 void DXRendering::PostInit()
+{
+}
+
+void DXRendering::Clean()
 {
 }
 

@@ -10,8 +10,6 @@
 #include "dear_imgui/imgui.h"
 #include "dear_imgui/backends/imgui_impl_win32.h"
 
-using namespace RFE;
-
 class DX_API DXWindow
 {
 public:
