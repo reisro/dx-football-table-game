@@ -16,7 +16,7 @@ enum class D3DVERTEXPROCESSING
 	HARDWARE = 2
 };
 
-class DXRenderingDirectX11: public DXRendering
+class DXRenderingDirectX11: public RFE::DXRendering
 {
 public:
 	DXRenderingDirectX11();

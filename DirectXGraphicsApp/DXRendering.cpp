@@ -1,5 +1,7 @@
 #include "DXRendering.h"
 
+using  namespace RFE;
+
 DXRendering::DXRendering()
 {
 }

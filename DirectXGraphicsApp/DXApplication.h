@@ -3,8 +3,7 @@
 #ifndef _DX_APPLICATION_H_
 #define _DX_APPLICATION_H_
 
-#include "DXAPI.h"
-#include "DXConfig.h"
+#include "pch.h"
 #include "DXWindow.h"
 
 namespace RFE

@@ -5,10 +5,12 @@
 
 #define MAX_LOADSTRING 100
 
-#include "DXAPI.h"
+#include "pch.h"
 #include "DXRendering.h"
 #include "dear_imgui/imgui.h"
 #include "dear_imgui/backends/imgui_impl_win32.h"
+
+using namespace RFE;
 
 class DX_API DXWindow
 {
@@ -31,10 +33,10 @@ protected:
 
 private:
 
-	DXRendering			 dxRendering;
+	DXRendering					 dxRendering;
 
-	dxInt				 width;
-	dxInt                height;
+	dxInt						 width;
+	dxInt						 height;
 };
 
 #endif _DXWINDOW_H
