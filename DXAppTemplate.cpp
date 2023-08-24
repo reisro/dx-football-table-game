@@ -11,10 +11,14 @@ int main()
 
 	DXEngineConfig::DXConfig appConfig;
 
+	appConfig.graphicsAPI = DXEngineConfig::GraphicsAPI::DirectX11;
+
 	std::unique_ptr<DXWindow> appWindow = std::make_unique<DXWindow>();
 
 	RFE::DXApplication::Setup(appConfig);
-	RFE::DXApplication::Run(std::move(appWindow));
+
+	if (RFE::DXApplication::Init())
+		RFE::DXApplication::Run(std::move(appWindow));
 
 	DXLog("\nFinished Application...");
 

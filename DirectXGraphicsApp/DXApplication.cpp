@@ -19,7 +19,14 @@ void DXApplication::Setup(const DXEngineConfig::DXConfig& config)
 
 bool DXApplication::Init()
 {
-	return false;
+	return InitRenderer();
+}
+
+bool DXApplication::InitRenderer()
+{
+	DXRenderer::CreateInstance();
+
+	return DXRenderer::initialized;
 }
 
 void DXApplication::Run(std::unique_ptr<DXWindow> window)

@@ -21,6 +21,7 @@
 // PhysicX define to suppress windows global min.max macros
 #define NOMINMAX
 #include <Windows.h>
+#include <windowsx.h>
 
 #include "DXTypes.h"
 

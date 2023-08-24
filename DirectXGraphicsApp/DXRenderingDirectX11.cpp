@@ -2,6 +2,7 @@
 
 DXRenderingDirectX11::DXRenderingDirectX11()
 {
+	Setup();
 }
 
 DXRenderingDirectX11::DXRenderingDirectX11(const DXRenderingDirectX11& rhs)
@@ -10,24 +11,23 @@ DXRenderingDirectX11::DXRenderingDirectX11(const DXRenderingDirectX11& rhs)
 
 void DXRenderingDirectX11::Setup()
 {
+	// clear out the struct for use
+	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
+
+	// fill the swap chain description struct
+	swapChainDesc.BufferCount = 1;                                    // one back buffer
+	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
+	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
+	swapChainDesc.OutputWindow = renderWindow;
+	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
+	swapChainDesc.Windowed = TRUE;                                    // windowed/full-screen mode
+
+	Init();
 }
 
 bool DXRenderingDirectX11::Init()
 {
-	// create a struct to hold information about the swap chain
-	DXGI_SWAP_CHAIN_DESC scd;
-
-	// clear out the struct for use
-	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
-
-	// fill the swap chain description struct
-	scd.BufferCount = 1;                                    // one back buffer
-	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
-	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-	scd.SampleDesc.Count = 4;                               // how many multisamples
-	scd.Windowed = TRUE;                                    // windowed/full-screen mode
-
-	 // create a device, device context and swap chain using the information in the scd struct
+	// create a device, device context and swap chain using the information in the scd struct
 	D3D11CreateDeviceAndSwapChain(NULL,
 		D3D_DRIVER_TYPE_HARDWARE,
 		NULL,
@@ -35,13 +35,13 @@ bool DXRenderingDirectX11::Init()
 		NULL,
 		NULL,
 		D3D11_SDK_VERSION,
-		&scd,
+		&swapChainDesc,
 		&swapChain,
 		&d3dDevice,
 		NULL,
 		&d3dDeviceContext);
 
-	return false;
+	return d3dDevice? !DXRenderer::initialized: DXRenderer::initialized;
 }
 
 void DXRenderingDirectX11::PostInit()

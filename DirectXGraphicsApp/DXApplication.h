@@ -16,6 +16,7 @@ namespace RFE
 
 		static void Setup(const DXEngineConfig::DXConfig& config);
 		static bool Init();
+		static bool InitRenderer();
 		static void Run(std::unique_ptr<DXWindow> window);
 
 	private:
