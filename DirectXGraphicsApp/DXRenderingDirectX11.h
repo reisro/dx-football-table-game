@@ -7,6 +7,7 @@
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>
+#include <sstream>
 
 //-----------------------------------------------------------------------------
 // Enum (Vertex Processing)
@@ -39,6 +40,7 @@ public:
 	ID3D11RenderTargetView* mainRenderTargetView;
 	DXGI_SWAP_CHAIN_DESC    swapChainDesc;
 	ID3D11RenderTargetView* backBuffer;
+	D3D_FEATURE_LEVEL		featureLevel;
 
 protected:
 

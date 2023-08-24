@@ -23,6 +23,10 @@ DXWindow::~DXWindow()
 {
 }
 
+void DXWindow::CreateInstance()
+{
+}
+
 void DXWindow::Setup()
 {
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("DXApp"), NULL };
@@ -72,6 +76,10 @@ void DXWindow::Create()
     }
 
     DXLog("\nCreated Window....");
+}
+
+void DXWindow::Show()
+{
 }
 
 LRESULT __stdcall DXWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

@@ -22,6 +22,11 @@ bool DXApplication::Init()
 	return InitRenderer();
 }
 
+bool RFE::DXApplication::InitWindow()
+{
+	return false;
+}
+
 bool DXApplication::InitRenderer()
 {
 	DXRenderer::CreateInstance();
