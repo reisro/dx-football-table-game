@@ -15,10 +15,10 @@ namespace RFE
 		~DXApplication();
 
 		static void Setup(const DXEngineConfig::DXConfig& config);
-		static bool Init();
+		static bool Init(std::unique_ptr<DXWindow> window);
 		static bool InitWindow();
 		static bool InitRenderer();
-		static void Run(std::unique_ptr<DXWindow> window);
+		static void Run();
 
 	private:
 		DXWindow window;

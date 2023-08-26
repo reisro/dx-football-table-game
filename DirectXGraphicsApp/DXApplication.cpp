@@ -17,9 +17,12 @@ void DXApplication::Setup(const DXEngineConfig::DXConfig& config)
 	DXEngineConfig::DXConfig::instance = config;
 }
 
-bool DXApplication::Init()
+bool DXApplication::Init(std::unique_ptr<DXWindow> window)
 {
-	return InitRenderer();
+	if (InitRenderer())
+		window->Create();
+
+	return true;
 }
 
 bool RFE::DXApplication::InitWindow()
@@ -34,11 +37,9 @@ bool DXApplication::InitRenderer()
 	return DXRenderer::initialized;
 }
 
-void DXApplication::Run(std::unique_ptr<DXWindow> window)
+void DXApplication::Run()
 {
 	DXLog("\nApplication running...");
-
-	window->Create();
 }
 
 DX_API DXApplication* createDXApplication()

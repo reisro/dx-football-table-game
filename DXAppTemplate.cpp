@@ -10,15 +10,17 @@ int main()
 	DXLog("----------------------------------------------");
 
 	DXEngineConfig::DXConfig appConfig;
-
 	appConfig.graphicsAPI = DXEngineConfig::GraphicsAPI::DirectX11;
 
-	std::unique_ptr<DXWindow> appWindow = std::make_unique<DXWindow>();
-
+	// Init the application setup configuration
 	RFE::DXApplication::Setup(appConfig);
 
-	if (RFE::DXApplication::Init())
-		RFE::DXApplication::Run(std::move(appWindow));
+	// Create a window game application
+	std::unique_ptr<DXWindow> appWindow = std::make_unique<DXWindow>();
+
+	// Run the app
+	if (RFE::DXApplication::Init(std::move(appWindow)))
+		RFE::DXApplication::Run();
 
 	DXLog("\nFinished Application...");
 

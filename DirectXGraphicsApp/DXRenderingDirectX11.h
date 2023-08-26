@@ -34,6 +34,8 @@ public:
 
 	virtual ~DXRenderingDirectX11();
 
+	void FillSwapChainDescription();
+
 	ID3D11Device*           d3dDevice;
 	ID3D11DeviceContext*    d3dDeviceContext;
 	IDXGISwapChain*         swapChain;

@@ -17,7 +17,6 @@ bool DXRenderingDirectX11::Init()
 {
 	UINT createDeviceFlags = 0;
 
-
 	#if defined(DEBUG) || defined(_DEBUG)
 		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 	#endif
@@ -44,9 +43,42 @@ bool DXRenderingDirectX11::Init()
 		return false;
 	}
 
+	//// create a device, device context and swap chain using the information in the scd struct
+	//D3D11CreateDeviceAndSwapChain(NULL,
+	//	D3D_DRIVER_TYPE_HARDWARE,
+	//	NULL,
+	//	NULL,
+	//	NULL,
+	//	NULL,
+	//	D3D11_SDK_VERSION,
+	//	&swapChainDesc,
+	//	&swapChain,
+	//	&d3dDevice,
+	//	NULL,
+	//	&d3dDeviceContext);
+
+	if (d3dDevice)
+		DXRenderer::initialized = !DXRenderer::initialized;
+
+	return DXRenderer::initialized;
+}
+
+void DXRenderingDirectX11::PostInit()
+{
+}
+
+void DXRenderingDirectX11::Clean()
+{
+	swapChain->Release();
+	d3dDevice->Release();
+	d3dDeviceContext->Release();
+}
+
+void DXRenderingDirectX11::FillSwapChainDescription()
+{
 	UINT m4xMsaaQuality;
 
-	HR(d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_B8G8R8A8_UNORM, 4, &m4xMsaaQuality));
+	HRESULT hr = d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_B8G8R8A8_UNORM, 4, &m4xMsaaQuality);
 	assert(m4xMsaaQuality > 0);
 
 	// clear out the struct for use
@@ -64,33 +96,6 @@ bool DXRenderingDirectX11::Init()
 	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
 	swapChainDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
 	swapChainDesc.Windowed = TRUE;
-
-	//// create a device, device context and swap chain using the information in the scd struct
-	//D3D11CreateDeviceAndSwapChain(NULL,
-	//	D3D_DRIVER_TYPE_HARDWARE,
-	//	NULL,
-	//	NULL,
-	//	NULL,
-	//	NULL,
-	//	D3D11_SDK_VERSION,
-	//	&swapChainDesc,
-	//	&swapChain,
-	//	&d3dDevice,
-	//	NULL,
-	//	&d3dDeviceContext);
-
-	return d3dDevice? !DXRenderer::initialized: DXRenderer::initialized;
-}
-
-void DXRenderingDirectX11::PostInit()
-{
-}
-
-void DXRenderingDirectX11::Clean()
-{
-	swapChain->Release();
-	d3dDevice->Release();
-	d3dDeviceContext->Release();
 }
 
 DXRenderingDirectX11::~DXRenderingDirectX11()

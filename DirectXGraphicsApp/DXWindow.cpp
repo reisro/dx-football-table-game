@@ -33,16 +33,19 @@ void DXWindow::Setup()
     ::RegisterClassEx(&wc);
     hWnd = ::CreateWindow(wc.lpszClassName, _T("Rain Forest Engine"), WS_OVERLAPPEDWINDOW, 100, 100, width, height, NULL, NULL, wc.hInstance, NULL);
 
-    dxRenderer->GetInstance()->renderWindow = hWnd;
+    #if defined DX11_RENDER_SUPPORT
+
+        DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
+
+        renderer->renderWindow = hWnd;
+        renderer->FillSwapChainDescription();
+
+    #endif 
 }
 
 void DXWindow::Create()
 {
     Setup();
-
-    // Show the window
-    ::ShowWindow(hWnd, SW_SHOWDEFAULT);
-    ::UpdateWindow(hWnd);
 
     //// Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -67,19 +70,24 @@ void DXWindow::Create()
     ImGui_ImplWin32_Init(hWnd);
     //ImGui_ImplDX11_Init(dxRendering->d3dDevice, dxRendering->d3dDeviceContext);
 
+    DXLog("\nCreated Window....");
+
+    Show();
+}
+
+void DXWindow::Show()
+{
+    // Show the window
+    ::ShowWindow(hWnd, SW_SHOWDEFAULT);
+    ::UpdateWindow(hWnd);
+
     msg = {};
-    
+
     while (::GetMessage(&msg, NULL, 0U, 0U) > 0)
     {
         ::TranslateMessage(&msg);
         ::DispatchMessage(&msg);
     }
-
-    DXLog("\nCreated Window....");
-}
-
-void DXWindow::Show()
-{
 }
 
 LRESULT __stdcall DXWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

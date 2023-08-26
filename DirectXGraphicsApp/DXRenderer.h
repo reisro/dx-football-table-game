@@ -24,7 +24,7 @@ public:
 	void PostInit() override;
 	void Clean() override;
 
-	virtual DXRenderer* GetInstance();
+	static DXRenderer* GetInstance();
 
 	HWND renderWindow;
 
