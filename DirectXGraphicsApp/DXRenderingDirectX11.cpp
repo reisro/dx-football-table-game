@@ -2,7 +2,7 @@
 
 DXRenderingDirectX11::DXRenderingDirectX11()
 {
-	Init();
+	initialized = true;
 }
 
 DXRenderingDirectX11::DXRenderingDirectX11(const DXRenderingDirectX11& rhs)
@@ -15,20 +15,41 @@ void DXRenderingDirectX11::Setup()
 
 bool DXRenderingDirectX11::Init()
 {
+	// clear out the struct for use
+	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
+
+	// fill the swap chain description struct
+	swapChainDesc.BufferCount = 1;                                    // one back buffer
+	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
+	swapChainDesc.OutputWindow = renderWindow;
+	swapChainDesc.Flags = 0;
+	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
+	swapChainDesc.Windowed = TRUE;
+
 	UINT createDeviceFlags = 0;
 
 	#if defined(DEBUG) || defined(_DEBUG)
 		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 	#endif
 
-	HRESULT hr = D3D11CreateDevice(0,
+	HRESULT hr = D3D11CreateDeviceAndSwapChain(NULL,
 		D3D_DRIVER_TYPE_HARDWARE,
-		0,
-		createDeviceFlags,
-		0, 0,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
 		D3D11_SDK_VERSION,
+		&swapChainDesc,
+		&swapChain,
 		&d3dDevice,
-		&featureLevel,
+		NULL,
 		&d3dDeviceContext);
 
 	if FAILED(hr)
@@ -37,25 +58,9 @@ bool DXRenderingDirectX11::Init()
 		return false;
 	}
 
-	if (featureLevel != D3D_FEATURE_LEVEL_11_0)
-	{
-		MessageBox(0, L"Direct3D Feature Level 11 unsupported.", 0, 0);
-		return false;
-	}
+	CreateRenderTargetView();
 
-	//// create a device, device context and swap chain using the information in the scd struct
-	//D3D11CreateDeviceAndSwapChain(NULL,
-	//	D3D_DRIVER_TYPE_HARDWARE,
-	//	NULL,
-	//	NULL,
-	//	NULL,
-	//	NULL,
-	//	D3D11_SDK_VERSION,
-	//	&swapChainDesc,
-	//	&swapChain,
-	//	&d3dDevice,
-	//	NULL,
-	//	&d3dDeviceContext);
+	SetViewport();
 
 	if (d3dDevice)
 		DXRenderer::initialized = !DXRenderer::initialized;
@@ -70,34 +75,79 @@ void DXRenderingDirectX11::PostInit()
 void DXRenderingDirectX11::Clean()
 {
 	swapChain->Release();
+	backBuffer->Release();
 	d3dDevice->Release();
 	d3dDeviceContext->Release();
 }
 
 void DXRenderingDirectX11::FillSwapChainDescription()
 {
-	UINT m4xMsaaQuality;
-
-	HRESULT hr = d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_B8G8R8A8_UNORM, 4, &m4xMsaaQuality);
-	assert(m4xMsaaQuality > 0);
-
 	// clear out the struct for use
 	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
 
 	// fill the swap chain description struct
 	swapChainDesc.BufferCount = 1;                                    // one back buffer
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
 	swapChainDesc.OutputWindow = renderWindow;
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	swapChainDesc.Flags = 0;
 	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
-	swapChainDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
 	swapChainDesc.Windowed = TRUE;
+}
+
+void DXRenderingDirectX11::CreateSwapChain()
+{
+}
+
+void DXRenderingDirectX11::CreateRenderTargetView()
+{
+	// get the address of the back buffer
+	swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&tBackBuffer);
+
+	// use the back buffer address to create the render target
+	d3dDevice->CreateRenderTargetView(tBackBuffer, NULL, &backBuffer);
+	tBackBuffer->Release();
+
+	// set the render target as the back buffer
+	d3dDeviceContext->OMSetRenderTargets(1, &backBuffer, NULL);
+}
+
+void DXRenderingDirectX11::SetViewport()
+{
+	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
+
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.Width = 1366;
+	viewport.Height = 768;
+
+	d3dDeviceContext->RSSetViewports(1, &viewport);
+}
+
+void DXRenderingDirectX11::Render()
+{
+	BeginFrame();
+}
+
+void DXRenderingDirectX11::BeginFrame()
+{
+	d3dDeviceContext->ClearRenderTargetView(backBuffer, D3DXCOLOR(0.0f, 0.2f, 0.4f, 1.0f));
+
+	EndFrame();
+}
+
+void DXRenderingDirectX11::EndFrame()
+{
+	swapChain->Present(0, 0);
 }
 
 DXRenderingDirectX11::~DXRenderingDirectX11()
 {
+	Clean();
 }

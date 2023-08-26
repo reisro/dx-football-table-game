@@ -2,8 +2,8 @@
 #include "DXRenderingDirectX11.h"
 
 DXWindow::DXWindow():
-    width(1920),
-    height(1080)
+    width(1366),
+    height(768)
 {
 }
 
@@ -29,23 +29,13 @@ void DXWindow::CreateInstance()
 
 void DXWindow::Setup()
 {
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("DXApp"), NULL };
-    ::RegisterClassEx(&wc);
-    hWnd = ::CreateWindow(wc.lpszClassName, _T("Rain Forest Engine"), WS_OVERLAPPEDWINDOW, 100, 100, width, height, NULL, NULL, wc.hInstance, NULL);
-
-    #if defined DX11_RENDER_SUPPORT
-
-        DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
-
-        renderer->renderWindow = hWnd;
-        renderer->FillSwapChainDescription();
-
-    #endif 
 }
 
 void DXWindow::Create()
 {
-    Setup();
+    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("DXApp"), NULL };
+    ::RegisterClassEx(&wc);
+    hWnd = ::CreateWindow(wc.lpszClassName, _T("Rain Forest Engine"), WS_OVERLAPPEDWINDOW, 0, 0, width, height, NULL, NULL, wc.hInstance, NULL);
 
     //// Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -68,7 +58,17 @@ void DXWindow::Create()
 
     //// Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(hWnd);
-    //ImGui_ImplDX11_Init(dxRendering->d3dDevice, dxRendering->d3dDeviceContext);
+
+#if defined DX11_RENDER_SUPPORT
+
+    DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
+
+    renderer->renderWindow = hWnd;
+    renderer->Init();
+
+    ImGui_ImplDX11_Init(renderer->d3dDevice, renderer->d3dDeviceContext);
+
+#endif 
 
     DXLog("\nCreated Window....");
 
@@ -83,10 +83,18 @@ void DXWindow::Show()
 
     msg = {};
 
-    while (::GetMessage(&msg, NULL, 0U, 0U) > 0)
+    while (true)
     {
-        ::TranslateMessage(&msg);
-        ::DispatchMessage(&msg);
+        if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+        {
+            ::TranslateMessage(&msg);
+            ::DispatchMessage(&msg);
+
+            if (msg.message == WM_QUIT)
+                break;
+        }
+
+        DXRenderer::GetInstance()->Render();
     }
 }
 

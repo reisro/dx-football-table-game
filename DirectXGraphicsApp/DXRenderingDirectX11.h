@@ -23,6 +23,7 @@ enum class D3DVERTEXPROCESSING
 class DXRenderingDirectX11: public DXRenderer
 {
 public:
+
 	DXRenderingDirectX11();
 	DXRenderingDirectX11(const DXRenderingDirectX11& rhs);
 
@@ -35,14 +36,26 @@ public:
 	virtual ~DXRenderingDirectX11();
 
 	void FillSwapChainDescription();
+	void CreateSwapChain();
+	void CreateRenderTargetView();
+	void SetViewport();
+	
+	void Render() override;
+	void BeginFrame() override;
+	void EndFrame() override;
 
-	ID3D11Device*           d3dDevice;
-	ID3D11DeviceContext*    d3dDeviceContext;
-	IDXGISwapChain*         swapChain;
-	ID3D11RenderTargetView* mainRenderTargetView;
-	DXGI_SWAP_CHAIN_DESC    swapChainDesc;
-	ID3D11RenderTargetView* backBuffer;
-	D3D_FEATURE_LEVEL		featureLevel;
+	ID3D11Device*				d3dDevice;
+	ID3D11DeviceContext*		d3dDeviceContext;
+	ID3D11RenderTargetView*		mainRenderTargetView;
+	ID3D11RenderTargetView*		backBuffer;
+	ID3D11Texture2D*			tBackBuffer;
+	IDXGISwapChain*				swapChain;
+	IDXGIDevice*				dxgiDevice;
+	IDXGIAdapter*				dxgiAdapter;
+	IDXGIFactory*				dxgiFactory;
+	DXGI_SWAP_CHAIN_DESC		swapChainDesc;
+	D3D_FEATURE_LEVEL			featureLevel;
+	D3D11_VIEWPORT				viewport;
 
 protected:
 

@@ -18,13 +18,16 @@ public:
 	static bool initialized;
 
 	static void CreateInstance();
+	static DXRenderer* GetInstance();
 
 	void Setup() override;
 	bool Init()  override;
 	void PostInit() override;
 	void Clean() override;
 
-	static DXRenderer* GetInstance();
+	virtual void Render();
+	virtual void BeginFrame();
+	virtual void EndFrame();
 
 	HWND renderWindow;
 

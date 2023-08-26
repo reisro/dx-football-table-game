@@ -39,6 +39,20 @@ void DXRenderer::Clean()
 {
 }
 
+void DXRenderer::Render()
+{
+    BeginFrame();
+}
+
+void DXRenderer::BeginFrame()
+{
+    EndFrame();
+}
+
+void DXRenderer::EndFrame()
+{
+}
+
 DXRenderer* DXRenderer::GetInstance()
 {
     return Singleton;

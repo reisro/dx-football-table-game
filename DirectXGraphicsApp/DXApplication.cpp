@@ -19,8 +19,9 @@ void DXApplication::Setup(const DXEngineConfig::DXConfig& config)
 
 bool DXApplication::Init(std::unique_ptr<DXWindow> window)
 {
-	if (InitRenderer())
-		window->Create();
+	DXRenderer::CreateInstance();
+
+	window->Create();
 
 	return true;
 }
@@ -30,11 +31,8 @@ bool RFE::DXApplication::InitWindow()
 	return false;
 }
 
-bool DXApplication::InitRenderer()
+void DXApplication::InitRenderer()
 {
-	DXRenderer::CreateInstance();
-
-	return DXRenderer::initialized;
 }
 
 void DXApplication::Run()
