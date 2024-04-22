@@ -37,27 +37,14 @@ void DXWindow::Create()
     ::RegisterClassEx(&wc);
     hWnd = ::CreateWindow(wc.lpszClassName, _T("Rain Forest Engine"), WS_OVERLAPPEDWINDOW, 0, 0, width, height, NULL, NULL, wc.hInstance, NULL);
 
-    //// Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    DXLog("\nCreated Window....");
 
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    Show();
+}
 
-    //// Setup Dear ImGui style
-    ImGui::StyleColorsDark();
+void DXWindow::Show()
+{
 
-    ImGuiStyle& style = ImGui::GetStyle();
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-    {
-        style.WindowRounding = 0.0f;
-        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-    }
-
-    //// Setup Platform/Renderer backends
-    ImGui_ImplWin32_Init(hWnd);
 
 #if defined DX11_RENDER_SUPPORT
 
@@ -66,17 +53,8 @@ void DXWindow::Create()
     renderer->renderWindow = hWnd;
     renderer->Init();
 
-    ImGui_ImplDX11_Init(renderer->d3dDevice, renderer->d3dDeviceContext);
+#endif
 
-#endif 
-
-    DXLog("\nCreated Window....");
-
-    Show();
-}
-
-void DXWindow::Show()
-{
     // Show the window
     ::ShowWindow(hWnd, SW_SHOWDEFAULT);
     ::UpdateWindow(hWnd);
@@ -118,8 +96,7 @@ LRESULT __stdcall DXWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
             EndPaint(hWnd, &ps);
         }
 
-        return 0;
-
+        break;
     }
 
     return DefWindowProc(hWnd, msg, wParam, lParam);

@@ -7,8 +7,6 @@
 
 #include "pch.h"
 #include "DXRenderer.h"
-#include "dear_imgui/imgui.h"
-#include "dear_imgui/backends/imgui_impl_win32.h"
 
 class DX_API DXWindow
 {

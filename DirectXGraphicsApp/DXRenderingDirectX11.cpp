@@ -108,7 +108,7 @@ void DXRenderingDirectX11::CreateSwapChain()
 void DXRenderingDirectX11::CreateRenderTargetView()
 {
 	// get the address of the back buffer
-	swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&tBackBuffer);
+	swapChain->GetBuffer(0, IID_PPV_ARGS(&tBackBuffer));
 
 	// use the back buffer address to create the render target
 	d3dDevice->CreateRenderTargetView(tBackBuffer, NULL, &backBuffer);
@@ -137,14 +137,13 @@ void DXRenderingDirectX11::Render()
 
 void DXRenderingDirectX11::BeginFrame()
 {
-	d3dDeviceContext->ClearRenderTargetView(backBuffer, D3DXCOLOR(0.0f, 0.2f, 0.4f, 1.0f));
+	d3dDeviceContext->ClearRenderTargetView(backBuffer, D3DXCOLOR(0.054f, 0.0f, 0.04f, 1.0f));
 
-	EndFrame();
+	swapChain->Present(1, 0);
 }
 
 void DXRenderingDirectX11::EndFrame()
 {
-	swapChain->Present(0, 0);
 }
 
 DXRenderingDirectX11::~DXRenderingDirectX11()
