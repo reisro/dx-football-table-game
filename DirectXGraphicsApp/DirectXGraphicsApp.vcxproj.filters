@@ -132,7 +132,7 @@
     <ClInclude Include="dear_imgui\backends\imgui_impl_win32.h">
       <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
     </ClInclude>
-    <ClInclude Include="RainForestEngine.h">
+    <ClInclude Include="YakiraEngine.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">

@@ -9,6 +9,8 @@
 #include <d3dx10.h>
 #include <sstream>
 
+using RGBA = float[4];
+
 //-----------------------------------------------------------------------------
 // Enum (Vertex Processing)
 // Types of vertex processing when using graphics card

@@ -35,7 +35,7 @@ void DXWindow::Create()
 {
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("DXApp"), NULL };
     ::RegisterClassEx(&wc);
-    hWnd = ::CreateWindow(wc.lpszClassName, _T("Rain Forest Engine"), WS_OVERLAPPEDWINDOW, 0, 0, width, height, NULL, NULL, wc.hInstance, NULL);
+    hWnd = ::CreateWindow(wc.lpszClassName, _T("Yakira Engine v0.2"), WS_OVERLAPPEDWINDOW, 0, 0, width, height, NULL, NULL, wc.hInstance, NULL);
 
     DXLog("\nCreated Window....");
 
@@ -73,6 +73,8 @@ void DXWindow::Show()
         }
 
         DXRenderer::GetInstance()->Render();
+
+        DXLog("\nGame Loop running...");
     }
 }
 

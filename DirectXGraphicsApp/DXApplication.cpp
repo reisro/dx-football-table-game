@@ -37,7 +37,6 @@ void DXApplication::InitRenderer()
 
 void DXApplication::Run()
 {
-	DXLog("\nApplication running...");
 }
 
 DX_API DXApplication* createDXApplication()

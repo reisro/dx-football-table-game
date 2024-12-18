@@ -4,7 +4,7 @@
 int main()
 {
 	DXLog("----------------------------------------------");
-	DXLog("\tRain Forest Engine v0.2");
+	DXLog("\tYakira Engine v0.2");
 	DXLog("----------------------------------------------");
 
 	DXEngineConfig::DXConfig appConfig;
