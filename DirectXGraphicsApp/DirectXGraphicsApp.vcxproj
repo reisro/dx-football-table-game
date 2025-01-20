@@ -167,6 +167,7 @@
     <ClInclude Include="DXApplication.h" />
     <ClInclude Include="DXConfig.h" />
     <ClInclude Include="DXGame.h" />
+    <ClInclude Include="DXPlaftormDefines.h" />
     <ClInclude Include="DXRenderer.h" />
     <ClInclude Include="DXRenderingDirectX11.h" />
     <ClInclude Include="DXTimer.h" />
