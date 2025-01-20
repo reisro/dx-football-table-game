@@ -3,8 +3,6 @@
 #ifndef _DX_CONFIG_H
 #define _DX_CONFIG_H
 
-#include "DXAPI.h"
-
 namespace DXEngineConfig
 {
 	enum class GraphicsAPI
