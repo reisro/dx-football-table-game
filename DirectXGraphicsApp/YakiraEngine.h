@@ -19,6 +19,7 @@
 #define _YAKIRA_ENGINE_H
 
 #include "DXAPI.h"
+#include "DXPlaftormDefines.h"
 #include "DXTypes.h"
 #include "DXConfig.h"
 
