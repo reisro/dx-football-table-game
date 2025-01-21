@@ -3,6 +3,7 @@
 #ifndef _PLATFORM_DEFINES_H
 #define _PLATFORM_DEFINES_H
 
+#include <memory>
 #include <string>
 
 namespace YakiraEngine
@@ -32,6 +33,23 @@ namespace YakiraEngine
 		OSState state;
 
 	} OperatingSystemParameters;
+
+	class GameState;
+
+	class PlatformOperatingSystem
+	{
+		PlatformOperatingSystem() {}
+		virtual ~PlatformOperatingSystem() = default;
+
+		PlatformOperatingSystem(std::string name, std::unique_ptr<GameState>& state):
+			identifier_name{ name }, game_state{ std::move(state) } {}
+
+		virtual bool hasInitiated() {};
+		virtual bool hasShutDown() {};
+
+		std::string identifier_name;
+		std::unique_ptr<GameState> game_state;
+	};
 }
 
 #endif _PLATFORM_DEFINES_H
