@@ -41,7 +41,7 @@ namespace YakiraEngine
 		PlatformOperatingSystem() {}
 		virtual ~PlatformOperatingSystem() = default;
 
-		PlatformOperatingSystem(std::string name, std::unique_ptr<GameState>& state):
+		explicit PlatformOperatingSystem(std::string name, std::unique_ptr<GameState>& state):
 			identifier_name{ name }, game_state{ std::move(state) } {}
 
 		virtual bool hasInitiated() {};
@@ -49,6 +49,31 @@ namespace YakiraEngine
 
 		std::string identifier_name;
 		std::unique_ptr<GameState> game_state;
+	};
+
+	class GameState
+	{
+	public:
+		enum class RunState
+		{
+			Idle,
+			Running,
+			Pause
+		};
+
+		GameState() = default;
+		virtual ~GameState() {}
+
+		explicit GameState(const GameState& state):
+			run_state { state.run_state } {}
+
+		virtual void Start() {};
+		virtual void Stop()  {};
+		virtual void Pause() {};
+
+	private:
+
+		RunState run_state;
 	};
 }
 
