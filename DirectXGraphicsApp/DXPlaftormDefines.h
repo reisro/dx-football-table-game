@@ -26,6 +26,8 @@ namespace YakiraEngine
 
 	typedef struct OperatingSystemParameters
 	{
+		OperatingSystemParameters() = default;
+
 		OperatingSystemParameters(std::string uiid, OSState osstate) : 
 			UIDID_instance { uiid }, state { osstate } {}
 
@@ -43,7 +45,7 @@ namespace YakiraEngine
 		virtual ~PlatformOperatingSystem() = default;
 
 		template <typename T, typename U, typename V>
-		explicit PlatformOperatingSystem(std::string name, std::unique_ptr<GameState<T,U,V>>& state):
+		explicit PlatformOperatingSystem(std::string name, std::unique_ptr<GameState<T,U,V>>& state) noexcept :
 			identifier_name{ name }, game_state{ std::move(state) } {}
 
 		virtual bool hasInitiated() {};
@@ -51,6 +53,7 @@ namespace YakiraEngine
 
 		std::string identifier_name;
 		std::unique_ptr<GameState<int,std::string,float>> game_state;
+		OperatingSystemParameters os_parameters;
 	};
 
 	template <typename T, typename U, typename V>
