@@ -1,6 +1,9 @@
 
 #include "DXApplication.h"
 
+// type alias for unique ptr
+using DXWindow_ptr = std::unique_ptr<DXWindow>;
+
 int main()
 {
 	DXLog("----------------------------------------------");
@@ -14,7 +17,7 @@ int main()
 	RFE::DXApplication::Setup(appConfig);
 
 	// Create a window game application
-	std::unique_ptr<DXWindow> appWindow = std::make_unique<DXWindow>();
+	DXWindow_ptr appWindow = std::make_unique<DXWindow>();
 
 	// Run the app
 	if (RFE::DXApplication::Init(std::move(appWindow)))

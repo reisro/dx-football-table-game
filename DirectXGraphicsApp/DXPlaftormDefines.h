@@ -26,7 +26,8 @@ namespace YakiraEngine
 
 	typedef struct OperatingSystemParameters
 	{
-		OperatingSystemParameters() = default;
+		OperatingSystemParameters():
+			UIDID_instance{ "0xxxx" }, state{ OSState::Initialized } {}
 
 		OperatingSystemParameters(std::string uiid, OSState osstate) : 
 			UIDID_instance { uiid }, state { osstate } {}
@@ -87,11 +88,11 @@ namespace YakiraEngine
 
 		template <typename T, typename U, typename V>
 		explicit GameState(T t, U u, V v) noexcept :
-			run_state{ default }, trigger_event{ default } {}
+			run_state{ RunState::Idle }, trigger_event{ TriggerEvent::Rendering } {}
 		
 		template <typename T, typename U, typename V>
 		explicit GameState(const GameState<T,U,V>& rhs) noexcept :
-			run_state{ default }, trigger_event{ default } {}
+			run_state{ RunState::Idle }, trigger_event{ TriggerEvent::Rendering } {}
 
 		virtual void Start() {};
 		virtual void Stop()  {};
