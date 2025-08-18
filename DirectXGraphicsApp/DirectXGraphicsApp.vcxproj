@@ -82,6 +82,8 @@
     <ExecutablePath>$(DXSDK_DIR)\Utilities\bin\x64;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>IntermediateFiles\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -151,56 +153,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx10.h" />
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx11.h" />
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx12.h" />
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx9.h" />
-    <ClInclude Include="dear_imgui\backends\imgui_impl_win32.h" />
-    <ClInclude Include="dear_imgui\imconfig.h" />
-    <ClInclude Include="dear_imgui\imgui.h" />
-    <ClInclude Include="dear_imgui\imgui_internal.h" />
-    <ClInclude Include="dear_imgui\imstb_rectpack.h" />
-    <ClInclude Include="dear_imgui\imstb_textedit.h" />
-    <ClInclude Include="dear_imgui\imstb_truetype.h" />
-    <ClInclude Include="dear_imgui\misc\cpp\imgui_stdlib.h" />
-    <ClInclude Include="DXAPI.h" />
-    <ClInclude Include="DXApplication.h" />
-    <ClInclude Include="DXConfig.h" />
-    <ClInclude Include="DXGame.h" />
-    <ClInclude Include="DXPlaftormDefines.h" />
-    <ClInclude Include="DXRenderer.h" />
-    <ClInclude Include="DXRenderingDirectX11.h" />
-    <ClInclude Include="DXTimer.h" />
-    <ClInclude Include="DXTypes.h" />
-    <ClInclude Include="DXWindow.h" />
-    <ClInclude Include="DXSubsystem.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="YakiraEngine.h" />
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.h" />
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx12.h" />
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx9.h" />
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="3rdparty\dear_imgui\imconfig.h" />
+    <ClInclude Include="3rdparty\dear_imgui\imgui.h" />
+    <ClInclude Include="3rdparty\dear_imgui\imgui_internal.h" />
+    <ClInclude Include="3rdparty\dear_imgui\imstb_rectpack.h" />
+    <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="src\DXAPI.h" />
+    <ClInclude Include="src\DXApplication.h" />
+    <ClInclude Include="src\DXConfig.h" />
+    <ClInclude Include="src\DXGame.h" />
+    <ClInclude Include="src\DXPlaftormDefines.h" />
+    <ClInclude Include="src\DXRenderer.h" />
+    <ClInclude Include="src\DXRenderingDirectX11.h" />
+    <ClInclude Include="src\DXSubsystem.h" />
+    <ClInclude Include="src\DXTimer.h" />
+    <ClInclude Include="src\DXTypes.h" />
+    <ClInclude Include="src\DXWindow.h" />
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\YakiraEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx10.cpp" />
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx11.cpp" />
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp" />
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx9.cpp" />
-    <ClCompile Include="dear_imgui\backends\imgui_impl_win32.cpp" />
-    <ClCompile Include="dear_imgui\imgui.cpp" />
-    <ClCompile Include="dear_imgui\imgui_demo.cpp" />
-    <ClCompile Include="dear_imgui\imgui_draw.cpp" />
-    <ClCompile Include="dear_imgui\imgui_tables.cpp" />
-    <ClCompile Include="dear_imgui\imgui_widgets.cpp" />
-    <ClCompile Include="dear_imgui\misc\cpp\imgui_stdlib.cpp" />
-    <ClCompile Include="DXApplication.cpp" />
-    <ClCompile Include="DXGame.cpp" />
-    <ClCompile Include="DXRenderer.cpp" />
-    <ClCompile Include="DXRenderingDirectX11.cpp" />
-    <ClCompile Include="DXTimer.cpp" />
-    <ClCompile Include="DXWindow.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dear_imgui\misc\imgui.natstepfilter" />
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="dear_imgui\misc\imgui.natvis" />
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx12.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx9.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\imgui.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\imgui_demo.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\imgui_draw.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\imgui_tables.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\imgui_widgets.cpp" />
+    <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="src\DXApplication.cpp" />
+    <ClCompile Include="src\DXGame.cpp" />
+    <ClCompile Include="src\DXRenderer.cpp" />
+    <ClCompile Include="src\DXRenderingDirectX11.cpp" />
+    <ClCompile Include="src\DXTimer.cpp" />
+    <ClCompile Include="src\DXWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

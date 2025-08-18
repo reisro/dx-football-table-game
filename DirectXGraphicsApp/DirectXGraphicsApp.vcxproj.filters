@@ -52,157 +52,129 @@
     <Filter Include="Arquivos de Cabeçalho\ThirdParty">
       <UniqueIdentifier>{6deb2a86-0d73-45fc-8c65-2dacc405d3d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui">
-      <UniqueIdentifier>{e920e3b8-c8ee-46bb-838d-04495e7425a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends">
-      <UniqueIdentifier>{a1b012a9-e407-43f1-b05b-182d00bd4e9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc">
-      <UniqueIdentifier>{b566e3b6-f41c-413c-985d-73a4fb4d6044}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp">
-      <UniqueIdentifier>{03f27e7a-e5aa-4636-ad90-4c4ef14ddeba}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DXAPI.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+    <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
     </ClInclude>
-    <ClInclude Include="DXApplication.h">
+    <ClInclude Include="3rdparty\dear_imgui\imgui.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\imgui_internal.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\imstb_rectpack.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx9.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx11.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx12.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_win32.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DXApplication.h">
       <Filter>Arquivos de Cabeçalho\Application</Filter>
     </ClInclude>
-    <ClInclude Include="DXWindow.h">
+    <ClInclude Include="src\DXWindow.h">
       <Filter>Arquivos de Cabeçalho\Application</Filter>
     </ClInclude>
-    <ClInclude Include="DXTypes.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="DXGame.h">
-      <Filter>Arquivos de Cabeçalho\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="DXRenderer.h">
-      <Filter>Arquivos de Cabeçalho\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="DXRenderingDirectX11.h">
-      <Filter>Arquivos de Cabeçalho\Rendering\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="DXSubsystem.h">
+    <ClInclude Include="src\DXSubsystem.h">
       <Filter>Arquivos de Cabeçalho\Core\Subsystem</Filter>
     </ClInclude>
-    <ClInclude Include="DXConfig.h">
+    <ClInclude Include="src\DXGame.h">
+      <Filter>Arquivos de Cabeçalho\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DXRenderer.h">
+      <Filter>Arquivos de Cabeçalho\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DXRenderingDirectX11.h">
+      <Filter>Arquivos de Cabeçalho\Rendering\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DXConfig.h">
       <Filter>Arquivos de Cabeçalho\System</Filter>
     </ClInclude>
-    <ClInclude Include="DXTimer.h">
+    <ClInclude Include="src\DXTimer.h">
       <Filter>Arquivos de Cabeçalho\System</Filter>
     </ClInclude>
-    <ClInclude Include="dear_imgui\imconfig.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\imgui.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\imgui_internal.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\imstb_rectpack.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\imstb_textedit.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\imstb_truetype.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx9.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx10.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx11.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\backends\imgui_impl_dx12.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\misc\cpp\imgui_stdlib.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp</Filter>
-    </ClInclude>
-    <ClInclude Include="dear_imgui\backends\imgui_impl_win32.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClInclude>
-    <ClInclude Include="YakiraEngine.h">
+    <ClInclude Include="src\DXAPI.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="src\DXPlaftormDefines.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="DXPlaftormDefines.h">
+    <ClInclude Include="src\DXTypes.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YakiraEngine.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DXApplication.cpp">
+    <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\imgui_demo.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\imgui_draw.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\imgui_tables.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\imgui_widgets.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx9.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx11.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx12.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_win32.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DXApplication.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
     </ClCompile>
-    <ClCompile Include="DXWindow.cpp">
+    <ClCompile Include="src\DXWindow.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
     </ClCompile>
-    <ClCompile Include="DXGame.cpp">
+    <ClCompile Include="src\DXGame.cpp">
       <Filter>Arquivos de Origem\Core</Filter>
     </ClCompile>
-    <ClCompile Include="DXRenderer.cpp">
+    <ClCompile Include="src\DXRenderer.cpp">
       <Filter>Arquivos de Origem\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="DXRenderingDirectX11.cpp">
+    <ClCompile Include="src\DXRenderingDirectX11.cpp">
       <Filter>Arquivos de Origem\Rendering\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="DXTimer.cpp">
+    <ClCompile Include="src\DXTimer.cpp">
       <Filter>Arquivos de Origem\System</Filter>
     </ClCompile>
-    <ClCompile Include="dear_imgui\imgui.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_demo.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_draw.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_tables.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\imgui_widgets.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx9.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx10.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx11.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\backends\imgui_impl_dx12.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\misc\cpp\imgui_stdlib.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="dear_imgui\backends\imgui_impl_win32.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\backends</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dear_imgui\misc\imgui.natstepfilter">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="dear_imgui\misc\imgui.natvis">
-      <Filter>Arquivos de Cabeçalho\ThirdParty\dear_imgui\misc</Filter>
-    </Natvis>
   </ItemGroup>
 </Project>
