@@ -35,7 +35,7 @@ public:
 	void PostInit() override;
 	void Clean() override;
 
-	virtual ~DXRenderingDirectX11();
+	~DXRenderingDirectX11();
 
 	void FillSwapChainDescription();
 	void CreateSwapChain();

@@ -126,14 +126,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DX11_RENDER_SUPPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;$(BX_SDK);$(BIMG_SDK);$(BGFX_SDK)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dx11.lib;d3dx10.lib;D3DCompiler.lib;dxerr.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;d3d11.lib;d3dx11.lib;d3dx10.lib;D3DCompiler.lib;dxerr.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;$(BGFX_SDK).build\win64_vs2022\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,6 +164,7 @@
     <ClInclude Include="3rdparty\dear_imgui\imgui_internal.h" />
     <ClInclude Include="3rdparty\dear_imgui\imstb_rectpack.h" />
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="src\DefaultCube.h" />
     <ClInclude Include="src\DXAPI.h" />
     <ClInclude Include="src\DXApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
@@ -189,6 +191,7 @@
     <ClCompile Include="3rdparty\dear_imgui\imgui_tables.cpp" />
     <ClCompile Include="3rdparty\dear_imgui\imgui_widgets.cpp" />
     <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="src\DefaultCube.cpp" />
     <ClCompile Include="src\DXApplication.cpp" />
     <ClCompile Include="src\DXGame.cpp" />
     <ClCompile Include="src\DXRenderer.cpp" />

@@ -1,11 +1,18 @@
 
 #include "DXApplication.h"
+#include <cstdlib>
+#include <crtdbg.h>
+
+#define _CRTDBG_MAP_ALLOC
 
 // type alias for unique ptr
 using DXWindow_ptr = std::unique_ptr<DXWindow>;
 
 int main()
 {
+	// Enable debug heap
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	DXLog("----------------------------------------------");
 	DXLog("\tYakira Engine v0.2");
 	DXLog("----------------------------------------------");
@@ -17,13 +24,15 @@ int main()
 	RFE::DXApplication::Setup(appConfig);
 
 	// Create a window game application
-	DXWindow_ptr appWindow = { std::make_unique<DXWindow>() };
+	DXWindow* appWindow = new DXWindow();
 
 	// Run the app
-	if (RFE::DXApplication::Init(std::move(appWindow)))
+	if (RFE::DXApplication::Init(appWindow))
 		RFE::DXApplication::Run();
 
 	DXLog("\nFinished Application...");
+
+	_CrtDumpMemoryLeaks();
 
 	return 0;
 }

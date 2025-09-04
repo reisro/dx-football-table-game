@@ -21,6 +21,7 @@ DXWindow::DXWindow(const DXWindow& rhs):
 
 DXWindow::~DXWindow()
 {
+	DXLog("\nDestroyed Window....");    
 }
 
 void DXWindow::CreateInstance()
@@ -48,10 +49,19 @@ void DXWindow::Show()
 
 #if defined DX11_RENDER_SUPPORT
 
-    DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
+    /*DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
 
     renderer->renderWindow = hWnd;
-    renderer->Init();
+    renderer->Init();*/
+
+	bgfx::Init bgfxInit;
+    bgfxInit.type = bgfx::RendererType::Direct3D11;
+    bgfxInit.platformData.nwh = hWnd;
+    bgfxInit.platformData.ndt = GetModuleHandle(NULL);
+	bgfxInit.resolution.width = width;
+	bgfxInit.resolution.height = height;
+	bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
+	bgfx::init(bgfxInit);
 
 #endif
 
@@ -60,6 +70,13 @@ void DXWindow::Show()
     ::UpdateWindow(hWnd);
 
     msg = {};
+
+    bgfx::setViewClear(0
+        , BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH
+        , 0x578a3dff
+        , 1.0f
+        , 0
+    );
 
     while (true)
     {
@@ -72,7 +89,12 @@ void DXWindow::Show()
                 break;
         }
 
-        DXRenderer::GetInstance()->Render();
+        //DXRenderer::GetInstance()->Render();
+
+        bgfx::setViewRect(0, 0, 0, width, height);
+		bgfx::touch(0);
+
+		bgfx::frame();
 
         DXLog("\nGame Loop running...");
     }

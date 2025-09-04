@@ -7,6 +7,7 @@
 
 #include "pch.h"
 #include "DXRenderer.h"
+#include "bgfx/bgfx.h"
 
 class DX_API DXWindow
 {
@@ -14,7 +15,7 @@ public:
 						 DXWindow();
 						 DXWindow(int width, int height);
 						 DXWindow(const DXWindow& rhs);
-	virtual		        ~DXWindow();
+				        ~DXWindow();
 
 	static void			 CreateInstance();
 

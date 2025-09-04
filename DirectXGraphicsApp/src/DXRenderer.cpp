@@ -14,6 +14,7 @@ DXRenderer::DXRenderer(const DXRenderer& rhs)
 
 DXRenderer::~DXRenderer()
 {
+	DXLog("\nDestroyed Renderer....");
 }
 
 void DXRenderer::CreateInstance()

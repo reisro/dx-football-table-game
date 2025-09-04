@@ -12,7 +12,7 @@ class DX_API DXRenderer: public DXSubsystem
 public:
 	DXRenderer();
 	DXRenderer(const DXRenderer& rhs);
-	virtual ~DXRenderer();
+	~DXRenderer();
 
 	static bool initialized;
 

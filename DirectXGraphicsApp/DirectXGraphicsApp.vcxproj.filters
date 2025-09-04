@@ -52,6 +52,9 @@
     <Filter Include="Arquivos de Cabeçalho\ThirdParty">
       <UniqueIdentifier>{6deb2a86-0d73-45fc-8c65-2dacc405d3d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Rendering\bgfx">
+      <UniqueIdentifier>{8474a0cb-5e24-4112-8ace-6d48d5ba5957}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -123,6 +126,9 @@
     <ClInclude Include="src\YakiraEngine.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="src\DefaultCube.h">
+      <Filter>Arquivos de Cabeçalho\Rendering\bgfx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -175,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="src\DXTimer.cpp">
       <Filter>Arquivos de Origem\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DefaultCube.cpp">
+      <Filter>Arquivos de Origem\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

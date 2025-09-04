@@ -10,6 +10,7 @@ DXApplication::DXApplication()
 
 DXApplication::~DXApplication()
 {
+	DXLog("\nDestroyed Application....");
 }
 
 void DXApplication::Setup(const DXEngineConfig::DXConfig& config)
@@ -17,7 +18,7 @@ void DXApplication::Setup(const DXEngineConfig::DXConfig& config)
 	DXEngineConfig::DXConfig::instance = config;
 }
 
-bool DXApplication::Init(std::unique_ptr<DXWindow> window)
+bool DXApplication::Init(DXWindow* window)
 {
 	DXRenderer::CreateInstance();
 
