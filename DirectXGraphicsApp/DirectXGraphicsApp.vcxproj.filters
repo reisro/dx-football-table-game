@@ -129,6 +129,9 @@
     <ClInclude Include="src\DefaultCube.h">
       <Filter>Arquivos de Cabeçalho\Rendering\bgfx</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEntry.h">
+      <Filter>Arquivos de Cabeçalho\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -184,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="src\DefaultCube.cpp">
       <Filter>Arquivos de Origem\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEntry.cpp">
+      <Filter>Arquivos de Origem\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

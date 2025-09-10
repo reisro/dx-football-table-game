@@ -2,7 +2,7 @@
 
 DXEngineConfig::DXConfig DXEngineConfig::DXConfig::instance;
 
-using namespace RFE;
+using namespace YE;
 
 DXApplication::DXApplication()
 {
@@ -27,7 +27,7 @@ bool DXApplication::Init(DXWindow* window)
 	return true;
 }
 
-bool RFE::DXApplication::InitWindow()
+bool YE::DXApplication::InitWindow()
 {
 	return false;
 }

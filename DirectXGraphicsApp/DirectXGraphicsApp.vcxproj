@@ -124,11 +124,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DX11_RENDER_SUPPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DX11_RENDER_SUPPORT;WINDOW_MAIN_IMPLEMENTED;_DEBUG;_CONSOLE;_WIN32;BX_CONFIG_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;$(BX_SDK);$(BIMG_SDK);$(BGFX_SDK)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;$(BIMG_SDK);$(BGFX_SDK)include;$(BX_SDK);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>/permissive- /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -176,6 +179,7 @@
     <ClInclude Include="src\DXTimer.h" />
     <ClInclude Include="src\DXTypes.h" />
     <ClInclude Include="src\DXWindow.h" />
+    <ClInclude Include="src\GameEntry.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\YakiraEngine.h" />
   </ItemGroup>
@@ -198,6 +202,7 @@
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\DXWindow.cpp" />
+    <ClCompile Include="src\GameEntry.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

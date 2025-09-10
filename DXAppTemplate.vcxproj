@@ -119,8 +119,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\DirectX\graphicsapplication\DirectXGraphicsApp\src;$(BGFX_SDK)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\DirectX\graphicsapplication\DirectXGraphicsApp\src;$(BGFX_SDK)include;$(BX_SDK)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

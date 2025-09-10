@@ -6,7 +6,7 @@
 #include "pch.h"
 #include "DXWindow.h"
 
-namespace RFE
+namespace YE
 {
 	class DX_API DXApplication
 	{

@@ -16,7 +16,9 @@ public:
 						 DXWindow(int width, int height);
 						 DXWindow(const DXWindow& rhs);
 				        ~DXWindow();
-
+	
+						void* GetWindowsHandle() { return hWnd; }
+					
 	static void			 CreateInstance();
 
 	virtual void		 Setup();

@@ -40,13 +40,11 @@ void DXWindow::Create()
 
     DXLog("\nCreated Window....");
 
-    Show();
+	Show();
 }
 
 void DXWindow::Show()
 {
-
-
 #if defined DX11_RENDER_SUPPORT
 
     /*DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
@@ -92,11 +90,11 @@ void DXWindow::Show()
         //DXRenderer::GetInstance()->Render();
 
         bgfx::setViewRect(0, 0, 0, width, height);
-		bgfx::touch(0);
+        bgfx::touch(0);
 
-		bgfx::frame();
+        bgfx::frame();
 
-        DXLog("\nGame Loop running...");
+        DXLog("\Window Loop running...");
     }
 }
 
