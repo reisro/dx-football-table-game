@@ -15,22 +15,14 @@ public:
 						 YEWindow(int width, int height);
 						 YEWindow(const YEWindow& rhs);
 						 virtual ~YEWindow();
-	
-						void* GetWindowsHandle() { return hWnd; }
 					
-	static void			 CreateInstance();
+	static YEWindow*	 CreateInstance();
+	static YEWindow*     GetInstance();
 
 	virtual void		 Setup();
 	virtual void         Create();
 	virtual void		 Show(uint16_t _width, uint16_t _height);
-
-	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-protected:
-
-	HWND				 hWnd;
-	WNDCLASSEX			 wc;
-	MSG					 msg;
+	virtual void		 Update();
 
 private:
 

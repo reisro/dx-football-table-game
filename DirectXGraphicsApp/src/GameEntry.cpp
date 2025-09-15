@@ -34,21 +34,30 @@ int gamentry::runGame(DXGame* _gameapp)
 	YEngineConfig::DXConfig gameConfig;
 	gameConfig.graphicsAPI = { YEngineConfig::GraphicsAPI::DirectX11 };
 
-	YE::DXApplication::Setup(gameConfig);
+	YE::YEApplication::Setup(gameConfig);
+
+	// Initialize the game application
+	if (!YE::YEApplication::InitEngine())
+	{
+		DXLog("Failed to initialize game engine...");
+		return -1;
+	}
 
 	GameInit gameInit;
 	gameInit._width = 1368;
 	gameInit._height = 720;
 	gameInit._title = "Yakira Engine v0.2";
+	gameInit._game = _gameapp;
 
 	// If game init is successful, run the game loop
-	if (YE::DXApplication::Init())
+	if (YE::YEApplication::Init())
 	{
 		DXLog("Initialized Game App...");
 
-		YE::DXApplication::Run(_gameapp);
+		YE::YEApplication::Run(_gameapp);
 	}
 	
+	// Shutdown the game application
 	_gameapp->shutdown();
 
 	return 0;

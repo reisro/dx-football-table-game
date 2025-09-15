@@ -45,8 +45,6 @@ public:
 	virtual void BeginFrame();
 	virtual void EndFrame();
 
-	HWND renderWindow;
-
 protected:
 
 	static DXRenderer* Singleton;

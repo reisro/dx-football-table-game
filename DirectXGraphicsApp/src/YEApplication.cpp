@@ -1,15 +1,15 @@
-#include "DXApplication.h"
+#include "YEApplication.h"
 
 using namespace YE;
 
 YEngineConfig::DXConfig YEngineConfig::DXConfig::instance;
-DXApplication* DXApplication::instance = 0;
+YEApplication* YEApplication::instance = 0;
 
-DXApplication::DXApplication()
+YEApplication::YEApplication()
 {
 }
 
-DXApplication::~DXApplication()
+YEApplication::~YEApplication()
 {
 	DXLog("\nDestroyed Application....");
 }
@@ -17,7 +17,7 @@ DXApplication::~DXApplication()
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-void DXApplication::Setup(const YEngineConfig::DXConfig& config)
+void YEApplication::Setup(const YEngineConfig::DXConfig& config)
 {
 	YEngineConfig::DXConfig::instance = config;
 }
@@ -25,10 +25,16 @@ void DXApplication::Setup(const YEngineConfig::DXConfig& config)
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-bool DXApplication::Init()
+bool YEApplication::Init()
+{
+
+	return true;
+}
+
+bool YE::YEApplication::InitEngine()
 {
 	// Create singletons for this application
-	instance = new DXApplication();
+	instance = new YEApplication();
 
 	// Create singletons for subsystems
 	YEWindow::CreateInstance();
@@ -41,28 +47,37 @@ bool DXApplication::Init()
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-bool YE::DXApplication::InitWindow()
+bool YE::YEApplication::InitWindow()
 {
+	YEWindow::GetInstance()->Create();
+
 	return false;
 }
 
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-void DXApplication::InitRenderer()
+void YEApplication::InitRenderer()
 {
+	DXRenderer::GetInstance()->Init();
 }
 
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-void YE::DXApplication::Run(DXGame* gameApp)
+void YE::YEApplication::Run(DXGame* gameApp)
 {
-	instance->_gameApp = gameApp;
-	instance->_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
+	if (instance->_isInitialized)
+	{
+		instance->_window->Show(1366, 768);
+		instance->_gameApp = gameApp;
+		instance->_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
+	}
+	else
+		DXLog("Application not initialized...");
 }
 
-DX_API DXApplication* createDXApplication()
+DX_API YEApplication* createDXApplication()
 {
-	return new DXApplication();
+	return new YEApplication();
 }

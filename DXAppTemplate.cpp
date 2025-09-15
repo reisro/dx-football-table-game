@@ -31,8 +31,7 @@ public:
 	}
 
 private:
-	uint32_t m_width;
-	uint32_t m_height;
+	const char* game_name;
 };
 
 WINDOW_MAIN_ENTRY(Cube);

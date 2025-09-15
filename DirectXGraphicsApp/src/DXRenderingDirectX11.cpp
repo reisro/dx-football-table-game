@@ -15,6 +15,10 @@ void DXRenderingDirectX11::Setup()
 
 bool DXRenderingDirectX11::Init()
 {
+	// Create the window for rendering
+	outputWindow = YEWindow::CreateInstance();
+	outputWindow->Create();
+
 	// clear out the struct for use
 	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
 
@@ -28,7 +32,7 @@ bool DXRenderingDirectX11::Init()
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-	swapChainDesc.OutputWindow = renderWindow;
+	//swapChainDesc.OutputWindow = static_cast<HWND>(outputWindow->GetWindowsHandle());
 	swapChainDesc.Flags = 0;
 	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
 	swapChainDesc.Windowed = TRUE;
@@ -95,7 +99,7 @@ void DXRenderingDirectX11::FillSwapChainDescription()
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-	swapChainDesc.OutputWindow = renderWindow;
+	//swapChainDesc.OutputWindow = renderWindow;
 	swapChainDesc.Flags = 0;
 	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
 	swapChainDesc.Windowed = TRUE;

@@ -10,24 +10,27 @@
 
 namespace YE
 {
-	class DX_API DXApplication
+	class DX_API YEApplication
 	{
 	public:
-		DXApplication();
-		~DXApplication();
+		YEApplication();
+		~YEApplication();
 
 		static void Setup(const YEngineConfig::DXConfig& config);
 		static bool Init();
+		static bool InitEngine();
 		static bool InitWindow();
 		static void InitRenderer();
 		static void Run(DXGame* gameApp);
 
 	protected:
-		static DXApplication* instance;
+		static YEApplication* instance;
 
 	private:
 		YEWindow* _window;
 		DXGame*	 _gameApp;
+		bool  _isRunning;
+		bool  _isInitialized;
 	};
 }
 

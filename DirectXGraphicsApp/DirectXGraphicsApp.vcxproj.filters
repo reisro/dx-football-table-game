@@ -90,7 +90,7 @@
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h">
       <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
     </ClInclude>
-    <ClInclude Include="src\DXApplication.h">
+    <ClInclude Include="src\YEApplication.h">
       <Filter>Arquivos de Cabeçalho\Application</Filter>
     </ClInclude>
     <ClInclude Include="src\YEWindow.h">
@@ -173,7 +173,7 @@
     <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp">
       <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
     </ClCompile>
-    <ClCompile Include="src\DXApplication.cpp">
+    <ClCompile Include="src\YEApplication.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
     </ClCompile>
     <ClCompile Include="src\YEWindow.cpp">

@@ -4,7 +4,7 @@
 #define _GAME_ENTRY_H_
 
 #include <stdint.h>
-#include "DXApplication.h"
+#include "YEApplication.h"
 
 extern "C" int main();
 
@@ -13,9 +13,9 @@ extern "C" int main();
 #endif // WINDOW_MAIN_IMPLEMENTED
 
 #define WINDOW_MAIN_ENTRY(_gameApp)         \
-	int main()                              \
-	{                                       \
-		_gameApp app;                       \
+	int main()								\
+	{										\
+		_gameApp app;						\
 		return gamentry::runGame(&app);     \
 	}
 
@@ -29,7 +29,7 @@ namespace gamentry
 		const char* _title;
 		uint32_t	_width;
 		uint32_t	_height;
-		YEWindow*   _window = new YEWindow();
+		DXGame*     _game;
 
 	};
 	const GameInit DefaultGameInit = { "Yakira Engine v0.2", 1366, 768 };
@@ -50,7 +50,7 @@ namespace gamentry
 	void SetWindowAppHeight(uint32_t _height);
 	
 	/// <summary>
-	int DX_API runGame(DXGame* _gameApp);
+	int DX_API runGame(DXGame* _gameapp);
 
 	/// <summary>
 	extern void* GetWindowsHandle();
