@@ -4,7 +4,7 @@
 #define _GAME_ENTRY_H_
 
 #include <stdint.h>
-#include "DXGame.h"
+#include "DXApplication.h"
 
 extern "C" int main();
 
@@ -21,19 +21,39 @@ extern "C" int main();
 
 namespace gamentry
 {
+	/// <summary>
+	/// Game initialization structure
+	/// </summary>
+	struct GameInit
+	{
+		const char* _title;
+		uint32_t	_width;
+		uint32_t	_height;
+		YEWindow*   _window = new YEWindow();
+
+	};
+	const GameInit DefaultGameInit = { "Yakira Engine v0.2", 1366, 768 };
+	
+	/// <summary>
 	void SetWindowAppTitle(const char* _title);
 	
+	/// <summary>
 	uint32_t GetWindowWidth();
 	
+	/// <summary>
 	void SetWindowAppWidth(uint32_t _width);
 	
+	/// <summary>
 	uint32_t GetWindowHeight();
 	
+	/// <summary>
 	void SetWindowAppHeight(uint32_t _height);
 	
+	/// <summary>
 	int DX_API runGame(DXGame* _gameApp);
 
-	extern "C" void* GetWindowsHandle();
+	/// <summary>
+	extern void* GetWindowsHandle();
 }
 
 #endif // _GAME_ENTRY_H_

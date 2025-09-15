@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{63e7ceb1-afdf-48fb-9c7b-8d2acadab3a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{80e76541-b4f7-47ec-9bf8-afb935006eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4ff2bf46-f94e-462c-b850-9b097fb9fae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\astc-coded">
+      <UniqueIdentifier>{e3a93e13-96d9-40dc-83b3-8fdd7a956fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\astc-coded\src">
+      <UniqueIdentifier>{82d35aa9-9ca0-4456-89ff-e4f7d555adf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\astc-coded\src\decoder">
+      <UniqueIdentifier>{f55e76f8-3d70-47ba-95d3-976e51a9bc80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\bimg">
+      <UniqueIdentifier>{61935560-a714-4edc-b862-cea14b9485f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DirectXGraphicsApp\bimg\src\config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bimg\src\bimg_p.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bimg\include\bimg\bimg.h">
+      <Filter>include\bimg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bimg\include\bimg\decode.h">
+      <Filter>include\bimg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bimg\include\bimg\encode.h">
+      <Filter>include\bimg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\footprint.h">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\src\image.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\src\image_gnf.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\astc_file.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\codec.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\endpoint_codec.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\integer_sequence_codec.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\intermediate_astc_block.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\logical_astc_block.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\partition.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\physical_astc_block.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\quantization.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bimg\3rdparty\astc-codec\src\decoder\weight_infill.cc">
+      <Filter>3rdparty\astc-coded\src\decoder</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

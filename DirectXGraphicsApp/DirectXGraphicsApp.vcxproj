@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DX11_RENDER_SUPPORT;WINDOW_MAIN_IMPLEMENTED;_DEBUG;_CONSOLE;_WIN32;BX_CONFIG_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;$(BIMG_SDK);$(BGFX_SDK)include;$(BX_SDK);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\bgfx\include;.\bx\include;.\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -178,7 +178,8 @@
     <ClInclude Include="src\DXSubsystem.h" />
     <ClInclude Include="src\DXTimer.h" />
     <ClInclude Include="src\DXTypes.h" />
-    <ClInclude Include="src\DXWindow.h" />
+    <ClInclude Include="src\YEWinAppWindow.h" />
+    <ClInclude Include="src\YEWindow.h" />
     <ClInclude Include="src\GameEntry.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\YakiraEngine.h" />
@@ -201,7 +202,8 @@
     <ClCompile Include="src\DXRenderer.cpp" />
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
-    <ClCompile Include="src\DXWindow.cpp" />
+    <ClCompile Include="src\YEWinAppWindow.cpp" />
+    <ClCompile Include="src\YEWindow.cpp" />
     <ClCompile Include="src\GameEntry.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,204 +1,234 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="include">
+      <UniqueIdentifier>{90cd8c08-658a-4987-9da2-369550dc73e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="src">
+      <UniqueIdentifier>{efc7d6d6-32e9-4e15-b6a8-23c57e4f6688}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="include\bgfx">
+      <UniqueIdentifier>{e06cb850-f213-4411-9d9b-239d42557003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\bgfx\c99">
+      <UniqueIdentifier>{44b93493-a784-47dc-b723-c5a6f5b23143}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\bgfx\include\bgfx\bgfx.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\c99\bgfx.h">
+      <Filter>include\bgfx\c99</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\include\bgfx\defines.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\bgfx.h">
+      <Filter>include\bgfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\include\bgfx\embedded_shader.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\defines.h">
+      <Filter>include\bgfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\include\bgfx\platform.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\embedded_shader.h">
+      <Filter>include\bgfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\include\bgfx\c99\bgfx.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\platform.h">
+      <Filter>include\bgfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\bgfx_p.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\bgfx_p.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\charset.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\charset.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\config.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\config.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\debug_renderdoc.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\debug_renderdoc.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\dxgi.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\dxgi.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\emscripten.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\emscripten.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear0.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear0.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear1.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear1.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear2.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear2.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear3.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear3.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear4.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear4.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear5.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear5.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear6.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear6.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_clear7.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear7.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\fs_debugfont.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_debugfont.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\glcontext_egl.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_eagl.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\glcontext_html5.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_egl.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\glcontext_wgl.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_glx.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\glimports.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_html5.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\nvapi.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_nsgl.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_wgl.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer_d3d.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glimports.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer_d3d11.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\nvapi.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer_d3d12.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer_gl.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer_mtl.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d9.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\renderer_vk.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d11.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\shader.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d12.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\shader_dxbc.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_gl.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\shader_spirv.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_mtl.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\topology.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_vk.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\version.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_webgpu.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\vertexlayout.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\vs_clear.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader_dx9bc.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bgfx\src\vs_debugfont.bin.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader_dxbc.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader_spirv.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\topology.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\version.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\vertexlayout.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\vs_clear.bin.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\vs_debugfont.bin.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\bgfx\src\amalgamated.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\amalgamated.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\bgfx.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\bgfx.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\debug_renderdoc.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\debug_renderdoc.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\dxgi.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\dxgi.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\glcontext_egl.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_egl.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\glcontext_html5.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_glx.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\glcontext_wgl.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_html5.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\nvapi.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_wgl.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_agc.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\nvapi.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_d3d11.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_agc.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_d3d12.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d9.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_gl.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d11.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_gnm.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d12.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_noop.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_gl.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_nvn.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_gnm.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\renderer_vk.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_noop.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\shader.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_nvn.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\shader_dxbc.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_vk.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\shader_spirv.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_webgpu.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\topology.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bgfx\src\vertexlayout.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader_dx9bc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader_dxbc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader_spirv.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\topology.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\vertexlayout.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

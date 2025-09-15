@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b3adff80-574e-4253-b62f-e631b82f5b27}</ProjectGuid>
+    <ProjectGuid>{fdd1b2ee-cf86-4079-a4c0-9e4e90eda491}</ProjectGuid>
     <RootNamespace>bgfx</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -70,6 +70,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>bgfx</TargetName>
+    <OutDir>$(ProjectDir)bin\x86_64\Debug\</OutDir>
+    <IntDir>$(ProjectDir)obj\x86_64\Debug\bgfx\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -101,12 +106,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>
+      </SDLCheck>
       <PreprocessorDefinitions>_DEBUG;BX_CONFIG_DEBUG=1;__STDC_FORMAT_MACROS;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bimg\include;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\include;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\3rdparty;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\3rdparty\dxsdk;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\3rdparty\khronos;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bx\include\compat\msvc;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bx\include</AdditionalIncludeDirectories>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\DirectX\graphicsapplication\DirectXGraphicsApp\bx\include;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\include;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bimg\include;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\3rdparty;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\3rdparty\dxsdk\include;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bgfx\3rdparty\khronos;C:\DirectX\graphicsapplication\DirectXGraphicsApp\bx\include\compat\msvc</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
@@ -131,69 +138,79 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\bgfx\include\bgfx\bgfx.h" />
-    <ClInclude Include="..\..\bgfx\include\bgfx\c99\bgfx.h" />
-    <ClInclude Include="..\..\bgfx\include\bgfx\defines.h" />
-    <ClInclude Include="..\..\bgfx\include\bgfx\embedded_shader.h" />
-    <ClInclude Include="..\..\bgfx\include\bgfx\platform.h" />
-    <ClInclude Include="..\..\bgfx\src\bgfx_p.h" />
-    <ClInclude Include="..\..\bgfx\src\charset.h" />
-    <ClInclude Include="..\..\bgfx\src\config.h" />
-    <ClInclude Include="..\..\bgfx\src\debug_renderdoc.h" />
-    <ClInclude Include="..\..\bgfx\src\dxgi.h" />
-    <ClInclude Include="..\..\bgfx\src\emscripten.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear0.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear1.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear2.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear3.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear4.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear5.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear6.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_clear7.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\fs_debugfont.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\glcontext_egl.h" />
-    <ClInclude Include="..\..\bgfx\src\glcontext_html5.h" />
-    <ClInclude Include="..\..\bgfx\src\glcontext_wgl.h" />
-    <ClInclude Include="..\..\bgfx\src\glimports.h" />
-    <ClInclude Include="..\..\bgfx\src\nvapi.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer_d3d.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer_d3d11.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer_d3d12.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer_gl.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer_mtl.h" />
-    <ClInclude Include="..\..\bgfx\src\renderer_vk.h" />
-    <ClInclude Include="..\..\bgfx\src\shader.h" />
-    <ClInclude Include="..\..\bgfx\src\shader_dxbc.h" />
-    <ClInclude Include="..\..\bgfx\src\shader_spirv.h" />
-    <ClInclude Include="..\..\bgfx\src\topology.h" />
-    <ClInclude Include="..\..\bgfx\src\version.h" />
-    <ClInclude Include="..\..\bgfx\src\vertexlayout.h" />
-    <ClInclude Include="..\..\bgfx\src\vs_clear.bin.h" />
-    <ClInclude Include="..\..\bgfx\src\vs_debugfont.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\bgfx.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\c99\bgfx.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\defines.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\embedded_shader.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\include\bgfx\platform.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\bgfx_p.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\charset.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\config.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\debug_renderdoc.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\dxgi.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\emscripten.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear0.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear1.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear2.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear3.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear4.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear5.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear6.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_clear7.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\fs_debugfont.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_eagl.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_egl.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_glx.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_html5.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_nsgl.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glcontext_wgl.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\glimports.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\nvapi.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d11.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d12.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d9.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_gl.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_mtl.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_vk.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\renderer_webgpu.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader_dx9bc.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader_dxbc.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\shader_spirv.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\topology.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\version.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\vertexlayout.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\vs_clear.bin.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bgfx\src\vs_debugfont.bin.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\bgfx\src\amalgamated.cpp" />
-    <ClCompile Include="..\..\bgfx\src\bgfx.cpp" />
-    <ClCompile Include="..\..\bgfx\src\debug_renderdoc.cpp" />
-    <ClCompile Include="..\..\bgfx\src\dxgi.cpp" />
-    <ClCompile Include="..\..\bgfx\src\glcontext_egl.cpp" />
-    <ClCompile Include="..\..\bgfx\src\glcontext_html5.cpp" />
-    <ClCompile Include="..\..\bgfx\src\glcontext_wgl.cpp" />
-    <ClCompile Include="..\..\bgfx\src\nvapi.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_agc.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_d3d11.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_d3d12.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_gl.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_gnm.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_noop.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_nvn.cpp" />
-    <ClCompile Include="..\..\bgfx\src\renderer_vk.cpp" />
-    <ClCompile Include="..\..\bgfx\src\shader.cpp" />
-    <ClCompile Include="..\..\bgfx\src\shader_dxbc.cpp" />
-    <ClCompile Include="..\..\bgfx\src\shader_spirv.cpp" />
-    <ClCompile Include="..\..\bgfx\src\topology.cpp" />
-    <ClCompile Include="..\..\bgfx\src\vertexlayout.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\amalgamated.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\bgfx.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\debug_renderdoc.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\dxgi.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_egl.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_glx.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_html5.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\glcontext_wgl.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\nvapi.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_agc.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d11.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d12.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_d3d9.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_gl.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_gnm.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_noop.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_nvn.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_vk.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\renderer_webgpu.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader_dx9bc.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader_dxbc.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\shader_spirv.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\topology.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bgfx\src\vertexlayout.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -137,7 +137,7 @@ void DXRenderingDirectX11::Render()
 
 void DXRenderingDirectX11::BeginFrame()
 {
-	d3dDeviceContext->ClearRenderTargetView(backBuffer, RGBA{ 0.054f, 0.0f, 0.04f, 1.0f });
+	d3dDeviceContext->ClearRenderTargetView(backBuffer, RGBA{ 0.33f, 0.41f, 0.18f, 1.0f });
 
 	swapChain->Present(1, 0);
 }

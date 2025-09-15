@@ -7,15 +7,14 @@
 
 #include "pch.h"
 #include "DXRenderer.h"
-#include "bgfx/bgfx.h"
 
-class DX_API DXWindow
+class DX_API YEWindow
 {
 public:
-						 DXWindow();
-						 DXWindow(int width, int height);
-						 DXWindow(const DXWindow& rhs);
-				        ~DXWindow();
+						 YEWindow();
+						 YEWindow(int width, int height);
+						 YEWindow(const YEWindow& rhs);
+						 virtual ~YEWindow();
 	
 						void* GetWindowsHandle() { return hWnd; }
 					
@@ -23,7 +22,7 @@ public:
 
 	virtual void		 Setup();
 	virtual void         Create();
-	virtual void		 Show();
+	virtual void		 Show(uint16_t _width, uint16_t _height);
 
 	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 

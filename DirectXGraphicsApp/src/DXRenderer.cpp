@@ -19,7 +19,7 @@ DXRenderer::~DXRenderer()
 
 void DXRenderer::CreateInstance()
 {
-    if (DXEngineConfig::DXConfig::instance.graphicsAPI == DXEngineConfig::GraphicsAPI::DirectX11)
+    if (YEngineConfig::DXConfig::instance.graphicsAPI == YEngineConfig::GraphicsAPI::DirectX11)
         Singleton = new DXRenderingDirectX11();
 }
 

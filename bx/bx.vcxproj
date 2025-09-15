@@ -17,12 +17,11 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2911dc75-560d-4e03-9775-8e50907333f6}</ProjectGuid>
+    <ProjectGuid>{eecf2b1d-0f91-43f3-bbb6-985ea2472bbe}</ProjectGuid>
     <RootNamespace>bx</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -53,27 +52,29 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared" >
+  <ImportGroup Label="Shared">
   </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)bin\x86_64\Debug\</OutDir>
+    <IntDir>$(ProjectDir)obj\x86_64\Debug\bx\</IntDir>
+    <TargetName>bx</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -82,8 +83,9 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem></SubSystem>
-       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,20 +98,27 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem></SubSystem>
-       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;__STDC_FORMAT_MACROS;BX_CONFIG_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <AdditionalIncludeDirectories>..\DirectXGraphicsApp\bx\3rdparty;..\DirectXGraphicsApp\bx\include;..\DirectXGraphicsApp\bx\include\compat\msvc</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
-      <SubSystem></SubSystem>
-       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,12 +131,107 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem></SubSystem>
-       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\allocator.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\bounds.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\bx.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\cpu.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\easing.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\endian.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\error.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\float4x4_t.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\handlealloc.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\hash.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\math.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\mpscqueue.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\mutex.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\os.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\pixelformat.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\readerwriter.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\ringbuffer.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\rng.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd128_langext.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd128_neon.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd128_ref.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd128_sse.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd128_swizzle.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd256_avx.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd256_ref.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\simd_ni.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\sort.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\spscqueue.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\string.inl" />
+    <None Include="..\DirectXGraphicsApp\bx\include\bx\inline\uint32_t.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\allocator.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\bounds.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\bx.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\commandline.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\config.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\cpu.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\debug.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\easing.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\endian.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\error.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\file.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\filepath.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\float4x4_t.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\handlealloc.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\hash.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\macros.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\maputil.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\math.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\mpscqueue.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\mutex.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\os.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\pixelformat.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\platform.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\process.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\readerwriter.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\ringbuffer.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\rng.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\semaphore.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\settings.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\simd_t.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\sort.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\spscqueue.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\string.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\thread.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\timer.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\uint32_t.h" />
+    <ClInclude Include="..\DirectXGraphicsApp\bx\include\bx\url.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\allocator.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\amalgamated.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\bounds.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\bx.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\commandline.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\crtnone.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\debug.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\dtoa.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\easing.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\file.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\filepath.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\hash.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\math.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\mutex.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\os.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\process.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\semaphore.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\settings.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\sort.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\string.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\thread.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\timer.cpp" />
+    <ClCompile Include="..\DirectXGraphicsApp\bx\src\url.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

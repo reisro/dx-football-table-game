@@ -3,7 +3,7 @@
 #ifndef _DX_CONFIG_H
 #define _DX_CONFIG_H
 
-namespace DXEngineConfig
+namespace YEngineConfig
 {
 	enum class GraphicsAPI
 	{
@@ -13,6 +13,11 @@ namespace DXEngineConfig
 		DirectX12,
 		OpenGL_4_5,
 		Vulkan
+	};
+
+	enum class InputAPI
+	{
+		XInput
 	};
 
 	//-----------------------------------------------------------------------------
@@ -29,12 +34,15 @@ namespace DXEngineConfig
 		DXConfig():
 		
 			#ifdef DX11_RENDER_SUPPORT
-				graphicsAPI(GraphicsAPI::DirectX11)
+				graphicsAPI(GraphicsAPI::DirectX11),
 			#endif // DX11_RENDER_SUPPORT
+			
+				inputAPI(InputAPI::XInput)
 		{
 		}
 
 		GraphicsAPI			graphicsAPI;
+		InputAPI			inputAPI;
 		static DXConfig		instance;
 	};
 }

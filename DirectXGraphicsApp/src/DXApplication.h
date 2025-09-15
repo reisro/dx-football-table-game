@@ -4,7 +4,9 @@
 #define _DX_APPLICATION_H_
 
 #include "pch.h"
-#include "DXWindow.h"
+#include "DXGame.h"
+#include "DXTimer.h"
+#include "YEWindow.h"
 
 namespace YE
 {
@@ -14,14 +16,18 @@ namespace YE
 		DXApplication();
 		~DXApplication();
 
-		static void Setup(const DXEngineConfig::DXConfig& config);
-		static bool Init(DXWindow* window);
+		static void Setup(const YEngineConfig::DXConfig& config);
+		static bool Init();
 		static bool InitWindow();
 		static void InitRenderer();
-		static void Run();
+		static void Run(DXGame* gameApp);
+
+	protected:
+		static DXApplication* instance;
 
 	private:
-		DXWindow window;
+		YEWindow* _window;
+		DXGame*	 _gameApp;
 	};
 }
 

@@ -4,6 +4,7 @@
 #define _DX_GAME_H_
 
 #include "DXAPI.h"
+#include "YEWindow.h"
 
 class DX_API DXGame
 {
@@ -13,7 +14,7 @@ class DX_API DXGame
 
 	virtual ~DXGame();
 
-	virtual void init(uint32_t _width, uint32_t _height) = 0;
+	virtual void init() = 0;
 
 	virtual void shutdown() = 0;
 

@@ -18,6 +18,9 @@
 #ifndef _YAKIRA_ENGINE_H
 #define _YAKIRA_ENGINE_H
 
+//-----------------------------------------------------------------------------
+// Base Header Includes
+//-----------------------------------------------------------------------------
 #include "DXAPI.h"
 #include "DXPlaftormDefines.h"
 #include "DXTypes.h"

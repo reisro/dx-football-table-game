@@ -1,5 +1,7 @@
 #include "DXTimer.h"
 
+DXTimer* DXTimer::Singleton = 0;
+
 DXTimer::DXTimer()
 {
 	QueryPerformanceCounter((LARGE_INTEGER*)& startTime);
@@ -19,6 +21,19 @@ DXTimer::DXTimer(const DXTimer& rhs):
 
 DXTimer::~DXTimer()
 {
+}
+
+void DXTimer::CreateInstance()
+{
+	if (Singleton == nullptr)
+	{
+		Singleton = new DXTimer();
+	}
+}
+
+DXTimer* DXTimer::GetInstance()
+{
+	return Singleton;
 }
 
 void DXTimer::Tick()
@@ -44,6 +59,11 @@ dxInt64 DXTimer::GetElapsedTime()
 	}
 
 	return (dxInt64)(elapsedTime * secondsPerTick);
+}
+
+dxDouble DXTimer::GetDeltaTime()
+{
+	return deltaTime;
 }
 
 dxInt64 DXTimer::GetPerformanceCounter()

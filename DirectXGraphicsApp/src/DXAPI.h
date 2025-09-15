@@ -5,6 +5,9 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+//-----------------------------------------------------------------------------
+// Standard headers
+//-----------------------------------------------------------------------------
 #include <stdlib.h>
 #include <malloc.h>
 #include <tchar.h>
@@ -18,7 +21,9 @@
 #include <map>
 #include <set>
 
-// PhysicX define to suppress windows global min.max macros
+//-----------------------------------------------------------------------------
+// // PhysicX define to suppress windows global min.max macros
+//-----------------------------------------------------------------------------
 #define NOMINMAX
 #include <Windows.h>
 #include <windowsx.h>

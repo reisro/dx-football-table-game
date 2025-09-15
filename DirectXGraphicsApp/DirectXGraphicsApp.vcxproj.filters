@@ -55,6 +55,9 @@
     <Filter Include="Arquivos de Cabeçalho\Rendering\bgfx">
       <UniqueIdentifier>{8474a0cb-5e24-4112-8ace-6d48d5ba5957}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Application\WindowsPlatform">
+      <UniqueIdentifier>{a9e268a5-e531-4a4b-aee9-9404441afc0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -90,7 +93,7 @@
     <ClInclude Include="src\DXApplication.h">
       <Filter>Arquivos de Cabeçalho\Application</Filter>
     </ClInclude>
-    <ClInclude Include="src\DXWindow.h">
+    <ClInclude Include="src\YEWindow.h">
       <Filter>Arquivos de Cabeçalho\Application</Filter>
     </ClInclude>
     <ClInclude Include="src\DXSubsystem.h">
@@ -132,6 +135,9 @@
     <ClInclude Include="src\GameEntry.h">
       <Filter>Arquivos de Cabeçalho\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEWinAppWindow.h">
+      <Filter>Arquivos de Cabeçalho\Application\WindowsPlatform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -170,7 +176,7 @@
     <ClCompile Include="src\DXApplication.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\DXWindow.cpp">
+    <ClCompile Include="src\YEWindow.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
     </ClCompile>
     <ClCompile Include="src\DXGame.cpp">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="src\GameEntry.cpp">
       <Filter>Arquivos de Origem\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEWinAppWindow.cpp">
+      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
