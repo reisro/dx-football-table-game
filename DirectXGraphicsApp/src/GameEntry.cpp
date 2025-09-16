@@ -55,7 +55,7 @@ int gamentry::runGame(DXGame* _gameapp)
 	{
 		DXLog("Initialized Game App...");
 
-		YE::YEApplication::GetInstance()->Run(_gameapp);
+		YE::YEApplication::GetInstance()->Start(_gameapp);
 	}
 
 	return 0;

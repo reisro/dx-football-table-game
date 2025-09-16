@@ -20,7 +20,7 @@ bool DXRenderingDirectX11::Init()
 	// Create the window for rendering
 	YEWindow::CreateInstance();
 
-	outputWindow = dynamic_cast<YEWinAppWindow*>(outputWindow); 
+	outputWindow = dynamic_cast<YEWinAppWindow*>(YEWindow::GetInstance()); 
 	outputWindow->Create();
 
 	// clear out the struct for use

@@ -27,6 +27,12 @@ void YEApplication::Setup(const YEngineConfig::DXConfig& config)
 //-----------------------------------------------------------------------------
 bool YEApplication::Init()
 {
+	if (!InitRenderer())
+	{
+		DXLog("Failed to initialize renderer...");
+		return false;
+	}
+
 	return instance->_isInitialized;
 }
 
@@ -40,32 +46,39 @@ bool YE::YEApplication::InitEngine()
 	DXRenderer::CreateInstance();
 	DXTimer::CreateInstance();
 
-	return !instance->_isInitialized;
+	instance->_isInitialized = true;
+
+	return instance->_isInitialized;
 }
 
 //-----------------------------------------------------------------------------
-// Application Initialization resources
+// Application Subsystem Window Initialization
 //-----------------------------------------------------------------------------
 bool YE::YEApplication::InitWindow()
 {
 	YEWindow::GetInstance()->Create();
 
-	return false;
+	return true;
 }
 
 //-----------------------------------------------------------------------------
-// Application Initialization resources
+// Application Subsystem Renderer Initialization
 //-----------------------------------------------------------------------------
-void YEApplication::InitRenderer()
+bool YEApplication::InitRenderer()
 {
 	DXRenderer::GetInstance()->Init();
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-void YE::YEApplication::Run(DXGame* gameApp)
+void YE::YEApplication::Start(DXGame* gameApp)
 {
+	_gameApp = gameApp;
+	_isRunning = true;
+
 	if (instance->_isInitialized)
 	{
 		#if defined DX11_RENDER_SUPPORT
