@@ -11,6 +11,8 @@ DXTimer::DXTimer()
 	currentTime = QueryPerformanceCounter((LARGE_INTEGER*)& currentTime);
 
 	secondsPerTick = 0.0000001;
+
+	DXLog("\nCreated Timer....");
 }
 
 DXTimer::DXTimer(const DXTimer& rhs):

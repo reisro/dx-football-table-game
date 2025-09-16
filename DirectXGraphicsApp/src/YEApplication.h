@@ -21,13 +21,14 @@ namespace YE
 		static bool InitEngine();
 		static bool InitWindow();
 		static void InitRenderer();
-		static void Run(DXGame* gameApp);
-
+		static YEApplication* GetInstance();
+		
+		void Run(DXGame* gameApp);
+	
 	protected:
 		static YEApplication* instance;
 
 	private:
-		YEWindow* _window;
 		DXGame*	 _gameApp;
 		bool  _isRunning;
 		bool  _isInitialized;

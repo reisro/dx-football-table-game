@@ -1,4 +1,5 @@
 #include "GameEntry.h"
+#include "YEApplication.h"
 
 void gamentry::SetWindowAppTitle(const char* _title)
 {
@@ -36,7 +37,7 @@ int gamentry::runGame(DXGame* _gameapp)
 
 	YE::YEApplication::Setup(gameConfig);
 
-	// Initialize the game application
+	// Initialize the game engine
 	if (!YE::YEApplication::InitEngine())
 	{
 		DXLog("Failed to initialize game engine...");
@@ -49,16 +50,13 @@ int gamentry::runGame(DXGame* _gameapp)
 	gameInit._title = "Yakira Engine v0.2";
 	gameInit._game = _gameapp;
 
-	// If game init is successful, run the game loop
+	// If engine init is successful, run the application loop
 	if (YE::YEApplication::Init())
 	{
 		DXLog("Initialized Game App...");
 
-		YE::YEApplication::Run(_gameapp);
+		YE::YEApplication::GetInstance()->Run(_gameapp);
 	}
-	
-	// Shutdown the game application
-	_gameapp->shutdown();
 
 	return 0;
 }

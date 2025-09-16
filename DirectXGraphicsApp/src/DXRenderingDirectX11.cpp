@@ -3,6 +3,8 @@
 DXRenderingDirectX11::DXRenderingDirectX11()
 {
 	initialized = true;
+
+	DXLog("\nCreated Renderer....");
 }
 
 DXRenderingDirectX11::DXRenderingDirectX11(const DXRenderingDirectX11& rhs)
@@ -16,7 +18,9 @@ void DXRenderingDirectX11::Setup()
 bool DXRenderingDirectX11::Init()
 {
 	// Create the window for rendering
-	outputWindow = YEWindow::CreateInstance();
+	YEWindow::CreateInstance();
+
+	outputWindow = dynamic_cast<YEWinAppWindow*>(outputWindow); 
 	outputWindow->Create();
 
 	// clear out the struct for use
@@ -32,7 +36,7 @@ bool DXRenderingDirectX11::Init()
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-	//swapChainDesc.OutputWindow = static_cast<HWND>(outputWindow->GetWindowsHandle());
+	swapChainDesc.OutputWindow = outputWindow->GetWindowsHandle();
 	swapChainDesc.Flags = 0;
 	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
 	swapChainDesc.Windowed = TRUE;

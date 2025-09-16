@@ -1,55 +1,46 @@
 #include "YEWinAppWindow.h"
 #include "DXRenderingDirectX11.h"
 
-YEWinAPIWindow::YEWinAPIWindow()
+YEWinAppWindow::YEWinAppWindow()
 {
 }
 
-YEWinAPIWindow::YEWinAPIWindow(int width, int height)
+YEWinAppWindow::YEWinAppWindow(int width, int height)
 {
 }
 
-YEWinAPIWindow::YEWinAPIWindow(const YEWinAPIWindow& rhs)
+YEWinAppWindow::YEWinAppWindow(const YEWinAppWindow& rhs)
 {
 }
 
-YEWinAPIWindow::~YEWinAPIWindow()
+YEWinAppWindow::~YEWinAppWindow()
 {
 }
 
-void YEWinAPIWindow::CreateInstance()
+void YEWinAppWindow::CreateInstance()
 {
 }
 
-void YEWinAPIWindow::Setup()
+void YEWinAppWindow::Setup()
 {
 }
 
-void YEWinAPIWindow::Create()
+void YEWinAppWindow::Create()
 {
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("DXApp"), NULL };
     ::RegisterClassEx(&wc);
     hWnd = ::CreateWindow(wc.lpszClassName, _T("Yakira Engine v0.2"), WS_OVERLAPPEDWINDOW, 0, 0, width, height, NULL, NULL, wc.hInstance, NULL);
 }
 
-void YEWinAPIWindow::Show(uint16_t _width, uint16_t _height)
+void YEWinAppWindow::Show(uint16_t _width, uint16_t _height)
 {
 	YEWindow::Show(_width, _height);
-
-//#if defined DX11_RENDER_SUPPORT
-//
-//    DXRenderingDirectX11* renderer = dynamic_cast<DXRenderingDirectX11*>(DXRenderer::GetInstance());
-//
-//    renderer->renderWindow = hWnd;
-//    renderer->Init();
-//
-//#endif
 
     // Show the window
     ::ShowWindow(hWnd, SW_SHOWDEFAULT);
 }
 
-void YEWinAPIWindow::Update()
+void YEWinAppWindow::Update()
 {
     ::UpdateWindow(hWnd);
 
@@ -66,7 +57,7 @@ void YEWinAPIWindow::Update()
                 break;
         }
 
-        DXRenderer::GetInstance()->Render();
+        //DXRenderer::GetInstance()->Render();
 
         // Game loop
         /*while (_gameapp->update(0.0f))
@@ -78,7 +69,7 @@ void YEWinAPIWindow::Update()
     }
 }
 
-LRESULT __stdcall YEWinAPIWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {

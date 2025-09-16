@@ -15,6 +15,15 @@ namespace YEngineConfig
 		Vulkan
 	};
 
+	enum class Platform
+	{
+		Windows,
+		Linux,
+		MacOS,
+		Android,
+		iOS
+	};
+
 	enum class InputAPI
 	{
 		XInput
@@ -37,11 +46,13 @@ namespace YEngineConfig
 				graphicsAPI(GraphicsAPI::DirectX11),
 			#endif // DX11_RENDER_SUPPORT
 			
-				inputAPI(InputAPI::XInput)
+				inputAPI(InputAPI::XInput),
+				platform(Platform::Windows)
 		{
 		}
 
 		GraphicsAPI			graphicsAPI;
+		Platform			platform;
 		InputAPI			inputAPI;
 		static DXConfig		instance;
 	};

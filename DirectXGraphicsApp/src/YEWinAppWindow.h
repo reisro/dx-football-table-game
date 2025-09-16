@@ -10,20 +10,20 @@
 #include <windows.h>
 #undef WIN32_LEAN_AND_MEAN
 
-class YEWinAPIWindow : public YEWindow
+class YEWinAppWindow : public YEWindow
 {
 public:
-	YEWinAPIWindow();
-	YEWinAPIWindow(int width, int height);
-	YEWinAPIWindow(const YEWinAPIWindow& rhs);
+	YEWinAppWindow();
+	YEWinAppWindow(int width, int height);
+	YEWinAppWindow(const YEWinAppWindow& rhs);
 
-	virtual ~YEWinAPIWindow();
+	virtual ~YEWinAppWindow();
 
 	void  Setup() override;
 	void  Create() override;
 	void  Show(uint16_t _width, uint16_t _height) override;
 	void  Update() override;
-	void* GetWindowsHandle() { return hWnd; }
+	HWND GetWindowsHandle() { return hWnd; }
 
 	static void CreateInstance();
 	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

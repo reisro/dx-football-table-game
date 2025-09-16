@@ -1,4 +1,5 @@
 #include "YEWindow.h"
+#include "YEWinAppWindow.h"
 
 YEWindow::YEWindow():
     width(1366),
@@ -27,17 +28,15 @@ YEWindow::~YEWindow()
 
 YEWindow* YEWindow::CreateInstance()
 {
-	return new YEWindow();
+    if (YEngineConfig::DXConfig::instance.platform == YEngineConfig::Platform::Windows)
+    {
+        return new YEWinAppWindow();
+    }
 }
 
 YEWindow* YEWindow::GetInstance()
 {
     static YEWindow* instance = nullptr;
-
-    if (instance == nullptr)
-    {
-        instance = new YEWindow();
-    }
 
     return instance;
 }

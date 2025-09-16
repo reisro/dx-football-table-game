@@ -3,10 +3,10 @@
 #ifndef DX_TIMER_H
 #define DX_TIMER_H
 
+#include "pch.h"
 #include <Windows.h>
 #include <timeapi.h>
 #include <profileapi.h>
-#include "DXTypes.h"
 
 class DXTimer
 {

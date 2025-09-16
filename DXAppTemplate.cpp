@@ -22,6 +22,9 @@ public:
 
 	bool update(float _deltaTime) override
 	{
+		while(true)
+			DXLog("Game Loop...");
+
 		return true;
 	}
 

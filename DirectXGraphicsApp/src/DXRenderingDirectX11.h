@@ -4,7 +4,7 @@
 #define DX_RENDERINGDX11_H
 
 #include "DXRenderer.h"
-#include "YEWindow.h"
+#include "YEWinAppWindow.h"
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>
@@ -59,7 +59,7 @@ public:
 	DXGI_SWAP_CHAIN_DESC		swapChainDesc;
 	D3D_FEATURE_LEVEL			featureLevel;
 	D3D11_VIEWPORT				viewport;
-	YEWindow*					outputWindow;
+	YEWinAppWindow*				outputWindow;
 
 protected:
 

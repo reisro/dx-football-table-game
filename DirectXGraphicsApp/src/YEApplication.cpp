@@ -27,8 +27,7 @@ void YEApplication::Setup(const YEngineConfig::DXConfig& config)
 //-----------------------------------------------------------------------------
 bool YEApplication::Init()
 {
-
-	return true;
+	return instance->_isInitialized;
 }
 
 bool YE::YEApplication::InitEngine()
@@ -41,7 +40,7 @@ bool YE::YEApplication::InitEngine()
 	DXRenderer::CreateInstance();
 	DXTimer::CreateInstance();
 
-	return true;
+	return !instance->_isInitialized;
 }
 
 //-----------------------------------------------------------------------------
@@ -69,9 +68,15 @@ void YE::YEApplication::Run(DXGame* gameApp)
 {
 	if (instance->_isInitialized)
 	{
-		instance->_window->Show(1366, 768);
-		instance->_gameApp = gameApp;
-		instance->_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
+		#if defined DX11_RENDER_SUPPORT
+
+		DXRenderer* renderer = DXRenderer::GetInstance();
+
+		renderer->BeginFrame();
+
+		#endif
+
+		_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
 	}
 	else
 		DXLog("Application not initialized...");
@@ -80,4 +85,9 @@ void YE::YEApplication::Run(DXGame* gameApp)
 DX_API YEApplication* createDXApplication()
 {
 	return new YEApplication();
+}
+
+YEApplication* YEApplication::GetInstance()
+{
+	return instance;
 }
