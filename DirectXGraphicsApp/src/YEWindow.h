@@ -21,7 +21,7 @@ public:
 
 	virtual void		 Setup();
 	virtual void         Create();
-	virtual void		 Show(uint16_t _width, uint16_t _height);
+	virtual void		 Show();
 	virtual void		 Update();
 
 protected:

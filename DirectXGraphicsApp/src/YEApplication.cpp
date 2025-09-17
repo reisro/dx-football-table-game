@@ -80,16 +80,43 @@ void YE::YEApplication::Start(DXGame* gameApp)
 	_isRunning = true;
 
 	if (instance->_isInitialized)
-	{
-		#if defined DX11_RENDER_SUPPORT
+	{	
+		_msg = {};
 
-		DXRenderer* renderer = DXRenderer::GetInstance();
+		while (true)
+		{
+			if (::PeekMessage(&_msg, NULL, 0, 0, PM_REMOVE))
+			{
+				::TranslateMessage(&_msg);
+				::DispatchMessage(&_msg);
 
-		renderer->BeginFrame();
+				if (_msg.message == WM_QUIT)
+					break;
 
-		#endif
+				#if defined DX11_RENDER_SUPPORT
 
-		_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
+				DXRenderer* renderer = DXRenderer::GetInstance();
+				renderer->Render();
+
+				#endif
+
+				_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
+			}
+			else
+			{
+				
+			}
+
+			//DXRenderer::GetInstance()->Render();
+
+			// Game loop
+			/*while (_gameapp->update(0.0f))
+			{
+				DXLog("Game Loop.....");
+			}*/
+
+			//DXLog("\Window Loop running...");
+		}
 	}
 	else
 		DXLog("Application not initialized...");

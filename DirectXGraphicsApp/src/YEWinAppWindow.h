@@ -21,7 +21,7 @@ public:
 
 	void  Setup() override;
 	void  Create() override;
-	void  Show(uint16_t _width, uint16_t _height) override;
+	void  Show() override;
 	void  Update() override;
 	HWND GetWindowsHandle() { return hWnd; }
 
@@ -32,7 +32,6 @@ protected:
 
 	HWND				 hWnd;
 	WNDCLASSEX			 wc;
-	MSG					 msg;
 
 private:
 	dxInt						 _width;

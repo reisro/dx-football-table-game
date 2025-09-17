@@ -52,7 +52,7 @@ void YEWindow::Create()
     DXLog("\nCreated Window....");
 }
 
-void YEWindow::Show(uint16_t _width, uint16_t _height)
+void YEWindow::Show()
 {
 }
 

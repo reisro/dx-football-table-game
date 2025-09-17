@@ -35,42 +35,18 @@ void YEWinAppWindow::Create()
     hWnd = ::CreateWindow(wc.lpszClassName, _T("Yakira Engine v0.2"), WS_OVERLAPPEDWINDOW, 0, 0, _width, _height, NULL, NULL, wc.hInstance, NULL);
 }
 
-void YEWinAppWindow::Show(uint16_t _width, uint16_t _height)
+void YEWinAppWindow::Show()
 {
-	YEWindow::Show(_width, _height);
+	YEWindow::Show();
 
     // Show the window
     ::ShowWindow(hWnd, SW_SHOWDEFAULT);
-	Update();
 }
 
 void YEWinAppWindow::Update()
 {
     ::UpdateWindow(hWnd);
-
-    msg = {};
-
-    while (true)
-    {
-        if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-        {
-            ::TranslateMessage(&msg);
-            ::DispatchMessage(&msg);
-
-            if (msg.message == WM_QUIT)
-                break;
-        }
-
-        //DXRenderer::GetInstance()->Render();
-
-        // Game loop
-        /*while (_gameapp->update(0.0f))
-        {
-            DXLog("Game Loop.....");
-        }*/
-
-        DXLog("\Window Loop running...");
-    }
+   
 }
 
 LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

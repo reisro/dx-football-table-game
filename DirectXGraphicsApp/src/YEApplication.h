@@ -29,9 +29,10 @@ namespace YE
 		static YEApplication* instance;
 
 	private:
+		MSG		 _msg;
 		DXGame*	 _gameApp;
-		bool  _isRunning;
-		bool  _isInitialized;
+		bool	_isRunning;
+		bool	_isInitialized;
 	};
 }
 
