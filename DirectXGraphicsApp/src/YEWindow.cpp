@@ -4,22 +4,22 @@
 YEWindow* YEWindow::instance = 0;
 
 YEWindow::YEWindow():
-    width(1366),
-    height(768)
+    _width(1366),
+    _height(768)
 {
 	Create();
 }
 
-YEWindow::YEWindow(int width, int height):
-    width(width),
-    height(height)
+YEWindow::YEWindow(dxInt width, dxInt height):
+    _width(width),
+    _height(height)
 {
 	Create();
 }
 
 YEWindow::YEWindow(const YEWindow& rhs):
-    width(rhs.width),
-    height(rhs.height)
+    _width(rhs._width),
+    _height(rhs._height)
 {
 }
 
@@ -30,9 +30,9 @@ YEWindow::~YEWindow()
 
 YEWindow* YEWindow::CreateInstance()
 {
-    if (YEngineConfig::DXConfig::instance.platform == YEngineConfig::Platform::Windows)
+    if (YEngineConfig::YEConfig::instance.platform == YEngineConfig::Platform::Windows)
     {
-        instance = new YEWinAppWindow();
+		instance = new YEWinAppWindow(YEngineConfig::YEConfig::instance.resolution.width, YEngineConfig::YEConfig::instance.resolution.height);
     }
 
 	return instance;

@@ -12,7 +12,7 @@ class DX_API YEWindow
 {
 public:
 						 YEWindow();
-						 YEWindow(int width, int height);
+						 YEWindow(dxInt width, dxInt height);
 						 YEWindow(const YEWindow& rhs);
 						 virtual ~YEWindow();
 					
@@ -31,8 +31,8 @@ private:
 
 	DXRenderer*					 dxRenderer;
 
-	dxInt						 width;
-	dxInt						 height;
+	dxInt						 _width;
+	dxInt						 _height;
 };
 
 #endif _DXWINDOW_H

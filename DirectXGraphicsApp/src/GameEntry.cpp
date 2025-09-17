@@ -3,7 +3,6 @@
 
 void gamentry::SetWindowAppTitle(const char* _title)
 {
-
 }
 
 uint32_t gamentry::GetWindowWidth()
@@ -13,7 +12,6 @@ uint32_t gamentry::GetWindowWidth()
 
 void gamentry::SetWindowAppWidth(uint32_t _width)
 {
-
 }
 
 uint32_t gamentry::GetWindowHeight()
@@ -23,7 +21,6 @@ uint32_t gamentry::GetWindowHeight()
 
 void gamentry::SetWindowAppHeight(uint32_t _height)
 {
-
 }
 
 int gamentry::runGame(DXGame* _gameapp)
@@ -32,8 +29,13 @@ int gamentry::runGame(DXGame* _gameapp)
 	DXLog("\tYakira Engine v0.2");
 	DXLog("----------------------------------------------");
 
-	YEngineConfig::DXConfig gameConfig;
+	YEngineConfig::YEConfig gameConfig;
+
 	gameConfig.graphicsAPI = { YEngineConfig::GraphicsAPI::DirectX11 };
+	gameConfig.platform = { YEngineConfig::Platform::Windows };
+	gameConfig.inputAPI = { YEngineConfig::InputAPI::XInput };
+	gameConfig.resolution.width = 1368;
+	gameConfig.resolution.height = 720;
 
 	YE::YEApplication::Setup(gameConfig);
 
@@ -43,12 +45,6 @@ int gamentry::runGame(DXGame* _gameapp)
 		DXLog("Failed to initialize game engine...");
 		return -1;
 	}
-
-	GameInit gameInit;
-	gameInit._width = 1368;
-	gameInit._height = 720;
-	gameInit._title = "Yakira Engine v0.2";
-	gameInit._game = _gameapp;
 
 	// If engine init is successful, run the application loop
 	if (YE::YEApplication::Init())

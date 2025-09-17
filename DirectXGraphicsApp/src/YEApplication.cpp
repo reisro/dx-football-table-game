@@ -2,7 +2,7 @@
 
 using namespace YE;
 
-YEngineConfig::DXConfig YEngineConfig::DXConfig::instance;
+YEngineConfig::YEConfig YEngineConfig::YEConfig::instance;
 YEApplication* YEApplication::instance = 0;
 
 YEApplication::YEApplication()
@@ -17,9 +17,9 @@ YEApplication::~YEApplication()
 //-----------------------------------------------------------------------------
 // Application Initialization resources
 //-----------------------------------------------------------------------------
-void YEApplication::Setup(const YEngineConfig::DXConfig& config)
+void YEApplication::Setup(const YEngineConfig::YEConfig& config)
 {
-	YEngineConfig::DXConfig::instance = config;
+	YEngineConfig::YEConfig::instance = config;
 }
 
 //-----------------------------------------------------------------------------

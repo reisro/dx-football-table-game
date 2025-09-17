@@ -16,7 +16,7 @@ namespace YE
 		YEApplication();
 		~YEApplication();
 
-		static void Setup(const YEngineConfig::DXConfig& config);
+		static void Setup(const YEngineConfig::YEConfig& config);
 		static bool Init();
 		static bool InitEngine();
 		static bool InitWindow();

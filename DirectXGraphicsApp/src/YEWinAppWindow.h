@@ -14,7 +14,7 @@ class YEWinAppWindow : public YEWindow
 {
 public:
 	YEWinAppWindow();
-	YEWinAppWindow(int width, int height);
+	YEWinAppWindow(dxInt width, dxInt height);
 	YEWinAppWindow(const YEWinAppWindow& rhs);
 
 	virtual ~YEWinAppWindow();
@@ -35,8 +35,8 @@ protected:
 	MSG					 msg;
 
 private:
-	dxInt						 width;
-	dxInt						 height;
+	dxInt						 _width;
+	dxInt						 _height;
 };
 
 #endif // !_YEWINAPIWINDOW_H

@@ -5,7 +5,10 @@ YEWinAppWindow::YEWinAppWindow()
 {
 }
 
-YEWinAppWindow::YEWinAppWindow(int width, int height)
+YEWinAppWindow::YEWinAppWindow(dxInt width, dxInt height):
+    YEWindow(width, height),
+    _width(width),
+	_height(height)
 {
 }
 
@@ -29,7 +32,7 @@ void YEWinAppWindow::Create()
 {
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("DXApp"), NULL };
     ::RegisterClassEx(&wc);
-    hWnd = ::CreateWindow(wc.lpszClassName, _T("Yakira Engine v0.2"), WS_OVERLAPPEDWINDOW, 0, 0, width, height, NULL, NULL, wc.hInstance, NULL);
+    hWnd = ::CreateWindow(wc.lpszClassName, _T("Yakira Engine v0.2"), WS_OVERLAPPEDWINDOW, 0, 0, _width, _height, NULL, NULL, wc.hInstance, NULL);
 }
 
 void YEWinAppWindow::Show(uint16_t _width, uint16_t _height)
@@ -38,6 +41,7 @@ void YEWinAppWindow::Show(uint16_t _width, uint16_t _height)
 
     // Show the window
     ::ShowWindow(hWnd, SW_SHOWDEFAULT);
+	Update();
 }
 
 void YEWinAppWindow::Update()

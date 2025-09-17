@@ -38,9 +38,15 @@ namespace YEngineConfig
 		#define DX11_RENDER_SUPPORT
 	#endif
 
-	struct DX_API DXConfig
+	struct AppResolution
 	{
-		DXConfig():
+		dxInt width;
+		dxInt height;
+	};
+
+	struct DX_API YEConfig
+	{
+		YEConfig():
 		
 			#ifdef DX11_RENDER_SUPPORT
 				graphicsAPI(GraphicsAPI::DirectX11),
@@ -54,7 +60,8 @@ namespace YEngineConfig
 		GraphicsAPI			graphicsAPI;
 		Platform			platform;
 		InputAPI			inputAPI;
-		static DXConfig		instance;
+		AppResolution		resolution;
+		static YEConfig		instance;
 	};
 }
 

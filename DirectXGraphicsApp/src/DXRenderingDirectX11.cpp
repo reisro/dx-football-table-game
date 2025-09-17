@@ -73,6 +73,8 @@ bool DXRenderingDirectX11::Init()
 	if (d3dDevice)
 		DXRenderer::initialized = !DXRenderer::initialized;
 
+	outputWindow->Show(1366, 768);
+
 	return DXRenderer::initialized;
 }
 
