@@ -3,15 +3,15 @@
 
 using namespace gamentry;
 
-class Cube: public DXGame
+class Cube: public YEGame
 {
 public:
-	Cube() : DXGame("Default Cube") 
+	Cube() : YEGame("Default Cube")
 	{
 	}
 
 	Cube(const char* _game_name) :
-		DXGame(_game_name)
+		YEGame(_game_name)
 	{
 	}
 
@@ -22,8 +22,7 @@ public:
 
 	bool update(float _deltaTime) override
 	{
-		//while(true)
-			DXLog("Game Loop...");
+		DXLog("Game Loop...");
 
 		return true;
 	}

@@ -99,7 +99,7 @@
     <ClInclude Include="src\DXSubsystem.h">
       <Filter>Arquivos de Cabeçalho\Core\Subsystem</Filter>
     </ClInclude>
-    <ClInclude Include="src\DXGame.h">
+    <ClInclude Include="src\YEGame.h">
       <Filter>Arquivos de Cabeçalho\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\DXRenderer.h">
@@ -179,7 +179,7 @@
     <ClCompile Include="src\YEWindow.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\DXGame.cpp">
+    <ClCompile Include="src\YEGame.cpp">
       <Filter>Arquivos de Origem\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\DXRenderer.cpp">

@@ -29,7 +29,7 @@ namespace gamentry
 		const char* _title;
 		uint32_t	_width;
 		uint32_t	_height;
-		DXGame*     _game;
+		YEGame*     _game;
 
 	};
 	const GameInit DefaultGameInit = { "Yakira Engine v0.2", 1366, 768 };
@@ -50,7 +50,7 @@ namespace gamentry
 	void SetWindowAppHeight(uint32_t _height);
 	
 	/// <summary>
-	int DX_API runGame(DXGame* _gameapp);
+	int DX_API runGame(YEGame* _gameapp);
 
 	/// <summary>
 	extern void* GetWindowsHandle();

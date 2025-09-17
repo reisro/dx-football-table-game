@@ -4,7 +4,7 @@
 #define _DX_APPLICATION_H_
 
 #include "pch.h"
-#include "DXGame.h"
+#include "YEGame.h"
 #include "DXTimer.h"
 #include "YEWindow.h"
 
@@ -23,14 +23,14 @@ namespace YE
 		static bool InitRenderer();
 		static YEApplication* GetInstance();
 		
-		void Start(DXGame* gameApp);
+		void Run(YEGame* gameApp);
 	
 	protected:
 		static YEApplication* instance;
 
 	private:
 		MSG		 _msg;
-		DXGame*	 _gameApp;
+		YEGame*	 _gameApp;
 		bool	_isRunning;
 		bool	_isInitialized;
 	};

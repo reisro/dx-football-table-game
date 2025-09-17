@@ -12,7 +12,7 @@ DXTimer::DXTimer()
 
 	secondsPerTick = 0.0000001;
 
-	DXLog("\nCreated Timer....");
+	DXLog("\nCreated Timer instance....");
 }
 
 DXTimer::DXTimer(const DXTimer& rhs):

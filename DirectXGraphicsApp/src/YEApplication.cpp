@@ -5,21 +5,45 @@ using namespace YE;
 YEngineConfig::YEConfig YEngineConfig::YEConfig::instance;
 YEApplication* YEApplication::instance = 0;
 
-YEApplication::YEApplication()
+/// <summary>
+/// Constructors Implementation
+/// </summary>
+YEApplication::YEApplication():
+	_isRunning {false}
 {
 }
 
+/// <summary>
+/// Destructors Implementation
+/// </summary>
 YEApplication::~YEApplication()
 {
 	DXLog("\nDestroyed Application....");
 }
 
 //-----------------------------------------------------------------------------
-// Application Initialization resources
+// Application Setup Configuration
 //-----------------------------------------------------------------------------
 void YEApplication::Setup(const YEngineConfig::YEConfig& config)
 {
 	YEngineConfig::YEConfig::instance = config;
+}
+
+//-----------------------------------------------------------------------------
+// Engine Subsystem Initialization
+//-----------------------------------------------------------------------------
+bool YE::YEApplication::InitEngine()
+{
+	// Create singletons for this application
+	instance = new YEApplication();
+
+	// Create singletons for subsystems
+	DXRenderer::CreateInstance();
+	DXTimer::CreateInstance();
+
+	instance->_isInitialized = true;
+
+	return instance->_isInitialized;
 }
 
 //-----------------------------------------------------------------------------
@@ -32,21 +56,6 @@ bool YEApplication::Init()
 		DXLog("Failed to initialize renderer...");
 		return false;
 	}
-
-	return instance->_isInitialized;
-}
-
-bool YE::YEApplication::InitEngine()
-{
-	// Create singletons for this application
-	instance = new YEApplication();
-
-	// Create singletons for subsystems
-	YEWindow::CreateInstance();
-	DXRenderer::CreateInstance();
-	DXTimer::CreateInstance();
-
-	instance->_isInitialized = true;
 
 	return instance->_isInitialized;
 }
@@ -72,17 +81,22 @@ bool YEApplication::InitRenderer()
 }
 
 //-----------------------------------------------------------------------------
-// Application Initialization resources
+// Application Main Loop
 //-----------------------------------------------------------------------------
-void YE::YEApplication::Start(DXGame* gameApp)
+void YE::YEApplication::Run(YEGame* gameApp)
 {
 	_gameApp = gameApp;
 	_isRunning = true;
 
+	// Check if application instance was properly initialized
 	if (instance->_isInitialized)
 	{	
+		// Start up game components
+		_gameApp->init();
+
 		_msg = {};
 
+		// Keep updating game until user closes the application
 		while (true)
 		{
 			if (::PeekMessage(&_msg, NULL, 0, 0, PM_REMOVE))
@@ -92,34 +106,28 @@ void YE::YEApplication::Start(DXGame* gameApp)
 
 				if (_msg.message == WM_QUIT)
 					break;
-
+			}
+			else
+			{
 				#if defined DX11_RENDER_SUPPORT
 
+				// Render application frame
 				DXRenderer* renderer = DXRenderer::GetInstance();
 				renderer->Render();
 
 				#endif
 
+				// Game application state related resources
 				_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
 			}
-			else
-			{
-				
-			}
-
-			//DXRenderer::GetInstance()->Render();
-
-			// Game loop
-			/*while (_gameapp->update(0.0f))
-			{
-				DXLog("Game Loop.....");
-			}*/
-
-			//DXLog("\Window Loop running...");
 		}
 	}
 	else
 		DXLog("Application not initialized...");
+
+	// After game is not updating 
+	// Release game resources
+	_gameApp->shutdown();
 }
 
 DX_API YEApplication* createDXApplication()

@@ -6,13 +6,13 @@
 #include "DXAPI.h"
 #include "YEWindow.h"
 
-class DX_API DXGame
+class DX_API YEGame
 {
 	public:
 
-	DXGame(const char* _game_name);
+	YEGame(const char* _game_name);
 
-	virtual ~DXGame();
+	virtual ~YEGame();
 
 	virtual void init() = 0;
 

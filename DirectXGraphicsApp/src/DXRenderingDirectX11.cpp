@@ -4,7 +4,7 @@ DXRenderingDirectX11::DXRenderingDirectX11()
 {
 	initialized = true;
 
-	DXLog("\nCreated Renderer....");
+	DXLog("\nCreated Renderer instance....");
 }
 
 DXRenderingDirectX11::DXRenderingDirectX11(const DXRenderingDirectX11& rhs)

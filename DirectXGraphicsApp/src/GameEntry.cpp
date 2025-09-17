@@ -23,7 +23,7 @@ void gamentry::SetWindowAppHeight(uint32_t _height)
 {
 }
 
-int gamentry::runGame(DXGame* _gameapp)
+int gamentry::runGame(YEGame* _gameapp)
 {
 	DXLog("----------------------------------------------");
 	DXLog("\tYakira Engine v0.2");
@@ -39,19 +39,20 @@ int gamentry::runGame(DXGame* _gameapp)
 
 	YE::YEApplication::Setup(gameConfig);
 
-	// Initialize the game engine
+	// Initialize the game engine components
 	if (!YE::YEApplication::InitEngine())
 	{
 		DXLog("Failed to initialize game engine...");
 		return -1;
 	}
 
-	// If engine init is successful, run the application loop
+	// If engine init is successful
 	if (YE::YEApplication::Init())
 	{
 		DXLog("Initialized Game App...");
 
-		YE::YEApplication::GetInstance()->Start(_gameapp);
+		// Run the game application
+		YE::YEApplication::GetInstance()->Run(_gameapp);
 	}
 
 	return 0;

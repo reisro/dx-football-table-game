@@ -49,7 +49,7 @@ void YEWindow::Setup()
 
 void YEWindow::Create()
 {
-    DXLog("\nCreated Window....");
+    DXLog("\nCreated Window instance....");
 }
 
 void YEWindow::Show()

@@ -171,7 +171,7 @@
     <ClInclude Include="src\DXAPI.h" />
     <ClInclude Include="src\YEApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
-    <ClInclude Include="src\DXGame.h" />
+    <ClInclude Include="src\YEGame.h" />
     <ClInclude Include="src\DXPlaftormDefines.h" />
     <ClInclude Include="src\DXRenderer.h" />
     <ClInclude Include="src\DXRenderingDirectX11.h" />
@@ -198,7 +198,7 @@
     <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="src\DefaultCube.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
-    <ClCompile Include="src\DXGame.cpp" />
+    <ClCompile Include="src\YEGame.cpp" />
     <ClCompile Include="src\DXRenderer.cpp" />
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
