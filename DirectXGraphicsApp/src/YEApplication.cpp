@@ -75,7 +75,8 @@ bool YE::YEApplication::InitWindow()
 //-----------------------------------------------------------------------------
 bool YEApplication::InitRenderer()
 {
-	DXRenderer::GetInstance()->Init();
+	instance->_renderer = DXRenderer::GetInstance();
+	instance->_renderer->Init();
 
 	return true;
 }
@@ -99,6 +100,7 @@ void YE::YEApplication::Run(YEGame* gameApp)
 		// Keep updating game until user closes the application
 		while (true)
 		{
+			// Listen for window messages
 			if (::PeekMessage(&_msg, NULL, 0, 0, PM_REMOVE))
 			{
 				::TranslateMessage(&_msg);
@@ -107,20 +109,22 @@ void YE::YEApplication::Run(YEGame* gameApp)
 				if (_msg.message == WM_QUIT)
 					break;
 			}
-			else
+			else // No messages to process, keep updating game application
 			{
 				#if defined DX11_RENDER_SUPPORT
 
 				// Render application frame
-				DXRenderer* renderer = DXRenderer::GetInstance();
-				renderer->Render();
+				_renderer->Render();
 
 				#endif
 
-				// Game application state related resources
+				// Game application state related resources update
 				_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
 			}
 		}
+
+		// After exiting main loop, release renderer resources
+		_renderer->Cleanup();
 	}
 	else
 		DXLog("Application not initialized...");

@@ -49,46 +49,49 @@
     <Filter Include="Arquivos de Origem\System">
       <UniqueIdentifier>{e6d83e73-f03b-4353-8770-75ac92a5bfa6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Arquivos de Cabeçalho\ThirdParty">
-      <UniqueIdentifier>{6deb2a86-0d73-45fc-8c65-2dacc405d3d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Arquivos de Cabeçalho\Rendering\bgfx">
       <UniqueIdentifier>{8474a0cb-5e24-4112-8ace-6d48d5ba5957}</UniqueIdentifier>
     </Filter>
     <Filter Include="Arquivos de Cabeçalho\Application\WindowsPlatform">
       <UniqueIdentifier>{a9e268a5-e531-4a4b-aee9-9404441afc0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Origem\Application\WindowsPlatform">
+      <UniqueIdentifier>{17bea08b-882c-4ff1-b6c6-65b029169662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\3rdparty">
+      <UniqueIdentifier>{6deb2a86-0d73-45fc-8c65-2dacc405d3d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\imgui.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\imgui_internal.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\imstb_rectpack.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx9.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx11.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_dx12.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\backends\imgui_impl_win32.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
     <ClInclude Include="src\YEApplication.h">
       <Filter>Arquivos de Cabeçalho\Application</Filter>
@@ -141,37 +144,37 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\imgui_demo.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\imgui_draw.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\imgui_tables.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\imgui_widgets.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx9.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx11.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx12.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_win32.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp">
-      <Filter>Arquivos de Cabeçalho\ThirdParty</Filter>
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="src\YEApplication.cpp">
       <Filter>Arquivos de Origem\Application</Filter>
@@ -198,7 +201,7 @@
       <Filter>Arquivos de Origem\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\YEWinAppWindow.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Arquivos de Origem\Application\WindowsPlatform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

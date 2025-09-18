@@ -44,6 +44,7 @@ public:
 	virtual void Render();
 	virtual void BeginFrame();
 	virtual void EndFrame();
+	virtual void Cleanup();
 
 protected:
 

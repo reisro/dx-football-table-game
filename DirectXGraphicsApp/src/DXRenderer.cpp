@@ -54,6 +54,10 @@ void DXRenderer::EndFrame()
 {
 }
 
+void DXRenderer::Cleanup()
+{
+}
+
 DXRenderer* DXRenderer::GetInstance()
 {
     return Singleton;

@@ -1,5 +1,9 @@
 #include "YEWinAppWindow.h"
 #include "DXRenderingDirectX11.h"
+#include "../3rdparty/dear_imgui/backends/imgui_impl_win32.h"
+
+// Forward declare message handler from imgui_impl_win32.cpp
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 YEWinAppWindow::YEWinAppWindow()
 {
@@ -51,6 +55,9 @@ void YEWinAppWindow::Update()
 
 LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+        return true;
+
     switch (msg)
     {
     case WM_DESTROY:

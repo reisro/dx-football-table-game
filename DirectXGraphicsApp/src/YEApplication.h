@@ -29,10 +29,11 @@ namespace YE
 		static YEApplication* instance;
 
 	private:
-		MSG		 _msg;
-		YEGame*	 _gameApp;
-		bool	_isRunning;
-		bool	_isInitialized;
+		MSG			_msg;
+		YEGame*		_gameApp;
+		DXRenderer* _renderer;
+		bool		_isRunning;
+		bool		_isInitialized;
 	};
 }
 
