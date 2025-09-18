@@ -27,10 +27,10 @@ bool DXRenderingDirectX11::Init()
 	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
 
 	// fill the swap chain description struct
-	swapChainDesc.BufferCount = 2;                                    // one back buffer
+	swapChainDesc.BufferCount = 1;                                    // one back buffer
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
-	swapChainDesc.BufferDesc.Width = 0;
-	swapChainDesc.BufferDesc.Height = 0;
+	swapChainDesc.BufferDesc.Width = 1368;
+	swapChainDesc.BufferDesc.Height = 720;
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
@@ -99,7 +99,7 @@ bool DXRenderingDirectX11::Init()
 	style.FontScaleDpi = main_scale;
 
 	// Setup Platform/Renderer backends
-	ImGui_ImplWin32_Init(outputWindow);
+	ImGui_ImplWin32_Init(outputWindow->GetWindowsHandle());
 	ImGui_ImplDX11_Init(d3dDevice, d3dDeviceContext);
 
 	return DXRenderer::initialized;
@@ -152,6 +152,7 @@ void DXRenderingDirectX11::CreateRenderTargetView()
 	// use the back buffer address to create the render target
 	d3dDevice->CreateRenderTargetView(tBackBuffer, nullptr, &mainRenderTargetView);
 	tBackBuffer->Release();
+
 }
 
 void DXRenderingDirectX11::SetViewport()
