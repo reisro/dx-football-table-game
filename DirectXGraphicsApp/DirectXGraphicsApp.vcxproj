@@ -171,6 +171,7 @@
     <ClInclude Include="src\DXAPI.h" />
     <ClInclude Include="src\YEApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
+    <ClInclude Include="src\YEBaseComponent.h" />
     <ClInclude Include="src\YEGame.h" />
     <ClInclude Include="src\DXPlaftormDefines.h" />
     <ClInclude Include="src\DXRenderer.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="src\DXSubsystem.h" />
     <ClInclude Include="src\DXTimer.h" />
     <ClInclude Include="src\DXTypes.h" />
+    <ClInclude Include="src\YETransformComponent.h" />
     <ClInclude Include="src\YEWinAppWindow.h" />
     <ClInclude Include="src\YEWindow.h" />
     <ClInclude Include="src\GameEntry.h" />
@@ -204,9 +206,13 @@
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\YEGameObject.cpp" />
+    <ClCompile Include="src\YETransformComponent.cpp" />
     <ClCompile Include="src\YEWinAppWindow.cpp" />
     <ClCompile Include="src\YEWindow.cpp" />
     <ClCompile Include="src\GameEntry.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -61,6 +61,18 @@
     <Filter Include="Arquivos de Cabeçalho\3rdparty">
       <UniqueIdentifier>{6deb2a86-0d73-45fc-8c65-2dacc405d3d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Core\Components">
+      <UniqueIdentifier>{c6e40ce6-8cb8-4d3b-9734-6c0265910918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Core\Objects">
+      <UniqueIdentifier>{5c730227-bbac-4f0d-9b57-cad99459da65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Core\Components">
+      <UniqueIdentifier>{fa24f162-51ed-4504-950a-8507c374066b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Core\Objects">
+      <UniqueIdentifier>{3761da40-239f-4fae-b622-7318483bea68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -141,8 +153,14 @@
     <ClInclude Include="src\YEWinAppWindow.h">
       <Filter>Arquivos de Cabeçalho\Application\WindowsPlatform</Filter>
     </ClInclude>
-    <ClInclude Include="src\YEGameObject.h">
+    <ClInclude Include="src\YEBaseComponent.h">
       <Filter>Arquivos de Cabeçalho\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YETransformComponent.h">
+      <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YEGameObject.h">
+      <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -207,7 +225,13 @@
       <Filter>Arquivos de Origem\Application\WindowsPlatform</Filter>
     </ClCompile>
     <ClCompile Include="src\YEGameObject.cpp">
-      <Filter>Arquivos de Origem\Core</Filter>
+      <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\YETransformComponent.cpp">
+      <Filter>Arquivos de Origem\Core\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

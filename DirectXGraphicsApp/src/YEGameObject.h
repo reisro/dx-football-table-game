@@ -4,7 +4,8 @@
 #define _YE_GAME_OBJECT_H_
 
 #include "DXAPI.h"
-#include "YEWindow.h"
+
+class YEBaseComponent;
 
 class DX_API YEGameObject
 {
@@ -22,9 +23,13 @@ public:
 
 	virtual void update(float _deltaTime);
 
-	virtual void addComponent();
+	virtual void addComponent(YEBaseComponent* component);
 
 	virtual void setName(const char* _name);
+
+protected:
+	std::vector<YEBaseComponent*> _components;
+	std::vector<YEGameObject*>	  _children;
 
 private:
 	const char* _game_object_name;
