@@ -174,10 +174,14 @@ void DXRenderingDirectX11::Render()
 
 void DXRenderingDirectX11::BeginFrame()
 {
+	bool show_demo_window = true;
+
 	// Start the Dear ImGui frame
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+
+	ImGui::ShowDemoWindow(&show_demo_window);
 
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
 	{
