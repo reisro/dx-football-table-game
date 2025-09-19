@@ -141,6 +141,9 @@
     <ClInclude Include="src\YEWinAppWindow.h">
       <Filter>Arquivos de Cabeçalho\Application\WindowsPlatform</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEGameObject.h">
+      <Filter>Arquivos de Cabeçalho\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="src\YEWinAppWindow.cpp">
       <Filter>Arquivos de Origem\Application\WindowsPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEGameObject.cpp">
+      <Filter>Arquivos de Origem\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

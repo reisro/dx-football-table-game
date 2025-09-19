@@ -5,6 +5,7 @@
 
 #include "DXAPI.h"
 #include "YEWindow.h"
+#include "YEGameObject.h"
 
 class DX_API YEGame
 {

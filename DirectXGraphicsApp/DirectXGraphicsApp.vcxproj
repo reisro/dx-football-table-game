@@ -183,6 +183,7 @@
     <ClInclude Include="src\GameEntry.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\YakiraEngine.h" />
+    <ClInclude Include="src\YEGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\backends\imgui_impl_dx10.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="src\DXRenderer.cpp" />
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
+    <ClCompile Include="src\YEGameObject.cpp" />
     <ClCompile Include="src\YEWinAppWindow.cpp" />
     <ClCompile Include="src\YEWindow.cpp" />
     <ClCompile Include="src\GameEntry.cpp" />

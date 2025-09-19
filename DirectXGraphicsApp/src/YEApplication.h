@@ -7,9 +7,6 @@
 #include "YEGame.h"
 #include "DXTimer.h"
 #include "YEWindow.h"
-#include "bgfx/bgfx.h"
-#include "bgfx/platform.h"
-#include "bx/bx.h"
 
 namespace YE
 {
