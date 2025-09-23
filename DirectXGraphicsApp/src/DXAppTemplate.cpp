@@ -18,16 +18,26 @@ public:
 
 	void init() override
 	{
-		DXLog("Initialized Cube Game...");
-
 		cube_game_object.start();
+		
+		// Set initial position of the cube
+		position = YEVector3::Zero();
+
+		cube_game_object.GetTransform()->setPosition(position);
+
+		//DXLog("Game Object Pos: (%f,%f,%f)", .0f, 0.0f, -10.0f);
 	}
 
 	bool update(float _deltaTime) override
+        
 	{
-		DXLog("Game Loop...");
+		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
+		moveDirection = YEVector3::Sum(*position, *newPosition);
 
+		cube_game_object.GetTransform()->setPosition(moveDirection);
 		cube_game_object.update(_deltaTime);
+
+		forward_speed += 0.1f;
 
 		return true;
 	}
@@ -43,6 +53,12 @@ private:
 	const char* game_name;
 
 	YEGameObject cube_game_object;
+	
+	YEVector3* position;
+	YEVector3* newPosition;
+	YEVector3* moveDirection;
+
+	yeFloat forward_speed = 0.1f;
 };
 
 WINDOW_MAIN_ENTRY(Cube);

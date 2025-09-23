@@ -119,7 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;BX_CONFIG_DEBUG=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\DirectXGraphicsApp\src;.\DirectXGraphicsApp\bgfx\include;.\DirectXGraphicsApp\bx\include;.\DirectXGraphicsApp\bx\include\compat\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\DirectXGraphicsApp\src;.\DirectXGraphicsApp\bgfx\include;.\DirectXGraphicsApp\bx\include;.\DirectXGraphicsApp\bx\include\compat\msvc;$(DXSDK_DIR)Include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/Zc:__cplusplus </AdditionalOptions>
@@ -148,12 +148,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DXAppTemplate.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="DirectXGraphicsApp\DirectXGraphicsApp.vcxproj">
       <Project>{f25278e2-c8e8-4683-a2c1-83a4d431804b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,6 +8,9 @@
 class DX_API YEBaseComponent
 {
 public:
+	
+	YEBaseComponent() {}
+	virtual ~YEBaseComponent() {}
 
 	virtual void start() = 0;
 	virtual void shutdown() = 0;

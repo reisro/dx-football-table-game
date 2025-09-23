@@ -73,6 +73,12 @@
     <Filter Include="Arquivos de Origem\Core\Objects">
       <UniqueIdentifier>{3761da40-239f-4fae-b622-7318483bea68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Math">
+      <UniqueIdentifier>{b5f4517b-59d2-4276-91c5-de88d641ab56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Math">
+      <UniqueIdentifier>{260a834e-cd42-423d-b581-6a697369fb6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -162,6 +168,9 @@
     <ClInclude Include="src\YEGameObject.h">
       <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEVector3.h">
+      <Filter>Arquivos de Cabeçalho\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -229,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="src\YETransformComponent.cpp">
       <Filter>Arquivos de Origem\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEVector3.cpp">
+      <Filter>Arquivos de Origem\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

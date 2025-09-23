@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DXAppTemplate.cpp">
+    <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>

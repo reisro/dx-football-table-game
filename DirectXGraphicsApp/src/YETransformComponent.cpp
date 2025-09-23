@@ -1,9 +1,9 @@
 #include "YETransformComponent.h"
 
 YETransformComponent::YETransformComponent():
-	position{ 0.0f, 0.0f, 0.0f },
-	rotation{ 0.0f, 0.0f, 0.0f },
-	scale{ 1.0f, 1.0f, 1.0f }
+	x{ 0.0f }, y{ 0.0f }, z {0.0f },
+	roll{ 0.0f }, yaw{ 0.0f }, pitch { 0.0f },
+	sx{ 1.0f }, sy{ 1.0f }, sz{ 1.0f }
 {
 	DXLog("\nCreated Transform Component...");
 }
@@ -27,38 +27,47 @@ void YETransformComponent::update(float _deltaTime)
 	DXLog("\nUpdating Transform Component...");
 }
 
-void YETransformComponent::setPosition(yeFloat x, yeFloat y, yeFloat z)
+void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)
 {
-	position[0] = x;
-	position[1] = y;
-	position[2] = z;
+	x = _x;
+	y = _y;
+	z = _z;
+}
+
+void YETransformComponent::setPosition(YEVector3* position)
+{
+	_position.SetValue(position);
+
+	x = position->_x;
+	y = position->_y;
+	z = position->_z;
 }
 
 void YETransformComponent::setRotation(yeFloat x, yeFloat y, yeFloat z)
 {
-	rotation[0] = x;
-	rotation[1] = y;
-	rotation[2] = z;
+	roll = x;
+	yaw = y;
+	pitch = z;
 }
 
 void YETransformComponent::setScale(yeFloat x, yeFloat y, yeFloat z)
 {
-	scale[0] = x;
-	scale[1] = y;
-	scale[2] = z;
+	sx = x;
+	sy = y;
+	sz = z;
 }
 
 yeFloat* YETransformComponent::getPosition()
 {
-	return position;
+	return &z;
 }
 
 yeFloat* YETransformComponent::getRotation()
 {
-	return rotation;
+	return &roll;
 }
 
 yeFloat* YETransformComponent::getScale()
 {
-	return scale;
+	return &sx;
 }

@@ -4,6 +4,7 @@
 #define _YE_GAME_OBJECT_H_
 
 #include "DXAPI.h"
+#include "YETransformComponent.h"
 
 class YEBaseComponent;
 
@@ -26,6 +27,8 @@ public:
 	virtual void addComponent(YEBaseComponent* component);
 
 	virtual void setName(const char* _name);
+
+	YETransformComponent* GetTransform();
 
 protected:
 	std::vector<YEBaseComponent*> _components;

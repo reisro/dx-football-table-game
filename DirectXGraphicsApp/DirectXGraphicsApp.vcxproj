@@ -180,6 +180,7 @@
     <ClInclude Include="src\DXTimer.h" />
     <ClInclude Include="src\DXTypes.h" />
     <ClInclude Include="src\YETransformComponent.h" />
+    <ClInclude Include="src\YEVector3.h" />
     <ClInclude Include="src\YEWinAppWindow.h" />
     <ClInclude Include="src\YEWindow.h" />
     <ClInclude Include="src\GameEntry.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\YEGameObject.cpp" />
     <ClCompile Include="src\YETransformComponent.cpp" />
+    <ClCompile Include="src\YEVector3.cpp" />
     <ClCompile Include="src\YEWinAppWindow.cpp" />
     <ClCompile Include="src\YEWindow.cpp" />
     <ClCompile Include="src\GameEntry.cpp" />

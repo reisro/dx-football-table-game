@@ -68,3 +68,10 @@ void YEGameObject::setName(const char* _name)
 {
 	_game_object_name = _name;
 }
+
+YETransformComponent* YEGameObject::GetTransform()
+{
+	std::vector<YEBaseComponent*>::iterator it = _components.begin();
+
+	return dynamic_cast<YETransformComponent*>(*it);
+}
