@@ -1,9 +1,11 @@
 #pragma once
+#pragma warning(disable : 4838) 
 
 #ifndef _YE_GAME_OBJECT_H_
 #define _YE_GAME_OBJECT_H_
 
 #include "DXAPI.h"
+#include "YEVectorWrapper.h"
 #include "YETransformComponent.h"
 
 class YEBaseComponent;
@@ -31,8 +33,8 @@ public:
 	YETransformComponent* GetTransform();
 
 protected:
-	std::vector<YEBaseComponent*> _components;
-	std::vector<YEGameObject*>	  _children;
+	YEVectorWrapper<YEBaseComponent*> _components;
+	YEVectorWrapper<YEGameObject*>	  _children;
 
 private:
 	const char* _game_object_name;

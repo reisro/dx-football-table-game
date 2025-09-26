@@ -24,12 +24,9 @@ public:
 		position = YEVector3::Zero();
 
 		cube_game_object.GetTransform()->setPosition(position);
-
-		//DXLog("Game Object Pos: (%f,%f,%f)", .0f, 0.0f, -10.0f);
 	}
 
-	bool update(float _deltaTime) override
-        
+	bool update(dxDouble _deltaTime) override
 	{
 		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
 		moveDirection = YEVector3::Sum(*position, *newPosition);

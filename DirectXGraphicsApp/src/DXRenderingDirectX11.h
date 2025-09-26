@@ -5,9 +5,9 @@
 
 #include "DXRenderer.h"
 #include "YEWinAppWindow.h"
-#include "../3rdparty/dear_imgui/imgui.h"
-#include "../3rdparty/dear_imgui/backends/imgui_impl_win32.h"
-#include "../3rdparty/dear_imgui/backends/imgui_impl_dx11.h"
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>

@@ -79,6 +79,9 @@
     <Filter Include="Arquivos de Origem\Math">
       <UniqueIdentifier>{260a834e-cd42-423d-b581-6a697369fb6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Utils">
+      <UniqueIdentifier>{6082be39-14d3-461a-9ccf-037a45b9b8a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -170,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="src\YEVector3.h">
       <Filter>Arquivos de Cabeçalho\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YEVectorWrapper.h">
+      <Filter>Arquivos de Cabeçalho\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VectorWrapper.h">
+      <Filter>Arquivos de Cabeçalho\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

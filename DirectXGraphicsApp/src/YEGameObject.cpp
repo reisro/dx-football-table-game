@@ -19,16 +19,16 @@ YEGameObject::YEGameObject(const char* _game_name):
 
 YEGameObject::~YEGameObject()
 {
-	_components.clear();
+	_components.getVector()->_list.clear();
 }
 
 void YEGameObject::start()
 {
 	DXLog("\nStart Game Object...");
 
-	if (!_components.empty())
+	if (!_components.getVector()->_list.empty())
 	{
-		for (auto cp : _components)
+		for (auto cp : _components.getVector()->_list)
 		{
 			cp->start();
 		}
@@ -37,9 +37,9 @@ void YEGameObject::start()
 
 void YEGameObject::shutdown()
 {
-	if (!_components.empty())
+	if (!_components.getVector()->_list.empty())
 	{
-		for (auto cp : _components)
+		for (auto cp : _components.getVector()->_list)
 		{
 			cp->shutdown();
 		}
@@ -50,9 +50,9 @@ void YEGameObject::update(float _deltaTime)
 {
 	DXLog("\nUpdating Game Object...");
 
-	if (!_components.empty())
+	if (!_components.getVector()->_list.empty())
 	{
-		for (auto cp : _components)
+		for (auto cp : _components.getVector()->_list)
 		{
 			cp->update(_deltaTime);
 		}
@@ -61,7 +61,7 @@ void YEGameObject::update(float _deltaTime)
 
 void YEGameObject::addComponent(YEBaseComponent* component)
 {
-	_components.push_back(component);
+	_components.getVector()->push_back(component);
 }
 
 void YEGameObject::setName(const char* _name)
@@ -71,7 +71,11 @@ void YEGameObject::setName(const char* _name)
 
 YETransformComponent* YEGameObject::GetTransform()
 {
-	std::vector<YEBaseComponent*>::iterator it = _components.begin();
+    // GetElements() が一時オブジェクトを返す場合、参照を保持しないようにする
+    auto elements = _components.getVector()->GetElements();
 
-	return dynamic_cast<YETransformComponent*>(*it);
+    if (elements.empty()) 
+		return nullptr;
+
+    return dynamic_cast<YETransformComponent*>(elements.front());
 }

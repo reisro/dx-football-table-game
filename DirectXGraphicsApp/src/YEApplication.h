@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4838) 
 
 #ifndef _DX_APPLICATION_H_
 #define _DX_APPLICATION_H_

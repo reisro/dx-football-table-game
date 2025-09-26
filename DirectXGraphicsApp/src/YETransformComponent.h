@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4838) 
 
 #ifndef _YE_TRANSFORM_COMPONENT_H_
 #define _YE_TRANSFORM_COMPONENT_H_

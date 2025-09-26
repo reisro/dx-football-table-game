@@ -81,7 +81,7 @@
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(DXSDK_DIR)\Utilities\bin\x64;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;.\3rdparty\dear_imgui;.\3rdparty\dear_imgui\backends</ExternalIncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>IntermediateFiles\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DX11_RENDER_SUPPORT;WINDOW_MAIN_IMPLEMENTED;_DEBUG;_CONSOLE;_WIN32;BX_CONFIG_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\bgfx\include;.\bx\include;.\bx\include\compat\msvc;.\3rdparty\dear_imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\bgfx\include;.\bx\include;.\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -169,6 +169,8 @@
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="src\DefaultCube.h" />
     <ClInclude Include="src\DXAPI.h" />
+    <ClInclude Include="src\VectorWrapper.h" />
+    <ClInclude Include="src\YEVectorWrapper.h" />
     <ClInclude Include="src\YEApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
     <ClInclude Include="src\YEBaseComponent.h" />
