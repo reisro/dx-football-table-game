@@ -170,6 +170,9 @@
     <ClInclude Include="src\DefaultCube.h" />
     <ClInclude Include="src\DXAPI.h" />
     <ClInclude Include="src\VectorWrapper.h" />
+    <ClInclude Include="src\YE3DMeshHelper.h" />
+    <ClInclude Include="src\YEMesh.h" />
+    <ClInclude Include="src\YEMeshComponent.h" />
     <ClInclude Include="src\YEVectorWrapper.h" />
     <ClInclude Include="src\YEApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
@@ -209,6 +212,7 @@
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\YEGameObject.cpp" />
+    <ClCompile Include="src\YEMeshComponent.cpp" />
     <ClCompile Include="src\YETransformComponent.cpp" />
     <ClCompile Include="src\YEVector3.cpp" />
     <ClCompile Include="src\YEWinAppWindow.cpp" />

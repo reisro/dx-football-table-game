@@ -82,6 +82,9 @@
     <Filter Include="Arquivos de Cabeçalho\Utils">
       <UniqueIdentifier>{6082be39-14d3-461a-9ccf-037a45b9b8a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Resources">
+      <UniqueIdentifier>{84bd6027-00c6-4f70-9d46-729d7f2a2b10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -180,6 +183,15 @@
     <ClInclude Include="src\VectorWrapper.h">
       <Filter>Arquivos de Cabeçalho\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEMeshComponent.h">
+      <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YEMesh.h">
+      <Filter>Arquivos de Cabeçalho\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YE3DMeshHelper.h">
+      <Filter>Arquivos de Cabeçalho\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -250,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="src\YEVector3.cpp">
       <Filter>Arquivos de Origem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEMeshComponent.cpp">
+      <Filter>Arquivos de Origem\Core\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
