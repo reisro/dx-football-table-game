@@ -32,7 +32,7 @@ namespace YE
 	private:
 		MSG			_msg;
 		YEGame*		_gameApp;
-		DXRenderer* _renderer;
+		YERenderer* _renderer;
 		bool		_isRunning;
 		bool		_isInitialized;
 		bool		_isLoopInitialized;

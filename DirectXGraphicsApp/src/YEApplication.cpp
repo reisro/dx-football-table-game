@@ -38,7 +38,7 @@ bool YE::YEApplication::InitEngine()
 	instance = new YEApplication();
 
 	// Create singletons for subsystems
-	DXRenderer::CreateInstance();
+	YERenderer::CreateInstance();
 	DXTimer::CreateInstance();
 
 	instance->_isInitialized = true;
@@ -75,7 +75,7 @@ bool YE::YEApplication::InitWindow()
 //-----------------------------------------------------------------------------
 bool YEApplication::InitRenderer()
 {
-	instance->_renderer = DXRenderer::GetInstance();
+	instance->_renderer = YERenderer::GetInstance();
 	instance->_renderer->Init();
 
 	return true;

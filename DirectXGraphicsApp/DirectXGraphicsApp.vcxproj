@@ -180,8 +180,8 @@
     <ClInclude Include="src\YEBaseComponent.h" />
     <ClInclude Include="src\YEGame.h" />
     <ClInclude Include="src\DXPlaftormDefines.h" />
-    <ClInclude Include="src\DXRenderer.h" />
-    <ClInclude Include="src\DXRenderingDirectX11.h" />
+    <ClInclude Include="src\YERenderer.h" />
+    <ClInclude Include="src\YERenderingDirectX11.h" />
     <ClInclude Include="src\DXSubsystem.h" />
     <ClInclude Include="src\DXTimer.h" />
     <ClInclude Include="src\DXTypes.h" />
@@ -210,8 +210,8 @@
     <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
-    <ClCompile Include="src\DXRenderer.cpp" />
-    <ClCompile Include="src\DXRenderingDirectX11.cpp" />
+    <ClCompile Include="src\YERenderer.cpp" />
+    <ClCompile Include="src\YERenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\YEGameObject.cpp" />
     <ClCompile Include="src\YEMesh.cpp" />

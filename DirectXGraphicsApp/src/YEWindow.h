@@ -6,7 +6,7 @@
 #define MAX_LOADSTRING 100
 
 #include "pch.h"
-#include "DXRenderer.h"
+#include "YERenderer.h"
 
 class DX_API YEWindow
 {
@@ -29,7 +29,7 @@ protected:
 
 private:
 
-	DXRenderer*					 dxRenderer;
+	YERenderer*					 dxRenderer;
 
 	dxInt						 _width;
 	dxInt						 _height;

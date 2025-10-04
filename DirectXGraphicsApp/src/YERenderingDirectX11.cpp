@@ -1,21 +1,21 @@
-#include "DXRenderingDirectX11.h"
+#include "YERenderingDirectX11.h"
 
-DXRenderingDirectX11::DXRenderingDirectX11()
+YERenderingDirectX11::YERenderingDirectX11()
 {
 	initialized = true;
 
 	DXLog("\nCreated Renderer instance....");
 }
 
-DXRenderingDirectX11::DXRenderingDirectX11(const DXRenderingDirectX11& rhs)
+YERenderingDirectX11::YERenderingDirectX11(const YERenderingDirectX11& rhs)
 {
 }
 
-void DXRenderingDirectX11::Setup()
+void YERenderingDirectX11::Setup()
 {
 }
 
-bool DXRenderingDirectX11::Init()
+bool YERenderingDirectX11::Init()
 {
 	// Create the window for rendering
 	YEWindow::CreateInstance();
@@ -90,7 +90,7 @@ bool DXRenderingDirectX11::Init()
 	SetViewport();
 
 	if (d3dDevice)
-		DXRenderer::initialized = !DXRenderer::initialized;
+		YERenderer::initialized = !YERenderer::initialized;
 
 	outputWindow->Show();
 
@@ -117,14 +117,14 @@ bool DXRenderingDirectX11::Init()
 	ImGui_ImplWin32_Init(outputWindow->GetWindowsHandle());
 	ImGui_ImplDX11_Init(d3dDevice, d3dDeviceContext);
 
-	return DXRenderer::initialized;
+	return YERenderer::initialized;
 }
 
-void DXRenderingDirectX11::PostInit()
+void YERenderingDirectX11::PostInit()
 {
 }
 
-void DXRenderingDirectX11::Clean()
+void YERenderingDirectX11::Clean()
 {
 	::DestroyWindow(outputWindow->GetWindowsHandle());
 
@@ -134,7 +134,7 @@ void DXRenderingDirectX11::Clean()
 	d3dDeviceContext->Release();
 }
 
-void DXRenderingDirectX11::CreateRenderTargetView()
+void YERenderingDirectX11::CreateRenderTargetView()
 {
 	// get the address of the back buffer
 	swapChain->GetBuffer(0, IID_PPV_ARGS(&tBackBuffer));
@@ -145,7 +145,7 @@ void DXRenderingDirectX11::CreateRenderTargetView()
 
 }
 
-void DXRenderingDirectX11::SetViewport()
+void YERenderingDirectX11::SetViewport()
 {
 	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
 
@@ -157,12 +157,12 @@ void DXRenderingDirectX11::SetViewport()
 	d3dDeviceContext->RSSetViewports(1, &viewport);
 }
 
-void DXRenderingDirectX11::Render()
+void YERenderingDirectX11::Render()
 {
 	BeginFrame();
 }
 
-void DXRenderingDirectX11::BeginFrame()
+void YERenderingDirectX11::BeginFrame()
 {
 	bool show_demo_window = true;
 
@@ -198,11 +198,11 @@ void DXRenderingDirectX11::BeginFrame()
 	swapChain->Present(1, 0);
 }
 
-void DXRenderingDirectX11::EndFrame()
+void YERenderingDirectX11::EndFrame()
 {
 }
 
-void DXRenderingDirectX11::Cleanup()
+void YERenderingDirectX11::Cleanup()
 {
 	// Cleanup imGui
 	ImGui_ImplDX11_Shutdown();
@@ -216,7 +216,7 @@ void DXRenderingDirectX11::Cleanup()
 	if (d3dDevice) { d3dDevice->Release(); d3dDevice = nullptr; }
 }
 
-DXRenderingDirectX11::~DXRenderingDirectX11()
+YERenderingDirectX11::~YERenderingDirectX11()
 {
 	Clean();
 }

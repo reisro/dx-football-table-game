@@ -1,5 +1,5 @@
 #include "YEWinAppWindow.h"
-#include "DXRenderingDirectX11.h"
+#include "YERenderingDirectX11.h"
 #include "../3rdparty/dear_imgui/backends/imgui_impl_win32.h"
 
 // Forward declare message handler from imgui_impl_win32.cpp

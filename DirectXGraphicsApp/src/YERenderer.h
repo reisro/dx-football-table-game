@@ -11,22 +11,22 @@
 #include <d3d11.h>
 
 // Renderer subsystem for DirectX
-class DX_API DXRenderer: public DXSubsystem
+class DX_API YERenderer: public DXSubsystem
 {
 public:
 
 	//-----------------------------------------------------------------------------
 	// Constructors and Destructors
 	//-----------------------------------------------------------------------------
-	DXRenderer();
-	DXRenderer(const DXRenderer& rhs);
-	~DXRenderer();
+	YERenderer();
+	YERenderer(const YERenderer& rhs);
+	~YERenderer();
 
 	//-----------------------------------------------------------------------------
 	// Global Function Declarations and Definitions
 	//-----------------------------------------------------------------------------
 	static void CreateInstance();
-	static DXRenderer* GetInstance();
+	static YERenderer* GetInstance();
 
 	static bool initialized;
 
@@ -48,11 +48,10 @@ public:
 
 protected:
 
-	static DXRenderer* Singleton;
+	static YERenderer* Singleton;
 
 private:
 
 };
-
 
 #endif _DX_RENDERING_H

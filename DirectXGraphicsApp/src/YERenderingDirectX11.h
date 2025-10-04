@@ -3,7 +3,7 @@
 #ifndef DX_RENDERINGDX11_H
 #define DX_RENDERINGDX11_H
 
-#include "DXRenderer.h"
+#include "YERenderer.h"
 #include "YEWinAppWindow.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -26,12 +26,12 @@ enum class D3DVERTEXPROCESSING
 	HARDWARE = 2
 };
 
-class DXRenderingDirectX11: public DXRenderer
+class YERenderingDirectX11: public YERenderer
 {
 public:
 
-	DXRenderingDirectX11();
-	DXRenderingDirectX11(const DXRenderingDirectX11& rhs);
+	YERenderingDirectX11();
+	YERenderingDirectX11(const YERenderingDirectX11& rhs);
 
 	// interface methods override
 	void Setup()    override;
@@ -39,7 +39,7 @@ public:
 	void PostInit() override;
 	void Clean() override;
 
-	~DXRenderingDirectX11();
+	~YERenderingDirectX11();
 
 	void CreateRenderTargetView();
 	void SetViewport();
