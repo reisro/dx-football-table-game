@@ -41,8 +41,6 @@ public:
 
 	~DXRenderingDirectX11();
 
-	void FillSwapChainDescription();
-	void CreateSwapChain();
 	void CreateRenderTargetView();
 	void SetViewport();
 	
@@ -64,6 +62,7 @@ public:
 	D3D_FEATURE_LEVEL			featureLevel;
 	D3D11_VIEWPORT				viewport;
 	YEWinAppWindow*				outputWindow;
+	UINT						m4xMsaaQuality;
 
 protected:
 

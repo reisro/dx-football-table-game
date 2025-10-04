@@ -81,7 +81,7 @@
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(DXSDK_DIR)\Utilities\bin\x64;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;.\3rdparty\dear_imgui;.\3rdparty\dear_imgui\backends</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\3rdparty\dear_imgui;.\3rdparty\dear_imgui\backends</ExternalIncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>IntermediateFiles\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DX11_RENDER_SUPPORT;WINDOW_MAIN_IMPLEMENTED;_DEBUG;_CONSOLE;_WIN32;BX_CONFIG_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\bgfx\include;.\bx\include;.\bx\include\compat\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\bgfx\include;.\bx\include;.\bx\include\compat\msvc;.\3rdparty\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -136,8 +136,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;d3d11.lib;d3dx11.lib;d3dx10.lib;D3DCompiler.lib;dxerr.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;$(BGFX_SDK).build\win64_vs2022\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;d3d11.lib;d3dx11.lib;d3dx10.lib;D3DCompiler.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;$(BGFX_SDK).build\win64_vs2022\bin;.\3rdparty\assimp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,6 +169,7 @@
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="src\DefaultCube.h" />
     <ClInclude Include="src\DXAPI.h" />
+    <ClInclude Include="src\dxerr.h" />
     <ClInclude Include="src\VectorWrapper.h" />
     <ClInclude Include="src\YE3DMeshHelper.h" />
     <ClInclude Include="src\YEMesh.h" />
@@ -206,12 +207,14 @@
     <ClCompile Include="3rdparty\dear_imgui\imgui_widgets.cpp" />
     <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="src\DefaultCube.cpp" />
+    <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
     <ClCompile Include="src\DXRenderer.cpp" />
     <ClCompile Include="src\DXRenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\YEGameObject.cpp" />
+    <ClCompile Include="src\YEMesh.cpp" />
     <ClCompile Include="src\YEMeshComponent.cpp" />
     <ClCompile Include="src\YETransformComponent.cpp" />
     <ClCompile Include="src\YEVector3.cpp" />
@@ -221,8 +224,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\directxmath.2024.10.15.1\build\native\directxmath.targets" Condition="Exists('packages\directxmath.2024.10.15.1\build\native\directxmath.targets')" />
+    <Import Project="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets" Condition="Exists('packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\directxmath.2024.10.15.1\build\native\directxmath.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxmath.2024.10.15.1\build\native\directxmath.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets'))" />
+  </Target>
 </Project>

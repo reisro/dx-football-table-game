@@ -85,6 +85,12 @@
     <Filter Include="Arquivos de Cabeçalho\Resources">
       <UniqueIdentifier>{84bd6027-00c6-4f70-9d46-729d7f2a2b10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Origem\Resources">
+      <UniqueIdentifier>{23e11253-5f47-44e9-8343-b5dce277d3b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Utils">
+      <UniqueIdentifier>{c20af5d9-923e-4599-9ef0-6f41666d0c92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -192,6 +198,9 @@
     <ClInclude Include="src\YE3DMeshHelper.h">
       <Filter>Arquivos de Cabeçalho\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\dxerr.h">
+      <Filter>Arquivos de Cabeçalho\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -266,8 +275,15 @@
     <ClCompile Include="src\YEMeshComponent.cpp">
       <Filter>Arquivos de Origem\Core\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\YEMesh.cpp">
+      <Filter>Arquivos de Origem\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dxerr.cpp">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

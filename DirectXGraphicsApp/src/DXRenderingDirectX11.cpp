@@ -64,6 +64,21 @@ bool DXRenderingDirectX11::Init()
 		&featureLevel,
 		&d3dDeviceContext);
 
+	if (FAILED(hr))
+	{
+		DXLog("D3D11CreateDeviceAndSwapChain Failed.");
+
+		return false;
+	}
+
+	// Check 4X MSAA quality support for our back buffer format.
+	// All Direct3D 11 capable devices support 4X MSAA for all render 
+	// target formats, so we only need to check quality support.
+
+	HRESULT hrMultiSample = d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m4xMsaaQuality);
+	assert(m4xMsaaQuality > 0);
+
+	// Create our swap chain
 	CreateRenderTargetView();
 
 	if FAILED(hr)
@@ -117,31 +132,6 @@ void DXRenderingDirectX11::Clean()
 	backBuffer->Release();
 	d3dDevice->Release();
 	d3dDeviceContext->Release();
-}
-
-void DXRenderingDirectX11::FillSwapChainDescription()
-{
-	// clear out the struct for use
-	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
-
-	// fill the swap chain description struct
-	swapChainDesc.BufferCount = 1;                                    // one back buffer
-	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
-	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-	//swapChainDesc.OutputWindow = renderWindow;
-	swapChainDesc.Flags = 0;
-	swapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
-	swapChainDesc.Windowed = TRUE;
-}
-
-void DXRenderingDirectX11::CreateSwapChain()
-{
 }
 
 void DXRenderingDirectX11::CreateRenderTargetView()

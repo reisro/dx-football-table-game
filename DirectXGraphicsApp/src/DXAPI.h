@@ -19,6 +19,7 @@
 #include <queue>
 #include <map>
 #include <set>
+#include "dxerr.h"
 
 //-----------------------------------------------------------------------------
 // // PhysicX define to suppress windows global min.max macros
@@ -63,5 +64,39 @@ static void DXLog(std::string msg)
 {
 	std::cout << msg << std::endl;
 }
+
+//---------------------------------------------------------------------------------------
+// Convenience macro for releasing COM objects.
+//---------------------------------------------------------------------------------------
+
+#define ReleaseCOM(x) { if(x){ x->Release(); x = 0; } }
+
+//---------------------------------------------------------------------------------------
+// Convenience macro for deleting objects.
+//---------------------------------------------------------------------------------------
+
+#define SafeDelete(x) { delete x; x = 0; }
+
+//---------------------------------------------------------------------------------------
+// Simple d3d error checker for book demos.
+//---------------------------------------------------------------------------------------
+
+#if defined(DEBUG) | defined(_DEBUG)
+#ifndef HR
+#define HR(x)                                              \
+	{                                                          \
+		HRESULT hr = (x);                                      \
+		if(FAILED(hr))                                         \
+		{                                                      \
+			DXLog("HR Result Failed...");					   \
+		}                                                      \
+	}
+#endif
+
+#else
+#ifndef HR
+#define HR(x) (x)
+#endif
+#endif 
 
 #endif _DXGRAPHICS_API_H_

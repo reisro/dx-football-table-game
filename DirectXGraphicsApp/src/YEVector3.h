@@ -6,10 +6,12 @@
 
 #include "DXAPI.h"
 #include "DXTypes.h"
-#include <xnamath.h>
+#include <DirectXMath.h>
 #include <iostream>
 #include <d3d11.h>
 #include <d3dx11.h>
+
+using namespace DirectX;
 
 class DX_API YEVector3
 {
@@ -52,9 +54,6 @@ public:
 	static inline yeFloat Dot(const YEVector3& vec, const YEVector3& vec2);
 
 	static inline YEVector3* Cross(const YEVector3& vec, const YEVector3& vec2, const YEVector3& vec3);
-
-	// converts to a Matrix
-	//rfMatrix& ToMatrix(const rfVector3& _vector) const;
 
 	yeFloat _x, _y, _z;
 
