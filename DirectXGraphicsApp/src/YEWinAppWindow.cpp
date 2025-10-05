@@ -10,9 +10,7 @@ YEWinAppWindow::YEWinAppWindow()
 }
 
 YEWinAppWindow::YEWinAppWindow(dxInt width, dxInt height):
-    YEWindow(width, height),
-    _width(width),
-	_height(height)
+    YEWindow(width, height)
 {
 }
 
@@ -53,6 +51,15 @@ void YEWinAppWindow::Update()
    
 }
 
+void YEWinAppWindow::OnResize(YERenderer* renderer)
+{
+    #ifdef DX11_RENDER_SUPPORT
+    
+    YERenderingDirectX11* rendererDX = dynamic_cast<YERenderingDirectX11*>(renderer);
+
+    #endif
+}
+
 LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
@@ -60,6 +67,7 @@ LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 
     switch (msg)
     {
+
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -76,6 +84,26 @@ LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LP
         EndPaint(hWnd, &ps);
     }
 
+    case WM_SIZE:
+    {
+        if (YERenderer::initialized)
+        {
+            YERenderer* renderer = YERenderer::GetInstance();
+
+            if (renderer)
+            {
+                YEWindow::GetInstance()->_width = LOWORD(lParam);
+                YEWindow::GetInstance()->_height = HIWORD(lParam);
+
+                if (wParam == SIZE_RESTORED)
+                {
+					DXLog("Window Restored...");
+
+                    YEWindow::GetInstance()->OnResize(renderer);
+                }
+            }
+        }
+    }
     break;
     }
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef DX_RENDERINGDX11_H
-#define DX_RENDERINGDX11_H
+#ifndef YE_RENDERINGDX11_H
+#define YE_RENDERINGDX11_H
 
 #include "YERenderer.h"
 #include "YEWinAppWindow.h"
@@ -49,10 +49,15 @@ public:
 	void EndFrame() override;
 	void Cleanup() override;
 
+protected:
+
 	ID3D11Device*				d3dDevice;
 	ID3D11DeviceContext*		d3dDeviceContext;
 	ID3D11RenderTargetView*		mainRenderTargetView;
 	ID3D11RenderTargetView*		backBuffer;
+	D3D11_TEXTURE2D_DESC		depthStencilDesc;
+	ID3D11Texture2D*            depthStencilBuffer;
+	ID3D11DepthStencilView*		depthStencilView;
 	ID3D11Texture2D*			tBackBuffer;
 	IDXGISwapChain*				swapChain;
 	IDXGIDevice*				dxgiDevice;
@@ -63,11 +68,10 @@ public:
 	D3D11_VIEWPORT				viewport;
 	YEWinAppWindow*				outputWindow;
 	UINT						m4xMsaaQuality;
-
-protected:
+	bool						enable4xMsaa;
 
 private:
 
 };
 
-#endif DX_RENDERINGDX11_H
+#endif YE_RENDERINGDX11_H

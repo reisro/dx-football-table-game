@@ -51,6 +51,7 @@ bool YERenderingDirectX11::Init()
 		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 	#endif
 
+	// Create the device, context and swap chain
 	HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -78,7 +79,7 @@ bool YERenderingDirectX11::Init()
 	HRESULT hrMultiSample = d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m4xMsaaQuality);
 	assert(m4xMsaaQuality > 0);
 
-	// Create our swap chain
+	// Create the render target view to the swap chain back buffer
 	CreateRenderTargetView();
 
 	if FAILED(hr)
@@ -87,6 +88,29 @@ bool YERenderingDirectX11::Init()
 		return false;
 	}
 
+	// Fill out Depth Stencil structure
+	depthStencilDesc.Width = 1368;
+	depthStencilDesc.Height = 720;
+	depthStencilDesc.MipLevels = 1;
+	depthStencilDesc.ArraySize = 1;
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+
+	if (enable4xMsaa)
+	{
+		depthStencilDesc.SampleDesc.Count = 4;
+		depthStencilDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
+	}
+
+	HRESULT hrDpethStencil = d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &depthStencilBuffer);
+	HRESULT hrDpethStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
+
+	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
+
+	// Set the viewport
 	SetViewport();
 
 	if (d3dDevice)
@@ -190,7 +214,6 @@ void YERenderingDirectX11::BeginFrame()
 	const float clear_color_with_alpha[4] = { 0.33f, 0.41f, 0.18f, 1.0f };
 	
 	// set the render target as the back buffer
-	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, nullptr);
 	d3dDeviceContext->ClearRenderTargetView(mainRenderTargetView, clear_color_with_alpha);
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

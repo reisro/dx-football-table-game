@@ -23,16 +23,18 @@ public:
 	virtual void         Create();
 	virtual void		 Show();
 	virtual void		 Update();
+	virtual void		 OnResize(YERenderer* renderer);
+
+public:
+	dxInt				 _width;
+	dxInt				 _height;
 
 protected:
-	static YEWindow* instance;
+	static YEWindow*	 instance;
 
 private:
 
-	YERenderer*					 dxRenderer;
-
-	dxInt						 _width;
-	dxInt						 _height;
+	YERenderer*			 dxRenderer;
 };
 
 #endif _DXWINDOW_H

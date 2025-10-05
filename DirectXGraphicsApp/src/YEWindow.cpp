@@ -60,3 +60,8 @@ void YEWindow::Update()
 {
     DXLog("\nUpdate Window....");
 }
+
+void YEWindow::OnResize(YERenderer* renderer)
+{
+    DXLog("\nResize Window....");
+}

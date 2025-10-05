@@ -19,11 +19,13 @@ public:
 
 	virtual ~YEWinAppWindow();
 
-	void  Setup() override;
-	void  Create() override;
-	void  Show() override;
-	void  Update() override;
-	HWND GetWindowsHandle() { return hWnd; }
+	void  Setup()    override;
+	void  Create()   override;
+	void  Show()     override;
+	void  Update()   override;
+	void  OnResize(YERenderer* renderer) override;
+
+	HWND  GetWindowsHandle() { return hWnd; }
 
 	static void CreateInstance();
 	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -32,10 +34,6 @@ protected:
 
 	HWND				 hWnd;
 	WNDCLASSEX			 wc;
-
-private:
-	dxInt						 _width;
-	dxInt						 _height;
 };
 
 #endif // !_YEWINAPIWINDOW_H
