@@ -91,6 +91,15 @@
     <Filter Include="Arquivos de Origem\Utils">
       <UniqueIdentifier>{c20af5d9-923e-4599-9ef0-6f41666d0c92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Recurso\DefaultFX">
+      <UniqueIdentifier>{7bc4dc37-44f3-4ace-a0b8-519eb5fb7a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Effects">
+      <UniqueIdentifier>{6b6025d5-fca8-47d2-80f8-28e5b7ffa9fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Effects\Shaders">
+      <UniqueIdentifier>{fef76b89-b0f9-4298-8bf6-d31f0647addc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -201,6 +210,12 @@
     <ClInclude Include="src\dxerr.h">
       <Filter>Arquivos de Cabeçalho\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\d3dx11effect.h">
+      <Filter>Arquivos de Cabeçalho\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\d3dxGlobal.h">
+      <Filter>Arquivos de Cabeçalho\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -285,5 +300,10 @@
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="src\SimpleColor.fx">
+      <Filter>Arquivos de Cabeçalho\Effects\Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -58,6 +58,22 @@ void YERenderer::Cleanup()
 {
 }
 
+void YERenderer::BuildDefaultGeometry()
+{
+}
+
+void YERenderer::BuildFX()
+{
+}
+
+void YERenderer::CreateVertexLayout()
+{
+}
+
+void YERenderer::CreatePixelLayout()
+{
+}
+
 YERenderer* YERenderer::GetInstance()
 {
     return Singleton;

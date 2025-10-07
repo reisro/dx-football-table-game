@@ -1,6 +1,8 @@
 #include "YERenderingDirectX11.h"
+#include "d3dx11Effect.h"
 
-YERenderingDirectX11::YERenderingDirectX11()
+YERenderingDirectX11::YERenderingDirectX11():
+	depthStencilBuffer(0), m4xMsaaQuality(false)
 {
 	initialized = true;
 
@@ -44,6 +46,7 @@ bool YERenderingDirectX11::Init()
 
 	UINT createDeviceFlags = 0;
 
+	// Check for Direct3D Feature Level is supported
 	D3D_FEATURE_LEVEL featureLevel;
 	const D3D_FEATURE_LEVEL featureLevelArray[2] = { D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_0, };
 
@@ -104,9 +107,16 @@ bool YERenderingDirectX11::Init()
 		depthStencilDesc.SampleDesc.Count = 4;
 		depthStencilDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
 	}
+	else
+	{
+		depthStencilDesc.SampleDesc.Count = 1;
+		depthStencilDesc.SampleDesc.Quality = 0;
+	}
 
-	HRESULT hrDpethStencil = d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &depthStencilBuffer);
-	HRESULT hrDpethStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
+	HRESULT hrDepthStencil = d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &depthStencilBuffer);
+
+	if (!FAILED(hrDepthStencil))
+		HRESULT hrDepthStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
 
 	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 
@@ -140,6 +150,12 @@ bool YERenderingDirectX11::Init()
 	// Setup Platform/Renderer backends
 	ImGui_ImplWin32_Init(outputWindow->GetWindowsHandle());
 	ImGui_ImplDX11_Init(d3dDevice, d3dDeviceContext);
+
+	BuildDefaultGeometry();
+
+	BuildFX();
+
+	CreateVertexLayout();
 
 	return YERenderer::initialized;
 }
@@ -188,6 +204,8 @@ void YERenderingDirectX11::Render()
 
 void YERenderingDirectX11::BeginFrame()
 {
+
+
 	bool show_demo_window = true;
 
 	// Start the Dear ImGui frame
@@ -215,6 +233,7 @@ void YERenderingDirectX11::BeginFrame()
 	
 	// set the render target as the back buffer
 	d3dDeviceContext->ClearRenderTargetView(mainRenderTargetView, clear_color_with_alpha);
+	d3dDeviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
@@ -237,6 +256,128 @@ void YERenderingDirectX11::Cleanup()
 	if (d3dDeviceContext) { d3dDeviceContext->Release(); d3dDeviceContext = nullptr; }
 	
 	if (d3dDevice) { d3dDevice->Release(); d3dDevice = nullptr; }
+}
+
+void YERenderingDirectX11::BuildDefaultGeometry()
+{
+	Vertex vertices[] =
+	{
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)	},
+		{ XMFLOAT3(-1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::BLACK.Value)   },
+		{ XMFLOAT3(+1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::RED.Value)     },
+		{ XMFLOAT3(+1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::GREEN.Value)   },
+		{ XMFLOAT3(-1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::BLUE.Value)    },
+		{ XMFLOAT3(-1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::YELLOW.Value)  },
+		{ XMFLOAT3(+1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::CYAN.Value)    },
+		{ XMFLOAT3(+1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::MAGENTA.Value) }
+	};
+
+	D3D11_BUFFER_DESC vbd;
+	vbd.Usage = D3D11_USAGE_IMMUTABLE;
+	vbd.ByteWidth = sizeof(Vertex) * 8;
+	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vbd.CPUAccessFlags = 0;
+	vbd.MiscFlags = 0;
+	vbd.StructureByteStride = 0;
+	D3D11_SUBRESOURCE_DATA vinitData;
+	vinitData.pSysMem = vertices;
+	HRESULT result = d3dDevice->CreateBuffer(&vbd, &vinitData, &mCubeVB);
+
+	// Create the index buffer
+
+	UINT indices[] = {
+		// front face
+		0, 1, 2,
+		0, 2, 3,
+
+		// back face
+		4, 6, 5,
+		4, 7, 6,
+
+		// left face
+		4, 5, 1,
+		4, 1, 0,
+
+		// right face
+		3, 2, 6,
+		3, 6, 7,
+
+		// top face
+		1, 5, 6,
+		1, 6, 2,
+
+		// bottom face
+		4, 0, 3,
+		4, 3, 7
+	};
+
+	D3D11_BUFFER_DESC ibd;
+	ibd.Usage = D3D11_USAGE_IMMUTABLE;
+	ibd.ByteWidth = sizeof(UINT) * 36;
+	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	ibd.CPUAccessFlags = 0;
+	ibd.MiscFlags = 0;
+	ibd.StructureByteStride = 0;
+	D3D11_SUBRESOURCE_DATA iinitData;
+	iinitData.pSysMem = indices;
+	HRESULT res = d3dDevice->CreateBuffer(&ibd, &iinitData, &mCubeIB);
+}
+
+void YERenderingDirectX11::BuildFX()
+{
+	DWORD shaderFlags = 0;
+#if defined( DEBUG ) || defined( _DEBUG )
+	shaderFlags |= D3D10_SHADER_DEBUG;
+	shaderFlags |= D3D10_SHADER_SKIP_OPTIMIZATION;
+#endif
+
+	ID3D10Blob* compiledShader = 0;
+	ID3D10Blob* compilationMsgs = 0;
+	HRESULT hr = D3DX11CompileFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\src\\SimpleColor.fx", 0, 0, 0, "fx_5_0", shaderFlags,
+		0, 0, &compiledShader, &compilationMsgs, 0);
+
+	//// compilationMsgs can store errors or warnings.
+	if (compilationMsgs != 0)
+	{
+		MessageBoxA(0, (char*)compilationMsgs->GetBufferPointer(), 0, 0);
+		ReleaseCOM(compilationMsgs);
+	}
+
+	//// Even if there are no compilationMsgs, check to make sure there were no other errors.
+	if (FAILED(hr))
+	{
+		DXLog("Shader Compilation errors.");
+	}
+
+	HRESULT hrEffect = (D3DX11CreateEffectFromMemory(compiledShader->GetBufferPointer(), compiledShader->GetBufferSize(),
+		0, d3dDevice, &defaultColorFX));
+
+	//// Done with compiled shader.
+	ReleaseCOM(compiledShader);
+
+	defaultEffectTechnique = defaultColorFX->GetTechniqueByName("SimpleColor");
+	fxWorldViewProj = defaultColorFX->GetVariableByName("gWorldViewProj")->AsMatrix();
+}
+
+void YERenderingDirectX11::CreateVertexLayout()
+{
+	// Create the vertex input layout.
+	D3D11_INPUT_ELEMENT_DESC vertexDesc[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
+	};
+
+	// Create the input layout
+	D3DX11_PASS_DESC passDesc;
+
+	defaultEffectTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
+
+	HRESULT hr = d3dDevice->CreateInputLayout(vertexDesc, 2, passDesc.pIAInputSignature, passDesc.IAInputSignatureSize, &inputLayout);
+}
+
+void YERenderingDirectX11::CreatePixelLayout()
+{
 }
 
 YERenderingDirectX11::~YERenderingDirectX11()

@@ -136,9 +136,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;d3d11.lib;d3dx11.lib;d3dx10.lib;D3DCompiler.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;$(BGFX_SDK).build\win64_vs2022\bin;.\3rdparty\assimp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;d3d11.lib;D3DCompiler.lib;Effects11d.lib;dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(BGFX_SDK).build\win64_vs2022\bin;.\3rdparty\assimp\lib\x64;.\lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <FxCompile>
+      <EntryPointName>VS</EntryPointName>
+      <ShaderModel>4.0_level_9_3</ShaderModel>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -167,6 +172,8 @@
     <ClInclude Include="3rdparty\dear_imgui\imgui_internal.h" />
     <ClInclude Include="3rdparty\dear_imgui\imstb_rectpack.h" />
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="src\d3dx11effect.h" />
+    <ClInclude Include="src\d3dxGlobal.h" />
     <ClInclude Include="src\DefaultCube.h" />
     <ClInclude Include="src\DXAPI.h" />
     <ClInclude Include="src\dxerr.h" />
@@ -225,6 +232,18 @@
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="src\SimpleColor.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

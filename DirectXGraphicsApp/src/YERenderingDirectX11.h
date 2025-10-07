@@ -5,6 +5,7 @@
 
 #include "YERenderer.h"
 #include "YEWinAppWindow.h"
+#include "d3dx11Effect.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -48,30 +49,43 @@ public:
 	void BeginFrame() override;
 	void EndFrame() override;
 	void Cleanup() override;
+	void BuildDefaultGeometry() override;
+	void BuildFX() override;
+	void CreateVertexLayout() override;
+	void CreatePixelLayout() override;
 
 protected:
 
-	ID3D11Device*				d3dDevice;
-	ID3D11DeviceContext*		d3dDeviceContext;
-	ID3D11RenderTargetView*		mainRenderTargetView;
-	ID3D11RenderTargetView*		backBuffer;
-	D3D11_TEXTURE2D_DESC		depthStencilDesc;
-	ID3D11Texture2D*            depthStencilBuffer;
-	ID3D11DepthStencilView*		depthStencilView;
-	ID3D11Texture2D*			tBackBuffer;
-	IDXGISwapChain*				swapChain;
-	IDXGIDevice*				dxgiDevice;
-	IDXGIAdapter*				dxgiAdapter;
-	IDXGIFactory*				dxgiFactory;
-	DXGI_SWAP_CHAIN_DESC		swapChainDesc;
-	D3D_FEATURE_LEVEL			featureLevel;
-	D3D11_VIEWPORT				viewport;
-	YEWinAppWindow*				outputWindow;
-	UINT						m4xMsaaQuality;
-	bool						enable4xMsaa;
+	ID3D11Device*				 d3dDevice;
+	ID3D11DeviceContext*		 d3dDeviceContext;
+	ID3D11RenderTargetView*		 mainRenderTargetView;
+	ID3D11RenderTargetView*		 backBuffer;
+	D3D11_TEXTURE2D_DESC		 depthStencilDesc;
+	ID3D11Texture2D*             depthStencilBuffer;
+	ID3D11DepthStencilView*		 depthStencilView;
+	ID3D11Texture2D*			 tBackBuffer;
+	IDXGISwapChain*				 swapChain;
+	IDXGIDevice*				 dxgiDevice;
+	IDXGIAdapter*				 dxgiAdapter;
+	IDXGIFactory*				 dxgiFactory;
+	DXGI_SWAP_CHAIN_DESC		 swapChainDesc;
+	D3D_FEATURE_LEVEL			 featureLevel;
+	D3D11_VIEWPORT				 viewport;
+	YEWinAppWindow*				 outputWindow;
+	UINT						 m4xMsaaQuality;
+	bool						 enable4xMsaa;
 
 private:
+	ID3D11Buffer*				 mCubeVB;
+	ID3D11Buffer*				 mCubeIB;
+	ID3D11InputLayout*           inputLayout;
+	ID3DX11Effect*				 defaultColorFX;
+	ID3DX11EffectTechnique*		 defaultEffectTechnique;
+	ID3DX11EffectMatrixVariable* fxWorldViewProj;
 
+	XMFLOAT4X4                  mWorld;
+	XMFLOAT4X4                  mView;
+	XMFLOAT4X4                  mProj;
 };
 
 #endif YE_RENDERINGDX11_H
