@@ -140,8 +140,8 @@
       <AdditionalLibraryDirectories>$(BGFX_SDK).build\win64_vs2022\bin;.\3rdparty\assimp\lib\x64;.\lib\Debug\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <FxCompile>
-      <EntryPointName>VS</EntryPointName>
-      <ShaderModel>4.0_level_9_3</ShaderModel>
+      <EntryPointName>VS,PS</EntryPointName>
+      <ShaderModel>5.0</ShaderModel>
       <ShaderType>Effect</ShaderType>
     </FxCompile>
   </ItemDefinitionGroup>

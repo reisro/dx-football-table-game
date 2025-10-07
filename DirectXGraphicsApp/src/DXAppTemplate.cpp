@@ -55,7 +55,12 @@ private:
 	YEVector3* newPosition;
 	YEVector3* moveDirection;
 
-	yeFloat forward_speed = 0.1f;
+	yeFloat    forward_speed = 0.1f;
+	yeFloat    mTheta;
+	yeFloat    mPhi;
+	yeFloat    mRadius;
+
+	XMFLOAT4X4 mView;
 };
 
 WINDOW_MAIN_ENTRY(Cube);

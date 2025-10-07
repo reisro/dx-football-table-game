@@ -6,6 +6,11 @@ YERenderingDirectX11::YERenderingDirectX11():
 {
 	initialized = true;
 
+	XMMATRIX I = XMMatrixIdentity();
+	XMStoreFloat4x4(&mWorld, I);
+	XMStoreFloat4x4(&mView, I);
+	XMStoreFloat4x4(&mProj, I);
+
 	DXLog("\nCreated Renderer instance....");
 }
 
@@ -204,7 +209,17 @@ void YERenderingDirectX11::Render()
 
 void YERenderingDirectX11::BeginFrame()
 {
+	// Build the view matrix.
+	XMVECTOR pos = XMVectorSet(4.2f, 3.53f, -3.53f, 1.0f);
+	XMVECTOR target = XMVectorZero();
+	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
+	XMMATRIX V = XMMatrixLookAtLH(pos, target, up);
+	XMStoreFloat4x4(&mView, V);
+
+	// Initialize the projection matrix
+	XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f*3.1415926535f, 1368 / (FLOAT)720, 0.01f, 100.0f);
+	XMStoreFloat4x4(&mProj, P);
 
 	bool show_demo_window = true;
 
@@ -234,6 +249,32 @@ void YERenderingDirectX11::BeginFrame()
 	// set the render target as the back buffer
 	d3dDeviceContext->ClearRenderTargetView(mainRenderTargetView, clear_color_with_alpha);
 	d3dDeviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+	d3dDeviceContext->IASetInputLayout(inputLayout);
+	d3dDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	UINT stride = sizeof(Vertex);
+	UINT offset = 0;
+	d3dDeviceContext->IASetVertexBuffers(0, 1, &mCubeVB, &stride, &offset);
+	d3dDeviceContext->IASetIndexBuffer(mCubeIB, DXGI_FORMAT_R32_UINT, 0);
+
+	// Set constants
+	XMMATRIX world = XMLoadFloat4x4(&mWorld);
+	XMMATRIX view = XMLoadFloat4x4(&mView);
+	XMMATRIX proj = XMLoadFloat4x4(&mProj);
+	XMMATRIX worldViewProj = world * view * proj;
+
+	fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&worldViewProj));
+
+	D3DX11_TECHNIQUE_DESC techniqueDesc;
+	defaultEffectTechnique->GetDesc(&techniqueDesc);
+	for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+	{
+		defaultEffectTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+
+		// 36 indices for the box.
+		d3dDeviceContext->DrawIndexed(36, 0, 0);
+	}
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
