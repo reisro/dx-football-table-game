@@ -62,6 +62,14 @@ void YERenderer::BuildDefaultGeometry()
 {
 }
 
+void YERenderer::CreateBasicGeometry()
+{
+}
+
+void YERenderer::CreateDefaultCube()
+{
+}
+
 void YERenderer::BuildFX()
 {
 }

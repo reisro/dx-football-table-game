@@ -7,6 +7,7 @@
 #include "DXAPI.h"
 #include "YEVectorWrapper.h"
 #include "YETransformComponent.h"
+#include "YEMeshComponent.h"
 
 class YEBaseComponent;
 

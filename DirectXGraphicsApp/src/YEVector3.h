@@ -9,7 +9,6 @@
 #include <DirectXMath.h>
 #include <iostream>
 #include <d3d11.h>
-#include <d3dx11.h>
 
 using namespace DirectX;
 

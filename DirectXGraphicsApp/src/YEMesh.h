@@ -3,11 +3,11 @@
 #ifndef _YE_MESH_H_
 #define _YE_MESH_H_
 
-#include <d3dx11.h>
+#include <d3d11.h>
 #include <vector>
 #include "DXAPI.h"
-#include <assimp/Importer.hpp>      // C++ importer interface
-#include <assimp/scene.h>           // Output data structure
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>              // Output data structure
 #include <assimp/postprocess.h>     // Post processing flags
 
 class YEMesh

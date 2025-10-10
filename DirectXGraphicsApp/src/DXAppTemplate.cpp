@@ -9,6 +9,8 @@ public:
 	Cube() : YEGame("Default Cube")
 	{
 		cube_game_object.setName("Cube Object");
+
+		
 	}
 
 	Cube(const char* _game_name) :
@@ -19,6 +21,8 @@ public:
 	void init() override
 	{
 		cube_game_object.start();
+
+		YE::YEApplication::CreatePrimitive(YE::GamePrimitives::Cube);
 		
 		// Set initial position of the cube
 		position = YEVector3::Zero();

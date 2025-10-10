@@ -11,6 +11,14 @@
 
 namespace YE
 {
+	enum class GamePrimitives
+	{
+		Cube,
+		Capsule,
+		Cylinder,
+		Torus
+	};
+
 	class DX_API YEApplication
 	{
 	public:
@@ -22,6 +30,7 @@ namespace YE
 		static bool InitEngine();
 		static bool InitWindow();
 		static bool InitRenderer();
+		static void CreatePrimitive(GamePrimitives primitive);
 		static YEApplication* GetInstance();
 		
 		void Run(YEGame* gameApp);

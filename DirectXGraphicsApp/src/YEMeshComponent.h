@@ -6,7 +6,7 @@
 #include "YEBaseComponent.h"
 #include "YEMesh.h"
 
-class YEMeshComponent : public YEBaseComponent
+class DX_API YEMeshComponent : public YEBaseComponent
 {
 	public:
 

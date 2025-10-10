@@ -49,6 +49,7 @@ public:
 	void BeginFrame() override;
 	void EndFrame() override;
 	void Cleanup() override;
+	void CreateDefaultCube() override;
 	void BuildDefaultGeometry() override;
 	void BuildFX() override;
 	void CreateVertexLayout() override;

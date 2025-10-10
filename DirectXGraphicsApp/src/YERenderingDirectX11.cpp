@@ -156,17 +156,13 @@ bool YERenderingDirectX11::Init()
 	ImGui_ImplWin32_Init(outputWindow->GetWindowsHandle());
 	ImGui_ImplDX11_Init(d3dDevice, d3dDeviceContext);
 
-	BuildDefaultGeometry();
-
-	BuildFX();
-
-	CreateVertexLayout();
-
 	return YERenderer::initialized;
 }
 
 void YERenderingDirectX11::PostInit()
 {
+	if (createGeometryCmd)
+		CreateDefaultCube();
 }
 
 void YERenderingDirectX11::Clean()
@@ -264,16 +260,20 @@ void YERenderingDirectX11::BeginFrame()
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 	XMMATRIX worldViewProj = world * view * proj;
 
-	fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&worldViewProj));
-
-	D3DX11_TECHNIQUE_DESC techniqueDesc;
-	defaultEffectTechnique->GetDesc(&techniqueDesc);
-	for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+	// if exists a default technique implemented
+	if (defaultEffectTechnique)
 	{
-		defaultEffectTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+		fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&worldViewProj));
 
-		// 36 indices for the box.
-		d3dDeviceContext->DrawIndexed(36, 0, 0);
+		D3DX11_TECHNIQUE_DESC techniqueDesc;
+		defaultEffectTechnique->GetDesc(&techniqueDesc);
+		for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+		{
+			defaultEffectTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+
+			// 36 indices for the box.
+			d3dDeviceContext->DrawIndexed(36, 0, 0);
+		}
 	}
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -299,18 +299,18 @@ void YERenderingDirectX11::Cleanup()
 	if (d3dDevice) { d3dDevice->Release(); d3dDevice = nullptr; }
 }
 
-void YERenderingDirectX11::BuildDefaultGeometry()
+void YERenderingDirectX11::CreateDefaultCube()
 {
 	Vertex vertices[] =
 	{
 		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)	},
-		{ XMFLOAT3(-1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::BLACK.Value)   },
-		{ XMFLOAT3(+1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::RED.Value)     },
-		{ XMFLOAT3(+1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::GREEN.Value)   },
-		{ XMFLOAT3(-1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::BLUE.Value)    },
-		{ XMFLOAT3(-1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::YELLOW.Value)  },
-		{ XMFLOAT3(+1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::CYAN.Value)    },
-		{ XMFLOAT3(+1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::MAGENTA.Value) }
+		{ XMFLOAT3(-1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
+		{ XMFLOAT3(+1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)     },
+		{ XMFLOAT3(+1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
+		{ XMFLOAT3(-1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)    },
+		{ XMFLOAT3(-1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)  },
+		{ XMFLOAT3(+1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)    },
+		{ XMFLOAT3(+1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value) }
 	};
 
 	D3D11_BUFFER_DESC vbd;
@@ -362,6 +362,15 @@ void YERenderingDirectX11::BuildDefaultGeometry()
 	D3D11_SUBRESOURCE_DATA iinitData;
 	iinitData.pSysMem = indices;
 	HRESULT res = d3dDevice->CreateBuffer(&ibd, &iinitData, &mCubeIB);
+
+	BuildFX();
+
+	CreateVertexLayout();
+}
+
+void YERenderingDirectX11::BuildDefaultGeometry()
+{
+	
 }
 
 void YERenderingDirectX11::BuildFX()

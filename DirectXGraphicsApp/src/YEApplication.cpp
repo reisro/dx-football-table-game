@@ -81,8 +81,28 @@ bool YEApplication::InitRenderer()
 	return true;
 }
 
+void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
+{
+	if (instance->_renderer)
+	{
+		instance->_renderer->createGeometryCmd = true;
+
+		switch (primitive)
+		{
+		case GamePrimitives::Cube:
+			instance->_renderer->CreateDefaultCube();
+			break;
+		case GamePrimitives::Cylinder:
+			instance->_renderer->CreateDefaultCube();
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 //-----------------------------------------------------------------------------
-// Application Main Loop
+// Application Main Loop / Game Client Code
 //-----------------------------------------------------------------------------
 void YE::YEApplication::Run(YEGame* gameApp)
 {

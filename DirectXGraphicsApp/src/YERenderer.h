@@ -87,16 +87,20 @@ public:
 	virtual void EndFrame();
 	virtual void Cleanup();
 	virtual void BuildDefaultGeometry();
+	virtual void CreateBasicGeometry();
+	virtual void CreateDefaultCube();
 	virtual void BuildFX();
 	virtual void CreateVertexLayout();
 	virtual void CreatePixelLayout();
+
+	bool createGeometryCmd;
 
 protected:
 
 	static YERenderer* Singleton;
 
 private:
-
+	
 };
 
 #endif _DX_RENDERING_H
