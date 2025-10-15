@@ -85,7 +85,7 @@ void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
 {
 	if (instance->_renderer)
 	{
-		instance->_renderer->createGeometryCmd = true;
+		instance->_renderer->createGeometryCmd = false;
 
 		switch (primitive)
 		{
@@ -99,6 +99,11 @@ void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
 			break;
 		}
 	}
+}
+
+void YEApplication::Import3DModel()
+{
+	
 }
 
 //-----------------------------------------------------------------------------

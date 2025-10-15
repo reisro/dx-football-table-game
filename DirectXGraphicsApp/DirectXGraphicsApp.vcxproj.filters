@@ -216,6 +216,12 @@
     <ClInclude Include="src\d3dxGlobal.h">
       <Filter>Arquivos de Cabeçalho\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEMeshLoader.h">
+      <Filter>Arquivos de Cabeçalho\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YETextureLoader.h">
+      <Filter>Arquivos de Cabeçalho\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -295,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="src\dxerr.cpp">
       <Filter>Arquivos de Origem\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEMeshLoader.cpp">
+      <Filter>Arquivos de Origem\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YETextureLoader.cpp">
+      <Filter>Arquivos de Origem\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-#include "YEMeshComponent.h"
+#include "YEMeshComponent.h"	
+#include "YERenderer.h"
 
 YEMeshComponent::YEMeshComponent()
 {
@@ -19,4 +20,11 @@ void YEMeshComponent::shutdown()
 
 void YEMeshComponent::update(float _deltaTime)
 {
+}
+
+bool YEMeshComponent::LoadModel(std::string path)
+{
+	YERenderer* renderer = YERenderer::GetInstance();
+
+	return ModelMesh->Load(reinterpret_cast<ID3D11Device*>(renderer->GetDevice()), renderer->GetDeviceContext(), path);
 }

@@ -14,7 +14,7 @@ YETransformComponent::~YETransformComponent()
 
 void YETransformComponent::start()
 {
-	DXLog("\nStarted Transform Component...");
+	//DXLog("\nStarted Transform Component...");
 }
 
 void YETransformComponent::shutdown()
@@ -24,7 +24,7 @@ void YETransformComponent::shutdown()
 
 void YETransformComponent::update(float _deltaTime)
 {
-	DXLog("\nUpdating Transform Component...");
+	//DXLog("\nUpdating Transform Component...");
 }
 
 void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)

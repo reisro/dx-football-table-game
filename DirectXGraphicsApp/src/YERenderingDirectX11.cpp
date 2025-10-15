@@ -125,6 +125,22 @@ bool YERenderingDirectX11::Init()
 
 	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 
+	// Set the rasterizer states
+	D3D11_RASTERIZER_DESC rasterDesc;
+	rasterDesc.AntialiasedLineEnable = false;
+	rasterDesc.CullMode = D3D11_CULL_BACK;
+	rasterDesc.DepthBias = 0;
+	rasterDesc.DepthBiasClamp = 0.0f;
+	rasterDesc.DepthClipEnable = true;
+	rasterDesc.FillMode = D3D11_FILL_SOLID;
+	rasterDesc.FrontCounterClockwise = false;
+	rasterDesc.MultisampleEnable = false;
+	rasterDesc.ScissorEnable = false;
+	rasterDesc.SlopeScaledDepthBias = 0.0f;
+
+	d3dDevice->CreateRasterizerState(&rasterDesc, &rasterstate);
+	d3dDeviceContext->RSSetState(rasterstate);
+
 	// Set the viewport
 	SetViewport();
 
@@ -156,6 +172,8 @@ bool YERenderingDirectX11::Init()
 	ImGui_ImplWin32_Init(outputWindow->GetWindowsHandle());
 	ImGui_ImplDX11_Init(d3dDevice, d3dDeviceContext);
 
+	PostInit();
+
 	return YERenderer::initialized;
 }
 
@@ -163,6 +181,10 @@ void YERenderingDirectX11::PostInit()
 {
 	if (createGeometryCmd)
 		CreateDefaultCube();
+
+	BuildFX();
+
+	CreateVertexLayout();
 }
 
 void YERenderingDirectX11::Clean()
@@ -173,6 +195,29 @@ void YERenderingDirectX11::Clean()
 	backBuffer->Release();
 	d3dDevice->Release();
 	d3dDeviceContext->Release();
+}
+
+HRESULT YERenderingDirectX11::CompileShaderFromFile(LPCWSTR pFileName, const D3D_SHADER_MACRO* pDefines, LPCSTR pEntryPoint, LPCSTR pShaderModel, ID3DBlob** ppBytecodeBlob)
+{
+	UINT compileFlags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR;
+
+#ifdef _DEBUG
+	compileFlags |= D3DCOMPILE_DEBUG;
+#endif
+
+	ID3DBlob* pErrorBlob = nullptr;
+
+	HRESULT result = D3DCompileFromFile(pFileName, pDefines, D3D_COMPILE_STANDARD_FILE_INCLUDE, pEntryPoint, pShaderModel, compileFlags, 0, ppBytecodeBlob, &pErrorBlob);
+	if (FAILED(result))
+	{
+		if (pErrorBlob != nullptr)
+			OutputDebugStringA((LPCSTR)pErrorBlob->GetBufferPointer());
+	}
+
+	if (pErrorBlob != nullptr)
+		pErrorBlob->Release();
+
+	return result;
 }
 
 void YERenderingDirectX11::CreateRenderTargetView()
@@ -368,9 +413,33 @@ void YERenderingDirectX11::CreateDefaultCube()
 	CreateVertexLayout();
 }
 
-void YERenderingDirectX11::BuildDefaultGeometry()
+void YERenderingDirectX11::LoadMesh()
 {
-	
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+}
+
+void YERenderingDirectX11::InitPipeline()
+{
+	/*ID3DBlob* VS, * PS;
+	if (FAILED(CompileShaderFromFile("C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\src\\SimpleColor.fx", 0, "VS", "vs_5_0", &VS)))
+		Throwanerror("Failed to compile shader from file");
+	if (FAILED(CompileShaderFromFile(PIXEL_SHADER_FILE, 0, "main", "ps_4_0", &PS)))
+		Throwanerror("Failed to compile shader from file ");
+
+	dev->CreateVertexShader(VS->GetBufferPointer(), VS->GetBufferSize(), nullptr, &pVS);
+	dev->CreatePixelShader(PS->GetBufferPointer(), PS->GetBufferSize(), nullptr, &pPS);
+
+	D3D11_INPUT_ELEMENT_DESC ied[] =
+	{
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+	};
+
+	dev->CreateInputLayout(ied, 2, VS->GetBufferPointer(), VS->GetBufferSize(), &pLayout);
+	devcon->IASetInputLayout(pLayout);*/
 }
 
 void YERenderingDirectX11::BuildFX()
@@ -428,6 +497,16 @@ void YERenderingDirectX11::CreateVertexLayout()
 
 void YERenderingDirectX11::CreatePixelLayout()
 {
+}
+
+IUnknown* YERenderingDirectX11::GetDevice()
+{
+	return d3dDevice;
+}
+
+IUnknown* YERenderingDirectX11::GetDeviceContext()
+{
+	return d3dDeviceContext;
 }
 
 YERenderingDirectX11::~YERenderingDirectX11()

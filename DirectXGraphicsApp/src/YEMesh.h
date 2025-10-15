@@ -6,9 +6,23 @@
 #include <d3d11.h>
 #include <vector>
 #include "DXAPI.h"
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>              // Output data structure
-#include <assimp/postprocess.h>     // Post processing flags
+#include "DXTypes.h"
+#include <DirectXMath.h>
+
+using namespace DirectX;
+
+struct YEMeshVertex
+{
+	yeFloat x, y, z;
+	XMFLOAT2 texcoord;
+};
+
+struct YETexture
+{
+	std::string type;
+	std::string path;
+	ID3D11ShaderResourceView* texture;
+};
 
 class YEMesh
 {
@@ -31,7 +45,12 @@ class YEMesh
 		};
 		
 		YEMesh();
+		YEMesh(IUnknown* device, const std::vector<YEMeshVertex>& vertices, const std::vector<UINT>& indices,
+			const std::vector<YETexture>& textures);
 		virtual ~YEMesh();
+
+		void PrepareMesh(IUnknown* device);
+		void Draw(IUnknown* context);
 
 		template <typename VertexType>
 		void SetVertices(ID3D11Device* device, const VertexType* vertices, UINT count);
@@ -44,10 +63,13 @@ class YEMesh
 
 		bool DoTheImportThing(const std::string& pFile);
 
-private:
-		YEMesh(const YEMesh& rhs);
-		YEMesh& operator=(const YEMesh& rhs);
+public:
+	std::vector<YEMeshVertex> _vertices;
+	std::vector<UINT>         _indices;
+	std::vector<YETexture>    _textures;
+	IUnknown*                 _device;
 
+private:
 		ID3D11Buffer* mVB;
 		ID3D11Buffer* mIB;
 

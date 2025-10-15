@@ -31,6 +31,8 @@ namespace YE
 		static bool InitWindow();
 		static bool InitRenderer();
 		static void CreatePrimitive(GamePrimitives primitive);
+		static void Import3DModel();
+
 		static YEApplication* GetInstance();
 		
 		void Run(YEGame* gameApp);
@@ -39,12 +41,12 @@ namespace YE
 		static YEApplication* instance;
 
 	private:
-		MSG			_msg;
-		YEGame*		_gameApp;
-		YERenderer* _renderer;
-		bool		_isRunning;
-		bool		_isInitialized;
-		bool		_isLoopInitialized;
+		MSG			  _msg;
+		YEGame*		  _gameApp;
+		YERenderer*   _renderer;
+		bool		  _isRunning;
+		bool		  _isInitialized;
+		bool		  _isLoopInitialized;
 	};
 }
 

@@ -1,4 +1,5 @@
 #include "YEGameObject.h"
+#include "YEGameObject.h"
 #include "YEBaseComponent.h"
 #include "YETransformComponent.h"
 
@@ -24,7 +25,7 @@ YEGameObject::~YEGameObject()
 
 void YEGameObject::start()
 {
-	DXLog("\nStart Game Object...");
+	//DXLog("\nStart Game Object...");
 
 	if (!_components.getVector()->_list.empty())
 	{

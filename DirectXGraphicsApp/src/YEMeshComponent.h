@@ -4,7 +4,7 @@
 #define _YE_MESH_COMPONENT_H_
 
 #include "YEBaseComponent.h"
-#include "YEMesh.h"
+#include "YEMeshLoader.h"
 
 class DX_API YEMeshComponent : public YEBaseComponent
 {
@@ -18,8 +18,10 @@ class DX_API YEMeshComponent : public YEBaseComponent
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
+	bool LoadModel(std::string path);
+
 private:
-	YEMesh* ModelMesh;
+	YEMeshLoader* ModelMesh;
 };
 
 #endif

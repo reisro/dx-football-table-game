@@ -9,6 +9,7 @@
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+#include <d3dcompiler.h>
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>
@@ -42,6 +43,7 @@ public:
 
 	~YERenderingDirectX11();
 
+	HRESULT CompileShaderFromFile(LPCWSTR pFileName, const D3D_SHADER_MACRO* pDefines, LPCSTR pEntryPoint, LPCSTR pShaderModel, ID3DBlob** ppBytecodeBlob);
 	void CreateRenderTargetView();
 	void SetViewport();
 	
@@ -50,10 +52,13 @@ public:
 	void EndFrame() override;
 	void Cleanup() override;
 	void CreateDefaultCube() override;
-	void BuildDefaultGeometry() override;
+	void LoadMesh() override;
+	void InitPipeline() override;
 	void BuildFX() override;
 	void CreateVertexLayout() override;
 	void CreatePixelLayout() override;
+	IUnknown* GetDevice() override;
+	IUnknown* GetDeviceContext() override;
 
 protected:
 
@@ -64,6 +69,7 @@ protected:
 	D3D11_TEXTURE2D_DESC		 depthStencilDesc;
 	ID3D11Texture2D*             depthStencilBuffer;
 	ID3D11DepthStencilView*		 depthStencilView;
+	ID3D11RasterizerState*		 rasterstate;
 	ID3D11Texture2D*			 tBackBuffer;
 	IDXGISwapChain*				 swapChain;
 	IDXGIDevice*				 dxgiDevice;

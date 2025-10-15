@@ -4,7 +4,8 @@
 YERenderer* YERenderer::Singleton = 0;
 bool YERenderer::initialized;
 
-YERenderer::YERenderer()
+YERenderer::YERenderer():
+    _meshLoader{ new YEMeshLoader }
 {
 }
 
@@ -58,15 +59,19 @@ void YERenderer::Cleanup()
 {
 }
 
-void YERenderer::BuildDefaultGeometry()
-{
-}
-
 void YERenderer::CreateBasicGeometry()
 {
 }
 
 void YERenderer::CreateDefaultCube()
+{
+}
+
+void YERenderer::LoadMesh()
+{
+}
+
+void YERenderer::InitPipeline()
 {
 }
 
@@ -80,6 +85,16 @@ void YERenderer::CreateVertexLayout()
 
 void YERenderer::CreatePixelLayout()
 {
+}
+
+IUnknown* YERenderer::GetDevice()
+{
+    return _device;
+}
+
+IUnknown* YERenderer::GetDeviceContext()
+{
+    return _deviceContext;
 }
 
 YERenderer* YERenderer::GetInstance()

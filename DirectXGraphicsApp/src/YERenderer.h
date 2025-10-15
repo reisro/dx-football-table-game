@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------------
 #include "pch.h"
 #include "DXSubsystem.h"
+#include "YEMeshLoader.h"
 #include <d3d11.h>
 #include <DirectXMath.h>
 
@@ -86,21 +87,26 @@ public:
 	virtual void BeginFrame();
 	virtual void EndFrame();
 	virtual void Cleanup();
-	virtual void BuildDefaultGeometry();
 	virtual void CreateBasicGeometry();
 	virtual void CreateDefaultCube();
+	virtual void LoadMesh();
+	virtual void InitPipeline();
 	virtual void BuildFX();
 	virtual void CreateVertexLayout();
 	virtual void CreatePixelLayout();
+	virtual IUnknown* GetDevice();
+	virtual IUnknown* GetDeviceContext();
 
 	bool createGeometryCmd;
 
 protected:
 
 	static YERenderer* Singleton;
+	YEMeshLoader* _meshLoader;
 
 private:
-	
+	IUnknown* _device;
+	IUnknown* _deviceContext;
 };
 
 #endif _DX_RENDERING_H

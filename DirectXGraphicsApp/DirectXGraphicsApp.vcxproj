@@ -181,6 +181,8 @@
     <ClInclude Include="src\YE3DMeshHelper.h" />
     <ClInclude Include="src\YEMesh.h" />
     <ClInclude Include="src\YEMeshComponent.h" />
+    <ClInclude Include="src\YEMeshLoader.h" />
+    <ClInclude Include="src\YETextureLoader.h" />
     <ClInclude Include="src\YEVectorWrapper.h" />
     <ClInclude Include="src\YEApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
@@ -217,12 +219,14 @@
     <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
+    <ClCompile Include="src\YEMeshLoader.cpp" />
     <ClCompile Include="src\YERenderer.cpp" />
     <ClCompile Include="src\YERenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
     <ClCompile Include="src\YEGameObject.cpp" />
     <ClCompile Include="src\YEMesh.cpp" />
     <ClCompile Include="src\YEMeshComponent.cpp" />
+    <ClCompile Include="src\YETextureLoader.cpp" />
     <ClCompile Include="src\YETransformComponent.cpp" />
     <ClCompile Include="src\YEVector3.cpp" />
     <ClCompile Include="src\YEWinAppWindow.cpp" />
