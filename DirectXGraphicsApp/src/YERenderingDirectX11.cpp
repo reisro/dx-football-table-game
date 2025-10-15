@@ -317,7 +317,8 @@ void YERenderingDirectX11::BeginFrame()
 			defaultEffectTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
 
 			// 36 indices for the box.
-			d3dDeviceContext->DrawIndexed(36, 0, 0);
+			//d3dDeviceContext->DrawIndexed(36, 0, 0);
+			_meshLoader->Draw(d3dDeviceContext);
 		}
 	}
 

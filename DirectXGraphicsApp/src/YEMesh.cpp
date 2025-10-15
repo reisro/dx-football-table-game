@@ -59,7 +59,7 @@ void YEMesh::Draw(IUnknown* context)
 	UINT stride = sizeof(YEMeshVertex);
 	UINT offset = 0;
 
-	ID3D11DeviceContext* renderContext = dynamic_cast<ID3D11DeviceContext*>(context);
+	ID3D11DeviceContext* renderContext = reinterpret_cast<ID3D11DeviceContext*>(context);
 
 	renderContext->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 	renderContext->IASetIndexBuffer(mIB, DXGI_FORMAT_R32_UINT, 0);
