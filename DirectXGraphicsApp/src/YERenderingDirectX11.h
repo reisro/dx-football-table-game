@@ -28,6 +28,12 @@ enum class D3DVERTEXPROCESSING
 	HARDWARE = 2
 };
 
+struct ConstantBuffer {
+	XMMATRIX mWorld;
+	XMMATRIX mView;
+	XMMATRIX mProjection;
+};
+
 class YERenderingDirectX11: public YERenderer
 {
 public:
@@ -70,6 +76,10 @@ protected:
 	ID3D11Texture2D*             depthStencilBuffer;
 	ID3D11DepthStencilView*		 depthStencilView;
 	ID3D11RasterizerState*		 rasterstate;
+	ID3D11SamplerState*			 texSamplerState;
+	ID3D11Buffer*				 pConstantBuffer;
+	ID3D11VertexShader*			 pVS;
+	ID3D11PixelShader*			 pPS;
 	ID3D11Texture2D*			 tBackBuffer;
 	IDXGISwapChain*				 swapChain;
 	IDXGIDevice*				 dxgiDevice;

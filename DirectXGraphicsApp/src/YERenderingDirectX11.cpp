@@ -182,9 +182,37 @@ void YERenderingDirectX11::PostInit()
 	if (createGeometryCmd)
 		CreateDefaultCube();
 
-	BuildFX();
+	InitPipeline();
 
-	CreateVertexLayout();
+	//BuildFX();
+
+	//CreateVertexLayout();
+
+	D3D11_BUFFER_DESC bd;
+	ZeroMemory(&bd, sizeof(bd));
+
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(ConstantBuffer);
+	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bd.CPUAccessFlags = 0;
+
+	HRESULT hr = d3dDevice->CreateBuffer(&bd, nullptr, &pConstantBuffer);
+	if (FAILED(hr))
+		DXLog("Constant buffer couldn't be created");
+
+	D3D11_SAMPLER_DESC sampDesc;
+	ZeroMemory(&sampDesc, sizeof(sampDesc));
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampDesc.MinLOD = 0;
+	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	hr = d3dDevice->CreateSamplerState(&sampDesc, &texSamplerState);
+	if (FAILED(hr))
+		DXLog("Texture sampler state couldn't be created");
 }
 
 void YERenderingDirectX11::Clean()
@@ -305,6 +333,19 @@ void YERenderingDirectX11::BeginFrame()
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 	XMMATRIX worldViewProj = world * view * proj;
 
+	ConstantBuffer cb;
+	cb.mWorld = XMMatrixTranspose(world);
+	cb.mView = XMMatrixTranspose(view);
+	cb.mProjection = XMMatrixTranspose(proj);
+
+	d3dDeviceContext->UpdateSubresource(pConstantBuffer, 0, nullptr, &cb, 0, 0);
+
+	d3dDeviceContext->VSSetShader(pVS, 0, 0);
+	d3dDeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+	d3dDeviceContext->PSSetShader(pPS, 0, 0);
+	d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
+	_meshLoader->Draw(d3dDeviceContext);
+
 	// if exists a default technique implemented
 	if (defaultEffectTechnique)
 	{
@@ -424,14 +465,14 @@ void YERenderingDirectX11::LoadMesh()
 
 void YERenderingDirectX11::InitPipeline()
 {
-	/*ID3DBlob* VS, * PS;
-	if (FAILED(CompileShaderFromFile("C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\src\\SimpleColor.fx", 0, "VS", "vs_5_0", &VS)))
-		Throwanerror("Failed to compile shader from file");
-	if (FAILED(CompileShaderFromFile(PIXEL_SHADER_FILE, 0, "main", "ps_4_0", &PS)))
-		Throwanerror("Failed to compile shader from file ");
+	ID3DBlob* VS, * PS;
+	if (FAILED(CompileShaderFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\shaders\\VertexShader.hlsl", 0, "main", "vs_5_0", &VS)))
+		DXLog("Failed to compile shader from file");
+	if (FAILED(CompileShaderFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\shaders\\PixelShader.hlsl", 0, "main", "ps_5_0", &PS)))
+		DXLog("Failed to compile shader from file ");
 
-	dev->CreateVertexShader(VS->GetBufferPointer(), VS->GetBufferSize(), nullptr, &pVS);
-	dev->CreatePixelShader(PS->GetBufferPointer(), PS->GetBufferSize(), nullptr, &pPS);
+	d3dDevice->CreateVertexShader(VS->GetBufferPointer(), VS->GetBufferSize(), nullptr, &pVS);
+	d3dDevice->CreatePixelShader(PS->GetBufferPointer(), PS->GetBufferSize(), nullptr, &pPS);
 
 	D3D11_INPUT_ELEMENT_DESC ied[] =
 	{
@@ -439,8 +480,8 @@ void YERenderingDirectX11::InitPipeline()
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 
-	dev->CreateInputLayout(ied, 2, VS->GetBufferPointer(), VS->GetBufferSize(), &pLayout);
-	devcon->IASetInputLayout(pLayout);*/
+	d3dDevice->CreateInputLayout(ied, 2, VS->GetBufferPointer(), VS->GetBufferSize(), &inputLayout);
+	d3dDeviceContext->IASetInputLayout(inputLayout);
 }
 
 void YERenderingDirectX11::BuildFX()
