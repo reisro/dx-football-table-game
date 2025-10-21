@@ -2,7 +2,7 @@
 #include "d3dx11Effect.h"
 
 YERenderingDirectX11::YERenderingDirectX11():
-	depthStencilBuffer(0), m4xMsaaQuality(false)
+	depthStencilBuffer(0), m4xMsaaQuality(true)
 {
 	initialized = true;
 
@@ -44,7 +44,7 @@ bool YERenderingDirectX11::Init()
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
 	swapChainDesc.OutputWindow = outputWindow->GetWindowsHandle();
-	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+	swapChainDesc.Flags = 0;
 	swapChainDesc.SampleDesc.Count = 1;         
 	swapChainDesc.SampleDesc.Quality = 0;								// how many multisamples
 	swapChainDesc.Windowed = TRUE;
@@ -120,26 +120,59 @@ bool YERenderingDirectX11::Init()
 
 	HRESULT hrDepthStencil = d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &depthStencilBuffer);
 
+	D3D11_DEPTH_STENCIL_DESC desc;
+	ZeroMemory(&desc, sizeof(desc));
+
+	// Depth Test Parameters
+	desc.DepthEnable = true;
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	desc.DepthFunc = D3D11_COMPARISON_LESS;
+
+	// Stencil test parameters
+	desc.StencilEnable = true;
+	desc.StencilReadMask ^ 0xFF;
+	desc.StencilWriteMask = 0xFF;
+
+	// Stencil operations if pixel is front facing
+	desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+	desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_INCR;
+	desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+	//Stencil Operations if pixel is back facing
+	desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+	desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+	d3dDevice->CreateDepthStencilState(&desc, &depthStencilStateDesc);
+
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	descDSV.Texture2D.MipSlice = 0;
+
 	if (!FAILED(hrDepthStencil))
 		HRESULT hrDepthStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
 
-	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
-
 	// Set the rasterizer states
 	D3D11_RASTERIZER_DESC rasterDesc;
-	rasterDesc.AntialiasedLineEnable = false;
+	rasterDesc.AntialiasedLineEnable = TRUE;
 	rasterDesc.CullMode = D3D11_CULL_BACK;
 	rasterDesc.DepthBias = 0;
 	rasterDesc.DepthBiasClamp = 0.0f;
 	rasterDesc.DepthClipEnable = true;
+	rasterDesc.ScissorEnable = false;
 	rasterDesc.FillMode = D3D11_FILL_SOLID;
 	rasterDesc.FrontCounterClockwise = false;
-	rasterDesc.MultisampleEnable = false;
-	rasterDesc.ScissorEnable = false;
+	rasterDesc.MultisampleEnable = true;
+	
 	rasterDesc.SlopeScaledDepthBias = 0.0f;
-
+	
 	d3dDevice->CreateRasterizerState(&rasterDesc, &rasterstate);
 	d3dDeviceContext->RSSetState(rasterstate);
+
+	d3dDeviceContext->OMSetDepthStencilState(depthStencilStateDesc, 1);
+	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 
 	// Set the viewport
 	SetViewport();
@@ -274,12 +307,31 @@ void YERenderingDirectX11::SetViewport()
 void YERenderingDirectX11::Render()
 {
 	BeginFrame();
+
+	
 }
 
 void YERenderingDirectX11::BeginFrame()
 {
+	static float y = 4.5f;
+	static float x = 2.2f;
+	static float z = -4.53f;
+
+	if (GetAsyncKeyState('1') & 0x8000)
+		x += 0.01f;
+	if (GetAsyncKeyState('2') & 0x8000)
+		y += 0.01f;
+	if (GetAsyncKeyState('3') & 0x8000)
+		z += 0.01f;
+	if (GetAsyncKeyState('4') & 0x8000)
+		x -= 0.01f;
+	if (GetAsyncKeyState('5') & 0x8000)
+		y -= 0.01f;
+	if (GetAsyncKeyState('6') & 0x8000)
+		z -= 0.01f;
+
 	// Build the view matrix.
-	XMVECTOR pos = XMVectorSet(4.2f, 3.53f, -3.53f, 1.0f);
+	XMVECTOR pos = XMVectorSet(x, y, z, 1.0f);
 	XMVECTOR target = XMVectorZero();
 	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
@@ -287,7 +339,7 @@ void YERenderingDirectX11::BeginFrame()
 	XMStoreFloat4x4(&mView, V);
 
 	// Initialize the projection matrix
-	XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f*3.1415926535f, 1368 / (FLOAT)720, 0.01f, 100.0f);
+	XMMATRIX P = XMMatrixPerspectiveFovLH(0.45f*3.1415926535f, 1368 / (FLOAT)720, .2f, 1000.0f);
 	XMStoreFloat4x4(&mProj, P);
 
 	bool show_demo_window = true;
@@ -317,7 +369,7 @@ void YERenderingDirectX11::BeginFrame()
 	
 	// set the render target as the back buffer
 	d3dDeviceContext->ClearRenderTargetView(mainRenderTargetView, clear_color_with_alpha);
-	d3dDeviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	d3dDeviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 1.0);
 
 	d3dDeviceContext->IASetInputLayout(inputLayout);
 	d3dDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -457,7 +509,22 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh()
 {
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\handles.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_field.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_back_net_r.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");

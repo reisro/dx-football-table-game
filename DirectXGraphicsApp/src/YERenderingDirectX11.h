@@ -77,6 +77,7 @@ protected:
 	ID3D11DepthStencilView*		 depthStencilView;
 	ID3D11RasterizerState*		 rasterstate;
 	ID3D11SamplerState*			 texSamplerState;
+	ID3D11DepthStencilState*     depthStencilStateDesc;
 	ID3D11Buffer*				 pConstantBuffer;
 	ID3D11VertexShader*			 pVS;
 	ID3D11PixelShader*			 pPS;
