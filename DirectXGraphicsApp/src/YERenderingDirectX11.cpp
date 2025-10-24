@@ -87,6 +87,28 @@ bool YERenderingDirectX11::Init()
 	HRESULT hrMultiSample = d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m4xMsaaQuality);
 	assert(m4xMsaaQuality > 0);
 
+	// Obtain DXGI factory from device (since we used nullptr for pAdapter above)
+	IDXGIFactory1* dxgiFactory = nullptr;
+	{
+		IDXGIDevice* dxgiDevice = nullptr;
+		HRESULT hr = d3dDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
+
+		if (SUCCEEDED(hr))
+		{
+			IDXGIAdapter* adapter = nullptr;
+			hr = dxgiDevice->GetAdapter(&adapter);
+			if (SUCCEEDED(hr))
+			{
+				hr = adapter->GetParent(__uuidof(IDXGIFactory1), reinterpret_cast<void**>(&dxgiFactory));
+				adapter->Release();
+			}
+			dxgiDevice->Release();
+		}
+
+		if (FAILED(hr))
+			DXLog("Failed to get IDXGIFactory1");
+	}
+
 	// Create the render target view to the swap chain back buffer
 	CreateRenderTargetView();
 
@@ -318,17 +340,17 @@ void YERenderingDirectX11::BeginFrame()
 	static float z = -4.53f;
 
 	if (GetAsyncKeyState('1') & 0x8000)
-		x += 0.01f;
+		x += 0.06f;
 	if (GetAsyncKeyState('2') & 0x8000)
-		y += 0.01f;
+		y += 0.06f;
 	if (GetAsyncKeyState('3') & 0x8000)
-		z += 0.01f;
+		z += 0.06f;
 	if (GetAsyncKeyState('4') & 0x8000)
-		x -= 0.01f;
+		x -= 0.06f;
 	if (GetAsyncKeyState('5') & 0x8000)
-		y -= 0.01f;
+		y -= 0.06f;
 	if (GetAsyncKeyState('6') & 0x8000)
-		z -= 0.01f;
+		z -= 0.06f;
 
 	// Build the view matrix.
 	XMVECTOR pos = XMVectorSet(x, y, z, 1.0f);
@@ -509,7 +531,12 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh()
 {
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\handles.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\VintageRacingCar.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
@@ -527,7 +554,7 @@ void YERenderingDirectX11::LoadMesh()
 	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
-		DXLog("Could not load 3D model successfully.....");
+		DXLog("Could not load 3D model successfully.....");*/
 }
 
 void YERenderingDirectX11::InitPipeline()
