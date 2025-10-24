@@ -68,8 +68,11 @@ public:
 
 protected:
 
+	D3D_DRIVER_TYPE				 driverType;
 	ID3D11Device*				 d3dDevice;
+	ID3D11Device*                d3dDevice2;
 	ID3D11DeviceContext*		 d3dDeviceContext;
+	ID3D11DeviceContext*         d3dDeviceContext2;
 	ID3D11RenderTargetView*		 mainRenderTargetView;
 	ID3D11RenderTargetView*		 backBuffer;
 	D3D11_TEXTURE2D_DESC		 depthStencilDesc;
@@ -83,10 +86,11 @@ protected:
 	ID3D11PixelShader*			 pPS;
 	ID3D11Texture2D*			 tBackBuffer;
 	IDXGISwapChain*				 swapChain;
+	IDXGISwapChain1*			 swapChain1;
 	IDXGIDevice*				 dxgiDevice;
 	IDXGIAdapter*				 dxgiAdapter;
 	IDXGIFactory*				 dxgiFactory;
-	DXGI_SWAP_CHAIN_DESC		 swapChainDesc;
+	DXGI_SWAP_CHAIN_DESC1		 swapChainDesc;
 	D3D_FEATURE_LEVEL			 featureLevel;
 	D3D11_VIEWPORT				 viewport;
 	YEWinAppWindow*				 outputWindow;

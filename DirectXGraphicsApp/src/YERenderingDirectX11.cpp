@@ -30,26 +30,11 @@ bool YERenderingDirectX11::Init()
 	outputWindow = dynamic_cast<YEWinAppWindow*>(YEWindow::GetInstance()); 
 	outputWindow->Create();
 
-	// clear out the struct for use
-	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
-
-	// fill the swap chain description struct
-	swapChainDesc.BufferCount = 1;                                    // one back buffer
-	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
-	swapChainDesc.BufferDesc.Width = 1368;
-	swapChainDesc.BufferDesc.Height = 720;
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
-	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-	swapChainDesc.OutputWindow = outputWindow->GetWindowsHandle();
-	swapChainDesc.Flags = 0;
-	swapChainDesc.SampleDesc.Count = 1;         
-	swapChainDesc.SampleDesc.Quality = 0;								// how many multisamples
-	swapChainDesc.Windowed = TRUE;
-
 	UINT createDeviceFlags = 0;
+
+#ifdef _DEBUG
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
 
 	// Check for Direct3D Feature Level is supported
 	D3D_FEATURE_LEVEL featureLevel;
@@ -59,26 +44,14 @@ bool YERenderingDirectX11::Init()
 		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 	#endif
 
-	// Create the device, context and swap chain
-	HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr,
-		D3D_DRIVER_TYPE_HARDWARE,
-		nullptr,
-		createDeviceFlags,
-		featureLevelArray,
-		2,
-		D3D11_SDK_VERSION,
-		&swapChainDesc,
-		&swapChain,
-		&d3dDevice,
-		&featureLevel,
-		&d3dDeviceContext);
+	HRESULT hr_createDevice = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevelArray, 2,
+			D3D11_SDK_VERSION, &d3dDevice, &featureLevel, &d3dDeviceContext);
 
-	if (FAILED(hr))
+	if(FAILED(hr_createDevice))
 	{
-		DXLog("D3D11CreateDeviceAndSwapChain Failed.");
-
+		DXLog("D3D11CreateDevice Failed.");
 		return false;
-	}
+	}	
 
 	// Check 4X MSAA quality support for our back buffer format.
 	// All Direct3D 11 capable devices support 4X MSAA for all render 
@@ -87,11 +60,13 @@ bool YERenderingDirectX11::Init()
 	HRESULT hrMultiSample = d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &m4xMsaaQuality);
 	assert(m4xMsaaQuality > 0);
 
+	HRESULT hr;
+
 	// Obtain DXGI factory from device (since we used nullptr for pAdapter above)
 	IDXGIFactory1* dxgiFactory = nullptr;
 	{
 		IDXGIDevice* dxgiDevice = nullptr;
-		HRESULT hr = d3dDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
+		hr = d3dDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
 
 		if (SUCCEEDED(hr))
 		{
@@ -109,16 +84,73 @@ bool YERenderingDirectX11::Init()
 			DXLog("Failed to get IDXGIFactory1");
 	}
 
-	// Create the render target view to the swap chain back buffer
-	CreateRenderTargetView();
+	IDXGIFactory2* dxgiFactory2 = nullptr;
+	hr = dxgiFactory->QueryInterface(__uuidof(IDXGIFactory2), reinterpret_cast<void**>(&dxgiFactory2));
 
-	if FAILED(hr)
+	if (dxgiFactory2)
 	{
-		MessageBox(0, L"Create Device Failed.", 0, 0);
+		hr = d3dDevice->QueryInterface(__uuidof(ID3D11Device1), reinterpret_cast<void**>(&d3dDevice2));
+
+		if (SUCCEEDED(hr))
+		{
+			(void)d3dDeviceContext->QueryInterface(__uuidof(ID3D11DeviceContext1), reinterpret_cast<void**>(&d3dDeviceContext2));
+		}
+
+		//// clear out the struct for use
+		ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
+
+		// fill the swap chain description struct
+		swapChainDesc.BufferCount = 1;                                    // one back buffer
+		swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
+		swapChainDesc.Width = 1368;
+		swapChainDesc.Height = 720;
+		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+		swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
+		swapChainDesc.Flags = 0;
+		swapChainDesc.SampleDesc.Quality = m4xMsaaQuality - 1;								// how many multisamples
+		swapChainDesc.SampleDesc.Count = 4;
+
+		hr = dxgiFactory2->CreateSwapChainForHwnd(d3dDevice, outputWindow->GetWindowsHandle(), &swapChainDesc, nullptr, nullptr, &swapChain1);
+		if (SUCCEEDED(hr))
+		{
+			hr = swapChain1->QueryInterface(__uuidof(IDXGISwapChain), reinterpret_cast<void**>(&swapChain));
+		}
+
+		dxgiFactory2->Release();
+	}
+	else
+	{
+		// DirectX 11.0 systems
+		DXGI_SWAP_CHAIN_DESC sd;
+		ZeroMemory(&sd, sizeof(sd));
+		sd.BufferCount = 1;
+		sd.BufferDesc.Width = 1368;
+		sd.BufferDesc.Height = 720;
+		sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		sd.BufferDesc.RefreshRate.Numerator = 60;
+		sd.BufferDesc.RefreshRate.Denominator = 1;
+		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		sd.OutputWindow = outputWindow->GetWindowsHandle();
+		sd.SampleDesc.Count = 1;
+		sd.SampleDesc.Quality = m4xMsaaQuality - 1;
+		sd.Windowed = TRUE;
+
+		hr = dxgiFactory->CreateSwapChain(d3dDevice, &sd, &swapChain);
+	}
+
+	dxgiFactory->Release();
+
+	if(FAILED(hr))
+	{
+		DXLog("CreateSwapChain Failed.");
 		return false;
 	}
 
-	// Fill out Depth Stencil structure
+	// Create the render target view to the swap chain back buffer
+	CreateRenderTargetView();
+
+	//// Fill out Depth Stencil structure
 	depthStencilDesc.Width = 1368;
 	depthStencilDesc.Height = 720;
 	depthStencilDesc.MipLevels = 1;
@@ -128,53 +160,30 @@ bool YERenderingDirectX11::Init()
 	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	depthStencilDesc.CPUAccessFlags = 0;
 	depthStencilDesc.MiscFlags = 0;
-
-	if (enable4xMsaa)
-	{
-		depthStencilDesc.SampleDesc.Count = 4;
-		depthStencilDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
-	}
-	else
-	{
-		depthStencilDesc.SampleDesc.Count = 1;
-		depthStencilDesc.SampleDesc.Quality = 0;
-	}
+	depthStencilDesc.SampleDesc.Count = 4;
+	depthStencilDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
 
 	HRESULT hrDepthStencil = d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &depthStencilBuffer);
 
-	D3D11_DEPTH_STENCIL_DESC desc;
-	ZeroMemory(&desc, sizeof(desc));
+	if (FAILED(hrDepthStencil))
+	{
+		DXLog("CreateTexture2D for Depth Stencil Failed.");
+		return false;
+	}
 
-	// Depth Test Parameters
-	desc.DepthEnable = true;
-	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	desc.DepthFunc = D3D11_COMPARISON_LESS;
-
-	// Stencil test parameters
-	desc.StencilEnable = true;
-	desc.StencilReadMask ^ 0xFF;
-	desc.StencilWriteMask = 0xFF;
-
-	// Stencil operations if pixel is front facing
-	desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-	desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-	desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_INCR;
-	desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
-	//Stencil Operations if pixel is back facing
-	desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-	desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-	desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-	desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-	d3dDevice->CreateDepthStencilState(&desc, &depthStencilStateDesc);
-
+	// Create the depth stencil view
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-	descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+	ZeroMemory(&descDSV, sizeof(descDSV));
+	descDSV.Format = depthStencilDesc.Format;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0;
+	hr = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
+	if (FAILED(hr))
+	{
+		DXLog("Depth Stencil View couldn't be created!");
+	}
 
-	if (!FAILED(hrDepthStencil))
-		HRESULT hrDepthStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
+	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 
 	// Set the rasterizer states
 	D3D11_RASTERIZER_DESC rasterDesc;
@@ -186,15 +195,11 @@ bool YERenderingDirectX11::Init()
 	rasterDesc.ScissorEnable = false;
 	rasterDesc.FillMode = D3D11_FILL_SOLID;
 	rasterDesc.FrontCounterClockwise = false;
-	rasterDesc.MultisampleEnable = true;
-	
+	rasterDesc.MultisampleEnable = false;
 	rasterDesc.SlopeScaledDepthBias = 0.0f;
 	
 	d3dDevice->CreateRasterizerState(&rasterDesc, &rasterstate);
 	d3dDeviceContext->RSSetState(rasterstate);
-
-	d3dDeviceContext->OMSetDepthStencilState(depthStencilStateDesc, 1);
-	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 
 	// Set the viewport
 	SetViewport();
@@ -230,6 +235,81 @@ bool YERenderingDirectX11::Init()
 	PostInit();
 
 	return YERenderer::initialized;
+
+	//// Create the device, context and swap chain
+	//HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr,
+	//	D3D_DRIVER_TYPE_HARDWARE,
+	//	nullptr,
+	//	createDeviceFlags,
+	//	featureLevelArray,
+	//	2,
+	//	D3D11_SDK_VERSION,
+	//	&swapChainDesc,
+	//	&swapChain,
+	//	&d3dDevice,
+	//	&featureLevel,
+	//	&d3dDeviceContext);
+
+	//if (FAILED(hr))
+	//{
+	//	DXLog("D3D11CreateDeviceAndSwapChain Failed.");
+
+	//	return false;
+	//}
+
+	//if FAILED(hr)
+	//{
+	//	MessageBox(0, L"Create Device Failed.", 0, 0);
+	//	return false;
+	//}
+
+	//if (enable4xMsaa)
+	//{
+	//	depthStencilDesc.SampleDesc.Count = 4;
+	//	depthStencilDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
+	//}
+	//else
+	//{
+	//	depthStencilDesc.SampleDesc.Count = 1;
+	//	depthStencilDesc.SampleDesc.Quality = 0;
+	//}
+
+	//D3D11_DEPTH_STENCIL_DESC desc;
+	//ZeroMemory(&desc, sizeof(desc));
+
+	//// Depth Test Parameters
+	//desc.DepthEnable = true;
+	//desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	//desc.DepthFunc = D3D11_COMPARISON_LESS;
+
+	//// Stencil test parameters
+	//desc.StencilEnable = true;
+	//desc.StencilReadMask ^ 0xFF;
+	//desc.StencilWriteMask = 0xFF;
+
+	//// Stencil operations if pixel is front facing
+	//desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	//desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+	//desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_INCR;
+	//desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+	////Stencil Operations if pixel is back facing
+	//desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	//desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+	//desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	//desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+	//d3dDevice->CreateDepthStencilState(&desc, &depthStencilStateDesc);
+
+	//D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	//descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+	//descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	//descDSV.Texture2D.MipSlice = 0;
+
+	//if (!FAILED(hrDepthStencil))
+	//	HRESULT hrDepthStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
+
+	//d3dDeviceContext->OMSetDepthStencilState(depthStencilStateDesc, 1);
+	//d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 }
 
 void YERenderingDirectX11::PostInit()
@@ -306,7 +386,7 @@ HRESULT YERenderingDirectX11::CompileShaderFromFile(LPCWSTR pFileName, const D3D
 void YERenderingDirectX11::CreateRenderTargetView()
 {
 	// get the address of the back buffer
-	swapChain->GetBuffer(0, IID_PPV_ARGS(&tBackBuffer));
+	swapChain->GetBuffer(0, _uuidof(ID3D11Texture2D), (LPVOID*)&tBackBuffer);
 
 	// use the back buffer address to create the render target
 	d3dDevice->CreateRenderTargetView(tBackBuffer, nullptr, &mainRenderTargetView);
@@ -320,6 +400,8 @@ void YERenderingDirectX11::SetViewport()
 
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
 	viewport.Width = 1368;
 	viewport.Height = 720;
 
@@ -531,12 +613,7 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh()
 {
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\VintageRacingCar.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
@@ -554,7 +631,7 @@ void YERenderingDirectX11::LoadMesh()
 	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
-		DXLog("Could not load 3D model successfully.....");*/
+		DXLog("Could not load 3D model successfully.....");
 }
 
 void YERenderingDirectX11::InitPipeline()
