@@ -71,3 +71,23 @@ yeFloat* YETransformComponent::getScale()
 {
 	return &sx;
 }
+
+void YETransformComponent::setWorldViewProj(CXMMATRIX M)
+{
+	WorldViewProj->SetMatrix(reinterpret_cast<const float*>(&M));
+}
+
+void YETransformComponent::SetWorld(CXMMATRIX M)
+{
+	World->SetMatrix(reinterpret_cast<const float*>(&M));
+}
+
+void YETransformComponent::SetWorldInverseTranspose(CXMMATRIX M)
+{
+	WorldInvTranspose->SetMatrix(reinterpret_cast<const float*>(&M));
+}
+
+void YETransformComponent::SetEyePosW(const XMVECTOR& v)
+{
+	EyePosW->SetFloatVector(reinterpret_cast<const float*>(&v));
+}

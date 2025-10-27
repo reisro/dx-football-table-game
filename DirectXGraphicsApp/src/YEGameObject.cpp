@@ -1,5 +1,4 @@
 #include "YEGameObject.h"
-#include "YEGameObject.h"
 #include "YEBaseComponent.h"
 #include "YETransformComponent.h"
 
@@ -70,24 +69,9 @@ void YEGameObject::setName(const char* _name)
 	_game_object_name = _name;
 }
 
-void YEGameObject::setWorldViewProj(CXMMATRIX M)
+void YEGameObject::SetPosition(YEVector3* pos)
 {
-	WorldViewProj->SetMatrix(reinterpret_cast<const float*>(&M));
-}
-
-void YEGameObject::SetWorld(CXMMATRIX M)
-{
-	World->SetMatrix(reinterpret_cast<const float*>(&M));
-}
-
-void YEGameObject::SetWorldInverseTranspose(CXMMATRIX M)
-{
-	WorldInvTranspose->SetMatrix(reinterpret_cast<const float*>(&M));
-}
-
-void YEGameObject::SetEyePosW(const XMVECTOR& v)
-{
-	EyePosW->SetFloatVector(reinterpret_cast<const float*>(&v));
+	GetTransform()->setPosition(pos);
 }
 
 YETransformComponent* YEGameObject::GetTransform()

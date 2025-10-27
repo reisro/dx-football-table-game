@@ -8,9 +8,6 @@
 #include "YEVectorWrapper.h"
 #include "YETransformComponent.h"
 #include "YEMeshComponent.h"
-#include <DirectXMath.h>
-#include <DirectXPackedVector.h>
-#include "d3dx11effect.h"
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;
@@ -37,20 +34,9 @@ public:
 
 	virtual void setName(const char* _name);
 
-	void setWorldViewProj(CXMMATRIX M);
-
-	void SetWorld(CXMMATRIX M);
-
-	void SetWorldInverseTranspose(CXMMATRIX M);
-
-	void SetEyePosW(const XMVECTOR& v);
+	void SetPosition(YEVector3* pos);
 
 	YETransformComponent* GetTransform();
-
-	ID3DX11EffectMatrixVariable* WorldViewProj;
-	ID3DX11EffectMatrixVariable* World;
-	ID3DX11EffectMatrixVariable* WorldInvTranspose;
-	ID3DX11EffectVectorVariable* EyePosW;
 
 protected:
 	YEVectorWrapper<YEBaseComponent*> _components;
@@ -59,6 +45,7 @@ protected:
 private:
 	const char* _game_object_name;
 	UINT _id;
+	YEVector3* position;
 };
 
 #endif _YE_GAME_OBJECT_H_

@@ -9,7 +9,7 @@ public:
 	Cube() : YEGame("Default Cube")
 	{
 		cube_game_object.setName("Cube Object");
-
+		football_table_game_object.setName("Football Table");
 		
 	}
 
@@ -21,6 +21,7 @@ public:
 	void init() override
 	{
 		cube_game_object.start();
+		football_table_game_object.start();
 
 		YE::YEApplication::Import3DModel();
 		
@@ -54,7 +55,8 @@ private:
 	const char* game_name;
 
 	YEGameObject cube_game_object;
-	
+	YEGameObject football_table_game_object;
+
 	YEVector3* position;
 	YEVector3* newPosition;
 	YEVector3* moveDirection;

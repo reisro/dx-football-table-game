@@ -8,6 +8,9 @@
 #include "YEBaseComponent.h"
 #include "DXTypes.h"
 #include "YEVector3.h"
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
+#include "d3dx11effect.h"
 
 class DX_API YETransformComponent : public YEBaseComponent
 {
@@ -34,6 +37,18 @@ private:
 	YEVector3 _position;
 	yeFloat pitch, roll, yaw, w;
 	yeFloat sx,sy,sz;
+	ID3DX11EffectMatrixVariable* WorldViewProj;
+	ID3DX11EffectMatrixVariable* World;
+	ID3DX11EffectMatrixVariable* WorldInvTranspose;
+	ID3DX11EffectVectorVariable* EyePosW;
+
+	void setWorldViewProj(CXMMATRIX M);
+
+	void SetWorld(CXMMATRIX M);
+
+	void SetWorldInverseTranspose(CXMMATRIX M);
+
+	void SetEyePosW(const XMVECTOR& v);
 };
 
 #endif
