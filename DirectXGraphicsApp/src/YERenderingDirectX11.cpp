@@ -613,7 +613,7 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh()
 {
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_new.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
@@ -623,15 +623,35 @@ void YERenderingDirectX11::LoadMesh()
 	else
 		DXLog("Could not load 3D model successfully.....");
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_back_net_r.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_ball.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_r.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully....."); 
+
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_l.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
+
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_handle.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");
+
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_back_net_r.fbx"))
+		DXLog("Loaded 3D model successfully.");
+	else
+		DXLog("Could not load 3D model successfully.....");*/
 }
 
 void YERenderingDirectX11::InitPipeline()

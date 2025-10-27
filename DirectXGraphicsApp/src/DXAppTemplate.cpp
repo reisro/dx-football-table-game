@@ -22,7 +22,6 @@ public:
 	{
 		cube_game_object.start();
 
-		//::YEApplication::CreatePrimitive(YE::GamePrimitives::Cube);
 		YE::YEApplication::Import3DModel();
 		
 		// Set initial position of the cube

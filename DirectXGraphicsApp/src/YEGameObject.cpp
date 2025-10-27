@@ -70,6 +70,26 @@ void YEGameObject::setName(const char* _name)
 	_game_object_name = _name;
 }
 
+void YEGameObject::setWorldViewProj(CXMMATRIX M)
+{
+	WorldViewProj->SetMatrix(reinterpret_cast<const float*>(&M));
+}
+
+void YEGameObject::SetWorld(CXMMATRIX M)
+{
+	World->SetMatrix(reinterpret_cast<const float*>(&M));
+}
+
+void YEGameObject::SetWorldInverseTranspose(CXMMATRIX M)
+{
+	WorldInvTranspose->SetMatrix(reinterpret_cast<const float*>(&M));
+}
+
+void YEGameObject::SetEyePosW(const XMVECTOR& v)
+{
+	EyePosW->SetFloatVector(reinterpret_cast<const float*>(&v));
+}
+
 YETransformComponent* YEGameObject::GetTransform()
 {
     // GetElements() が一時オブジェクトを返す場合、参照を保持しないようにする
