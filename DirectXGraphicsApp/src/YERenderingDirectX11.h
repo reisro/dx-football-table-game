@@ -5,6 +5,7 @@
 
 #include "YERenderer.h"
 #include "YEWinAppWindow.h"
+#include "YEStandardEffect.h"
 #include "d3dx11Effect.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -94,6 +95,7 @@ protected:
 	D3D_FEATURE_LEVEL			 featureLevel;
 	D3D11_VIEWPORT				 viewport;
 	YEWinAppWindow*				 outputWindow;
+	YEStandardEffect*			 standardEffect;
 	UINT						 m4xMsaaQuality;
 	bool						 enable4xMsaa;
 

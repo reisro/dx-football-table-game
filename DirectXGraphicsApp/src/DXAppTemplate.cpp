@@ -9,7 +9,7 @@ public:
 	Cube() : YEGame("Default Cube")
 	{
 		cube_game_object.setName("Cube Object");
-		football_table_game_object.setName("Football Table");
+		football_table_ball_object.setName("Football ball");
 		
 	}
 
@@ -21,14 +21,15 @@ public:
 	void init() override
 	{
 		cube_game_object.start();
-		football_table_game_object.start();
+		football_table_ball_object.start();
 
 		YE::YEApplication::Import3DModel();
 		
 		// Set initial position of the cube
 		position = YEVector3::Zero();
 
-		cube_game_object.GetTransform()->setPosition(position);
+		//cube_game_object.GetTransform()->setPosition(position);
+		football_table_ball_object.GetTransform()->setPosition(new YEVector3(.0f,.0f,-10.0f));
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -55,7 +56,7 @@ private:
 	const char* game_name;
 
 	YEGameObject cube_game_object;
-	YEGameObject football_table_game_object;
+	YEGameObject football_table_ball_object;
 
 	YEVector3* position;
 	YEVector3* newPosition;

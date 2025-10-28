@@ -9,9 +9,6 @@
 #include "YETransformComponent.h"
 #include "YEMeshComponent.h"
 
-using namespace DirectX;
-using namespace DirectX::PackedVector;
-
 class YEBaseComponent;
 
 class DX_API YEGameObject

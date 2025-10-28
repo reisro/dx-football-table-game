@@ -235,81 +235,6 @@ bool YERenderingDirectX11::Init()
 	PostInit();
 
 	return YERenderer::initialized;
-
-	//// Create the device, context and swap chain
-	//HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr,
-	//	D3D_DRIVER_TYPE_HARDWARE,
-	//	nullptr,
-	//	createDeviceFlags,
-	//	featureLevelArray,
-	//	2,
-	//	D3D11_SDK_VERSION,
-	//	&swapChainDesc,
-	//	&swapChain,
-	//	&d3dDevice,
-	//	&featureLevel,
-	//	&d3dDeviceContext);
-
-	//if (FAILED(hr))
-	//{
-	//	DXLog("D3D11CreateDeviceAndSwapChain Failed.");
-
-	//	return false;
-	//}
-
-	//if FAILED(hr)
-	//{
-	//	MessageBox(0, L"Create Device Failed.", 0, 0);
-	//	return false;
-	//}
-
-	//if (enable4xMsaa)
-	//{
-	//	depthStencilDesc.SampleDesc.Count = 4;
-	//	depthStencilDesc.SampleDesc.Quality = m4xMsaaQuality - 1;
-	//}
-	//else
-	//{
-	//	depthStencilDesc.SampleDesc.Count = 1;
-	//	depthStencilDesc.SampleDesc.Quality = 0;
-	//}
-
-	//D3D11_DEPTH_STENCIL_DESC desc;
-	//ZeroMemory(&desc, sizeof(desc));
-
-	//// Depth Test Parameters
-	//desc.DepthEnable = true;
-	//desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	//desc.DepthFunc = D3D11_COMPARISON_LESS;
-
-	//// Stencil test parameters
-	//desc.StencilEnable = true;
-	//desc.StencilReadMask ^ 0xFF;
-	//desc.StencilWriteMask = 0xFF;
-
-	//// Stencil operations if pixel is front facing
-	//desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-	//desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-	//desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_INCR;
-	//desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
-	////Stencil Operations if pixel is back facing
-	//desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-	//desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-	//desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-	//desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-	//d3dDevice->CreateDepthStencilState(&desc, &depthStencilStateDesc);
-
-	//D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-	//descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-	//descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-	//descDSV.Texture2D.MipSlice = 0;
-
-	//if (!FAILED(hrDepthStencil))
-	//	HRESULT hrDepthStencilView = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
-
-	//d3dDeviceContext->OMSetDepthStencilState(depthStencilStateDesc, 1);
-	//d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
 }
 
 void YERenderingDirectX11::PostInit()
@@ -411,8 +336,6 @@ void YERenderingDirectX11::SetViewport()
 void YERenderingDirectX11::Render()
 {
 	BeginFrame();
-
-	
 }
 
 void YERenderingDirectX11::BeginFrame()
@@ -685,7 +608,7 @@ void YERenderingDirectX11::BuildFX()
 
 	ID3D10Blob* compiledShader = 0;
 	ID3D10Blob* compilationMsgs = 0;
-	HRESULT hr = D3DX11CompileFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\src\\SimpleColor.fx", 0, 0, 0, "fx_5_0", shaderFlags,
+	HRESULT hr = D3DX11CompileFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\src\\WorldTransformation.fx", 0, 0, 0, "fx_5_0", shaderFlags,
 		0, 0, &compiledShader, &compilationMsgs, 0);
 
 	//// compilationMsgs can store errors or warnings.
@@ -706,6 +629,8 @@ void YERenderingDirectX11::BuildFX()
 
 	//// Done with compiled shader.
 	ReleaseCOM(compiledShader);
+
+	standardEffect = new YEStandardEffect(d3dDevice);
 
 	defaultEffectTechnique = defaultColorFX->GetTechniqueByName("SimpleColor");
 	fxWorldViewProj = defaultColorFX->GetVariableByName("gWorldViewProj")->AsMatrix();

@@ -100,6 +100,9 @@
     <Filter Include="Arquivos de Cabeçalho\Effects\Shaders">
       <UniqueIdentifier>{fef76b89-b0f9-4298-8bf6-d31f0647addc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Origem\Effects">
+      <UniqueIdentifier>{62a29734-fbd8-4c80-bb6b-adad3ac8ad53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="src\YETextureLoader.h">
       <Filter>Arquivos de Cabeçalho\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEStandardEffect.h">
+      <Filter>Arquivos de Cabeçalho\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -308,10 +314,16 @@
     <ClCompile Include="src\YETextureLoader.cpp">
       <Filter>Arquivos de Origem\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\YEStandardEffect.cpp">
+      <Filter>Arquivos de Origem\Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="packages.config" />
+    <None Include="src\MatrixFunctions.inl">
+      <Filter>Arquivos de Cabeçalho\Utils</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="src\SimpleColor.fx">
