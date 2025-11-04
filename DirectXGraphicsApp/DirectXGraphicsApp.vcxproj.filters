@@ -231,6 +231,9 @@
     <ClInclude Include="src\YEStringUtils.h">
       <Filter>Arquivos de Cabeçalho\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\YESceneObject.h">
+      <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -319,6 +322,9 @@
     </ClCompile>
     <ClCompile Include="src\YEStandardEffect.cpp">
       <Filter>Arquivos de Origem\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YESceneObject.cpp">
+      <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

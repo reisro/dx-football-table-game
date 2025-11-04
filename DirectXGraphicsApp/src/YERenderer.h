@@ -102,7 +102,7 @@ public:
 protected:
 
 	static YERenderer* Singleton;
-	YEMeshLoader* _meshLoader;
+	YEMeshLoader*	   _meshLoader;
 
 private:
 	IUnknown* _device;

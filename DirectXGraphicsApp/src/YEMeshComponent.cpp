@@ -5,9 +5,10 @@ YEMeshComponent::YEMeshComponent()
 {
 }
 
-YEMeshComponent::YEMeshComponent(const wchar_t* pFileName)
+YEMeshComponent::YEMeshComponent(const wchar_t* pFileName):
+	ModelMesh(new YEMeshLoader())	
 {
-	//LoadModel(pFileName);
+	LoadModel(pFileName);
 }
 
 YEMeshComponent::~YEMeshComponent()

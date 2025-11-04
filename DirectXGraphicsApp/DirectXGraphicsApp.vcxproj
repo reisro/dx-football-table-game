@@ -182,6 +182,7 @@
     <ClInclude Include="src\YEMesh.h" />
     <ClInclude Include="src\YEMeshComponent.h" />
     <ClInclude Include="src\YEMeshLoader.h" />
+    <ClInclude Include="src\YESceneObject.h" />
     <ClInclude Include="src\YEStandardEffect.h" />
     <ClInclude Include="src\YEStringUtils.h" />
     <ClInclude Include="src\YETextureLoader.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="src\YEGameObject.cpp" />
     <ClCompile Include="src\YEMesh.cpp" />
     <ClCompile Include="src\YEMeshComponent.cpp" />
+    <ClCompile Include="src\YESceneObject.cpp" />
     <ClCompile Include="src\YEStandardEffect.cpp" />
     <ClCompile Include="src\YETextureLoader.cpp" />
     <ClCompile Include="src\YETransformComponent.cpp" />

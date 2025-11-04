@@ -8,6 +8,7 @@
 #include <assimp/scene.h>
 #include "YEMesh.h"
 #include "YETextureLoader.h"
+#include "YESceneObject.h"
 
 class YEMeshLoader
 {
