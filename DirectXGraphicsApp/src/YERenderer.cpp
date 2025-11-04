@@ -98,6 +98,11 @@ IUnknown* YERenderer::GetDeviceContext()
     return _deviceContext;
 }
 
+YESceneObject* YERenderer::GetSceneObject()
+{
+	return _sceneObject;
+}
+
 YERenderer* YERenderer::GetInstance()
 {
     return Singleton;

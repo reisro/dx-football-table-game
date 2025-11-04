@@ -422,6 +422,9 @@ void YERenderingDirectX11::BeginFrame()
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
 	d3dDeviceContext->PSSetShader(pPS, 0, 0);
 	d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
+
+	// Draw the scene object
+	_sceneObject->_meshes = _meshLoader->getLoadedMeshes();
 	_sceneObject->Draw(d3dDeviceContext);
 
 	// if exists a default technique implemented

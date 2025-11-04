@@ -32,9 +32,9 @@ bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFil
 	return true;
 }
 
-void YEMeshLoader::SendToSceneObject()
+std::vector<YEMesh>& YEMeshLoader::getLoadedMeshes()
 {
-	//_sceneObject->addMesh(_meshes);
+	return _meshes;
 }
 
 void YEMeshLoader::processNode(aiNode* node, const aiScene* scene)

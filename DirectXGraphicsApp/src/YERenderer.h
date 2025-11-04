@@ -97,6 +97,7 @@ public:
 	virtual void CreatePixelLayout();
 	virtual IUnknown* GetDevice();
 	virtual IUnknown* GetDeviceContext();
+	virtual YESceneObject* GetSceneObject();
 
 	bool createGeometryCmd;
 

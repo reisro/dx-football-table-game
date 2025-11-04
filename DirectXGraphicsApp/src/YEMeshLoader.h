@@ -8,7 +8,6 @@
 #include <assimp/scene.h>
 #include "YEMesh.h"
 #include "YETextureLoader.h"
-#include "YESceneObject.h"
 
 class YEMeshLoader
 {
@@ -17,17 +16,16 @@ public:
 	virtual ~YEMeshLoader();
 
 	bool Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName);
+	std::vector<YEMesh>& getLoadedMeshes();
 
 private:
 	IUnknown*		_device;
 	IUnknown*		_context;
-	YESceneObject* _sceneObject;
 
 	std::vector<YEMesh>    _meshes;
 	std::string			   _directory;
 	std::vector<YETexture> _textures;
 
-	void SendToSceneObject();
 	void processNode(aiNode* node, const aiScene* scene);
 	YEMesh processMesh(aiMesh* mesh, const aiScene* scene);
 	std::vector<YETexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, const aiScene* scene);
