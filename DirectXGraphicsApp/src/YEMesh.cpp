@@ -75,10 +75,6 @@ void YEMesh::SetSubsetTable(std::vector<Subset>& subsetTable)
 {
 }
 
-void YEMesh::Draw(ID3D11DeviceContext* dc, UINT subsetId)
-{
-}
-
 bool YEMesh::DoTheImportThing(const std::string& pFile) 
 {
 	//// Create an instance of the Importer class

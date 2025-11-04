@@ -9,6 +9,7 @@
 #include "pch.h"
 #include "DXSubsystem.h"
 #include "YEMeshLoader.h"
+#include "YESceneObject.h"
 #include <d3d11.h>
 #include <DirectXMath.h>
 
@@ -103,6 +104,7 @@ protected:
 
 	static YERenderer* Singleton;
 	YEMeshLoader*	   _meshLoader;
+	YESceneObject*	   _sceneObject;
 
 private:
 	IUnknown* _device;

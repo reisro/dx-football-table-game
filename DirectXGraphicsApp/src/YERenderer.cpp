@@ -5,7 +5,8 @@ YERenderer* YERenderer::Singleton = 0;
 bool YERenderer::initialized;
 
 YERenderer::YERenderer():
-    _meshLoader{ new YEMeshLoader }
+    _meshLoader{ new YEMeshLoader },
+	_sceneObject{ new YESceneObject }
 {
 }
 

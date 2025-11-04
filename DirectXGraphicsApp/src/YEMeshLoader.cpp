@@ -32,12 +32,9 @@ bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFil
 	return true;
 }
 
-void YEMeshLoader::Draw(IUnknown* context)
+void YEMeshLoader::SendToSceneObject()
 {
-	for (size_t i = 0; i < _meshes.size(); ++i)
-	{
-		_meshes[i].Draw(_context);
-	}
+	//_sceneObject->addMesh(_meshes);
 }
 
 void YEMeshLoader::processNode(aiNode* node, const aiScene* scene)

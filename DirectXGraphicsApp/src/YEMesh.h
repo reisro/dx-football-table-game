@@ -25,7 +25,7 @@ struct YETexture
 	ID3D11ShaderResourceView* texture;
 };
 
-class YEMesh
+class DX_API YEMesh
 {
 	public:
 
@@ -60,7 +60,7 @@ class YEMesh
 
 		void SetSubsetTable(std::vector<Subset>& subsetTable);
 
-		void Draw(ID3D11DeviceContext* dc, UINT subsetId);
+		//void Draw(ID3D11DeviceContext* dc, UINT subsetId);
 
 		bool DoTheImportThing(const std::string& pFile);
 

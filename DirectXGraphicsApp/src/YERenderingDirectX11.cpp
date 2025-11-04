@@ -2,7 +2,7 @@
 #include "d3dx11Effect.h"
 #include "MatrixFunctions.inl"
 
-YERenderingDirectX11::YERenderingDirectX11():
+YERenderingDirectX11::YERenderingDirectX11() :
 	depthStencilBuffer(0), m4xMsaaQuality(true)
 {
 	initialized = true;
@@ -422,7 +422,7 @@ void YERenderingDirectX11::BeginFrame()
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
 	d3dDeviceContext->PSSetShader(pPS, 0, 0);
 	d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
-	_meshLoader->Draw(d3dDeviceContext);
+	_sceneObject->Draw(d3dDeviceContext);
 
 	// if exists a default technique implemented
 	//if (standardEffect->TransformationTechnique)

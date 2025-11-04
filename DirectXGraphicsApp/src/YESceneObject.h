@@ -11,9 +11,12 @@ class DX_API YESceneObject
 public:
 	YESceneObject();
 	virtual ~YESceneObject();
+
+	//void addMesh(std::vector<YEMesh> meshes);
+	void Draw(IUnknown* context);
 	
 private:
-
+	std::vector<YEMesh> _meshes;
 };
 
 #endif
