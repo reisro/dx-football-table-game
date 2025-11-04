@@ -15,7 +15,7 @@ public:
 	YEMeshLoader();
 	virtual ~YEMeshLoader();
 
-	bool Load(IUnknown* device, IUnknown* context, std::string filename);
+	bool Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName);
 	void Draw(IUnknown* context);
 
 private:

@@ -8,6 +8,7 @@
 #include "DXAPI.h"
 #include "DXTypes.h"
 #include <DirectXMath.h>
+#include "YEVector3.h"
 
 using namespace DirectX;
 
@@ -68,6 +69,8 @@ public:
 	std::vector<UINT>         _indices;
 	std::vector<YETexture>    _textures;
 	IUnknown*                 _device;
+
+	YEVector3                 _translation;
 
 private:
 		ID3D11Buffer* mVB;

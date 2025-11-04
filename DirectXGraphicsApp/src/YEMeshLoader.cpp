@@ -1,4 +1,5 @@
 #include "YEMeshLoader.h"
+#include "YEStringUtils.h"
 
 YEMeshLoader::YEMeshLoader():
 	_device(nullptr), _context(nullptr),
@@ -11,10 +12,12 @@ YEMeshLoader::~YEMeshLoader()
 {
 }
 
-bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, std::string filename)
+bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName)
 {
 	_device = device;
 	_context = context;
+
+	std::string filename = YEStringUtils::ConvertLPWSTRToString(pFileName);
 
 	Assimp::Importer importer;
 	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);

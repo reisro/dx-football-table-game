@@ -1,5 +1,6 @@
 #include "YERenderingDirectX11.h"
 #include "d3dx11Effect.h"
+#include "MatrixFunctions.inl"
 
 YERenderingDirectX11::YERenderingDirectX11():
 	depthStencilBuffer(0), m4xMsaaQuality(true)
@@ -7,7 +8,7 @@ YERenderingDirectX11::YERenderingDirectX11():
 	initialized = true;
 
 	XMMATRIX I = XMMatrixIdentity();
-	XMStoreFloat4x4(&mWorld, I);
+	XMStoreFloat4x4(&mWorld, XMMatrixTranslation(.0f,1.0f,5.0f));
 	XMStoreFloat4x4(&mView, I);
 	XMStoreFloat4x4(&mProj, I);
 
@@ -403,8 +404,6 @@ void YERenderingDirectX11::BeginFrame()
 
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-	d3dDeviceContext->IASetVertexBuffers(0, 1, &mCubeVB, &stride, &offset);
-	d3dDeviceContext->IASetIndexBuffer(mCubeIB, DXGI_FORMAT_R32_UINT, 0);
 
 	// Set constants
 	XMMATRIX world = XMLoadFloat4x4(&mWorld);
@@ -426,21 +425,39 @@ void YERenderingDirectX11::BeginFrame()
 	_meshLoader->Draw(d3dDeviceContext);
 
 	// if exists a default technique implemented
-	if (defaultEffectTechnique)
-	{
-		fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&worldViewProj));
+	//if (standardEffect->TransformationTechnique)
+	//{
+	//	//fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&worldViewProj));
 
-		D3DX11_TECHNIQUE_DESC techniqueDesc;
-		defaultEffectTechnique->GetDesc(&techniqueDesc);
-		for (UINT p = 0; p < techniqueDesc.Passes; ++p)
-		{
-			defaultEffectTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+	//	D3DX11_TECHNIQUE_DESC techniqueDesc;
+	//	standardEffect->TransformationTechnique->GetDesc(&techniqueDesc);
+	//	for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+	//	{
+	//		// Set effect parameters
+	//		standardEffect->SetEyePosW(XMFLOAT3(x, y, z));
+	//		standardEffect->world = {
+	//			1.0f, 0.0f, 0.0f, 0.0f,
+	//			0.0f, 1.0f, 0.0f, 0.0f,
+	//			0.0f, 0.0f, 1.0f, 0.0f,
+	//			0.0f, 0.0f, -5.0f, 1.0f
+	//		};
 
-			// 36 indices for the box.
-			//d3dDeviceContext->DrawIndexed(36, 0, 0);
-			_meshLoader->Draw(d3dDeviceContext);
-		}
-	}
+	//		XMMATRIX world = XMLoadFloat4x4(&standardEffect->world);
+	//		XMMATRIX worldInvTranspose = YEMath::MatrixHelper::InverseTranspose(world);
+	//		XMMATRIX worldViewProj = world * view * proj;
+
+	//		standardEffect->SetWorld(world);
+	//		standardEffect->SetWorldInvTranspose(worldInvTranspose);
+	//		standardEffect->SetWorldViewProj(worldViewProj);
+	//		//standardEffect->TransformationTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+
+	//		//XMMATRIX world = XMLoadFloat4x4(&mWorld);
+
+	//		// 36 indices for the box.
+	//		//d3dDeviceContext->DrawIndexed(36, 0, 0);
+	//		//_meshLoader->Draw(d3dDeviceContext);
+	//	}
+	//}
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
@@ -471,12 +488,12 @@ void YERenderingDirectX11::CreateDefaultCube()
 	{
 		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)	},
 		{ XMFLOAT3(-1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
-		{ XMFLOAT3(+1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)     },
+		{ XMFLOAT3(+1.0f, +1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
 		{ XMFLOAT3(+1.0f, -1.0f, -1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
-		{ XMFLOAT3(-1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)    },
-		{ XMFLOAT3(-1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)  },
-		{ XMFLOAT3(+1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)    },
-		{ XMFLOAT3(+1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value) }
+		{ XMFLOAT3(-1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
+		{ XMFLOAT3(-1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
+		{ XMFLOAT3(+1.0f, +1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   },
+		{ XMFLOAT3(+1.0f, -1.0f, +1.0f), XMFLOAT4(YEngineColors::WHITE.Value)   }
 	};
 
 	D3D11_BUFFER_DESC vbd;
@@ -536,7 +553,7 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh()
 {
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_new.fbx"))
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_new.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
@@ -544,29 +561,24 @@ void YERenderingDirectX11::LoadMesh()
 	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_field.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
-		DXLog("Could not load 3D model successfully.....");
+		DXLog("Could not load 3D model successfully.....");*/
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_ball.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_ball.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_r.fbx"))
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_r.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
-		DXLog("Could not load 3D model successfully....."); 
+		DXLog("Could not load 3D model successfully.....");*/
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_l.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_player.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_player.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_handle.fbx"))
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_handle.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
@@ -600,40 +612,20 @@ void YERenderingDirectX11::InitPipeline()
 
 void YERenderingDirectX11::BuildFX()
 {
-	DWORD shaderFlags = 0;
-#if defined( DEBUG ) || defined( _DEBUG )
-	shaderFlags |= D3D10_SHADER_DEBUG;
-	shaderFlags |= D3D10_SHADER_SKIP_OPTIMIZATION;
-#endif
-
-	ID3D10Blob* compiledShader = 0;
-	ID3D10Blob* compilationMsgs = 0;
-	HRESULT hr = D3DX11CompileFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\src\\WorldTransformation.fx", 0, 0, 0, "fx_5_0", shaderFlags,
-		0, 0, &compiledShader, &compilationMsgs, 0);
-
-	//// compilationMsgs can store errors or warnings.
-	if (compilationMsgs != 0)
-	{
-		MessageBoxA(0, (char*)compilationMsgs->GetBufferPointer(), 0, 0);
-		ReleaseCOM(compilationMsgs);
-	}
-
-	//// Even if there are no compilationMsgs, check to make sure there were no other errors.
-	if (FAILED(hr))
-	{
-		DXLog("Shader Compilation errors.");
-	}
-
-	HRESULT hrEffect = (D3DX11CreateEffectFromMemory(compiledShader->GetBufferPointer(), compiledShader->GetBufferSize(),
-		0, d3dDevice, &defaultColorFX));
-
-	//// Done with compiled shader.
-	ReleaseCOM(compiledShader);
-
 	standardEffect = new YEStandardEffect(d3dDevice);
 
-	defaultEffectTechnique = defaultColorFX->GetTechniqueByName("SimpleColor");
-	fxWorldViewProj = defaultColorFX->GetVariableByName("gWorldViewProj")->AsMatrix();
+	//HRESULT hrEffect = (D3DX11CreateEffectFromMemory(compiledShader->GetBufferPointer(), compiledShader->GetBufferSize(),
+		//0, d3dDevice, &standardEffect->EffectTech));
+
+	//// Done with compiled shader.
+	//ReleaseCOM(compiledShader);
+	
+	D3DX11_PASS_DESC passDesc;
+	standardEffect->TransformationTechnique = standardEffect->EffectTech->GetTechniqueByName("Transformation");
+	standardEffect->TransformationTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
+
+	//defaultEffectTechnique = defaultColorFX->GetTechniqueByName("Transformation");
+	//fxWorldViewProj = defaultColorFX->GetVariableByName("gWorldViewProj")->AsMatrix();
 }
 
 void YERenderingDirectX11::CreateVertexLayout()
@@ -641,14 +633,14 @@ void YERenderingDirectX11::CreateVertexLayout()
 	// Create the vertex input layout.
 	D3D11_INPUT_ELEMENT_DESC vertexDesc[] =
 	{
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"POSITION", 0,  DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"NORMAL",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	// Create the input layout
 	D3DX11_PASS_DESC passDesc;
 
-	defaultEffectTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
+	standardEffect->TransformationTechnique->GetPassByIndex(0)->GetDesc(&passDesc);
 
 	HRESULT hr = d3dDevice->CreateInputLayout(vertexDesc, 2, passDesc.pIAInputSignature, passDesc.IAInputSignatureSize, &inputLayout);
 }

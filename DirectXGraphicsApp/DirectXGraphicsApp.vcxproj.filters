@@ -228,6 +228,9 @@
     <ClInclude Include="src\YEStandardEffect.h">
       <Filter>Arquivos de Cabeçalho\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEStringUtils.h">
+      <Filter>Arquivos de Cabeçalho\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -324,10 +327,18 @@
     <None Include="src\MatrixFunctions.inl">
       <Filter>Arquivos de Cabeçalho\Utils</Filter>
     </None>
+    <None Include="shaders\Transformation.fxo">
+      <Filter>Arquivos de Cabeçalho\Effects\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="src\SimpleColor.fx">
       <Filter>Arquivos de Cabeçalho\Effects\Shaders</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="shaders\WorldTransformation.fx">
+      <Filter>Arquivos de Cabeçalho\Effects\Shaders</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

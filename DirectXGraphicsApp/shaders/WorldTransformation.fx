@@ -43,7 +43,6 @@ struct VertexOut
 	float4 PosH    : SV_POSITION;
     float3 PosW    : POSITION;
     float3 NormalW : NORMAL;
-    float4 Color : COLOR;
 };
 
 VertexOut VS(VertexIn vin)
@@ -80,9 +79,9 @@ float4 PS(VertexOut pin, uniform int gLightCount) : SV_Target
 
 
 	// Start with a sum of zero. 
-	//float4 ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
-	//float4 diffuse = float4(0.0f, 0.0f, 0.0f, 0.0f);
-	//float4 spec    = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 ambient = float4(1.0f, 1.0f, 1.0f, 1.0f);
+	float4 diffuse = float4(1.0f, 1.0f, 1.0f, 1.0f);
+	float4 spec    = float4(1.0f, 1.0f, 1.0f, 1.0f);
 
 	// Sum the light contribution from each light source.  
 	//[unroll]
@@ -97,40 +96,20 @@ float4 PS(VertexOut pin, uniform int gLightCount) : SV_Target
 		//spec    += S;
 	//}
 
-	//float4 litColor = ambient + diffuse + spec;
+	float4 litColor = ambient + diffuse + spec;
 
 	// Common to take alpha from diffuse material.
-	//litColor.a = gMaterial.Diffuse.a;
+	litColor.a = gMaterial.Diffuse.a;
 
-    return pin.Color;
+    return litColor;
 }
 
-technique11 Light1
+technique11 Transformation
 {
     pass P0
     {
         SetVertexShader( CompileShader( vs_5_0, VS() ) );
 		SetGeometryShader( NULL );
         SetPixelShader( CompileShader( ps_5_0, PS(1) ) );
-    }
-}
-
-technique11 Light2
-{
-    pass P0
-    {
-        SetVertexShader( CompileShader( vs_5_0, VS() ) );
-		SetGeometryShader( NULL );
-        SetPixelShader( CompileShader( ps_5_0, PS(2) ) );
-    }
-}
-
-technique11 Light3
-{
-    pass P0
-    {
-        SetVertexShader( CompileShader( vs_5_0, VS() ) );
-		SetGeometryShader( NULL );
-        SetPixelShader( CompileShader( ps_5_0, PS(3) ) );
     }
 }

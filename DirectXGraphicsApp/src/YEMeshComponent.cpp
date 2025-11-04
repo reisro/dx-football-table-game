@@ -1,8 +1,13 @@
-#include "YEMeshComponent.h"	
+#include "YEMeshComponent.h"
 #include "YERenderer.h"
 
 YEMeshComponent::YEMeshComponent()
 {
+}
+
+YEMeshComponent::YEMeshComponent(const wchar_t* pFileName)
+{
+	//LoadModel(pFileName);
 }
 
 YEMeshComponent::~YEMeshComponent()
@@ -22,9 +27,9 @@ void YEMeshComponent::update(float _deltaTime)
 {
 }
 
-bool YEMeshComponent::LoadModel(std::string path)
+bool YEMeshComponent::LoadModel(const wchar_t* pFileName)
 {
 	YERenderer* renderer = YERenderer::GetInstance();
 
-	return ModelMesh->Load(reinterpret_cast<ID3D11Device*>(renderer->GetDevice()), renderer->GetDeviceContext(), path);
+	return ModelMesh->Load(reinterpret_cast<ID3D11Device*>(renderer->GetDevice()), renderer->GetDeviceContext(), pFileName);
 }

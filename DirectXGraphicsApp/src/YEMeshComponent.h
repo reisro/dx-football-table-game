@@ -11,6 +11,7 @@ class DX_API YEMeshComponent : public YEBaseComponent
 	public:
 
 	YEMeshComponent();
+	YEMeshComponent(const wchar_t* pFileName);
 
 	virtual ~YEMeshComponent();
 
@@ -18,7 +19,7 @@ class DX_API YEMeshComponent : public YEBaseComponent
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
-	bool LoadModel(std::string path);
+	bool LoadModel(const wchar_t* pFileName);
 
 private:
 	YEMeshLoader* ModelMesh;

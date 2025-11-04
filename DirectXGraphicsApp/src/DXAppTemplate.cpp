@@ -29,7 +29,11 @@ public:
 		position = YEVector3::Zero();
 
 		//cube_game_object.GetTransform()->setPosition(position);
-		football_table_ball_object.GetTransform()->setPosition(new YEVector3(.0f,.0f,-10.0f));
+
+        LPCWSTR ball_model_path = L"football_ball.fbx";
+
+		football_table_ball_object.addComponent(new YEMeshComponent(ball_model_path));
+		//football_table_ball_object.GetTransform()->setPosition(new YEVector3(.0f,.0f,-10.0f));
 	}
 
 	bool update(dxDouble _deltaTime) override
