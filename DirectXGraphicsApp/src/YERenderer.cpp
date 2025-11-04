@@ -68,7 +68,7 @@ void YERenderer::CreateDefaultCube()
 {
 }
 
-void YERenderer::LoadMesh()
+void YERenderer::LoadMesh(const wchar_t* pFileName)
 {
 }
 

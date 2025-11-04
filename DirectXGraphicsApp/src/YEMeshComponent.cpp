@@ -32,5 +32,7 @@ bool YEMeshComponent::LoadModel(const wchar_t* pFileName)
 {
 	YERenderer* renderer = YERenderer::GetInstance();
 
-	return ModelMesh->Load(reinterpret_cast<ID3D11Device*>(renderer->GetDevice()), renderer->GetDeviceContext(), pFileName);
+	renderer->LoadMesh(pFileName);
+
+	return true;
 }

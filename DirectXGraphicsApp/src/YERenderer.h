@@ -90,7 +90,7 @@ public:
 	virtual void Cleanup();
 	virtual void CreateBasicGeometry();
 	virtual void CreateDefaultCube();
-	virtual void LoadMesh();
+	virtual void LoadMesh(const wchar_t* pFileName);
 	virtual void InitPipeline();
 	virtual void BuildFX();
 	virtual void CreateVertexLayout();

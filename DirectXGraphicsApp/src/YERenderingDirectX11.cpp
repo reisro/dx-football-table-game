@@ -423,7 +423,7 @@ void YERenderingDirectX11::BeginFrame()
 	d3dDeviceContext->PSSetShader(pPS, 0, 0);
 	d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
 
-	// Draw the scene object
+	// Draw the scene objects
 	_sceneObject->_meshes = _meshLoader->getLoadedMeshes();
 	_sceneObject->Draw(d3dDeviceContext);
 
@@ -554,32 +554,32 @@ void YERenderingDirectX11::CreateDefaultCube()
 	CreateVertexLayout();
 }
 
-void YERenderingDirectX11::LoadMesh()
+void YERenderingDirectX11::LoadMesh(const wchar_t* pFileName)
 {
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_new.fbx"))
+	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, pFileName))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_field.fbx"))
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_field.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");*/
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_ball.fbx"))
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_ball.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
-		DXLog("Could not load 3D model successfully.....");
+		DXLog("Could not load 3D model successfully.....");*/
 
 	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_r.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
 		DXLog("Could not load 3D model successfully.....");*/
 
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_player.fbx"))
+	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_player.fbx"))
 		DXLog("Loaded 3D model successfully.");
 	else
-		DXLog("Could not load 3D model successfully.....");
+		DXLog("Could not load 3D model successfully.....");*/
 
 	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_handle.fbx"))
 		DXLog("Loaded 3D model successfully.");

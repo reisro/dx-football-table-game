@@ -32,7 +32,7 @@ bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFil
 	return true;
 }
 
-std::vector<YEMesh>& YEMeshLoader::getLoadedMeshes()
+std::vector<YEMesh> YEMeshLoader::getLoadedMeshes()
 {
 	return _meshes;
 }

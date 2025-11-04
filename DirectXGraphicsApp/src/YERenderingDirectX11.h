@@ -59,7 +59,7 @@ public:
 	void EndFrame() override;
 	void Cleanup() override;
 	void CreateDefaultCube() override;
-	void LoadMesh() override;
+	void LoadMesh(const wchar_t* pFileName) override;
 	void InitPipeline() override;
 	void BuildFX() override;
 	void CreateVertexLayout() override;
