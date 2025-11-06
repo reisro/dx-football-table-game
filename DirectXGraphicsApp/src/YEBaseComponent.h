@@ -5,16 +5,28 @@
 
 #include "DXAPI.h"
 
+class YETransformComponent;
+class YEGameObject;
+
 class DX_API YEBaseComponent
 {
+	friend class YEGameObject;
+
 public:
 	
-	YEBaseComponent() {}
+	YEBaseComponent(): _gameObject(nullptr) {}
+	YEBaseComponent(YEGameObject* _owner) : _gameObject(_owner) {}
 	virtual ~YEBaseComponent() {}
 
 	virtual void start() = 0;
 	virtual void shutdown() = 0;
 	virtual void update(float _deltaTime) = 0;
+
+	virtual YETransformComponent* getTransformComponent();
+	
+protected:
+		
+	YEGameObject* _gameObject;
 };
 
 #endif // _YE_BASE_COMPONENT_H_

@@ -8,7 +8,7 @@ YERenderingDirectX11::YERenderingDirectX11() :
 	initialized = true;
 
 	XMMATRIX I = XMMatrixIdentity();
-	XMStoreFloat4x4(&mWorld, XMMatrixTranslation(.0f,1.0f,5.0f));
+	XMStoreFloat4x4(&mWorld, XMMatrixTranslation(.0f,1.0f,0.0f));
 	XMStoreFloat4x4(&mView, I);
 	XMStoreFloat4x4(&mProj, I);
 
@@ -405,8 +405,17 @@ void YERenderingDirectX11::BeginFrame()
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 
+	_sceneObject->_meshes = _meshLoader->getLoadedMeshes();
+
+	// Check if there are meshes loaded
+	if (_sceneObject->_meshes.size() == 0)
+	{
+		DXLog("No meshes loaded to render.");
+		return;
+	}
+
 	// Set constants
-	XMMATRIX world = XMLoadFloat4x4(&mWorld);
+	XMMATRIX world = XMLoadFloat4x4(&_sceneObject->_meshes[0]._mWorld);
 	XMMATRIX view = XMLoadFloat4x4(&mView);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 	XMMATRIX worldViewProj = world * view * proj;
@@ -424,7 +433,6 @@ void YERenderingDirectX11::BeginFrame()
 	d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
 
 	// Draw the scene objects
-	_sceneObject->_meshes = _meshLoader->getLoadedMeshes();
 	_sceneObject->Draw(d3dDeviceContext);
 
 	// if exists a default technique implemented

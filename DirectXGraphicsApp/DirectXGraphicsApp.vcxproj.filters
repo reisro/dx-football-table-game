@@ -326,6 +326,9 @@
     <ClCompile Include="src\YESceneObject.cpp">
       <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\YEBaseComponent.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

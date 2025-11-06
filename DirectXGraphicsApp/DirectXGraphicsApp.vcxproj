@@ -221,6 +221,7 @@
     <ClCompile Include="src\DefaultCube.cpp" />
     <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
+    <ClCompile Include="src\YEBaseComponent.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
     <ClCompile Include="src\YEMeshLoader.cpp" />
     <ClCompile Include="src\YERenderer.cpp" />

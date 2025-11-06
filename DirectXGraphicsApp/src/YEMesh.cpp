@@ -8,6 +8,12 @@ YEMesh::YEMesh(IUnknown* device, const std::vector<YEMeshVertex>& vertices, cons
 	:_vertices(vertices), _indices(indices), _textures(textures), _device(device), mVB(nullptr), mIB(nullptr)
 {
 	PrepareMesh(_device);
+
+	_mWorld = XMFLOAT4X4(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 YEMesh::~YEMesh()

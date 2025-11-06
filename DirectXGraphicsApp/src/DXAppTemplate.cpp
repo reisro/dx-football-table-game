@@ -10,7 +10,6 @@ public:
 	{
 		cube_game_object.setName("Cube Object");
 		football_table_ball_object.setName("Football ball");
-		
 	}
 
 	Cube(const char* _game_name) :
@@ -32,8 +31,7 @@ public:
 
         LPCWSTR ball_model_path = L"C:\\Game Assets\\football_ball.fbx";
 
-		football_table_ball_object.addComponent(new YEMeshComponent(ball_model_path));
-		//football_table_ball_object.GetTransform()->setPosition(new YEVector3(.0f,.0f,-10.0f));
+		football_table_ball_object._transform->setPosition(new YEVector3(.0f,.0f,-10.0f));
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -41,7 +39,7 @@ public:
 		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
 		moveDirection = YEVector3::Sum(*position, *newPosition);
 
-		cube_game_object.GetTransform()->setPosition(moveDirection);
+		//cube_game_object.GetTransform()->setPosition(moveDirection);
 		cube_game_object.update(_deltaTime);
 
 		forward_speed += 0.1f;

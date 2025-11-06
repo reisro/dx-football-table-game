@@ -7,7 +7,7 @@ YEGameObject::YEGameObject():
 	_id{ 0 }
 {
 	// Every game object has a transform component by default
-	addComponent(new YETransformComponent());
+	_transform = new YETransformComponent();
 }
 
 YEGameObject::YEGameObject(const char* _game_name):
@@ -61,6 +61,8 @@ void YEGameObject::update(float _deltaTime)
 
 void YEGameObject::addComponent(YEBaseComponent* component)
 {
+	component->_gameObject = this;
+
 	_components.getVector()->push_back(component);
 }
 
@@ -76,11 +78,13 @@ void YEGameObject::SetPosition(YEVector3* pos)
 
 YETransformComponent* YEGameObject::GetTransform()
 {
+	return _transform;
+
     // GetElements() が一時オブジェクトを返す場合、参照を保持しないようにする
-    auto elements = _components.getVector()->GetElements();
+    /*auto elements = _components.getVector()->GetElements();
 
     if (elements.empty()) 
 		return nullptr;
 
-    return dynamic_cast<YETransformComponent*>(elements.front());
+    return dynamic_cast<YETransformComponent*>(elements.front());*/
 }

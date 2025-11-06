@@ -7,7 +7,6 @@
 #include "DXAPI.h"
 #include "YEVectorWrapper.h"
 #include "YETransformComponent.h"
-#include "YEMeshComponent.h"
 
 class YEBaseComponent;
 
@@ -35,10 +34,12 @@ public:
 
 	YETransformComponent* GetTransform();
 
+	YETransformComponent* _transform;
+
 protected:
 	YEVectorWrapper<YEBaseComponent*> _components;
 	YEVectorWrapper<YEGameObject*>	  _children;
-
+	
 private:
 	const char* _game_object_name;
 	UINT _id;

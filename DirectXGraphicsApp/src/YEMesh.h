@@ -71,6 +71,7 @@ public:
 	IUnknown*                 _device;
 
 	YEVector3                 _translation;
+	XMFLOAT4X4                _mWorld;
 
 private:
 		ID3D11Buffer* mVB;
