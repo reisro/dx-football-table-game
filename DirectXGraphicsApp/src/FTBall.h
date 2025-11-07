@@ -1,0 +1,23 @@
+#pragma once
+
+#ifndef _FT_BALL_H_
+#define _FT_BALL_H_
+
+#include "YEGameObject.h"
+#include "YEMeshComponent.h"
+
+class FTBall : public YEGameObject
+{
+	public:
+		FTBall();
+		virtual ~FTBall();
+
+		void start() override;
+		void shutdown() override;
+		void update(float _deltaTime) override;
+
+protected:
+	YEMeshComponent* _mesh_component;
+};
+
+#endif _FT_BALL_H_

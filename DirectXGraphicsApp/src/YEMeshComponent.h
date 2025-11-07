@@ -11,7 +11,7 @@ class DX_API YEMeshComponent : public YEBaseComponent
 	public:
 
 	YEMeshComponent();
-	YEMeshComponent(const wchar_t* pFileName);
+	YEMeshComponent(YEGameObject* owner, const wchar_t* pFileName);
 
 	virtual ~YEMeshComponent();
 

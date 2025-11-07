@@ -5,8 +5,8 @@ YEMeshComponent::YEMeshComponent()
 {
 }
 
-YEMeshComponent::YEMeshComponent(const wchar_t* pFileName): YEBaseComponent(),
-ModelMesh(new YEMeshLoader())	
+YEMeshComponent::YEMeshComponent(YEGameObject* owner, const wchar_t* pFileName): 
+	YEBaseComponent(owner), ModelMesh(new YEMeshLoader())
 {
 	LoadModel(pFileName);
 }

@@ -13,10 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="TableFootball">
+      <UniqueIdentifier>{487c0d34-2dda-45ae-99b5-b1308b50c4d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTBall.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

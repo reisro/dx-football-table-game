@@ -234,6 +234,9 @@
     <ClInclude Include="src\YESceneObject.h">
       <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEComponents.h">
+      <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">

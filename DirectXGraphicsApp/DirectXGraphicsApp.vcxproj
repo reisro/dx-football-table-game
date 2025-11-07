@@ -179,6 +179,7 @@
     <ClInclude Include="src\dxerr.h" />
     <ClInclude Include="src\VectorWrapper.h" />
     <ClInclude Include="src\YE3DMeshHelper.h" />
+    <ClInclude Include="src\YEComponents.h" />
     <ClInclude Include="src\YEMesh.h" />
     <ClInclude Include="src\YEMeshComponent.h" />
     <ClInclude Include="src\YEMeshLoader.h" />

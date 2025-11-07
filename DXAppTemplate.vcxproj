@@ -155,6 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTBall.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DirectXGraphicsApp\src\FTBall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

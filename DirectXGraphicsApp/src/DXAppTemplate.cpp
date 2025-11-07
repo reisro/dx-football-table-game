@@ -29,8 +29,6 @@ public:
 
 		//cube_game_object.GetTransform()->setPosition(position);
 
-        LPCWSTR ball_model_path = L"C:\\Game Assets\\football_ball.fbx";
-
 		football_table_ball_object._transform->setPosition(new YEVector3(.0f,.0f,-10.0f));
 	}
 
