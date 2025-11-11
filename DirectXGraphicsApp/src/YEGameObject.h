@@ -32,8 +32,6 @@ public:
 
 	void SetPosition(YEVector3* pos);
 
-	YETransformComponent* GetTransform();
-
 	YETransformComponent* _transform;
 
 protected:

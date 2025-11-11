@@ -1,5 +1,6 @@
 
 #include "GameEntry.h"
+#include <FTBall.h>
 
 using namespace gamentry;
 
@@ -9,7 +10,7 @@ public:
 	Cube() : YEGame("Default Cube")
 	{
 		cube_game_object.setName("Cube Object");
-		football_table_ball_object.setName("Football ball");
+		football_ball = new FTBall();
 	}
 
 	Cube(const char* _game_name) :
@@ -20,22 +21,22 @@ public:
 	void init() override
 	{
 		cube_game_object.start();
-		football_table_ball_object.start();
 
-		YE::YEApplication::Import3DModel();
-		
+		football_ball->start();
+		football_ball->_transform->setPosition(new YEVector3(3.0f, 2.0f, 5.0f));
+
 		// Set initial position of the cube
 		position = YEVector3::Zero();
 
-		//cube_game_object.GetTransform()->setPosition(position);
-
-		football_table_ball_object._transform->setPosition(new YEVector3(.0f,.0f,-10.0f));
+		cube_game_object._transform->setPosition(position);
 	}
 
 	bool update(dxDouble _deltaTime) override
 	{
 		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
 		moveDirection = YEVector3::Sum(*position, *newPosition);
+
+		//football_ball->update(_deltaTime);
 
 		//cube_game_object.GetTransform()->setPosition(moveDirection);
 		cube_game_object.update(_deltaTime);
@@ -56,7 +57,7 @@ private:
 	const char* game_name;
 
 	YEGameObject cube_game_object;
-	YEGameObject football_table_ball_object;
+	FTBall* football_ball;
 
 	YEVector3* position;
 	YEVector3* newPosition;

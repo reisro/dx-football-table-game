@@ -8,7 +8,7 @@ YERenderingDirectX11::YERenderingDirectX11() :
 	initialized = true;
 
 	XMMATRIX I = XMMatrixIdentity();
-	XMStoreFloat4x4(&mWorld, XMMatrixTranslation(.0f,1.0f,0.0f));
+	XMStoreFloat4x4(&mWorld, I);
 	XMStoreFloat4x4(&mView, I);
 	XMStoreFloat4x4(&mProj, I);
 
@@ -405,17 +405,19 @@ void YERenderingDirectX11::BeginFrame()
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 
-	_sceneObject->_meshes = _meshLoader->getLoadedMeshes();
-
 	// Check if there are meshes loaded
-	if (_sceneObject->_meshes.size() == 0)
+	if (_sceneObject->_meshesToRender.size() == 0)
 	{
 		DXLog("No meshes loaded to render.");
-		return;
 	}
 
-	// Set constants
-	XMMATRIX world = XMLoadFloat4x4(&_sceneObject->_meshes[0]._mWorld);
+	XMMATRIX world;
+
+	for (size_t i = 0; i < _sceneObject->_meshesToRender.size(); i++)
+	{
+		world = XMLoadFloat4x4(&_sceneObject->_meshesToRender[i]._mWorld);
+	}
+	
 	XMMATRIX view = XMLoadFloat4x4(&mView);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 	XMMATRIX worldViewProj = world * view * proj;
@@ -564,40 +566,7 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh(const wchar_t* pFileName)
 {
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, pFileName))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_field.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");*/
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_ball.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");*/
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_net_r.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");*/
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, L"C:\\Game Assets\\football_player.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");*/
-
-	/*if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_handle.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");
-
-	if (_meshLoader->Load(d3dDevice, d3dDeviceContext, "C:\\Game Assets\\football_table_back_net_r.fbx"))
-		DXLog("Loaded 3D model successfully.");
-	else
-		DXLog("Could not load 3D model successfully.....");*/
+	_meshLoader->Load(d3dDevice, d3dDeviceContext, pFileName);
 }
 
 void YERenderingDirectX11::InitPipeline()

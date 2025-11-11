@@ -8,7 +8,7 @@
 
 class DX_API YEMeshComponent : public YEBaseComponent
 {
-	public:
+public:
 
 	YEMeshComponent();
 	YEMeshComponent(YEGameObject* owner, const wchar_t* pFileName);
@@ -19,10 +19,13 @@ class DX_API YEMeshComponent : public YEBaseComponent
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
-	bool LoadModel(const wchar_t* pFileName);
+	void LoadModel(const wchar_t* pFileName);
+	const wchar_t* GetFilenamePath();
 
 private:
 	YEMeshLoader* ModelMesh;
+	YEMesh* _mesh;
+	const wchar_t* _meshFilename;
 };
 
 #endif

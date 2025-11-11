@@ -5,6 +5,12 @@ YETransformComponent::YETransformComponent():
 	roll{ 0.0f }, yaw{ 0.0f }, pitch { 0.0f },
 	sx{ 1.0f }, sy{ 1.0f }, sz{ 1.0f }
 {
+	_mWorld = XMFLOAT4X4{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		x,    y,    z,    1.0f
+	};
 
 	DXLog("\nCreated Transform Component...");
 }
@@ -33,6 +39,13 @@ void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)
 	x = _x;
 	y = _y;
 	z = _z;
+
+	_mWorld = XMFLOAT4X4{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		x,    y,    z,    1.0f
+	};
 }
 
 void YETransformComponent::setPosition(YEVector3* position)
@@ -42,6 +55,13 @@ void YETransformComponent::setPosition(YEVector3* position)
 	x = position->_x;
 	y = position->_y;
 	z = position->_z;
+
+	_mWorld = XMFLOAT4X4{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		x,    y,    z,    1.0f
+	};
 }
 
 void YETransformComponent::setRotation(yeFloat x, yeFloat y, yeFloat z)
@@ -58,9 +78,9 @@ void YETransformComponent::setScale(yeFloat x, yeFloat y, yeFloat z)
 	sz = z;
 }
 
-yeFloat* YETransformComponent::getPosition()
+YEVector3* YETransformComponent::getPosition()
 {
-	return &z;
+	return &_position;
 }
 
 yeFloat* YETransformComponent::getRotation()

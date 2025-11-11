@@ -25,7 +25,9 @@ public:
 	void setRotation(yeFloat x, yeFloat y, yeFloat z);
 	void setScale(yeFloat x, yeFloat y, yeFloat z);
 
-	yeFloat* getPosition();
+	const XMFLOAT4X4& getWorldMatrix() const { return _mWorld; }
+
+	YEVector3* getPosition();
 	yeFloat* getRotation();
 	yeFloat* getScale();
 
@@ -34,6 +36,8 @@ private:
 	YEVector3 _position;
 	yeFloat pitch, roll, yaw, w;
 	yeFloat sx,sy,sz;
+
+	XMFLOAT4X4  _mWorld;
 };
 
 #endif

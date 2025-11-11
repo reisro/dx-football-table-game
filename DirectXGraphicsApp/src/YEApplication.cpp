@@ -103,7 +103,7 @@ void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
 
 void YEApplication::Import3DModel()
 {
-	//instance->_renderer->LoadMesh();
+	instance->_renderer->LoadMesh(L"C:\\Game Assets\\football_ball.fbx");
 }
 
 //-----------------------------------------------------------------------------

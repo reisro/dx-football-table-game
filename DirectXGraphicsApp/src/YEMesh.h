@@ -69,9 +69,7 @@ public:
 	std::vector<UINT>         _indices;
 	std::vector<YETexture>    _textures;
 	IUnknown*                 _device;
-
-	YEVector3                 _translation;
-	XMFLOAT4X4                _mWorld;
+	XMFLOAT4X4				  _mWorld;
 
 private:
 		ID3D11Buffer* mVB;

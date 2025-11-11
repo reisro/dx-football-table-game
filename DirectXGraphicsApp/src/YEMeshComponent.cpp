@@ -1,14 +1,15 @@
 #include "YEMeshComponent.h"
 #include "YERenderer.h"
+#include "YEMesh.h"
+#include "YEGameObject.h"
 
 YEMeshComponent::YEMeshComponent()
 {
 }
 
 YEMeshComponent::YEMeshComponent(YEGameObject* owner, const wchar_t* pFileName): 
-	YEBaseComponent(owner), ModelMesh(new YEMeshLoader())
+	YEBaseComponent(owner), _meshFilename(pFileName), ModelMesh(new YEMeshLoader())
 {
-	LoadModel(pFileName);
 }
 
 YEMeshComponent::~YEMeshComponent()
@@ -28,11 +29,18 @@ void YEMeshComponent::update(float _deltaTime)
 {
 }
 
-bool YEMeshComponent::LoadModel(const wchar_t* pFileName)
+void YEMeshComponent::LoadModel(const wchar_t* pFileName)
 {
 	YERenderer* renderer = YERenderer::GetInstance();
 
-	renderer->LoadMesh(pFileName);
+	ModelMesh->Load(renderer->GetDevice(), renderer->GetDeviceContext(), pFileName);
 
-	return true;
+	renderer->GetSceneObject()->_meshesToRender = ModelMesh->getLoadedMeshes();
+
+	renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
+}
+
+const wchar_t* YEMeshComponent::GetFilenamePath()
+{
+	return _meshFilename;
 }

@@ -14,7 +14,7 @@ public:
 
 	void Draw(IUnknown* context);
 
-	std::vector<YEMesh> _meshes;
+	std::vector<YEMesh> _meshesToRender;
 };
 
 #endif

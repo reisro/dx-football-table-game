@@ -73,18 +73,5 @@ void YEGameObject::setName(const char* _name)
 
 void YEGameObject::SetPosition(YEVector3* pos)
 {
-	GetTransform()->setPosition(pos);
-}
-
-YETransformComponent* YEGameObject::GetTransform()
-{
-	return _transform;
-
-    // GetElements() が一時オブジェクトを返す場合、参照を保持しないようにする
-    /*auto elements = _components.getVector()->GetElements();
-
-    if (elements.empty()) 
-		return nullptr;
-
-    return dynamic_cast<YETransformComponent*>(elements.front());*/
+	_transform->setPosition(pos);
 }

@@ -4,6 +4,7 @@
 #define _YE_BASE_COMPONENT_H_
 
 #include "DXAPI.h"
+#include "YEVector3.h"
 
 class YETransformComponent;
 class YEGameObject;

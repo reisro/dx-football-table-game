@@ -15,7 +15,7 @@ public:
 	YEMeshLoader();
 	virtual ~YEMeshLoader();
 
-	bool Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName);
+	void Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName);
 	std::vector<YEMesh> getLoadedMeshes();
 
 private:

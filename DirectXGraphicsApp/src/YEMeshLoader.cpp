@@ -12,7 +12,7 @@ YEMeshLoader::~YEMeshLoader()
 {
 }
 
-bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName)
+void YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName)
 {
 	_device = device;
 	_context = context;
@@ -23,13 +23,11 @@ bool YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFil
 	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
 
 	if (pScene == nullptr)
-		return false;
+		return;
 
 	this->_directory = filename.substr(0, filename.find_last_of("/\\"));
 	
 	processNode(pScene->mRootNode, pScene);
-
-	return true;
 }
 
 std::vector<YEMesh> YEMeshLoader::getLoadedMeshes()
