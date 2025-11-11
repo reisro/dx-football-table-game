@@ -103,6 +103,9 @@
     <Filter Include="Arquivos de Origem\Effects">
       <UniqueIdentifier>{62a29734-fbd8-4c80-bb6b-adad3ac8ad53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Core\Interfaces">
+      <UniqueIdentifier>{ed88089e-d360-40d0-a899-1c8f513f05b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -237,6 +240,12 @@
     <ClInclude Include="src\YEComponents.h">
       <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEObserver.h">
+      <Filter>Arquivos de Cabeçalho\Core\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YEGameContext.h">
+      <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -331,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="src\YEBaseComponent.cpp">
       <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEGameContext.cpp">
+      <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

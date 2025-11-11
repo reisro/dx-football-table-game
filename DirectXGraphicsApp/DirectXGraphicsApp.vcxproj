@@ -180,9 +180,11 @@
     <ClInclude Include="src\VectorWrapper.h" />
     <ClInclude Include="src\YE3DMeshHelper.h" />
     <ClInclude Include="src\YEComponents.h" />
+    <ClInclude Include="src\YEGameContext.h" />
     <ClInclude Include="src\YEMesh.h" />
     <ClInclude Include="src\YEMeshComponent.h" />
     <ClInclude Include="src\YEMeshLoader.h" />
+    <ClInclude Include="src\YEObserver.h" />
     <ClInclude Include="src\YESceneObject.h" />
     <ClInclude Include="src\YEStandardEffect.h" />
     <ClInclude Include="src\YEStringUtils.h" />
@@ -224,6 +226,7 @@
     <ClCompile Include="src\YEApplication.cpp" />
     <ClCompile Include="src\YEBaseComponent.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
+    <ClCompile Include="src\YEGameContext.cpp" />
     <ClCompile Include="src\YEMeshLoader.cpp" />
     <ClCompile Include="src\YERenderer.cpp" />
     <ClCompile Include="src\YERenderingDirectX11.cpp" />
