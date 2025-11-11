@@ -34,6 +34,18 @@ void YETransformComponent::update(float _deltaTime)
 	//DXLog("\nUpdating Transform Component...");
 }
 
+void YETransformComponent::Attach(IYEObserver* observer)
+{
+}
+
+void YETransformComponent::Detach(IYEObserver* observer)
+{
+}
+
+void YETransformComponent::Notify()
+{
+}
+
 void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)
 {
 	x = _x;
@@ -46,6 +58,8 @@ void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)
 		0.0f, 0.0f, 1.0f, 0.0f,
 		x,    y,    z,    1.0f
 	};
+
+	Notify();
 }
 
 void YETransformComponent::setPosition(YEVector3* position)
@@ -62,6 +76,8 @@ void YETransformComponent::setPosition(YEVector3* position)
 		0.0f, 0.0f, 1.0f, 0.0f,
 		x,    y,    z,    1.0f
 	};
+
+	Notify();
 }
 
 void YETransformComponent::setRotation(yeFloat x, yeFloat y, yeFloat z)

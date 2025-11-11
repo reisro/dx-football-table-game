@@ -8,8 +8,9 @@
 #include "YEBaseComponent.h"
 #include "DXTypes.h"
 #include "YEVector3.h"
+#include "YEObserver.h"
 
-class DX_API YETransformComponent : public YEBaseComponent
+class DX_API YETransformComponent : public YEBaseComponent, public IYESubject 
 {
 public:
 
@@ -19,6 +20,10 @@ public:
 	virtual void start() override;
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
+
+	void Attach(IYEObserver* observer) override;
+	void Detach(IYEObserver* observer) override;
+	void Notify() override;
 
 	void setPosition(yeFloat x, yeFloat y, yeFloat z);
 	void setPosition(YEVector3* position);

@@ -12,6 +12,7 @@ public:
 
 class IYESubject
 {
+public:
 	virtual ~IYESubject() {};
 	virtual void Attach(IYEObserver* observer) = 0;
 	virtual void Detach(IYEObserver* observer) = 0;
