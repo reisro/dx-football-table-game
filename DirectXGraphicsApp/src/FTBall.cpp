@@ -1,4 +1,5 @@
 #include "FTBall.h"
+#include "YEGameContext.h"
 
 FTBall::FTBall():
 	_mesh_component(nullptr)

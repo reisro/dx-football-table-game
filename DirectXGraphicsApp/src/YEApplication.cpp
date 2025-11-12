@@ -5,17 +5,17 @@ using namespace YE;
 YEngineConfig::YEConfig YEngineConfig::YEConfig::instance;
 YEApplication* YEApplication::instance = 0;
 
-/// <summary>
-/// Constructors Implementation
-/// </summary>
+//-----------------------------------------------------------------------------
+// Constructor
+//-----------------------------------------------------------------------------
 YEApplication::YEApplication():
 	_isRunning {false}
 {
 }
 
-/// <summary>
-/// Destructors Implementation
-/// </summary>
+//-----------------------------------------------------------------------------
+// Destructor
+//-----------------------------------------------------------------------------
 YEApplication::~YEApplication()
 {
 	DXLog("\nDestroyed Application....");

@@ -8,6 +8,7 @@
 #include "YEVectorWrapper.h"
 #include "YETransformComponent.h"
 
+struct YEGameContext;
 class YEBaseComponent;
 
 class DX_API YEGameObject

@@ -6,6 +6,7 @@
 
 #include "pch.h"
 #include "YEGame.h"
+#include "YEGameContext.h"
 #include "DXTimer.h"
 #include "YEWindow.h"
 
@@ -41,12 +42,13 @@ namespace YE
 		static YEApplication* instance;
 
 	private:
-		MSG			  _msg;
-		YEGame*		  _gameApp;
-		YERenderer*   _renderer;
-		bool		  _isRunning;
-		bool		  _isInitialized;
-		bool		  _isLoopInitialized;
+		MSG			         _msg;
+		YEGame*		         _gameApp;
+		YEGameContext		 _gameContext;
+		YERenderer*			 _renderer;
+		bool				 _isRunning;
+		bool				 _isInitialized;
+		bool				 _isLoopInitialized;
 	};
 }
 

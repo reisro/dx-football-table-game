@@ -1,6 +1,7 @@
 #include "YEGameObject.h"
 #include "YEBaseComponent.h"
 #include "YETransformComponent.h"
+#include "YEGameContext.h"
 
 YEGameObject::YEGameObject():
 	_game_object_name{ "Game Object" },

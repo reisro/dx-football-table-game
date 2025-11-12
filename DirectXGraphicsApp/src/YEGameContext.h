@@ -1,18 +1,13 @@
 #pragma once
+#include "YESceneObject.h"
 
 #ifndef _YE_GAMECONTEXT_H_
 #define _YE_GAMECONTEXT_H_
 
-#include "YESceneObject.h"
-
-class YEGameContext
+struct YEGameContext
 {
-public:
-	YEGameContext() {}
-	virtual ~YEGameContext() {}
-
-private:
-	YESceneObject* _scene;
+	int meshCount;
+	YESceneObject* sceneObject;
 };
 
 #endif

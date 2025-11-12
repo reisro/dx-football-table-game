@@ -4,13 +4,15 @@
 
 using namespace gamentry;
 
+class YEApplication;
+
 class Cube: public YEGame
 {
 public:
 	Cube() : YEGame("Default Cube")
 	{
 		cube_game_object.setName("Cube Object");
-		football_ball = new FTBall();
+		football_ball = new FTBall(); 
 	}
 
 	Cube(const char* _game_name) :
