@@ -43,6 +43,8 @@ private:
 	yeFloat sx,sy,sz;
 
 	XMFLOAT4X4  _mWorld;
+
+	std::list<IYETransformComponentListener*> _list_observer;
 };
 
 #endif

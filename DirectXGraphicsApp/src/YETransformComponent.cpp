@@ -38,6 +38,7 @@ void YETransformComponent::update(float _deltaTime)
 
 void YETransformComponent::Attach(IYETransformComponentListener* observer)
 {
+	_list_observer.push_back(observer);
 }
 
 void YETransformComponent::Detach(IYETransformComponentListener* observer)
@@ -46,9 +47,17 @@ void YETransformComponent::Detach(IYETransformComponentListener* observer)
 
 void YETransformComponent::Notify()
 {
-	YERenderer * renderer = YERenderer::GetInstance();
+	//YERenderer * renderer = YERenderer::GetInstance();
 
-	renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
+	//renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
+
+	std::list<IYETransformComponentListener*>::iterator it = _list_observer.begin();
+
+	while (it != _list_observer.end()) 
+	{
+		(*it)->Update(XMLoadFloat4x4(&_mWorld));
+		++it;
+	}
 }
 
 void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)
