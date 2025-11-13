@@ -15,3 +15,10 @@ void YESceneObject::Draw(IUnknown* context)
 		_meshesToRender[i].Draw(context);
 	}
 }
+
+void YESceneObject::Update(DirectX::CXMMATRIX M)
+{
+	XMFLOAT4X4 world;
+
+	XMStoreFloat4x4(&_meshesToRender[_meshid]._mWorld, M);
+}

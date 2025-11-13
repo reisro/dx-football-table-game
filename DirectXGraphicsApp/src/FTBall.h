@@ -9,7 +9,7 @@
 class FTBall : public YEGameObject
 {
 	public:
-		FTBall();
+		FTBall(const YEGameContext& _game_context);
 		virtual ~FTBall();
 
 		void start() override;

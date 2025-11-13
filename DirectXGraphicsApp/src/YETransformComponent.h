@@ -10,7 +10,7 @@
 #include "YEVector3.h"
 #include "YEObserver.h"
 
-class DX_API YETransformComponent : public YEBaseComponent, public IYESubject 
+class DX_API YETransformComponent : public YEBaseComponent, public IYETransformComponentChange
 {
 public:
 
@@ -21,8 +21,8 @@ public:
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
-	void Attach(IYEObserver* observer) override;
-	void Detach(IYEObserver* observer) override;
+	void Attach(IYETransformComponentListener* observer) override;
+	void Detach(IYETransformComponentListener* observer) override;
 	void Notify() override;
 
 	void setPosition(yeFloat x, yeFloat y, yeFloat z);

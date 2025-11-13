@@ -1,7 +1,8 @@
 #include "FTBall.h"
 #include "YEGameContext.h"
 
-FTBall::FTBall():
+FTBall::FTBall(const YEGameContext& _game_context):
+	YEGameObject(_game_context),
 	_mesh_component(nullptr)
 {
 }

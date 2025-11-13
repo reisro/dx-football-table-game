@@ -9,6 +9,17 @@ YEGameObject::YEGameObject():
 {
 	// Every game object has a transform component by default
 	_transform = new YETransformComponent();
+	_transform->_gameObject = this;
+}
+
+YEGameObject::YEGameObject(const YEGameContext& _game_context):
+_game_object_name{ "Game Object" },
+_id{ 0 }
+{
+	// Every game object has a transform component by default
+	_transform = new YETransformComponent();
+	_transform->Attach(_game_context.sceneObject);
+	_transform->_gameObject = this;
 }
 
 YEGameObject::YEGameObject(const char* _game_name):

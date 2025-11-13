@@ -566,7 +566,6 @@ void YERenderingDirectX11::CreateDefaultCube()
 
 void YERenderingDirectX11::LoadMesh(const wchar_t* pFileName)
 {
-	_meshLoader->Load(d3dDevice, d3dDeviceContext, pFileName);
 }
 
 void YERenderingDirectX11::InitPipeline()

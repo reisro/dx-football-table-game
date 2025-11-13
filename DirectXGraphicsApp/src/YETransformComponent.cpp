@@ -1,4 +1,6 @@
 #include "YETransformComponent.h"
+#include "YERenderer.h"
+#include "YEGameObject.h"
 
 YETransformComponent::YETransformComponent():
 	x{ 0.0f }, y{ 0.0f }, z {0.0f },
@@ -34,16 +36,19 @@ void YETransformComponent::update(float _deltaTime)
 	//DXLog("\nUpdating Transform Component...");
 }
 
-void YETransformComponent::Attach(IYEObserver* observer)
+void YETransformComponent::Attach(IYETransformComponentListener* observer)
 {
 }
 
-void YETransformComponent::Detach(IYEObserver* observer)
+void YETransformComponent::Detach(IYETransformComponentListener* observer)
 {
 }
 
 void YETransformComponent::Notify()
 {
+	YERenderer * renderer = YERenderer::GetInstance();
+
+	renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
 }
 
 void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)

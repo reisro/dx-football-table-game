@@ -1,4 +1,5 @@
 #include "YEApplication.h"
+#include "YEGameContext.h"
 
 using namespace YE;
 
@@ -113,10 +114,16 @@ void YE::YEApplication::Run(YEGame* gameApp)
 {
 	_gameApp = gameApp;
 	_isRunning = true;
-
+	
 	// Check if application instance was properly initialized
 	if (instance->_isInitialized)
 	{	
+		// Set up game context
+		_gameContext.sceneObject = _renderer->GetSceneObject();
+
+		// Get game context from renderer
+		_gameApp->SetGameContext(_gameContext);
+
 		// Start up game components
 		_gameApp->init();
 

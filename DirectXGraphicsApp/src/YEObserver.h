@@ -3,19 +3,19 @@
 #ifndef _YE_OBSERVER_H_
 #define _YE_OBSERVER_H_
 
-class IYEObserver
+class IYETransformComponentListener
 {
 public:
-	virtual ~IYEObserver() {};
-	virtual void Update() = 0;
+	virtual ~IYETransformComponentListener() {};
+	virtual void Update(DirectX::CXMMATRIX M) = 0;
 };
 
-class IYESubject
+class IYETransformComponentChange
 {
 public:
-	virtual ~IYESubject() {};
-	virtual void Attach(IYEObserver* observer) = 0;
-	virtual void Detach(IYEObserver* observer) = 0;
+	virtual ~IYETransformComponentChange() {};
+	virtual void Attach(IYETransformComponentListener* observer) = 0;
+	virtual void Detach(IYETransformComponentListener* observer) = 0;
 	virtual void Notify() = 0;
 };
 

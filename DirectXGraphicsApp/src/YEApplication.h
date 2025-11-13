@@ -6,9 +6,10 @@
 
 #include "pch.h"
 #include "YEGame.h"
-#include "YEGameContext.h"
 #include "DXTimer.h"
 #include "YEWindow.h"
+
+struct YEGameContext;
 
 namespace YE
 {
@@ -44,8 +45,8 @@ namespace YE
 	private:
 		MSG			         _msg;
 		YEGame*		         _gameApp;
-		YEGameContext		 _gameContext;
 		YERenderer*			 _renderer;
+		YEGameContext		 _gameContext;
 		bool				 _isRunning;
 		bool				 _isInitialized;
 		bool				 _isLoopInitialized;

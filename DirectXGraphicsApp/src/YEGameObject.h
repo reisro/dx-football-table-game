@@ -16,7 +16,7 @@ class DX_API YEGameObject
 public:
 
 	YEGameObject();
-
+	YEGameObject(const YEGameContext& _game_context);
 	YEGameObject(const char* _game_name);
 
 	virtual ~YEGameObject();

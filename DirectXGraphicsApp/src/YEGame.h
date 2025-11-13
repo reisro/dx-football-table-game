@@ -7,6 +7,7 @@
 #include "DXAPI.h"
 #include "YEWindow.h"
 #include "YEGameObject.h"
+#include "YEGameContext.h"
 
 class DX_API YEGame
 {
@@ -22,8 +23,14 @@ class DX_API YEGame
 
 	virtual bool update(dxDouble _deltaTime) = 0;
 
+	YEGameContext GetGameContext() { return _gameContext; }
+
+	void SetGameContext(const YEGameContext& _context) { _gameContext = _context; }
+
 	private:
-	const char* game_name;
+	const char*			  game_name;
+	YEGameContext		 _gameContext;
+
 };
 	
 #endif _DX_GAME_H_
