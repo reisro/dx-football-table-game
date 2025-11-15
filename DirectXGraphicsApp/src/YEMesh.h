@@ -70,6 +70,8 @@ public:
 	std::vector<YETexture>    _textures;
 	IUnknown*                 _device;
 	XMFLOAT4X4				  _mWorld;
+	XMFLOAT4X4				  _mView;
+	XMFLOAT4X4				  _mProj;
 
 private:
 		ID3D11Buffer* mVB;

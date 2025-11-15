@@ -14,7 +14,7 @@ YEGameObject::YEGameObject():
 
 YEGameObject::YEGameObject(const YEGameContext& _game_context):
 _game_object_name{ "Game Object" },
-_id{ 0 }
+_id{ _game_context.sceneObject->_meshid++ }
 {
 	// Every game object has a transform component by default
 	_transform = new YETransformComponent();

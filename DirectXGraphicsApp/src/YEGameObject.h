@@ -35,13 +35,14 @@ public:
 
 	YETransformComponent* _transform;
 
+	UINT _id;
+
 protected:
 	YEVectorWrapper<YEBaseComponent*> _components;
 	YEVectorWrapper<YEGameObject*>	  _children;
 	
 private:
 	const char* _game_object_name;
-	UINT _id;
 	YEVector3* position;
 };
 

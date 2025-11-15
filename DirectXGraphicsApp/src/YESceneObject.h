@@ -13,12 +13,11 @@ public:
 	YESceneObject();
 	virtual ~YESceneObject();
 
-	void Draw(IUnknown* context);
-	virtual void Update(DirectX::CXMMATRIX M) override;
+	void Draw(IUnknown* context, int id);
+	virtual void Update(UINT id, DirectX::CXMMATRIX M) override;
 
 	std::vector<YEMesh> _meshesToRender;
 
-private:
 	UINT _meshid;
 };
 

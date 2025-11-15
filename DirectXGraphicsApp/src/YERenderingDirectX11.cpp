@@ -412,63 +412,78 @@ void YERenderingDirectX11::BeginFrame()
 	}
 
 	XMMATRIX world;
+	XMMATRIX view;
+	XMMATRIX proj;
+	XMMATRIX worldViewProj;
 
 	for (size_t i = 0; i < _sceneObject->_meshesToRender.size(); i++)
 	{
 		world = XMLoadFloat4x4(&_sceneObject->_meshesToRender[i]._mWorld);
+		view = XMLoadFloat4x4(&mView);
+		proj = XMLoadFloat4x4(&mProj);
+		worldViewProj = world * view * proj;
+
+		ConstantBuffer cb;
+		cb.mWorld = XMMatrixTranspose(world);
+		cb.mView = XMMatrixTranspose(view);
+		cb.mProjection = XMMatrixTranspose(proj);
+
+		d3dDeviceContext->UpdateSubresource(pConstantBuffer, 0, nullptr, &cb, 0, 0);
+
+		d3dDeviceContext->VSSetShader(pVS, 0, 0);
+		d3dDeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+		d3dDeviceContext->PSSetShader(pPS, 0, 0);
+		d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
+
+		// Draw the scene objects
+		_sceneObject->Draw(d3dDeviceContext, i);
 	}
-	
-	XMMATRIX view = XMLoadFloat4x4(&mView);
-	XMMATRIX proj = XMLoadFloat4x4(&mProj);
-	XMMATRIX worldViewProj = world * view * proj;
 
-	ConstantBuffer cb;
-	cb.mWorld = XMMatrixTranspose(world);
-	cb.mView = XMMatrixTranspose(view);
-	cb.mProjection = XMMatrixTranspose(proj);
-
-	d3dDeviceContext->UpdateSubresource(pConstantBuffer, 0, nullptr, &cb, 0, 0);
-
-	d3dDeviceContext->VSSetShader(pVS, 0, 0);
-	d3dDeviceContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
-	d3dDeviceContext->PSSetShader(pPS, 0, 0);
-	d3dDeviceContext->PSSetSamplers(0, 1, &texSamplerState);
-
-	// Draw the scene objects
-	_sceneObject->Draw(d3dDeviceContext);
-
-	// if exists a default technique implemented
-	//if (standardEffect->TransformationTechnique)
+	//for (size_t i = 0; i < _sceneObject->_meshesToRender.size(); i++)
 	//{
-	//	//fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&worldViewProj));
+	//	XMMATRIX world = XMLoadFloat4x4(&_sceneObject->_meshesToRender[i]._mWorld);
+	//	XMMATRIX view = XMLoadFloat4x4(&mView);
+	//	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 
-	//	D3DX11_TECHNIQUE_DESC techniqueDesc;
-	//	standardEffect->TransformationTechnique->GetDesc(&techniqueDesc);
-	//	for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+	//	XMMATRIX viewProj = view * proj;
+
+	//	//XMMATRIX view = XMLoadFloat4x4(&mView);
+	//	//XMMATRIX proj = XMLoadFloat4x4(&mProj);
+
+	//	// if exists a default technique implemented
+	//	if (standardEffect->TransformationTechnique)
 	//	{
-	//		// Set effect parameters
-	//		standardEffect->SetEyePosW(XMFLOAT3(x, y, z));
-	//		standardEffect->world = {
-	//			1.0f, 0.0f, 0.0f, 0.0f,
-	//			0.0f, 1.0f, 0.0f, 0.0f,
-	//			0.0f, 0.0f, 1.0f, 0.0f,
-	//			0.0f, 0.0f, -5.0f, 1.0f
-	//		};
+	//		//fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&viewProj));
+	//		D3DX11_TECHNIQUE_DESC techniqueDesc;
+	//		standardEffect->TransformationTechnique->GetDesc(&techniqueDesc);
+	//		for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+	//		{
+	//			// Set effect parameters
+	//			standardEffect->SetEyePosW(XMFLOAT3(x, y, z));
+	//			standardEffect->world = {
+	//				1.0f, 0.0f, 0.0f, 0.0f,
+	//				0.0f, 1.0f, 0.0f, 0.0f,
+	//				0.0f, 0.0f, 1.0f, 0.0f,
+	//				0.0f, 0.0f, -5.0f, 1.0f
+	//			};
 
-	//		XMMATRIX world = XMLoadFloat4x4(&standardEffect->world);
-	//		XMMATRIX worldInvTranspose = YEMath::MatrixHelper::InverseTranspose(world);
-	//		XMMATRIX worldViewProj = world * view * proj;
+	//			XMMATRIX world = XMLoadFloat4x4(&standardEffect->world);
+	//			XMMATRIX worldInvTranspose = YEMath::MatrixHelper::InverseTranspose(world);
+	//			XMMATRIX worldViewProj = world * view * proj;
 
-	//		standardEffect->SetWorld(world);
-	//		standardEffect->SetWorldInvTranspose(worldInvTranspose);
-	//		standardEffect->SetWorldViewProj(worldViewProj);
-	//		//standardEffect->TransformationTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+	//			standardEffect->SetWorld(world);
+	//			standardEffect->SetWorldInvTranspose(worldInvTranspose);
+	//			standardEffect->SetWorldViewProj(worldViewProj);
+	//			standardEffect->TransformationTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
 
-	//		//XMMATRIX world = XMLoadFloat4x4(&mWorld);
+	//			//XMMATRIX world = XMLoadFloat4x4(&mWorld);
 
-	//		// 36 indices for the box.
-	//		//d3dDeviceContext->DrawIndexed(36, 0, 0);
-	//		//_meshLoader->Draw(d3dDeviceContext);
+	//	//		// 36 indices for the box.
+	//			//d3dDeviceContext->DrawIndexed(36, 0, 0);
+	//		}
+
+	//		// Draw the scene objects
+	//		_sceneObject->Draw(d3dDeviceContext);
 	//	}
 	//}
 

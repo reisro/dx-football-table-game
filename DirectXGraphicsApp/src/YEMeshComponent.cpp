@@ -35,9 +35,25 @@ void YEMeshComponent::LoadModel(const wchar_t* pFileName)
 
 	ModelMesh->Load(renderer->GetDevice(), renderer->GetDeviceContext(), pFileName);
 
-	renderer->GetSceneObject()->_meshesToRender = ModelMesh->getLoadedMeshes();
+	SendToSceneObject();
+}
 
-	renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
+void YEMeshComponent::SendToSceneObject()
+{
+	YERenderer* renderer = YERenderer::GetInstance();
+
+	std::vector<YEMesh> loadedMeshes = ModelMesh->getLoadedMeshes();
+
+	if (!loadedMeshes.empty())
+	{
+		std::vector<YEMesh>::iterator it = loadedMeshes.begin();
+
+		while (it != loadedMeshes.end())
+		{
+			renderer->GetSceneObject()->_meshesToRender.push_back(*it);
+			++it;
+		}
+	}
 }
 
 const wchar_t* YEMeshComponent::GetFilenamePath()

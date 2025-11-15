@@ -6,7 +6,7 @@
 
 struct YEGameContext
 {
-	int meshCount;
+	UINT meshCount=0;
 	YESceneObject* sceneObject;
 };
 

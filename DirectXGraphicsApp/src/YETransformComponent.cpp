@@ -14,6 +14,20 @@ YETransformComponent::YETransformComponent():
 		x,    y,    z,    1.0f
 	};
 
+	_mView = XMFLOAT4X4{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
+	_mProj = XMFLOAT4X4{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
 	DXLog("\nCreated Transform Component...");
 }
 
@@ -55,7 +69,7 @@ void YETransformComponent::Notify()
 
 	while (it != _list_observer.end()) 
 	{
-		(*it)->Update(XMLoadFloat4x4(&_mWorld));
+		(*it)->Update(_gameObject->_id, DirectX::XMLoadFloat4x4(&_mWorld));
 		++it;
 	}
 }

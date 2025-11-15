@@ -8,17 +8,14 @@ YESceneObject::~YESceneObject()
 {
 }
 
-void YESceneObject::Draw(IUnknown* context)
+void YESceneObject::Draw(IUnknown* context, int id)
 {
-	for (size_t i = 0; i < _meshesToRender.size(); ++i)
-	{
-		_meshesToRender[i].Draw(context);
-	}
+	_meshesToRender[id].Draw(context);
 }
 
-void YESceneObject::Update(DirectX::CXMMATRIX M)
+void YESceneObject::Update(UINT id, DirectX::CXMMATRIX M)
 {
 	XMFLOAT4X4 world;
 
-	XMStoreFloat4x4(&_meshesToRender[_meshid]._mWorld, M);
+	XMStoreFloat4x4(&_meshesToRender[id]._mWorld, M);
 }

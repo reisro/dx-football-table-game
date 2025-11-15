@@ -7,7 +7,7 @@ class IYETransformComponentListener
 {
 public:
 	virtual ~IYETransformComponentListener() {};
-	virtual void Update(DirectX::CXMMATRIX M) = 0;
+	virtual void Update(UINT id, DirectX::CXMMATRIX M) = 0;
 };
 
 class IYETransformComponentChange

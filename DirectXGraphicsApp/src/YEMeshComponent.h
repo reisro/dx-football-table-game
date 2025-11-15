@@ -20,6 +20,8 @@ public:
 	virtual void update(float _deltaTime) override;
 
 	void LoadModel(const wchar_t* pFileName);
+	void SendToSceneObject();
+
 	const wchar_t* GetFilenamePath();
 
 private:
