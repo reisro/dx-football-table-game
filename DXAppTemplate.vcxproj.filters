@@ -24,9 +24,15 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTBall.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTField.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTField.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

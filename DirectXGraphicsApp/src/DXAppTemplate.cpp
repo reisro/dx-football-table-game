@@ -18,13 +18,9 @@ public:
 	void init() override
 	{
 		football_ball = new FTBall(GetGameContext());
-		football_ball2 = new FTBall(GetGameContext());
 
 		football_ball->start();
-		football_ball->_transform->setPosition(new YEVector3(0.0f, 2.0f, 0.0f));
-
-		football_ball2->start();
-		football_ball2->_transform->setPosition(new YEVector3(3.0f, 1.0f, 5.0f));
+		football_ball->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
 
 		// Set initial position of the cube
 		position = YEVector3::Zero();
@@ -53,7 +49,6 @@ private:
 	const char* game_name;
 
 	FTBall* football_ball;
-	FTBall* football_ball2;
 
 	YEVector3* position;
 	YEVector3* newPosition;
