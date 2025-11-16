@@ -44,6 +44,12 @@ void YEMeshComponent::SendToSceneObject()
 
 	std::vector<YEMesh> loadedMeshes = ModelMesh->getLoadedMeshes();
 
+	if (loadedMeshes.size() > 1)
+	{
+		GetGameObjectOwner()->_numberChildren = static_cast<int>(loadedMeshes.size());
+		GetGameObjectOwner()->hasChildren = true;
+	}
+
 	if (!loadedMeshes.empty())
 	{
 		std::vector<YEMesh>::iterator it = loadedMeshes.begin();
@@ -59,4 +65,9 @@ void YEMeshComponent::SendToSceneObject()
 const wchar_t* YEMeshComponent::GetFilenamePath()
 {
 	return _meshFilename;
+}
+
+YEGameObject* YEMeshComponent::GetGameObjectOwner()
+{
+	return _gameObject;
 }

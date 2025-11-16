@@ -1,6 +1,8 @@
 #include "GameEntry.h"
 #include <FTBall.h>
 #include <FTField.h>
+#include <FTPlayer.h>
+#include <FTHandle.h>
 
 using namespace gamentry;
 
@@ -18,14 +20,27 @@ public:
 
 	void init() override
 	{
-		football_ball = new FTBall(GetGameContext());
+		/*football_ball = new FTBall(GetGameContext());
 		football_field = new FTField(GetGameContext());
+		football_player = new FTPlayer(GetGameContext());
+		football_player2 = new FTPlayer(GetGameContext());*/
+		football_handle = new FTHandle(GetGameContext());
 
-		football_ball->start();
+		/*football_ball->start();
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
 
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
+
+		football_player->start();
+		football_player->_transform->setPosition(new YEVector3(0.0f, 1.55f, 3.63704f));
+
+		football_player2->start();
+		football_player2->_transform->setPosition(new YEVector3(3.29396f, 1.55f, 3.63704f));*/
+
+		football_handle->start();
+		//football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.55f, 3.62057f));
+		football_handle->_transform->setPosition(YEVector3::Zero());
 
 		// Set initial position of the cube
 		position = YEVector3::Zero();
@@ -35,10 +50,6 @@ public:
 	{
 		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
 		moveDirection = YEVector3::Sum(*position, *newPosition);
-
-		//football_ball->update(_deltaTime);
-
-		//cube_game_object.GetTransform()->setPosition(moveDirection);
 
 		forward_speed += 0.1f;
 
@@ -55,6 +66,9 @@ private:
 
 	FTBall* football_ball;
 	FTField* football_field;
+	FTPlayer* football_player;
+	FTPlayer* football_player2;
+	FTHandle* football_handle;
 
 	YEVector3* position;
 	YEVector3* newPosition;

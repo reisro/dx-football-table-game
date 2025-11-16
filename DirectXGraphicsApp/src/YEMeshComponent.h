@@ -24,6 +24,10 @@ public:
 
 	const wchar_t* GetFilenamePath();
 
+protected:
+
+	YEGameObject* GetGameObjectOwner();
+
 private:
 	YEMeshLoader* ModelMesh;
 	YEMesh* _mesh;

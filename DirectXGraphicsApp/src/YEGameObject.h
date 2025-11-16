@@ -33,9 +33,15 @@ public:
 
 	void SetPosition(YEVector3* pos);
 
+	int GetNumberOfChildren() const { return _numberChildren; }
+
 	YETransformComponent* _transform;
 
 	UINT _id;
+
+	int _numberChildren;
+
+	bool hasChildren;
 
 protected:
 	YEVectorWrapper<YEBaseComponent*> _components;

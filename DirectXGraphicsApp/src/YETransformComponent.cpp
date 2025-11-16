@@ -65,12 +65,25 @@ void YETransformComponent::Notify()
 
 	//renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
 
-	std::list<IYETransformComponentListener*>::iterator it = _list_observer.begin();
-
-	while (it != _list_observer.end()) 
+	if (_gameObject->hasChildren)
 	{
-		(*it)->Update(_gameObject->_id, DirectX::XMLoadFloat4x4(&_mWorld));
-		++it;
+		for (size_t i = 0; i < _gameObject->GetNumberOfChildren(); i++)
+		{
+            for (auto it = _list_observer.begin(); it != _list_observer.end() && i < _gameObject->GetNumberOfChildren(); ++it)
+            {
+                (*it)->Update(i, DirectX::XMLoadFloat4x4(&_mWorld));
+            }
+		}
+	}
+	else
+	{
+		std::list<IYETransformComponentListener*>::iterator it = _list_observer.begin();
+
+		while (it != _list_observer.end())
+		{
+			(*it)->Update(_gameObject->_id, DirectX::XMLoadFloat4x4(&_mWorld));
+			++it;
+		}
 	}
 }
 

@@ -2,12 +2,42 @@
 
 YEMesh::YEMesh()
 {
-	
+	_mView = XMFLOAT4X4
+	{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
+	_mProj = XMFLOAT4X4
+	{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
 }
 
 YEMesh::YEMesh(IUnknown* device, const std::vector<YEMeshVertex>& vertices, const std::vector<UINT>& indices, const std::vector<YETexture>& textures)
 	:_vertices(vertices), _indices(indices), _textures(textures), _device(device), mVB(nullptr), mIB(nullptr)
 {
+	_mView = XMFLOAT4X4
+	{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
+	_mProj = XMFLOAT4X4
+	{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
 	PrepareMesh(_device);
 }
 

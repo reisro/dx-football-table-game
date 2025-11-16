@@ -25,4 +25,5 @@ void FTField::shutdown()
 
 void FTField::update(float _deltaTime)
 {
+	YEGameObject::update(_deltaTime);
 }
