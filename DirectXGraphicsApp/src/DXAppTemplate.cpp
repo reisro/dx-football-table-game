@@ -1,5 +1,6 @@
 #include "GameEntry.h"
 #include <FTBall.h>
+#include <FTField.h>
 
 using namespace gamentry;
 
@@ -18,9 +19,13 @@ public:
 	void init() override
 	{
 		football_ball = new FTBall(GetGameContext());
+		football_field = new FTField(GetGameContext());
 
 		football_ball->start();
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
+
+		football_field->start();
+		football_field->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
 
 		// Set initial position of the cube
 		position = YEVector3::Zero();
@@ -49,6 +54,7 @@ private:
 	const char* game_name;
 
 	FTBall* football_ball;
+	FTField* football_field;
 
 	YEVector3* position;
 	YEVector3* newPosition;
