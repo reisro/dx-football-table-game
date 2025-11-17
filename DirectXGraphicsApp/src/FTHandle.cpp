@@ -12,7 +12,7 @@ FTHandle::~FTHandle()
 
 void FTHandle::start()
 {
-	_mesh_component = new YEMeshComponent(this, L"C:\\Game Assets\\football_handle.fbx");
+	_mesh_component = new YEMeshComponent(this, L"C:\\Game Assets\\football_handle_right.fbx");
 
 	addComponent(_mesh_component);
 

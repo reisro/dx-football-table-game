@@ -159,12 +159,14 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTField.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTHandle.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayer.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTPlayerWhite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTField.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTHandle.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayer.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTPlayerWhite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

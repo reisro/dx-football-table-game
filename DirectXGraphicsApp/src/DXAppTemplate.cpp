@@ -2,6 +2,7 @@
 #include <FTBall.h>
 #include <FTField.h>
 #include <FTPlayer.h>
+#include <FTPlayerWhite.h>
 #include <FTHandle.h>
 
 using namespace gamentry;
@@ -24,6 +25,7 @@ public:
 		football_field = new FTField(GetGameContext());
 		football_player = new FTPlayer(GetGameContext());
 		football_player2 = new FTPlayer(GetGameContext());
+		football_player_white = new FTPlayerWhite(GetGameContext());
 		football_handle = new FTHandle(GetGameContext());
 
 		football_ball->start();
@@ -38,9 +40,11 @@ public:
 		football_player2->start();
 		football_player2->_transform->setPosition(new YEVector3(3.29396f, 1.55f, 3.63704f));
 
+		football_player_white->start();
+		football_player_white->_transform->setPosition(new YEVector3(3.29396f, 1.55f, -3.63704f));
+
 		football_handle->start();
-		football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.55f, 3.62057f));
-		//football_handle->_transform->setPosition(YEVector3::Zero());
+		football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));
 
 		// Set initial position of the cube
 		position = YEVector3::Zero();
@@ -68,6 +72,7 @@ private:
 	FTField* football_field;
 	FTPlayer* football_player;
 	FTPlayer* football_player2;
+	FTPlayerWhite* football_player_white;
 	FTHandle* football_handle;
 
 	YEVector3* position;
