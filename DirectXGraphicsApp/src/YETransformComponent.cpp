@@ -61,10 +61,6 @@ void YETransformComponent::Detach(IYETransformComponentListener* observer)
 
 void YETransformComponent::Notify()
 {
-	//YERenderer * renderer = YERenderer::GetInstance();
-
-	//renderer->GetSceneObject()->_meshesToRender[0]._mWorld = _gameObject->_transform->getWorldMatrix();
-
 	if (_gameObject->hasChildren)
 	{
 		for (size_t i = 0; i < _gameObject->GetNumberOfChildren(); i++)
