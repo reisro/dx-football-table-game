@@ -33,6 +33,8 @@ public:
 
 	void SetPosition(YEVector3* pos);
 
+	YEVector3* GetPosition() const;
+
 	int GetNumberOfChildren() const { return _numberChildren; }
 
 	YETransformComponent* _transform;

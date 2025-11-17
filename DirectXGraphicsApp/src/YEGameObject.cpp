@@ -1,4 +1,5 @@
 #include "YEGameObject.h"
+#include "YEGameObject.h"
 #include "YEBaseComponent.h"
 #include "YETransformComponent.h"
 #include "YEGameContext.h"
@@ -86,4 +87,9 @@ void YEGameObject::setName(const char* _name)
 void YEGameObject::SetPosition(YEVector3* pos)
 {
 	_transform->setPosition(pos);
+}
+
+YEVector3* YEGameObject::GetPosition() const
+{
+	return _transform->getPosition();
 }

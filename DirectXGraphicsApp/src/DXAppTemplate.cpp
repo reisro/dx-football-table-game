@@ -53,9 +53,11 @@ public:
 	bool update(dxDouble _deltaTime) override
 	{
 		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
-		moveDirection = YEVector3::Sum(*position, *newPosition);
+		moveDirection = YEVector3::Sum(*football_ball->GetPosition(), *newPosition);
 
-		forward_speed += 0.1f;
+		forward_speed += 0.00000000001f;
+
+		football_ball->SetPosition(moveDirection);
 
 		return true;
 	}
