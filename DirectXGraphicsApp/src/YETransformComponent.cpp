@@ -57,15 +57,16 @@ void YETransformComponent::Attach(IYETransformComponentListener* observer)
 
 void YETransformComponent::Detach(IYETransformComponentListener* observer)
 {
+	_list_observer.remove(observer);
 }
 
 void YETransformComponent::Notify()
 {
 	if (_gameObject->hasChildren)
 	{
-		for (size_t i = 0; i < _gameObject->GetNumberOfChildren(); i++)
+		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfChildren(); i++)
 		{
-            for (auto it = _list_observer.begin(); it != _list_observer.end() && i < _gameObject->GetNumberOfChildren(); ++it)
+            for (auto it = _list_observer.begin(); it != _list_observer.end(); ++it)
             {
                 (*it)->Update(i, DirectX::XMLoadFloat4x4(&_mWorld));
             }
