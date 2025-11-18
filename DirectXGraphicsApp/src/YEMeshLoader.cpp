@@ -136,7 +136,7 @@ std::vector<YETexture> YEMeshLoader::loadMaterialTextures(aiMaterial* mat, aiTex
 				hr = CreateWICTextureFromFile(renderDevice, renderContext, filenamews.c_str(), nullptr, &texture.texture);
 
 				if (FAILED(hr))
-					DXLog("Texture could not be loaded...");
+					YELog("Texture could not be loaded...");
 			}
 
 			texture.type = typeName;
@@ -182,13 +182,13 @@ ID3D11ShaderResourceView* YEMeshLoader::loadEmbeddedTexture(const aiTexture* emb
 
 		if (FAILED(hr))
 		{
-			DXLog("Create Texture Failed");
+			YELog("Create Texture Failed");
 		}
 
 		hr = renderDevice->CreateShaderResourceView(texture2D, nullptr, &texture);
 		if (FAILED(hr))
 		{
-			DXLog("Create Shader Resource View failed...");
+			YELog("Create Shader Resource View failed...");
 		}
 
 		return texture;
@@ -201,7 +201,7 @@ ID3D11ShaderResourceView* YEMeshLoader::loadEmbeddedTexture(const aiTexture* emb
 
 	hr = CreateWICTextureFromMemory(renderDevice_, renderContext_, reinterpret_cast<const unsigned char*>(embeddedTexture->pcData), size, nullptr, &texture);
 	if (FAILED(hr))
-		DXLog("Texture couldn't be created from memory!");
+		YELog("Texture couldn't be created from memory!");
 
 	return texture;
 }

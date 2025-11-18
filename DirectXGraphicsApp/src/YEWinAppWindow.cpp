@@ -97,7 +97,7 @@ LRESULT __stdcall YEWinAppWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LP
 
                 if (wParam == SIZE_RESTORED)
                 {
-					DXLog("Window Restored...");
+					YELog("Window Restored...");
 
                     YEWindow::GetInstance()->OnResize(renderer);
                 }

@@ -88,7 +88,7 @@ static void YELog(std::string msg)
 		HRESULT hr = (x);                                      \
 		if(FAILED(hr))                                         \
 		{                                                      \
-			DXLog("HR Result Failed...");					   \
+			YELog("HR Result Failed...");					   \
 		}                                                      \
 	}
 #endif

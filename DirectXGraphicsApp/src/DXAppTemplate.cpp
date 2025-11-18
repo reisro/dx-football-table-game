@@ -64,7 +64,7 @@ public:
 
 	virtual void shutdown() override
 	{
-		DXLog("Shutdown Cube Game...");
+		YELog("Shutdown Cube Game...");
 	}
 
 private:

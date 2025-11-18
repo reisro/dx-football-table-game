@@ -19,7 +19,7 @@ YEApplication::YEApplication():
 //-----------------------------------------------------------------------------
 YEApplication::~YEApplication()
 {
-	DXLog("\nDestroyed Application....");
+	YELog("\nDestroyed Application....");
 }
 
 //-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ bool YE::YEApplication::InitEngine()
 	// Create singletons for subsystems
 	YERenderer::CreateInstance();
 	YEPhysics::CreateInstance();
-	DXTimer::CreateInstance();
+	YETimer::CreateInstance();
 
 	instance->_isInitialized = true;
 
@@ -55,7 +55,7 @@ bool YEApplication::Init()
 {
 	if (!InitRenderer())
 	{
-		DXLog("Failed to initialize renderer...");
+		YELog("Failed to initialize renderer...");
 		return false;
 	}
 
@@ -160,7 +160,7 @@ void YE::YEApplication::Run(YEGame* gameApp)
 				#endif
 
 				// Game application state related resources update
-				_gameApp->update(DXTimer::GetInstance()->GetDeltaTime());
+				_gameApp->update(YETimer::GetInstance()->GetDeltaTime());
 			}
 		}
 
@@ -168,7 +168,7 @@ void YE::YEApplication::Run(YEGame* gameApp)
 		_renderer->Cleanup();
 	}
 	else
-		DXLog("Application not initialized...");
+		YELog("Application not initialized...");
 
 	// After game is not updating 
 	// Release game resources

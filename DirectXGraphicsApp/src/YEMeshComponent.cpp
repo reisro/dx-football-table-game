@@ -18,7 +18,7 @@ YEMeshComponent::~YEMeshComponent()
 
 void YEMeshComponent::start()
 {
-	DXLog("\nStarting Mesh Component...");
+	YELog("\nStarting Mesh Component...");
 }
 
 void YEMeshComponent::shutdown()

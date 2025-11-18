@@ -12,7 +12,7 @@ YERenderingDirectX11::YERenderingDirectX11() :
 	XMStoreFloat4x4(&mView, I);
 	XMStoreFloat4x4(&mProj, I);
 
-	DXLog("\nCreated Renderer instance....");
+	YELog("\nCreated Renderer instance....");
 }
 
 YERenderingDirectX11::YERenderingDirectX11(const YERenderingDirectX11& rhs)
@@ -50,7 +50,7 @@ bool YERenderingDirectX11::Init()
 
 	if(FAILED(hr_createDevice))
 	{
-		DXLog("D3D11CreateDevice Failed.");
+		YELog("D3D11CreateDevice Failed.");
 		return false;
 	}	
 
@@ -82,7 +82,7 @@ bool YERenderingDirectX11::Init()
 		}
 
 		if (FAILED(hr))
-			DXLog("Failed to get IDXGIFactory1");
+			YELog("Failed to get IDXGIFactory1");
 	}
 
 	IDXGIFactory2* dxgiFactory2 = nullptr;
@@ -144,7 +144,7 @@ bool YERenderingDirectX11::Init()
 
 	if(FAILED(hr))
 	{
-		DXLog("CreateSwapChain Failed.");
+		YELog("CreateSwapChain Failed.");
 		return false;
 	}
 
@@ -168,7 +168,7 @@ bool YERenderingDirectX11::Init()
 
 	if (FAILED(hrDepthStencil))
 	{
-		DXLog("CreateTexture2D for Depth Stencil Failed.");
+		YELog("CreateTexture2D for Depth Stencil Failed.");
 		return false;
 	}
 
@@ -181,7 +181,7 @@ bool YERenderingDirectX11::Init()
 	hr = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
 	if (FAILED(hr))
 	{
-		DXLog("Depth Stencil View couldn't be created!");
+		YELog("Depth Stencil View couldn't be created!");
 	}
 
 	d3dDeviceContext->OMSetRenderTargets(1, &mainRenderTargetView, depthStencilView);
@@ -259,7 +259,7 @@ void YERenderingDirectX11::PostInit()
 
 	HRESULT hr = d3dDevice->CreateBuffer(&bd, nullptr, &pConstantBuffer);
 	if (FAILED(hr))
-		DXLog("Constant buffer couldn't be created");
+		YELog("Constant buffer couldn't be created");
 
 	D3D11_SAMPLER_DESC sampDesc;
 	ZeroMemory(&sampDesc, sizeof(sampDesc));
@@ -273,7 +273,7 @@ void YERenderingDirectX11::PostInit()
 
 	hr = d3dDevice->CreateSamplerState(&sampDesc, &texSamplerState);
 	if (FAILED(hr))
-		DXLog("Texture sampler state couldn't be created");
+		YELog("Texture sampler state couldn't be created");
 }
 
 void YERenderingDirectX11::Clean()
@@ -390,7 +390,7 @@ void YERenderingDirectX11::BeginFrame()
 	}
 
 	ImGui::Render();
-	DXLog("imgui rendering...");
+	YELog("imgui rendering...");
 
 	// Rendering
 	const float clear_color_with_alpha[4] = { 0.33f, 0.41f, 0.18f, 1.0f };
@@ -408,7 +408,7 @@ void YERenderingDirectX11::BeginFrame()
 	// Check if there are meshes loaded
 	if (_sceneObject->_meshesToRender.size() == 0)
 	{
-		DXLog("No meshes loaded to render.");
+		YELog("No meshes loaded to render.");
 	}
 
 	XMMATRIX world;
@@ -587,9 +587,9 @@ void YERenderingDirectX11::InitPipeline()
 {
 	ID3DBlob* VS, * PS;
 	if (FAILED(CompileShaderFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\shaders\\VertexShader.hlsl", 0, "main", "vs_5_0", &VS)))
-		DXLog("Failed to compile shader from file");
+		YELog("Failed to compile shader from file");
 	if (FAILED(CompileShaderFromFile(L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\shaders\\PixelShader.hlsl", 0, "main", "ps_5_0", &PS)))
-		DXLog("Failed to compile shader from file ");
+		YELog("Failed to compile shader from file ");
 
 	d3dDevice->CreateVertexShader(VS->GetBufferPointer(), VS->GetBufferSize(), nullptr, &pVS);
 	d3dDevice->CreatePixelShader(PS->GetBufferPointer(), PS->GetBufferSize(), nullptr, &pPS);

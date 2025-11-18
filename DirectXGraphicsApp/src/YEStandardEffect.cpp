@@ -86,7 +86,7 @@ void YEStandardEffect::CreateEffectFromMemory(ID3D11Device* device, const std::w
 	//// Even if there are no compilationMsgs, check to make sure there were no other errors.
 	if (FAILED(hr))
 	{
-		DXLog("Shader Compilation errors.");
+		YELog("Shader Compilation errors.");
 	}
 
 	hr = D3DX11CreateEffectFromMemory(compiledShader->GetBufferPointer(), compiledShader->GetBufferSize(), 0, device, &EffectTech);

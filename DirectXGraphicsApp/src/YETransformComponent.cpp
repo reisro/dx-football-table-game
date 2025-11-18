@@ -28,7 +28,7 @@ YETransformComponent::YETransformComponent():
 		0.0f, 0.0f, 0.0f, 1.0f
 	};
 
-	DXLog("\nCreated Transform Component...");
+	YELog("\nCreated Transform Component...");
 }
 
 YETransformComponent::~YETransformComponent()
@@ -42,7 +42,7 @@ void YETransformComponent::start()
 
 void YETransformComponent::shutdown()
 {
-	DXLog("\nShutdown Transform Component...");
+	YELog("\nShutdown Transform Component...");
 }
 
 void YETransformComponent::update(float _deltaTime)

@@ -25,7 +25,7 @@ YEWindow::YEWindow(const YEWindow& rhs):
 
 YEWindow::~YEWindow()
 {
-	DXLog("\nDestroyed Window....");    
+	YELog("\nDestroyed Window....");    
 }
 
 YEWindow* YEWindow::CreateInstance()
@@ -49,7 +49,7 @@ void YEWindow::Setup()
 
 void YEWindow::Create()
 {
-    DXLog("\nCreated Window instance....");
+    YELog("\nCreated Window instance....");
 }
 
 void YEWindow::Show()
@@ -58,10 +58,10 @@ void YEWindow::Show()
 
 void YEWindow::Update()
 {
-    DXLog("\nUpdate Window....");
+    YELog("\nUpdate Window....");
 }
 
 void YEWindow::OnResize(YERenderer* renderer)
 {
-    DXLog("\nResize Window....");
+    YELog("\nResize Window....");
 }

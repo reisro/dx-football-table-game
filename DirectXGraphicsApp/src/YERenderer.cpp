@@ -15,7 +15,7 @@ YERenderer::YERenderer(const YERenderer& rhs)
 
 YERenderer::~YERenderer()
 {
-	DXLog("\nDestroyed Renderer....");
+	YELog("\nDestroyed Renderer....");
 }
 
 void YERenderer::CreateInstance()

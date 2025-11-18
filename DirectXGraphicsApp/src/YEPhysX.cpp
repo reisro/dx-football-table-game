@@ -2,7 +2,7 @@
 
 YEPhysX::YEPhysX()
 {
-	DXLog("\nCreated Physics instance....");
+	YELog("\nCreated Physics instance....");
 }
 
 YEPhysX::~YEPhysX()

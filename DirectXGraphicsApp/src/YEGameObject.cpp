@@ -61,7 +61,7 @@ void YEGameObject::shutdown()
 
 void YEGameObject::update(float _deltaTime)
 {
-	DXLog("\nUpdating Game Object...");
+	YELog("\nUpdating Game Object...");
 
 	if (!_components.getVector()->_list.empty())
 	{

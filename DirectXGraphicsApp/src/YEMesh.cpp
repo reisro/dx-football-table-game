@@ -64,7 +64,7 @@ void YEMesh::PrepareMesh(IUnknown* device)
 
 	if (FAILED(hr))
 	{
-		DXLog("Failed creating vertex buffer....");
+		YELog("Failed creating vertex buffer....");
 	}
 
 	D3D11_BUFFER_DESC ibufferDesc;
@@ -81,7 +81,7 @@ void YEMesh::PrepareMesh(IUnknown* device)
 
 	if (FAILED(hr))
 	{
-		DXLog("Failed creating index buffer....");
+		YELog("Failed creating index buffer....");
 	}
 }
 

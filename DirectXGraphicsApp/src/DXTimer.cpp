@@ -12,7 +12,7 @@ YETimer::YETimer()
 
 	secondsPerTick = 0.0000001;
 
-	DXLog("\nCreated Timer instance....");
+	YELog("\nCreated Timer instance....");
 }
 
 YETimer::YETimer(const YETimer& rhs):
