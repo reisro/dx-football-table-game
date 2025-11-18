@@ -15,6 +15,12 @@ namespace YEngineConfig
 		Vulkan
 	};
 
+	enum class PhysicsAPI
+	{
+		Bullet,
+		PhysX
+	};
+
 	enum class Platform
 	{
 		Windows,
@@ -58,6 +64,7 @@ namespace YEngineConfig
 		}
 
 		GraphicsAPI			graphicsAPI;
+		PhysicsAPI			physicsAPI;
 		Platform			platform;
 		InputAPI			inputAPI;
 		AppResolution		resolution;
