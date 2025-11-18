@@ -14,6 +14,8 @@ public:
 	YEPhysics();
 	virtual ~YEPhysics();
 
+	static void CreateInstance();
+
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
 
@@ -25,4 +27,6 @@ public:
 
 	// Clean resources before shutting down
 	virtual void Clean() override;
+
+	static YEPhysics* _instance;
 };

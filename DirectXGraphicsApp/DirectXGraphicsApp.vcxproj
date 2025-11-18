@@ -186,6 +186,7 @@
     <ClInclude Include="src\YEMeshLoader.h" />
     <ClInclude Include="src\YEObserver.h" />
     <ClInclude Include="src\YEPhysics.h" />
+    <ClInclude Include="src\YEPhysX.h" />
     <ClInclude Include="src\YESceneObject.h" />
     <ClInclude Include="src\YEStandardEffect.h" />
     <ClInclude Include="src\YEStringUtils.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="src\YEGameContext.cpp" />
     <ClCompile Include="src\YEMeshLoader.cpp" />
     <ClCompile Include="src\YEPhysics.cpp" />
+    <ClCompile Include="src\YEPhysX.cpp" />
     <ClCompile Include="src\YERenderer.cpp" />
     <ClCompile Include="src\YERenderingDirectX11.cpp" />
     <ClCompile Include="src\DXTimer.cpp" />
