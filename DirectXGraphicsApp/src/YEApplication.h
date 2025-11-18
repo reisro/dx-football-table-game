@@ -8,6 +8,7 @@
 #include "YEGame.h"
 #include "DXTimer.h"
 #include "YEWindow.h"
+#include "YEPhysics.h"
 
 struct YEGameContext;
 
@@ -47,6 +48,7 @@ namespace YE
 		MSG			         _msg;
 		YEGame*		         _gameApp;
 		YERenderer*			 _renderer;
+		YEPhysics*			 _physics;
 		YEGameContext		 _gameContext;
 		bool				 _isRunning;
 		bool				 _isInitialized;

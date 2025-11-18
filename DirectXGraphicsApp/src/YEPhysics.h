@@ -15,6 +15,7 @@ public:
 	virtual ~YEPhysics();
 
 	static void CreateInstance();
+	static YEPhysics* GetInstance();
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;

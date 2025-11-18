@@ -17,6 +17,11 @@ void YEPhysics::CreateInstance()
 		_instance = new YEPhysX();
 }
 
+YEPhysics* YEPhysics::GetInstance()
+{
+	return _instance;
+}
+
 void YEPhysics::Setup()
 {
 }

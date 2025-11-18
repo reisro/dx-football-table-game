@@ -40,6 +40,7 @@ bool YE::YEApplication::InitEngine()
 
 	// Create singletons for subsystems
 	YERenderer::CreateInstance();
+	YEPhysics::CreateInstance();
 	DXTimer::CreateInstance();
 
 	instance->_isInitialized = true;
@@ -84,7 +85,10 @@ bool YEApplication::InitRenderer()
 
 bool YE::YEApplication::InitPhysics()
 {
-	return false;
+	instance->_physics = YEPhysics::GetInstance();
+	instance->_physics->Init();
+
+	return true;
 }
 
 void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
