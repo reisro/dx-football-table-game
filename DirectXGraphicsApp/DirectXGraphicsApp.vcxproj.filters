@@ -109,6 +109,9 @@
     <Filter Include="Arquivos de Cabeçalho\Physics">
       <UniqueIdentifier>{671f4e9f-2902-4ffb-ae27-37730696c9cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Origem\Physics">
+      <UniqueIdentifier>{3c5d6146-99a8-44f0-b416-3a10b7f1885d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -249,6 +252,9 @@
     <ClInclude Include="src\YEGameContext.h">
       <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEPhysics.h">
+      <Filter>Arquivos de Cabeçalho\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="src\YEGameContext.cpp">
       <Filter>Arquivos de Origem\Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEPhysics.cpp">
+      <Filter>Arquivos de Origem\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
