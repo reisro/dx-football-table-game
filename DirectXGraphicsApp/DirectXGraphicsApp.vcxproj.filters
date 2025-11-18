@@ -106,6 +106,9 @@
     <Filter Include="Arquivos de Cabeçalho\Core\Interfaces">
       <UniqueIdentifier>{ed88089e-d360-40d0-a899-1c8f513f05b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Physics">
+      <UniqueIdentifier>{671f4e9f-2902-4ffb-ae27-37730696c9cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">

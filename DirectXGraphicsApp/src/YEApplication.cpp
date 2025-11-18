@@ -82,6 +82,11 @@ bool YEApplication::InitRenderer()
 	return true;
 }
 
+bool YE::YEApplication::InitPhysics()
+{
+	return false;
+}
+
 void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
 {
 	if (instance->_renderer)

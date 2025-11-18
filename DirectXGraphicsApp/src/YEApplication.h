@@ -32,6 +32,7 @@ namespace YE
 		static bool InitEngine();
 		static bool InitWindow();
 		static bool InitRenderer();
+		static bool InitPhysics();
 		static void CreatePrimitive(GamePrimitives primitive);
 		static void Import3DModel();
 
