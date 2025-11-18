@@ -8,18 +8,18 @@
 #include <timeapi.h>
 #include <profileapi.h>
 
-class DXTimer
+class YETimer
 {
 public:
-	                DXTimer();
-	                DXTimer(const DXTimer& rhs);
-	virtual        ~DXTimer();
+					YETimer();
+					YETimer(const YETimer& rhs);
+	virtual        ~YETimer();
 
 	//-------------------------------------------------------------------------
 	// Public Static Functions
 	//-------------------------------------------------------------------------
 	static void     CreateInstance();
-	static DXTimer* GetInstance();
+	static YETimer* GetInstance();
 
 	//-------------------------------------------------------------------------
 	// Public Methods
@@ -34,7 +34,7 @@ public:
 	inline dxInt64	GetPerformanceFrequency() const { return performanceFrequency; }
 
 protected:
-	static DXTimer* Singleton;
+	static YETimer* Singleton;
 
 private:
 

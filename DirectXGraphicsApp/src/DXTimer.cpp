@@ -1,8 +1,8 @@
 #include "DXTimer.h"
 
-DXTimer* DXTimer::Singleton = 0;
+YETimer* YETimer::Singleton = 0;
 
-DXTimer::DXTimer()
+YETimer::YETimer()
 {
 	QueryPerformanceCounter((LARGE_INTEGER*)& startTime);
 	lastTime = startTime;
@@ -15,34 +15,34 @@ DXTimer::DXTimer()
 	DXLog("\nCreated Timer instance....");
 }
 
-DXTimer::DXTimer(const DXTimer& rhs):
+YETimer::YETimer(const YETimer& rhs):
 	startTime(rhs.startTime), lastTime(rhs.lastTime), elapsedTime(rhs.elapsedTime),
 	performanceFrequency(rhs.performanceFrequency), currentTime(rhs.currentTime)
 {
 }
 
-DXTimer::~DXTimer()
+YETimer::~YETimer()
 {
 }
 
-void DXTimer::CreateInstance()
+void YETimer::CreateInstance()
 {
 	if (Singleton == nullptr)
 	{
-		Singleton = new DXTimer();
+		Singleton = new YETimer();
 	}
 }
 
-DXTimer* DXTimer::GetInstance()
+YETimer* YETimer::GetInstance()
 {
 	return Singleton;
 }
 
-void DXTimer::Tick()
+void YETimer::Tick()
 {
 }
 
-dxInt64 DXTimer::GetTicks()
+dxInt64 YETimer::GetTicks()
 {
 	LARGE_INTEGER ticks;
 
@@ -53,7 +53,7 @@ dxInt64 DXTimer::GetTicks()
 	return ticks.QuadPart;
 }
 
-dxInt64 DXTimer::GetElapsedTime()
+dxInt64 YETimer::GetElapsedTime()
 {
 	if (QueryPerformanceCounter((LARGE_INTEGER*)&lastTime))
 	{
@@ -63,12 +63,12 @@ dxInt64 DXTimer::GetElapsedTime()
 	return (dxInt64)(elapsedTime * secondsPerTick);
 }
 
-dxDouble DXTimer::GetDeltaTime()
+dxDouble YETimer::GetDeltaTime()
 {
 	return deltaTime;
 }
 
-dxInt64 DXTimer::GetPerformanceCounter()
+dxInt64 YETimer::GetPerformanceCounter()
 {
 	if (QueryPerformanceCounter((LARGE_INTEGER*)& startTime))
 	{
