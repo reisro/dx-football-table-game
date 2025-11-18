@@ -60,7 +60,7 @@
 //-----------------------------------------------------------------------------
 // Utilities Functions
 //-----------------------------------------------------------------------------
-static void DXLog(std::string msg)
+static void YELog(std::string msg)
 {
 	std::cout << msg << std::endl;
 }
