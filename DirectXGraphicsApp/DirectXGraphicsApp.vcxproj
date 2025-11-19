@@ -80,7 +80,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)$(IncludePath);.\3rdparty\assimp\include;.\3rdparty\physx\SDKs\Physics\include;.\3rdparty\physx\SDKs\Foundation\include;.\3rdparty\physx\SDKs\PhysXLoader\include;.\3rdparty\physx\SDKs\NxCharacter\include;.\3rdparty\physx\SDKs\Cooking\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)$(IncludePath);.\3rdparty\assimp\include;.\3rdparty\physx\include</IncludePath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\3rdparty\dear_imgui;.\3rdparty\dear_imgui\backends</ExternalIncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>IntermediateFiles\$(Platform)\$(Configuration)\</IntDir>

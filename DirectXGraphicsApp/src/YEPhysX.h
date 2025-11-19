@@ -4,7 +4,7 @@
 #define _YE_PHYSX_H
 
 #include "YEPhysics.h"
-//#include "NxPhysics.h"
+#include "PxPhysicsAPI.h"
 
 class DX_API YEPhysX : public YEPhysics
 {

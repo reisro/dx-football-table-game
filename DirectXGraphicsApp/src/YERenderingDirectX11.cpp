@@ -574,9 +574,9 @@ void YERenderingDirectX11::CreateDefaultCube()
 	iinitData.pSysMem = indices;
 	HRESULT res = d3dDevice->CreateBuffer(&ibd, &iinitData, &mCubeIB);
 
-	BuildFX();
+	//BuildFX();
 
-	CreateVertexLayout();
+	//CreateVertexLayout();
 }
 
 void YERenderingDirectX11::LoadMesh(const wchar_t* pFileName)

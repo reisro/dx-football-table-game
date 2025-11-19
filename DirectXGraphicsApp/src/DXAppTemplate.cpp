@@ -31,7 +31,7 @@ public:
 		football_ball->start();
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
 
-		football_field->start();
+		/*football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
 
 		football_player->start();
@@ -44,7 +44,7 @@ public:
 		football_player_white->_transform->setPosition(new YEVector3(3.29396f, 1.55f, -3.63704f));
 
 		football_handle->start();
-		football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));
+		football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));*/
 
 		// Set initial position of the cube
 		position = YEVector3::Zero();
