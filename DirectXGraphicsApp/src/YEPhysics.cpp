@@ -1,4 +1,5 @@
 #include "YEPhysics.h"
+#include "DXConfig.h"
 #include "YEPhysX.h"
 
 YEPhysics* YEPhysics::_instance = nullptr;

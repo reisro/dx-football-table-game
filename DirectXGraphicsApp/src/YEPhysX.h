@@ -4,12 +4,12 @@
 #define _YE_PHYSX_H
 
 #include "YEPhysics.h"
-#include "NxPhysics.h"
+//#include "NxPhysics.h"
 
 class DX_API YEPhysX : public YEPhysics
 {
 public:
-		YEPhysX();
+	YEPhysX();
 	virtual ~YEPhysX();
 
 	static void CreateInstance();

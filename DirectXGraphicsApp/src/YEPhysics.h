@@ -3,13 +3,12 @@
 //-----------------------------------------------------------------------------
 // Base Header Includes
 //-----------------------------------------------------------------------------
-#include "pch.h"
+#include "DXAPI.h"
 #include "DXSubsystem.h"
 
 // Renderer subsystem for DirectX
 class DX_API YEPhysics : public DXSubsystem
 {
-
 public:
 	YEPhysics();
 	virtual ~YEPhysics();
