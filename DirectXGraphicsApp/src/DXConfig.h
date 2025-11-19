@@ -1,4 +1,5 @@
 #pragma once
+#include "DXTypes.h"
 
 #ifndef _DX_CONFIG_H
 #define _DX_CONFIG_H
