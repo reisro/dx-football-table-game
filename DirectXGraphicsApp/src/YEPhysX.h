@@ -6,6 +6,8 @@
 #include "YEPhysics.h"
 #include "PxPhysicsAPI.h"
 
+using namespace physx;
+
 class DX_API YEPhysX : public YEPhysics
 {
 public:
@@ -26,7 +28,11 @@ public:
 	// Clean resources before shutting down
 	virtual void Clean() override;
 
-	static YEPhysX* _instance;
+	static YEPhysX*					_instance;
+
+	static PxFoundation*			_foundation;
+	static PxDefaultAllocator		_allocator;
+	static PxDefaultErrorCallback	_errorCallback;
 };
 
 #endif _YE_PHYSX_H
