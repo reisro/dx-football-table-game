@@ -33,6 +33,11 @@ public:
 	static PxFoundation*			_foundation;
 	static PxDefaultAllocator		_allocator;
 	static PxDefaultErrorCallback	_errorCallback;
+	static PxDefaultCpuDispatcher*  _dispatcher;
+	static PxPhysics*				_physics;
+	static PxScene*					_scene;
+	static PxMaterial*				_material;
+	static PxPvd*					_pvd;
 };
 
 #endif _YE_PHYSX_H
