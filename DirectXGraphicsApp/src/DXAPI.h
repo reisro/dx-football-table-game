@@ -3,6 +3,7 @@
 #ifndef _DXGRAPHICS_API_H_
 #define _DXGRAPHICS_API_H_
 
+#define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 
 //-----------------------------------------------------------------------------
@@ -24,7 +25,6 @@
 //-----------------------------------------------------------------------------
 // // PhysicX define to suppress windows global min.max macros
 //-----------------------------------------------------------------------------
-#define NOMINMAX
 #include <Windows.h>
 #include <windowsx.h>
 
