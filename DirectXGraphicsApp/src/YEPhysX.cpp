@@ -19,6 +19,20 @@ YEPhysX::~YEPhysX()
 {
 }
 
+void YEPhysX::CreateDefaultPlane()
+{
+	PxSceneDesc sceneDesc(_physics->getTolerancesScale());
+	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
+	sceneDesc.cpuDispatcher = _dispatcher;
+	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
+	_scene = _physics->createScene(sceneDesc);
+
+	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
+
+	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
+	_scene->addActor(*groundPlane);
+}
+
 void YEPhysX::Setup()
 {
 }
@@ -29,20 +43,7 @@ bool YEPhysX::Init()
 	
 	_pvd = PxCreatePvd(*_foundation);
 	_physics = PxCreatePhysics(PX_PHYSICS_VERSION, *_foundation, PxTolerancesScale(), true, _pvd);
-
-	PxSceneDesc sceneDesc(_physics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
-
 	_dispatcher = PxDefaultCpuDispatcherCreate(2);
-
-	sceneDesc.cpuDispatcher = _dispatcher;
-	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
-	_scene = _physics->createScene(sceneDesc);
-
-	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
-
-	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
-	_scene->addActor(*groundPlane);
 
 	return true;
 }

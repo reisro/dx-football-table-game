@@ -15,6 +15,7 @@ public:
 	virtual ~YEPhysX();
 
 	static void CreateInstance();
+	static void CreateDefaultPlane();
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
