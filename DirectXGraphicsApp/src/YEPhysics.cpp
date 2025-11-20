@@ -39,3 +39,7 @@ void YEPhysics::PostInit()
 void YEPhysics::Clean()
 {
 }
+
+void YEPhysics::RenderCallback()
+{
+}

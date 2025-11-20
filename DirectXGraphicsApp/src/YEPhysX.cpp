@@ -33,6 +33,19 @@ void YEPhysX::CreateDefaultPlane()
 	_scene->addActor(*groundPlane);
 }
 
+void YEPhysX::CreateDynamicSphere()
+{
+	PxReal sphereStartingHeight = 5.0f;
+
+	PxSphereGeometry sphereGeometry(1.0f);
+	
+	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(PxVec3(0.0f, sphereStartingHeight, 0.0f)), sphereGeometry, *_material, 10.0f);
+	dynamic->setAngularDamping(0.5f);
+	dynamic->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
+
+	_scene->addActor(*dynamic);
+}
+
 void YEPhysX::Setup()
 {
 }
@@ -54,4 +67,10 @@ void YEPhysX::PostInit()
 
 void YEPhysX::Clean()
 {
+}
+
+void YEPhysX::RenderCallback()
+{
+	_scene->simulate(1.0f / 60.0f);
+	_scene->fetchResults(true);
 }

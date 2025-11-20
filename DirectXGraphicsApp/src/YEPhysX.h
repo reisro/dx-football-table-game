@@ -14,8 +14,10 @@ public:
 	YEPhysX();
 	virtual ~YEPhysX();
 
+	// Static Creation Functions
 	static void CreateInstance();
 	static void CreateDefaultPlane();
+	static void CreateDynamicSphere();
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
@@ -28,6 +30,9 @@ public:
 
 	// Clean resources before shutting down
 	virtual void Clean() override;
+
+	// Render callback for physics debug rendering
+	virtual void RenderCallback() override;
 
 	static YEPhysX*					_instance;
 

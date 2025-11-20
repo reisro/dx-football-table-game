@@ -28,5 +28,8 @@ public:
 	// Clean resources before shutting down
 	virtual void Clean() override;
 
+	// Render callback for physics debug rendering
+	virtual void RenderCallback();
+
 	static YEPhysics* _instance;
 };
