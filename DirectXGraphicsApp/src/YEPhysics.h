@@ -28,6 +28,9 @@ public:
 	// Clean resources before shutting down
 	virtual void Clean() override;
 
+	// Physics simulation step
+	virtual void Simulate();
+
 	// Render callback for physics debug rendering
 	virtual void RenderCallback();
 
