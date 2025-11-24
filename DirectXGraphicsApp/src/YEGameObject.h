@@ -44,6 +44,7 @@ public:
 	int _numberChildren;
 
 	bool hasChildren;
+	bool hasRigidBody;
 
 protected:
 	YEVectorWrapper<YEBaseComponent*> _components;
