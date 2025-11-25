@@ -5,6 +5,10 @@
 
 #include "YEPhysics.h"
 #include "PxPhysicsAPI.h"
+#include "DirectXMath.h"
+#include <vector>
+
+using namespace DirectX;
 
 using namespace physx;
 
@@ -31,11 +35,18 @@ public:
 	// Clean resources before shutting down
 	virtual void Clean() override;
 
+	// Physics simulation step
+	virtual void Simulate() override;
+
+	// Render physics actors
+	void Render(PxRigidActor** actors, const PxU32 numActors);
+
 	// Render callback for physics debug rendering
 	virtual void RenderCallback() override;
 
-	static YEPhysX*					_instance;
+	virtual XMMATRIX GetGlobalPose(UINT actorID);
 
+	static YEPhysX*					_instance;
 	static PxFoundation*			_foundation;
 	static PxDefaultAllocator		_allocator;
 	static PxDefaultErrorCallback	_errorCallback;
@@ -44,6 +55,8 @@ public:
 	static PxScene*					_scene;
 	static PxMaterial*				_material;
 	static PxPvd*					_pvd;
+
+	std::vector<XMMATRIX> actorGlobalPoses;
 };
 
 #endif _YE_PHYSX_H
