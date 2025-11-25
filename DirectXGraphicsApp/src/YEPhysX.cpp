@@ -60,6 +60,8 @@ bool YEPhysX::Init()
 	_physics = PxCreatePhysics(PX_PHYSICS_VERSION, *_foundation, PxTolerancesScale(), true, _pvd);
 	_dispatcher = PxDefaultCpuDispatcherCreate(2);
 
+	CreateDefaultPlane();
+
 	return true;
 }
 

@@ -59,6 +59,12 @@ bool YEApplication::Init()
 		return false;
 	}
 
+	if (!InitPhysics())
+	{
+		YELog("Failed to initialize physics...");
+		return false;
+	}
+
 	return instance->_isInitialized;
 }
 
