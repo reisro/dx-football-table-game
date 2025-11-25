@@ -264,6 +264,9 @@
     <ClInclude Include="src\YEPhysX.h">
       <Filter>Arquivos de Cabeçalho\Physics\PhysX</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEPhysicsComponent.h">
+      <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -367,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="src\YEPhysX.cpp">
       <Filter>Arquivos de Origem\Physics\PhysX</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEPhysicsComponent.cpp">
+      <Filter>Arquivos de Origem\Core\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

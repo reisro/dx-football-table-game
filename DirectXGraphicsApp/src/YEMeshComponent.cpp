@@ -60,6 +60,9 @@ void YEMeshComponent::SendToSceneObject()
 			++it;
 		}
 	}
+
+	delete ModelMesh;
+	ModelMesh = nullptr;
 }
 
 const wchar_t* YEMeshComponent::GetFilenamePath()

@@ -39,6 +39,8 @@ class YERenderingDirectX11: public YERenderer
 {
 public:
 
+	XMMATRIX(*PhysicsCallback)(void);
+
 	YERenderingDirectX11();
 	YERenderingDirectX11(const YERenderingDirectX11& rhs);
 

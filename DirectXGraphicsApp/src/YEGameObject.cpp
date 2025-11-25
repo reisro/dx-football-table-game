@@ -1,5 +1,4 @@
 #include "YEGameObject.h"
-#include "YEGameObject.h"
 #include "YEBaseComponent.h"
 #include "YETransformComponent.h"
 #include "YEGameContext.h"
