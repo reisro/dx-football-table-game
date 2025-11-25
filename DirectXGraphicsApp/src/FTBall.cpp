@@ -1,11 +1,11 @@
 #include "FTBall.h"
 #include "YEGameContext.h"
-#include "YEPhysX.h"
+#include <YEPhysX.h>
 
 FTBall::FTBall(const YEGameContext& _game_context):
 	YEGameObject(_game_context),
 	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_ball.fbx")),
-	_physics_component(new YEPhysicsComponent)
+	_physics_component(new YEPhysicsComponent())
 {
 	addComponent(_mesh_component);
 	addComponent(_physics_component);
@@ -31,7 +31,7 @@ void FTBall::update(float _deltaTime)
 
 	if (hasRigidBody)
 	{
-		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(_physics_component->GetPhysicsEngine());
+	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(_physics_component->GetPhysicsEngine());
 
 		XMMATRIX globalPose = phsyX->GetGlobalPose(_id);
 
