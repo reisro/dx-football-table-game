@@ -31,7 +31,7 @@ void FTBall::update(float _deltaTime)
 
 	if (hasRigidBody)
 	{
-	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(_physics_component->GetPhysicsEngine());
+		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(_physics_component->GetPhysicsEngine());
 
 		XMMATRIX globalPose = phsyX->GetGlobalPose(_id);
 
