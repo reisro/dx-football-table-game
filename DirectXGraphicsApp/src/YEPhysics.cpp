@@ -18,6 +18,14 @@ void YEPhysics::CreateInstance()
 		_instance = new YEPhysX();
 }
 
+void YEPhysics::CreateDefaultPlane()
+{
+}
+
+void YEPhysics::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

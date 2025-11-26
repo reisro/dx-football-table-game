@@ -21,9 +21,9 @@ public:
 	virtual ~YEPhysX();
 
 	// Static Creation Functions
-	static void CreateInstance();
-	static void CreateDefaultPlane();
-	static void CreateDynamicSphere(const YEVector3& pos, yeFloat radius);
+	void CreateDefaultPlane() override;
+
+	void CreateDynamicSphere(YEVector3* pos, yeFloat radius) override;
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;

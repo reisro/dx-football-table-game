@@ -4,6 +4,8 @@
 // Base Header Includes
 //-----------------------------------------------------------------------------
 #include "DXAPI.h"
+#include "DXTypes.h"
+#include "YEVector3.h"
 #include "DXSubsystem.h"
 
 // Renderer subsystem for DirectX
@@ -14,6 +16,9 @@ public:
 	virtual ~YEPhysics();
 
 	static void CreateInstance();
+	virtual void CreateDefaultPlane();
+	virtual void CreateDynamicSphere(YEVector3* pos, yeFloat radius);
+
 	static YEPhysics* GetInstance();
 
 	// Starts up all procedures for a specific susbsystem

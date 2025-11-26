@@ -35,15 +35,17 @@ void YEPhysX::CreateDefaultPlane()
 	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
 
 	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
+
 	groundPlane->setGlobalPose(PxTransform(PxVec3(0.0f, -1.0f, 0.0f)));
+
 	_scene->addActor(*groundPlane);
 }
 
-void YEPhysX::CreateDynamicSphere(const YEVector3& pos, yeFloat radius)
+void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 {
 	PxSphereGeometry sphereGeometry(radius);
 
-	PxVec3 position = PxVec3(pos._x, pos._y, pos._z);
+	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
 	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 10.0f);
 
@@ -64,8 +66,6 @@ bool YEPhysX::Init()
 	_pvd = PxCreatePvd(*_foundation);
 	_physics = PxCreatePhysics(PX_PHYSICS_VERSION, *_foundation, PxTolerancesScale(), true, _pvd);
 	_dispatcher = PxDefaultCpuDispatcherCreate(2);
-
-	CreateDefaultPlane();
 
 	return true;
 }
