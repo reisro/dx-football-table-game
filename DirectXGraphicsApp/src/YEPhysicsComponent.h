@@ -20,14 +20,14 @@ public:
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
-	YEPhysics* GetPhysicsEngine();
+	static void GetPhysicsEngine();
 
 	void Attach(IYETransformComponentListener* observer) override;
 	void Detach(IYETransformComponentListener* observer) override;
 	void Notify() override;
 
 private:
-
+	static YEPhysics* _physics_engine;
 };
 
 #endif

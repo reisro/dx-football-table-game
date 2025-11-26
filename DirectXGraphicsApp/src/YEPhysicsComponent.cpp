@@ -3,10 +3,11 @@
 #include "YEGameObject.h"
 #include "YEPhysics.h"
 
+YEPhysics* YEPhysicsComponent::_physics_engine = nullptr;
+
 YEPhysicsComponent::YEPhysicsComponent():
 	YEBaseComponent()
 {
-
 }
 
 YEPhysicsComponent::YEPhysicsComponent(YEGameObject* owner):
@@ -32,9 +33,9 @@ void YEPhysicsComponent::update(float _deltaTime)
 {
 }
 
-YEPhysics* YEPhysicsComponent::GetPhysicsEngine()
+void YEPhysicsComponent::GetPhysicsEngine()
 {
-	return YEPhysics::GetInstance();
+	_physics_engine = YEPhysics::GetInstance();
 }
 
 void YEPhysicsComponent::Attach(IYETransformComponentListener* observer)
