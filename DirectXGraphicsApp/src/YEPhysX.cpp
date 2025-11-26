@@ -27,7 +27,10 @@ void YEPhysX::CreateDefaultPlane()
 	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
 	sceneDesc.cpuDispatcher = _dispatcher;
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
+
 	_scene = _physics->createScene(sceneDesc);
+	_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
+	_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_STATIC, 1.0f);
 
 	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
 
@@ -36,15 +39,16 @@ void YEPhysX::CreateDefaultPlane()
 	_scene->addActor(*groundPlane);
 }
 
-void YEPhysX::CreateDynamicSphere()
+void YEPhysX::CreateDynamicSphere(const YEVector3& pos, yeFloat radius)
 {
-	PxReal sphereStartingHeight = 5.0f;
+	PxSphereGeometry sphereGeometry(radius);
 
-	PxSphereGeometry sphereGeometry(1.0f);
+	PxVec3 position = PxVec3(pos._x, pos._y, pos._z);
 	
-	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(PxVec3(0.0f, sphereStartingHeight, 0.0f)), sphereGeometry, *_material, 10.0f);
+	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 10.0f);
+
 	dynamic->setAngularDamping(0.5f);
-	dynamic->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
+	dynamic->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));                  
 
 	_scene->addActor(*dynamic);
 }

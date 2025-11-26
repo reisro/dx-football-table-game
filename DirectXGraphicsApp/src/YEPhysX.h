@@ -5,6 +5,8 @@
 
 #include "YEPhysics.h"
 #include "PxPhysicsAPI.h"
+#include "DXTypes.h"
+#include "YEVector3.h"
 #include "DirectXMath.h"
 #include <vector>
 
@@ -21,7 +23,7 @@ public:
 	// Static Creation Functions
 	static void CreateInstance();
 	static void CreateDefaultPlane();
-	static void CreateDynamicSphere();
+	static void CreateDynamicSphere(const YEVector3& pos, yeFloat radius);
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
