@@ -1,4 +1,6 @@
 #include "YEPhysicsComponent.h"
+#include "YETransformComponent.h"
+#include "YEGameObject.h"
 #include "YEPhysics.h"
 
 YEPhysicsComponent::YEPhysicsComponent():
@@ -10,6 +12,7 @@ YEPhysicsComponent::YEPhysicsComponent():
 YEPhysicsComponent::YEPhysicsComponent(YEGameObject* owner):
 	YEBaseComponent(owner)
 {
+	SetGameObject(owner);
 }
 
 YEPhysicsComponent::~YEPhysicsComponent()

@@ -5,6 +5,7 @@
 
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
+#include "YEPhysicsComponent.h"
 
 class FTField : public YEGameObject
 {
@@ -18,6 +19,7 @@ public:
 
 protected:
 	YEMeshComponent* _mesh_component;
+	YEPhysicsComponent* _physics_component;
 };
 
 #endif _FT_FIELD_H_

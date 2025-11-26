@@ -32,6 +32,7 @@ void YEPhysX::CreateDefaultPlane()
 	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
 
 	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
+	groundPlane->setGlobalPose(PxTransform(PxVec3(0.0f, -1.0f, 0.0f)));
 	_scene->addActor(*groundPlane);
 }
 
