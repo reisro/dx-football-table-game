@@ -24,6 +24,7 @@ public:
 	virtual void update(float _deltaTime) = 0;
 
 	virtual YETransformComponent* getTransformComponent();
+	virtual void SetGameObject(YEGameObject* go) { _gameObject = go; }
 	
 protected:
 		
