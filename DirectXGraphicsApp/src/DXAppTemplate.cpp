@@ -21,22 +21,22 @@ public:
 
 	void init() override
 	{
-		//football_ball = new FTBall(GetGameContext());
-		//football_ball->hasRigidBody = true;
-
 		football_field = new FTField(GetGameContext());
 		football_field->hasRigidBody = true;
+
+		football_ball = new FTBall(GetGameContext());
+		football_ball->hasRigidBody = true;
 
 		/*football_player = new FTPlayer(GetGameContext());
 		football_player2 = new FTPlayer(GetGameContext());
 		football_player_white = new FTPlayerWhite(GetGameContext());
 		football_handle = new FTHandle(GetGameContext());*/
 
-		//football_ball->start();
-		//football_ball->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
-
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
+
+		football_ball->start();
+		football_ball->_transform->setPosition(new YEVector3(0.0f, 3.0f, 0.0f));
 
 		/*football_player->start();
 		football_player->_transform->setPosition(new YEVector3(0.0f, 1.55f, 3.63704f));
@@ -57,8 +57,12 @@ public:
 	bool update(dxDouble _deltaTime) override
 	{
 		newPosition = new YEVector3(0.0f, 0.0f, forward_speed);
+		
 		//moveDirection = YEVector3::Sum(*football_ball->GetPosition(), *newPosition);
+		
 		football_field->update(static_cast<float>(_deltaTime));
+		football_ball->update(static_cast<float>(_deltaTime));
+
 		forward_speed += 0.00000000001f;
 
 		//football_ball->SetPosition(moveDirection);

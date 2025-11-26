@@ -139,11 +139,11 @@ void YE::YEApplication::Run(YEGame* gameApp)
 		// Get game context from renderer
 		_gameApp->SetGameContext(_gameContext);
 
-		// Init physics simulations
-		instance->_physics->Simulate();
-
 		// Start up game components
 		_gameApp->init();
+
+		// Init physics simulations
+		instance->_physics->Simulate();
 
 		_msg = {};
 
