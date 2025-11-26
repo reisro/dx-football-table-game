@@ -20,6 +20,8 @@ void FTField::start()
 	addComponent(_mesh_component);
 
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+
+	YEPhysics::GetInstance()->CreateDefaultPlane();
 }
 
 void FTField::shutdown()
@@ -32,7 +34,7 @@ void FTField::update(float _deltaTime)
 
 	if (hasRigidBody)
 	{
-		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(_physics_component->GetPhysicsEngine());
+		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 		XMMATRIX globalPose = phsyX->GetGlobalPose(_id);
 

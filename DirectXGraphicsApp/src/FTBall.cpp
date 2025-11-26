@@ -19,6 +19,8 @@ void FTBall::start()
 {
 	// initialize mesh component to load its mesh
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+
+	YEPhysics::GetInstance()->CreateDynamicSphere(_transform->getPosition(), 1.0f);
 }
 
 void FTBall::shutdown()
@@ -31,7 +33,7 @@ void FTBall::update(float _deltaTime)
 
 	if (hasRigidBody)
 	{
-		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(_physics_component->GetPhysicsEngine());
+		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 		XMMATRIX globalPose = phsyX->GetGlobalPose(_id);
 
