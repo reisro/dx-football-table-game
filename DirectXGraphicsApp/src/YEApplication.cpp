@@ -142,14 +142,13 @@ void YE::YEApplication::Run(YEGame* gameApp)
 		// Start up game components
 		_gameApp->init();
 
-		// Init physics simulations
-		instance->_physics->Simulate();
-
 		_msg = {};
 
 		// Keep updating game until user closes the application
 		while (true)
 		{
+			static int frame_coutner = 0;
+
 			// Listen for window messages
 			if (::PeekMessage(&_msg, NULL, 0, 0, PM_REMOVE))
 			{
@@ -163,13 +162,24 @@ void YE::YEApplication::Run(YEGame* gameApp)
 			{
 				#if defined DX11_RENDER_SUPPORT
 
+				YETimer::GetInstance()->NowTime();
+
 				// Render application frame
 				_renderer->Render();
+				
+				// Init physics simulations
+				instance->_physics->Simulate(YETimer::GetInstance()->GetDeltaTime());
 
 				#endif
 
 				// Game application state related resources update
 				_gameApp->update(YETimer::GetInstance()->GetDeltaTime());
+
+				YETimer::GetInstance()->UpdateLastTime();
+
+				YELog("Frame:" + std::to_string(frame_coutner));
+
+				frame_coutner++;
 			}
 		}
 

@@ -4,12 +4,11 @@ YETimer* YETimer::Singleton = 0;
 
 YETimer::YETimer()
 {
-	QueryPerformanceCounter((LARGE_INTEGER*)& startTime);
-	lastTime = startTime;
+	//QueryPerformanceCounter((LARGE_INTEGER*)& startTime);
+	lastTime = clock_c::now();
 	elapsedTime = 0;
 	performanceFrequency = QueryPerformanceFrequency((LARGE_INTEGER*)& performanceFrequency);
-	currentTime = QueryPerformanceCounter((LARGE_INTEGER*)& currentTime);
-
+	
 	secondsPerTick = 0.0000001;
 
 	YELog("\nCreated Timer instance....");
@@ -55,17 +54,29 @@ dxInt64 YETimer::GetTicks()
 
 dxInt64 YETimer::GetElapsedTime()
 {
-	if (QueryPerformanceCounter((LARGE_INTEGER*)&lastTime))
-	{
-		elapsedTime = (dxDouble)(lastTime - startTime);
-	}
+	startTime = clock_c::now();
 
-	return (dxInt64)(elapsedTime * secondsPerTick);
+	seconds deltatime = startTime - lastTime;
+		
+	lastTime = startTime;
+
+	return deltatime.count();
+}
+
+void YETimer::NowTime()
+{
+	startTime = clock_c::now();
 }
 
 dxDouble YETimer::GetDeltaTime()
 {
-	return deltaTime;
+	seconds deltatime = startTime - lastTime;
+
+	dxDouble millisecs = deltatime.count() / 1000.0;
+
+	YELog("Delta Time:" + std::to_string(millisecs));
+
+	return millisecs;
 }
 
 dxInt64 YETimer::GetPerformanceCounter()
@@ -74,5 +85,10 @@ dxInt64 YETimer::GetPerformanceCounter()
 	{
 	}
 
-	return startTime;
+	return 0.0;
+}
+
+void YETimer::UpdateLastTime()
+{
+	lastTime = startTime;
 }

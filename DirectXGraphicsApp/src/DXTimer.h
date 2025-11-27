@@ -5,8 +5,12 @@
 
 #include "pch.h"
 #include <Windows.h>
+#include <chrono> 
 #include <timeapi.h>
 #include <profileapi.h>
+
+using clock_c = std::chrono::high_resolution_clock;
+using seconds = std::chrono::duration<dxDouble>;
 
 class YETimer
 {
@@ -27,20 +31,22 @@ public:
 	void			Tick();
 	dxInt64			GetTicks();
 	dxInt64			GetElapsedTime();
+	void			NowTime();
 	dxDouble		GetDeltaTime();
 	dxInt64			GetPerformanceCounter();
+	void			UpdateLastTime();
 
-	inline dxInt64	GetCurrentTime() const { return currentTime; }
 	inline dxInt64	GetPerformanceFrequency() const { return performanceFrequency; }
-
+	std::chrono::steady_clock::time_point GetStartTime() const { return startTime; }
 protected:
 	static YETimer* Singleton;
 
 private:
 
-	dxInt64			startTime;
-	dxInt64			lastTime;
-	dxInt64			currentTime;
+	std::chrono::steady_clock::time_point		startTime;
+	std::chrono::steady_clock::time_point		lastTime;
+
+	seconds			currentTime;
 	dxInt64			performanceFrequency;
 	dxDouble		deltaTime;
 	dxDouble		elapsedTime;
