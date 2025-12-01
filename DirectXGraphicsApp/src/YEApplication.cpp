@@ -177,7 +177,7 @@ void YE::YEApplication::Run(YEGame* gameApp)
 
 				YETimer::GetInstance()->UpdateLastTime();
 
-				YELog("Frame:" + std::to_string(frame_coutner));
+				//YELog("Frame:" + std::to_string(frame_coutner));
 
 				frame_coutner++;
 			}

@@ -15,6 +15,8 @@ YEPhysX::YEPhysX()
 	YELog("\nCreated Physics instance....");
 
 	actorGlobalPoses = std::vector<XMMATRIX>();
+	actorGlobalPoses.push_back(XMMatrixIdentity());
+	actorGlobalPoses.push_back(XMMatrixIdentity());
 }
 
 YEPhysX::~YEPhysX()
@@ -35,9 +37,6 @@ void YEPhysX::CreateDefaultPlane()
 	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
 
 	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
-
-	groundPlane->setGlobalPose(PxTransform(PxVec3(0.0f, -1.0f, 0.0f)));
-
 	_scene->addActor(*groundPlane);
 }
 
@@ -47,10 +46,10 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 
 	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
-	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 10.0f);
+	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 2.0f);
 
 	dynamic->setAngularDamping(0.5f);
-	dynamic->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));                  
+	dynamic->setLinearVelocity(PxVec3(1.0f, -2.0f, 0.0f));                  
 
 	_scene->addActor(*dynamic);
 }
@@ -78,9 +77,9 @@ void YEPhysX::Clean()
 {
 }
 
-void YEPhysX::Simulate()
+void YEPhysX::Simulate(dxDouble deltaTime)
 {
-	_scene->simulate(1.0f / 60.0f);
+	_scene->simulate(1.0f/60.0f);
 	_scene->fetchResults(true);
 
 	RenderCallback();
@@ -100,6 +99,11 @@ void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)
 			const PxMat44 shapePose(PxShapeExt::getGlobalPose(*shapes[j], *actors[i]));
 			const PxGeometry& geom = shapes[j]->getGeometry();
 
+			if (geom.getType() == PxGeometryType::eSPHERE)
+			{
+				//std::cout << shapePose.column3.x << " " << shapePose.column3.y << " " << shapePose.column3.z << " " << shapePose.column0.w << std::endl;
+			}
+
 			XMFLOAT4X4 world;
 			world._11 = shapePose.column0.x; world._12 = shapePose.column0.y; world._13 = shapePose.column0.z; world._14 = shapePose.column0.w;
 			world._21 = shapePose.column1.x; world._22 = shapePose.column1.y; world._23 = shapePose.column1.z; world._24 = shapePose.column1.w;
@@ -108,7 +112,13 @@ void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)
 
 			XMMATRIX mWorld = XMLoadFloat4x4(&world);
 
-			actorGlobalPoses.push_back(mWorld);
+			if (geom.getType() == PxGeometryType::eSPHERE)
+				//std::cout << shapePose.column3.x << " " << shapePose.column3.y << " " << shapePose.column3.z << " " << shapePose.column0.w << std::endl;
+
+				if (geom.getType() == PxGeometryType::ePLANE)
+					std::cout << shapePose.column3.x << " " << shapePose.column3.y << " " << shapePose.column3.z << " " << shapePose.column0.w << std::endl;
+
+			actorGlobalPoses[i] = mWorld;
 		}
 	}
 }

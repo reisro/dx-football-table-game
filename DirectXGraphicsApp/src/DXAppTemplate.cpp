@@ -33,7 +33,7 @@ public:
 		football_handle = new FTHandle(GetGameContext());*/
 
 		football_field->start();
-		football_field->_transform->setPosition(new YEVector3(0.0f, 1.0f, 0.0f));
+		football_field->_transform->setPosition(new YEVector3(0.0f, 5.0f, 0.0f));
 
 		football_ball->start();
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 3.0f, 0.0f));

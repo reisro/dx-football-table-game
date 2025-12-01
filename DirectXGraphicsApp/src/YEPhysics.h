@@ -34,7 +34,7 @@ public:
 	virtual void Clean() override;
 
 	// Physics simulation step
-	virtual void Simulate();
+	virtual void Simulate(dxDouble deltaTime);
 
 	// Render callback for physics debug rendering
 	virtual void RenderCallback();

@@ -390,7 +390,6 @@ void YERenderingDirectX11::BeginFrame()
 	}
 
 	ImGui::Render();
-	YELog("imgui rendering...");
 
 	// Rendering
 	const float clear_color_with_alpha[4] = { 0.33f, 0.41f, 0.18f, 1.0f };

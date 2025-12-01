@@ -48,7 +48,7 @@ void YEPhysics::Clean()
 {
 }
 
-void YEPhysics::Simulate()
+void YEPhysics::Simulate(dxDouble deltaTime)
 {
 }
 

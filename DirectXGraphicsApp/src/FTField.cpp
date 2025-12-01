@@ -42,5 +42,9 @@ void FTField::update(float _deltaTime)
 			globalPose.r[3].m128_f32[0],
 			globalPose.r[3].m128_f32[1],
 			globalPose.r[3].m128_f32[2]);
+
+		YELog("Global Pose: X:" + std::to_string(globalPose.r[3].m128_f32[0]) +
+			" Y:" + std::to_string(globalPose.r[3].m128_f32[1]) +
+			" Z:" + std::to_string(globalPose.r[3].m128_f32[2]));
 	}
 }

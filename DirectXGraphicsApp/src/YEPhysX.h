@@ -38,7 +38,7 @@ public:
 	virtual void Clean() override;
 
 	// Physics simulation step
-	virtual void Simulate() override;
+	virtual void Simulate(dxDouble deltaTime) override;
 
 	// Render physics actors
 	void Render(PxRigidActor** actors, const PxU32 numActors);

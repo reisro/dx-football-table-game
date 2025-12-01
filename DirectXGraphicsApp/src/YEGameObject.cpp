@@ -60,8 +60,6 @@ void YEGameObject::shutdown()
 
 void YEGameObject::update(float _deltaTime)
 {
-	YELog("\nUpdating Game Object...");
-
 	if (!_components.getVector()->_list.empty())
 	{
 		for (auto cp : _components.getVector()->_list)
