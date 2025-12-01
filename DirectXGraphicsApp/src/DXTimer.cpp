@@ -74,7 +74,7 @@ dxDouble YETimer::GetDeltaTime()
 
 	dxDouble millisecs = deltatime.count() / 1000.0;
 
-	YELog("Delta Time:" + std::to_string(millisecs));
+	//YELog("Delta Time:" + std::to_string(millisecs));
 
 	return millisecs;
 }
