@@ -42,6 +42,7 @@ bool YE::YEApplication::InitEngine()
 	YERenderer::CreateInstance();
 	YEPhysics::CreateInstance();
 	YETimer::CreateInstance();
+	YEInput::CreateInstance();
 
 	instance->_isInitialized = true;
 
@@ -93,6 +94,14 @@ bool YE::YEApplication::InitPhysics()
 {
 	instance->_physics = YEPhysics::GetInstance();
 	instance->_physics->Init();
+
+	return true;
+}
+
+bool YE::YEApplication::InitInput()
+{
+	instance->_input = YEInput::GetInstance();
+	instance->_input->Init();
 
 	return true;
 }

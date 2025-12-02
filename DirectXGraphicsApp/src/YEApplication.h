@@ -9,6 +9,7 @@
 #include "DXTimer.h"
 #include "YEWindow.h"
 #include "YEPhysics.h"
+#include "YEInput.h"
 
 struct YEGameContext;
 
@@ -34,6 +35,7 @@ namespace YE
 		static bool InitWindow();
 		static bool InitRenderer();
 		static bool InitPhysics();
+		static bool InitInput();
 		static void CreatePrimitive(GamePrimitives primitive);
 		static void Import3DModel();
 
@@ -49,6 +51,7 @@ namespace YE
 		YEGame*		         _gameApp;
 		YERenderer*			 _renderer;
 		YEPhysics*			 _physics;
+		YEInput*			 _input;
 		YEGameContext		 _gameContext;
 		bool				 _isRunning;
 		bool				 _isInitialized;
