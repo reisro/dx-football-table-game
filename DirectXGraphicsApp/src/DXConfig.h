@@ -33,7 +33,8 @@ namespace YEngineConfig
 
 	enum class InputAPI
 	{
-		XInput
+		XInput,
+		DirectInput
 	};
 
 	//-----------------------------------------------------------------------------
@@ -59,7 +60,7 @@ namespace YEngineConfig
 				graphicsAPI(GraphicsAPI::DirectX11),
 			#endif // DX11_RENDER_SUPPORT
 			
-				inputAPI(InputAPI::XInput),
+				inputAPI(InputAPI::DirectInput),
 				platform(Platform::Windows)
 		{
 		}

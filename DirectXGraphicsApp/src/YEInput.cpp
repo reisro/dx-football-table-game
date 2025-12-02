@@ -1,4 +1,5 @@
 #include "YEInput.h"
+#include "DXConfig.h"
 
 YEInput* YEInput::_instance = nullptr;
 
@@ -10,6 +11,19 @@ YEInput::YEInput()
 YEInput::~YEInput()
 {
 	_instance = nullptr;
+}
+
+void YEInput::CreateInstance()
+{
+	if (YEngineConfig::YEConfig::instance.inputAPI == YEngineConfig::InputAPI::DirectInput)
+	{
+		_instance = new YEInput();
+	}
+}
+
+YEInput* YEInput::GetInstance()
+{
+	return _instance;
 }
 
 void YEInput::Setup()

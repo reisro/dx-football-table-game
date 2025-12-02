@@ -14,6 +14,9 @@ public:
 	YEInput();
 	virtual ~YEInput();
 
+	static void CreateInstance();
+	static YEInput* GetInstance();
+
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
 
