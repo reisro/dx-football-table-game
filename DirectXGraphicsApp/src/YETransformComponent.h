@@ -27,6 +27,7 @@ public:
 
 	void setPosition(yeFloat x, yeFloat y, yeFloat z);
 	void setPosition(YEVector3* position);
+	void setTransformMatrix(const DirectX::CXMMATRIX& mWorld);
 	void setRotation(yeFloat x, yeFloat y, yeFloat z);
 	void setScale(yeFloat x, yeFloat y, yeFloat z);
 

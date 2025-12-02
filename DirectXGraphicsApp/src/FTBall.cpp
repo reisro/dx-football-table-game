@@ -20,7 +20,7 @@ void FTBall::start()
 	// initialize mesh component to load its mesh
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
 
-	YEPhysics::GetInstance()->CreateDynamicSphere(new YEVector3(.0f,4.0f,0.0f), 0.0015f);
+	YEPhysics::GetInstance()->CreateDynamicSphere(new YEVector3(.0f,4.0f,0.0f), 0.15f);
 }
 
 void FTBall::shutdown()
@@ -41,6 +41,8 @@ void FTBall::update(float _deltaTime)
 			globalPose.r[3].m128_f32[0],
 			globalPose.r[3].m128_f32[1],
 			globalPose.r[3].m128_f32[2]);
+
+		_physics_component->getTransformComponent()->setTransformMatrix(globalPose);
 
 		/*YELog("Global Pose: X:" + std::to_string(globalPose.r[3].m128_f32[0]) +
 		" Y:" + std::to_string(globalPose.r[3].m128_f32[1]) +

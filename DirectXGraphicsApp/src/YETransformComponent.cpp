@@ -118,6 +118,13 @@ void YETransformComponent::setPosition(YEVector3* position)
 	Notify();
 }
 
+void YETransformComponent::setTransformMatrix(const DirectX::CXMMATRIX& mWorld)
+{
+	XMStoreFloat4x4(&_mWorld, mWorld);
+
+	Notify(); 
+}
+
 void YETransformComponent::setRotation(yeFloat x, yeFloat y, yeFloat z)
 {
 	roll = x;
