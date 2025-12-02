@@ -118,6 +118,12 @@
     <Filter Include="Arquivos de Origem\Physics\PhysX">
       <UniqueIdentifier>{1a932961-d028-4beb-b50a-9afc0518e113}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Input">
+      <UniqueIdentifier>{274a4767-dd74-4a3b-bae8-08fca8501521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Input">
+      <UniqueIdentifier>{973907d7-ebff-46fb-9090-b3cfca95665a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -267,6 +273,9 @@
     <ClInclude Include="src\YEPhysicsComponent.h">
       <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEInput.h">
+      <Filter>Arquivos de Cabeçalho\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -373,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="src\YEPhysicsComponent.cpp">
       <Filter>Arquivos de Origem\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEInput.cpp">
+      <Filter>Arquivos de Origem\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
