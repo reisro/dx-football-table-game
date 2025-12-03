@@ -8,6 +8,7 @@
 #include "DXTypes.h"
 #include "YEVector3.h"
 #include "DirectXMath.h"
+#include "YEInput.h"
 #include <vector>
 
 using namespace DirectX;
@@ -57,6 +58,9 @@ public:
 	static PxScene*					_scene;
 	static PxMaterial*				_material;
 	static PxPvd*					_pvd;
+
+	PxRigidDynamic*					_dynamicSphere;
+	YEInput*						_input;
 
 	std::vector<XMMATRIX> actorGlobalPoses;
 };

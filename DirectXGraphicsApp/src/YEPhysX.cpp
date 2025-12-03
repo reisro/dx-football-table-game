@@ -1,4 +1,5 @@
 #include "YEPhysX.h"
+#include <dinput.h>
 
 YEPhysX* YEPhysX::_instance = nullptr;
 PxFoundation* YEPhysX::_foundation = nullptr;
@@ -17,6 +18,8 @@ YEPhysX::YEPhysX()
 	actorGlobalPoses = std::vector<XMMATRIX>();
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
+
+	_input = YEInput::GetInstance();
 }
 
 YEPhysX::~YEPhysX()
@@ -32,7 +35,7 @@ void YEPhysX::CreateDefaultPlane()
 
 	_scene = _physics->createScene(sceneDesc);
 	_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
-	_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_STATIC, 1.0f);
+	_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_DYNAMIC, 1.0f);
 
 	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
 
@@ -46,12 +49,12 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 
 	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
-	PxRigidDynamic* dynamic = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 2.0f);
+	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 1.0f);
 
-	dynamic->setAngularDamping(0.5f);
-	dynamic->setLinearVelocity(PxVec3(1.0f, -2.0f, 0.0f));                  
+	_dynamicSphere->setAngularDamping(0.5f);
+	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
 
-	_scene->addActor(*dynamic);
+	_scene->addActor(*_dynamicSphere);
 }
 
 void YEPhysX::Setup()
@@ -83,6 +86,13 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	_scene->fetchResults(true);
 
 	RenderCallback();
+
+	_input->poll();
+
+	if(_input->keyDown(DIK_SPACE))
+	{
+		_dynamicSphere->addForce(PxVec3(20.0f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+	}
 }
 
 void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)
