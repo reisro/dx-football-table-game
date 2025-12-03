@@ -6,6 +6,7 @@
 #define DIRECTINPUT_VERSION 0x0800
 #include "DXAPI.h"
 #include "DXSubsystem.h"
+#include "YEWinAppWindow.h"
 #include <dinput.h>
 
 class DX_API YEInput : public DXSubsystem
@@ -29,13 +30,21 @@ public:
 	// Clean resources before shutting down
 	virtual void Clean() override;
 
+	void poll();
+
 	bool keyDown(int keycode);
+
+	bool mouseButtonDown(int button);
 
 private:
 	static YEInput* _instance;
 	
-	char		    _mKeyboardState[256];
-	IDirectInput8*  _dInput;
+	IDirectInput8*		 _dInput;
+	IDirectInputDevice8* _dInputDeviceKeyboard;
+	IDirectInputDevice8* _dInputDeviceMouse;
+
+	char				 _mKeyboardState[256];
+	DIMOUSESTATE2		 _mMouseState;
 };
 
 #endif // _YE_INPUT_H
