@@ -26,6 +26,8 @@ public:
 
 	void CreateDynamicSphere(YEVector3* pos, yeFloat radius) override;
 
+	void CreateCustomRigidBody() override;
+
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
 

@@ -26,6 +26,10 @@ void YEPhysics::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 {
 }
 
+void YEPhysics::CreateCustomRigidBody()
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

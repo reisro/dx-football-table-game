@@ -57,6 +57,10 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 	_scene->addActor(*_dynamicSphere);
 }
 
+void YEPhysX::CreateCustomRigidBody()
+{
+}
+
 void YEPhysX::Setup()
 {
 }
@@ -89,9 +93,19 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	_input->poll();
 
-	if(_input->keyDown(DIK_SPACE))
+	if(_input->keyDown(DIK_D))
 	{
-		_dynamicSphere->addForce(PxVec3(20.0f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		_dynamicSphere->addForce(PxVec3(0.0f, 0.0f, 0.0002f), PxForceMode::eIMPULSE);
+	}
+
+	if (_input->keyDown(DIK_A))
+	{
+		_dynamicSphere->addForce(PxVec3(0.0002f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+	}
+
+	if (_input->keyDown(DIK_W))
+	{
+		_dynamicSphere->addForce(PxVec3(0.0f, 2.0f, 0.0f), PxForceMode::eIMPULSE);
 	}
 }
 

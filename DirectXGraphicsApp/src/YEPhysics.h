@@ -18,6 +18,7 @@ public:
 	static void CreateInstance();
 	virtual void CreateDefaultPlane();
 	virtual void CreateDynamicSphere(YEVector3* pos, yeFloat radius);
+	virtual void CreateCustomRigidBody();
 
 	static YEPhysics* GetInstance();
 
