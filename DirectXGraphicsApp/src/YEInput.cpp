@@ -5,26 +5,7 @@ YEInput* YEInput::_instance = nullptr;
 
 YEInput::YEInput()
 {
-	ZeroMemory(_mKeyboardState, sizeof(_mKeyboardState));
-
-	YEWinAppWindow* outputWindow = dynamic_cast<YEWinAppWindow*>(YEWindow::GetInstance());
-
-	HR(DirectInput8Create(outputWindow->GetHInstance(), DIRECTINPUT_VERSION,
-		IID_IDirectInput8, (void**)&_dInput, 0));
-
-	// Keyboard device initalization
-	HR(_dInput->CreateDevice(GUID_SysKeyboard, &_dInputDeviceKeyboard, 0));
-	HR(_dInputDeviceKeyboard->SetDataFormat(&c_dfDIKeyboard));
-	HR(_dInputDeviceKeyboard->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
-	HR(_dInputDeviceKeyboard->Acquire());
-
-	// Mouse device initalization
-	HR(_dInput->CreateDevice(GUID_SysMouse, &_dInputDeviceKeyboard, 0));
-	HR(_dInputDeviceMouse->SetDataFormat(&c_dfDIMouse2));
-	HR(_dInputDeviceMouse->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
-	HR(_dInputDeviceMouse->Acquire());
-
-	_instance = this;
+	
 }
 
 YEInput::~YEInput()
@@ -59,7 +40,27 @@ void YEInput::Setup()
 
 bool YEInput::Init()
 {
-	return false;
+	ZeroMemory(_mKeyboardState, sizeof(_mKeyboardState));
+	ZeroMemory(&_mMouseState, sizeof(_mMouseState));
+
+	YEWinAppWindow* outputWindow = dynamic_cast<YEWinAppWindow*>(YEWindow::GetInstance());
+
+	HR(DirectInput8Create(outputWindow->GetHInstance(), DIRECTINPUT_VERSION,
+		IID_IDirectInput8, (void**)&_dInput, 0));
+
+	// Keyboard device initalization
+	HR(_dInput->CreateDevice(GUID_SysKeyboard, &_dInputDeviceKeyboard, 0));
+	HR(_dInputDeviceKeyboard->SetDataFormat(&c_dfDIKeyboard));
+	HR(_dInputDeviceKeyboard->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
+	HR(_dInputDeviceKeyboard->Acquire());
+
+	// Mouse device initalization
+	HR(_dInput->CreateDevice(GUID_SysMouse, &_dInputDeviceMouse, 0));
+	HR(_dInputDeviceMouse->SetDataFormat(&c_dfDIMouse2));
+	HR(_dInputDeviceMouse->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
+	HR(_dInputDeviceMouse->Acquire());
+
+	return true;
 }
 
 void YEInput::PostInit()
@@ -72,14 +73,13 @@ void YEInput::Clean()
 
 void YEInput::poll()
 {
-	HRESULT hr = _dInputDeviceKeyboard->GetDeviceState(sizeof(_mKeyboardState), (LPVOID)&_mKeyboardState);
+	HRESULT hr = _dInputDeviceKeyboard->GetDeviceState(sizeof(_mKeyboardState), (void **)&_mKeyboardState);
 	
 	if (FAILED(hr))
 	{
 		// If the keyboard lost focus or was not acquired then try to get control back.
 		if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
 		{
-
 			// if lost set to zero
 			ZeroMemory(_mKeyboardState, sizeof(_mKeyboardState));
 

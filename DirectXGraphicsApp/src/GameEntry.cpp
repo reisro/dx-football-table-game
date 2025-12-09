@@ -32,9 +32,9 @@ int gamentry::runGame(YEGame* _gameapp)
 	YEngineConfig::YEConfig gameConfig;
 
 	gameConfig.graphicsAPI = { YEngineConfig::GraphicsAPI::DirectX11 };
-	gameConfig.physicsAPI = { YEngineConfig::PhysicsAPI::PhysX };
-	gameConfig.platform = { YEngineConfig::Platform::Windows };
-	gameConfig.inputAPI = { YEngineConfig::InputAPI::XInput };
+	gameConfig.physicsAPI =  { YEngineConfig::PhysicsAPI::PhysX };
+	gameConfig.platform =    { YEngineConfig::Platform::Windows };
+	gameConfig.inputAPI =    { YEngineConfig::InputAPI::DirectInput };
 	gameConfig.resolution.width = 1368;
 	gameConfig.resolution.height = 720;
 

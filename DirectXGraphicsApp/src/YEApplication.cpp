@@ -40,9 +40,9 @@ bool YE::YEApplication::InitEngine()
 
 	// Create singletons for subsystems
 	YERenderer::CreateInstance();
+	YEInput::CreateInstance();
 	YEPhysics::CreateInstance();
 	YETimer::CreateInstance();
-	YEInput::CreateInstance();
 
 	instance->_isInitialized = true;
 
@@ -57,6 +57,12 @@ bool YEApplication::Init()
 	if (!InitRenderer())
 	{
 		YELog("Failed to initialize renderer...");
+		return false;
+	}
+
+	if (!InitInput())
+	{
+		YELog("Failed to initialize input...");
 		return false;
 	}
 
