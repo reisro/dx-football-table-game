@@ -25,13 +25,15 @@ public:
 	void  Update()   override;
 	void  OnResize(YERenderer* renderer) override;
 
-	HWND  GetWindowsHandle() { return hWnd; }
+	HINSTANCE  GetHInstance()	   { return GetModuleHandle(NULL); }
+	HWND	   GetWindowsHandle()  { return hWnd; }
 
 	static void CreateInstance();
 	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 protected:
 
+	HINSTANCE			 hInstance;
 	HWND				 hWnd;
 	WNDCLASSEX			 wc;
 };
