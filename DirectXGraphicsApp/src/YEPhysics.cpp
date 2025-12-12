@@ -30,6 +30,10 @@ void YEPhysics::CreateCustomRigidBody()
 {
 }
 
+void YEPhysics::CreateJoint(int numberOfAttached)
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

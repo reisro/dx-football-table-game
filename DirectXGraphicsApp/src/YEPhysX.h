@@ -9,8 +9,9 @@
 #include "YEVector3.h"
 #include "DirectXMath.h"
 #include "YEInput.h"
-#include "samples/PulleyJoint.h"
 #include <vector>
+
+class PulleyJoint;
 
 using namespace DirectX;
 
@@ -28,6 +29,8 @@ public:
 	void CreateDynamicSphere(YEVector3* pos, yeFloat radius) override;
 
 	void CreateCustomRigidBody() override;
+
+	void CreateJoint(int numberOfAttached) override;
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
@@ -64,6 +67,7 @@ public:
 
 	PxRigidDynamic*					_dynamicSphere;
 	YEInput*						_input;
+	PulleyJoint*					_joint;
 
 	std::vector<XMMATRIX> actorGlobalPoses;
 };

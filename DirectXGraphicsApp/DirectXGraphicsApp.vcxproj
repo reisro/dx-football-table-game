@@ -172,6 +172,7 @@
     <ClInclude Include="3rdparty\dear_imgui\imgui_internal.h" />
     <ClInclude Include="3rdparty\dear_imgui\imstb_rectpack.h" />
     <ClInclude Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="3rdparty\physx\include\samples\PulleyJoint.h" />
     <ClInclude Include="src\d3dx11effect.h" />
     <ClInclude Include="src\d3dxGlobal.h" />
     <ClInclude Include="src\DefaultCube.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="3rdparty\dear_imgui\imgui_tables.cpp" />
     <ClCompile Include="3rdparty\dear_imgui\imgui_widgets.cpp" />
     <ClCompile Include="3rdparty\dear_imgui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="3rdparty\physx\include\samples\PulleyJoint.cpp" />
     <ClCompile Include="src\DefaultCube.cpp" />
     <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />

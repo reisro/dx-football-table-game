@@ -1,4 +1,5 @@
 #include "YEPhysX.h"
+#include "samples/PulleyJoint.h"
 #include <dinput.h>
 
 YEPhysX* YEPhysX::_instance = nullptr;
@@ -59,6 +60,19 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 
 void YEPhysX::CreateCustomRigidBody()
 {
+}
+
+void YEPhysX::CreateJoint(int numberOfAttached)
+{
+	std::vector<PxRigidDynamic*> attachedBodies;
+
+	PxBoxGeometry boxGeom(1.0f, 6.0f, 1.0f);
+
+	for (size_t i = 0; i < numberOfAttached; i++)
+		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(5, 7, 0)), boxGeom, *_material, 1.0f));
+
+	_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(5.0f, 10.0f, 0.0f),
+		*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 10.0f, 0.0f));
 }
 
 void YEPhysX::Setup()
