@@ -35,12 +35,15 @@ public:
 
 	YEVector3* GetPosition() const;
 
+	int GetNumberOfMeshes() const { return _numberMeshes; }
+
 	int GetNumberOfChildren() const { return _numberChildren; }
 
 	YETransformComponent* _transform;
 
 	UINT _id;
 
+	int _numberMeshes;
 	int _numberChildren;
 
 	bool hasChildren;

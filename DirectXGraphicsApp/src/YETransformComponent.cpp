@@ -64,7 +64,7 @@ void YETransformComponent::Notify()
 {
 	if (_gameObject->hasMultipleMeshes)
 	{
-		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfMeshes(); i++)
+		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfMeshes() + _gameObject->GetNumberOfChildren(); i++)
 		{
             for (auto it = _list_observer.begin(); it != _list_observer.end(); ++it)
             {

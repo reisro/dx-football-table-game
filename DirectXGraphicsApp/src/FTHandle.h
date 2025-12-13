@@ -19,6 +19,8 @@ public:
 
 protected:
 	YEMeshComponent*    _mesh_component;
+	YEMeshComponent*	_mesh_component1;
+	YEMeshComponent*	_mesh_component2;
 	YEPhysicsComponent* _physics_component;
 };
 

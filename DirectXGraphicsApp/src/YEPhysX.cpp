@@ -29,17 +29,6 @@ YEPhysX::~YEPhysX()
 
 void YEPhysX::CreateDefaultPlane()
 {
-	PxSceneDesc sceneDesc(_physics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
-	sceneDesc.cpuDispatcher = _dispatcher;
-	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
-
-	_scene = _physics->createScene(sceneDesc);
-	_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
-	_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_DYNAMIC, 1.0f);
-
-	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
-
 	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
 	_scene->addActor(*groundPlane);
 }
@@ -86,6 +75,17 @@ bool YEPhysX::Init()
 	_pvd = PxCreatePvd(*_foundation);
 	_physics = PxCreatePhysics(PX_PHYSICS_VERSION, *_foundation, PxTolerancesScale(), true, _pvd);
 	_dispatcher = PxDefaultCpuDispatcherCreate(2);
+
+	PxSceneDesc sceneDesc(_physics->getTolerancesScale());
+	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
+	sceneDesc.cpuDispatcher = _dispatcher;
+	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
+
+	_scene = _physics->createScene(sceneDesc);
+	_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
+	_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_DYNAMIC, 1.0f);
+
+	_material = _physics->createMaterial(0.5f, 0.5f, 0.6f);
 
 	return true;
 }
