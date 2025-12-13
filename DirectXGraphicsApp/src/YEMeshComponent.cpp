@@ -44,10 +44,17 @@ void YEMeshComponent::SendToSceneObject()
 
 	std::vector<YEMesh> loadedMeshes = ModelMesh->getLoadedMeshes();
 
+	// Check if there are multiple meshes loaded
 	if (loadedMeshes.size() > 1)
 	{
 		GetGameObjectOwner()->_numberChildren = static_cast<int>(loadedMeshes.size());
-		GetGameObjectOwner()->hasChildren = true;
+		GetGameObjectOwner()->hasMultipleMeshes = true;
+	}
+
+	// Check if this component 's game object has parent
+	if (GetGameObjectOwner()->hasChildren)
+	{
+
 	}
 
 	if (!loadedMeshes.empty())

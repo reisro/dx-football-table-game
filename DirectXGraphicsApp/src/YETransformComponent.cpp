@@ -62,7 +62,7 @@ void YETransformComponent::Detach(IYETransformComponentListener* observer)
 
 void YETransformComponent::Notify()
 {
-	if (_gameObject->hasChildren)
+	if (_gameObject->hasMultipleMeshes)
 	{
 		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfChildren(); i++)
 		{
