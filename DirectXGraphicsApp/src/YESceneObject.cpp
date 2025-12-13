@@ -17,5 +17,12 @@ void YESceneObject::Update(UINT id, DirectX::CXMMATRIX M)
 {
 	XMFLOAT4X4 world;
 
-	XMStoreFloat4x4(&_meshesToRender[id]._mWorld, M);
+	if (id != _internalid)
+	{
+		_internalid++;
+
+		XMStoreFloat4x4(&_meshesToRender[_internalid]._mWorld, M);
+	}
+	else
+		XMStoreFloat4x4(&_meshesToRender[id]._mWorld, M);
 }

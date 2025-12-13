@@ -29,10 +29,8 @@ public:
 
 		football_handle = new FTHandle(GetGameContext());
 
-		/*football_player = new FTPlayer(GetGameContext());
+		football_player = new FTPlayer(GetGameContext());
 		football_player2 = new FTPlayer(GetGameContext());
-		football_player_white = new FTPlayerWhite(GetGameContext());
-		football_handle = new FTHandle(GetGameContext());*/
 
 		//football_field->start();
 		//football_field->_transform->setPosition(new YEVector3(0.0f, 5.0f, 0.0f));
@@ -43,13 +41,13 @@ public:
 		football_handle->start();
 		football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));
 
-		/*football_player->start();
+		football_player->start();
 		football_player->_transform->setPosition(new YEVector3(0.0f, 1.55f, 3.63704f));
 
 		football_player2->start();
 		football_player2->_transform->setPosition(new YEVector3(3.29396f, 1.55f, 3.63704f));
 
-		football_player_white->start();
+		/*football_player_white->start();
 		football_player_white->_transform->setPosition(new YEVector3(3.29396f, 1.55f, -3.63704f));
 
 		*/

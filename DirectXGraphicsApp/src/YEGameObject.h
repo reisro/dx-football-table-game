@@ -41,6 +41,8 @@ public:
 
 	YETransformComponent* _transform;
 
+	YEGameObject* _parent;
+
 	UINT _id;
 
 	int _numberMeshes;

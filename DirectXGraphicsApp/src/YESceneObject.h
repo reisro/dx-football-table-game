@@ -19,6 +19,7 @@ public:
 	std::vector<YEMesh> _meshesToRender;
 
 	UINT _meshid;
+	UINT _internalid;
 };
 
 #endif

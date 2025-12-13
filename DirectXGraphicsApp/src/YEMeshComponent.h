@@ -19,14 +19,12 @@ public:
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
+	YEGameObject* GetGameObjectOwner();
+
 	void LoadModel(const wchar_t* pFileName);
 	void SendToSceneObject();
 
 	const wchar_t* GetFilenamePath();
-
-protected:
-
-	YEGameObject* GetGameObjectOwner();
 
 private:
 	YEMeshLoader* ModelMesh;

@@ -3,7 +3,7 @@
 #include "YEGameObject.h"
 
 YETransformComponent::YETransformComponent():
-	x{ 0.0f }, y{ 0.0f }, z {0.0f },
+	x{ 0.0f }, y{ 0.0f }, z { 0.0f },
 	roll{ 0.0f }, yaw{ 0.0f }, pitch { 0.0f },
 	sx{ 1.0f }, sy{ 1.0f }, sz{ 1.0f }
 {
@@ -64,7 +64,7 @@ void YETransformComponent::Notify()
 {
 	if (_gameObject->hasMultipleMeshes)
 	{
-		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfMeshes() + _gameObject->GetNumberOfChildren(); i++)
+		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfMeshes(); i++)
 		{
             for (auto it = _list_observer.begin(); it != _list_observer.end(); ++it)
             {
@@ -102,6 +102,14 @@ void YETransformComponent::setPosition(yeFloat _x, yeFloat _y, yeFloat _z)
 
 void YETransformComponent::setPosition(YEVector3* position)
 {
+	if (_gameObject->_parent)
+	{
+		YEVector3* parentPos = _gameObject->_parent->GetPosition();
+		position->_x += parentPos->_x;
+		position->_y += parentPos->_y;
+		position->_z += parentPos->_z;
+	}
+	
 	_position.SetValue(position);
 
 	x = position->_x;
