@@ -20,6 +20,8 @@ _id{ _game_context.sceneObject->_meshid++ }
 	_transform = new YETransformComponent();
 	_transform->Attach(_game_context.sceneObject);
 	_transform->_gameObject = this;
+
+	_game_context.sceneObject->CreateObjectWorldList(_id, DirectX::XMLoadFloat4x4(&_transform->getWorldMatrix()));
 }
 
 YEGameObject::YEGameObject(const char* _game_name):

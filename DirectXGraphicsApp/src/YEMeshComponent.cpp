@@ -59,6 +59,7 @@ void YEMeshComponent::SendToSceneObject()
 
 		while (it != loadedMeshes.end())
 		{
+			it->_idMWorld = obj->_id;
 			renderer->GetSceneObject()->_meshesToRender.push_back(*it);
 			++it;
 		}

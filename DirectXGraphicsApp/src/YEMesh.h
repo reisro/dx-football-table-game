@@ -69,6 +69,7 @@ public:
 	std::vector<UINT>         _indices;
 	std::vector<YETexture>    _textures;
 	IUnknown*                 _device;
+	UINT					  _idMWorld;
 	XMFLOAT4X4				  _mWorld;
 	XMFLOAT4X4				  _mView;
 	XMFLOAT4X4				  _mProj;

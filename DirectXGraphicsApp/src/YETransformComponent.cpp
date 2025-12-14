@@ -3,8 +3,8 @@
 #include "YEGameObject.h"
 
 YETransformComponent::YETransformComponent():
-	x{ 0.0f }, y{ 0.0f }, z { 0.0f },
-	roll{ 0.0f }, yaw{ 0.0f }, pitch { 0.0f },
+	x { 0.0f }, y { 0.0f }, z{ 0.0f },
+	roll { 0.0f }, yaw { 0.0f }, pitch { 0.0f },
 	sx{ 1.0f }, sy{ 1.0f }, sz{ 1.0f }
 {
 	_mWorld = XMFLOAT4X4{
@@ -62,12 +62,12 @@ void YETransformComponent::Detach(IYETransformComponentListener* observer)
 
 void YETransformComponent::Notify()
 {
-	if (_gameObject->hasMultipleMeshes)
+	if (_gameObject->hasMultipleMeshes) //1 2 3 render world 1 
 	{
 		for (size_t i =_gameObject->_id; i < _gameObject->_id + _gameObject->GetNumberOfMeshes(); i++)
 		{
             for (auto it = _list_observer.begin(); it != _list_observer.end(); ++it)
-            {
+           {
                 (*it)->Update(i, DirectX::XMLoadFloat4x4(&_mWorld));
             }
 		}

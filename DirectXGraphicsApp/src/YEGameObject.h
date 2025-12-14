@@ -49,6 +49,7 @@ public:
 	int _numberChildren;
 
 	bool hasChildren;
+	bool hasParent;
 	bool hasMultipleMeshes;
 	bool hasRigidBody;
 

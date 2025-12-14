@@ -417,7 +417,9 @@ void YERenderingDirectX11::BeginFrame()
 
 	for (size_t i = 0; i < _sceneObject->_meshesToRender.size(); i++)
 	{
-		world = XMLoadFloat4x4(&_sceneObject->_meshesToRender[i]._mWorld);
+		XMFLOAT4X4 _world = _sceneObject->LoadWorldPosition(_sceneObject->_meshesToRender[i]._idMWorld);
+
+		world = XMLoadFloat4x4(&_world);
 		view = XMLoadFloat4x4(&mView);
 		proj = XMLoadFloat4x4(&mProj);
 		worldViewProj = world * view * proj;
