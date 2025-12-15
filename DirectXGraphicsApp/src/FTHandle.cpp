@@ -19,7 +19,7 @@ void FTHandle::start()
 {
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
 
-	//YEPhysics::GetInstance()->CreateJoint(2);
+	YEPhysics::GetInstance()->CreateJoint(2);
 }
 
 void FTHandle::shutdown()
