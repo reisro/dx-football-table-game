@@ -64,12 +64,19 @@ public:
 	static PxScene*					_scene;
 	static PxMaterial*				_material;
 	static PxPvd*					_pvd;
+	static PxPvdTransport*			_transport;
+	
+	float rot;
+	float rotInc = 0.0f;
+	float rightDir = 1.0f;
+	float leftDir = 1.0f;
 
 	PxRigidDynamic*					_dynamicSphere;
 	YEInput*						_input;
 	PulleyJoint*					_joint;
 
 	std::vector<XMMATRIX> actorGlobalPoses;
+	std::vector<PxRigidDynamic*> attachedBodies;
 };
 
 #endif _YE_PHYSX_H
