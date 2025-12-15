@@ -19,7 +19,7 @@ public:
 	virtual void CreateDefaultPlane();
 	virtual void CreateDynamicSphere(YEVector3* pos, yeFloat radius);
 	virtual void CreateCustomRigidBody();
-	virtual void CreateJoint(int numberOfAttached);
+	virtual void CreateJoint(const YEVector3& pos, int numberOfAttached);
 
 	static YEPhysics* GetInstance();
 

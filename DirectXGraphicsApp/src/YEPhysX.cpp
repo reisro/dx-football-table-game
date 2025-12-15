@@ -51,7 +51,7 @@ void YEPhysX::CreateCustomRigidBody()
 {
 }
 
-void YEPhysX::CreateJoint(int numberOfAttached)
+void YEPhysX::CreateJoint(const YEVector3& pos, int numberOfAttached)
 {
 	std::vector<PxRigidDynamic*> attachedBodies;
 
@@ -60,7 +60,7 @@ void YEPhysX::CreateJoint(int numberOfAttached)
 	for (size_t i = 0; i < numberOfAttached; i++)
 		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(5, 7, 0)), boxGeom, *_material, 1.0f));
 
-	_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(5.0f, 10.0f, 0.0f),
+	_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(pos._x,pos._y, pos._z)), PxVec3(5.0f, 10.0f, 0.0f),
 		*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 10.0f, 0.0f));
 }
 
