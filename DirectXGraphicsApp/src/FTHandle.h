@@ -10,7 +10,7 @@
 class FTHandle : public YEGameObject
 {
 public:
-	FTHandle(const YEGameContext& _game_context);
+	FTHandle(const YEGameContext& _game_context, bool isEmpty);
 	virtual ~FTHandle();
 
 	void start() override;

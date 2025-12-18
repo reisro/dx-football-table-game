@@ -5,6 +5,7 @@
 
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
+#include "YEPhysicsComponent.h"
 
 class FTPlayer : public YEGameObject
 {
@@ -17,7 +18,8 @@ public:
 	void update(float _deltaTime) override;
 
 protected:
-	YEMeshComponent* _mesh_component;
+	YEMeshComponent*	_mesh_component;
+	YEPhysicsComponent* _physics_component;
 };
 
 #endif _FT_BALL_H_

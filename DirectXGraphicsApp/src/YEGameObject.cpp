@@ -12,7 +12,7 @@ YEGameObject::YEGameObject():
 	_transform->_gameObject = this;
 }
 
-YEGameObject::YEGameObject(const YEGameContext& _game_context):
+YEGameObject::YEGameObject(const YEGameContext& _game_context, bool isEmpty):
 _game_object_name{ "Game Object" },
 _id{ _game_context.sceneObject->_meshid++ }
 {
@@ -21,7 +21,9 @@ _id{ _game_context.sceneObject->_meshid++ }
 	_transform->Attach(_game_context.sceneObject);
 	_transform->_gameObject = this;
 
-	_game_context.sceneObject->CreateObjectWorldList(_id, DirectX::XMLoadFloat4x4(&_transform->getWorldMatrix()));
+	// If the game object is not empty, add it to the scene object's world list to have world matrix updated
+	if(!isEmpty)
+		_game_context.sceneObject->CreateObjectWorldList(_id, DirectX::XMLoadFloat4x4(&_transform->getWorldMatrix()));
 }
 
 YEGameObject::YEGameObject(const char* _game_name):

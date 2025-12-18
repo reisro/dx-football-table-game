@@ -2,8 +2,8 @@
 #include "YEGameContext.h"
 #include <YEPhysX.h>
 
-FTHandle::FTHandle(const YEGameContext& _game_context):
-	YEGameObject(_game_context),
+FTHandle::FTHandle(const YEGameContext& _game_context, bool isEmpty):
+	YEGameObject(_game_context, isEmpty),
 	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_handle_right.fbx")),
 	_physics_component(new YEPhysicsComponent())
 {
@@ -17,9 +17,9 @@ FTHandle::~FTHandle()
 
 void FTHandle::start()
 {
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+	//_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
 
-	YEPhysics::GetInstance()->CreateJoint(*_transform->getPosition(), 2);
+	
 }
 
 void FTHandle::shutdown()
