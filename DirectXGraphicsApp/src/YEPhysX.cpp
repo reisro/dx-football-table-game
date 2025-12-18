@@ -66,17 +66,38 @@ void YEPhysX::CreateJoint(const YEVector3& pos, int numberOfAttached)
 {
 	PxBoxGeometry boxGeom(0.25f,0.9f, 0.15f);
 
-	for (size_t i = 0; i < numberOfAttached; i++)
+	switch (numberOfAttached)
+	{
+	case 1:
 		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, PxTransform(PxVec3(0.0, -0.25, 0.0))));
+		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+			*attachedBodies[0], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)); break;
+	case 2:
+		for (size_t i = 0; i < 2; i++)
+			attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, 
+																PxTransform(PxVec3(0.0, -0.25, 0.0))));
+		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+			*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
+		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+		_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true); 
+		break;
+	case 3:
+		for (size_t i = 0; i < 3; i++)
+			attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f,
+				PxTransform(PxVec3(0.0, -0.25, 0.0))));
+		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+			*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+			*attachedBodies[2], PxTransform(PxVec3(0.0f, 2.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)); break;
+	default:
+		YELog("\n[ERROR] Unsupported number of attached bodies for joint creation!");
+		return;
+	}
 
 	_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
 		*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
 
-	_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
-	_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
-
-	_scene->addActor(*attachedBodies[0]);
-	_scene->addActor(*attachedBodies[1]);
+	for (size_t i = 0; i < attachedBodies.size(); i++)
+		_scene->addActor(*attachedBodies[i]);
 }
 
 void YEPhysX::Setup()
