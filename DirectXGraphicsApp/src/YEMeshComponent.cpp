@@ -1,4 +1,5 @@
 #include "YEMeshComponent.h"
+#include "YEMeshComponent.h"
 #include "YERenderer.h"
 #include "YEMesh.h"
 #include "YEGameObject.h"
@@ -67,6 +68,11 @@ void YEMeshComponent::SendToSceneObject()
 
 	delete ModelMesh;
 	ModelMesh = nullptr;
+}
+
+void YEMeshComponent::SetFilenamePath(const wchar_t* pFileName)
+{
+	_meshFilename = pFileName;
 }
 
 const wchar_t* YEMeshComponent::GetFilenamePath()

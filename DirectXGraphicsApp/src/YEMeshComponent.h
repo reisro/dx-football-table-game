@@ -24,6 +24,7 @@ public:
 	void LoadModel(const wchar_t* pFileName);
 	void SendToSceneObject();
 
+	void SetFilenamePath(const wchar_t* pFileName);
 	const wchar_t* GetFilenamePath();
 
 private:
