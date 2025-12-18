@@ -49,9 +49,17 @@ public:
 
 	static const physx::PxU32 TYPE_ID = physx::PxConcreteType::eFIRST_USER_EXTENSION;
 
-	PulleyJoint(physx::PxPhysics& physics, 
-				physx::PxRigidBody& body0, const physx::PxTransform& localFrame0, const physx::PxVec3& attachment0,
-			    physx::PxRigidBody& body1, const physx::PxTransform& localFrame1, const physx::PxVec3& attachment1);
+	PulleyJoint(physx::PxPhysics& physics,
+		physx::PxRigidBody& body0, const physx::PxTransform& localFrame0, const physx::PxVec3& attachment0);
+
+	PulleyJoint(physx::PxPhysics& physics,
+		physx::PxRigidBody& body0, const physx::PxTransform& localFrame0, const physx::PxVec3& attachment0,
+		physx::PxRigidBody& body1, const physx::PxTransform& localFrame1, const physx::PxVec3& attachment1);
+
+	PulleyJoint(physx::PxPhysics& physics,
+		physx::PxRigidBody& body0, const physx::PxTransform& localFrame0, const physx::PxVec3& attachment0,
+		physx::PxRigidBody& body1, const physx::PxTransform& localFrame1, const physx::PxVec3& attachment1,
+		physx::PxRigidBody& body2, const physx::PxTransform& localFrame2, const physx::PxVec3& attachment2);
 
 	void release();
 

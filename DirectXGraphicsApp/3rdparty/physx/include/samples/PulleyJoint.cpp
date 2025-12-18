@@ -110,6 +110,24 @@ static PxConstraintShaderTable sShaderTable = { solverPrep, visualize, PxConstra
 
 PxConstraintSolverPrep PulleyJoint::getPrep() const { return solverPrep; }
 
+PulleyJoint::PulleyJoint(physx::PxPhysics& physics, physx::PxRigidBody& body0, const physx::PxTransform& localFrame0, const physx::PxVec3& attachment0)
+{
+	mConstraint = physics.createConstraint(&body0, nullptr, *this, sShaderTable, sizeof(PulleyJointData));
+
+	mBody[0] = &body0;
+	mBody[1] = nullptr;
+
+	// keep these around in case the CoM gets relocated
+	mLocalPose[0] = localFrame0.getNormalized();
+
+	// the data which will be fed to the joint solver and projection shaders
+	mData.attachment0 = attachment0;
+	mData.attachment1 = PxVec3(0.0f);
+	mData.distance = 1.0f;
+	mData.ratio = 1.0f;
+	mData.c2b[0] = body0.getCMassLocalPose().transformInv(mLocalPose[0]);
+}
+
 PulleyJoint::PulleyJoint(PxPhysics& physics, PxRigidBody& body0, const PxTransform& localFrame0, const PxVec3& attachment0,
 											 PxRigidBody& body1, const PxTransform& localFrame1, const PxVec3& attachment1)
 {
@@ -122,6 +140,26 @@ PulleyJoint::PulleyJoint(PxPhysics& physics, PxRigidBody& body0, const PxTransfo
 	mLocalPose[0] = localFrame0.getNormalized();
 	mLocalPose[1] = localFrame1.getNormalized();
 
+	// the data which will be fed to the joint solver and projection shaders
+	mData.attachment0 = attachment0;
+	mData.attachment1 = attachment1;
+	mData.distance = 1.0f;
+	mData.ratio = 1.0f;
+	mData.c2b[0] = body0.getCMassLocalPose().transformInv(mLocalPose[0]);
+	mData.c2b[1] = body1.getCMassLocalPose().transformInv(mLocalPose[1]);
+}
+
+PulleyJoint::PulleyJoint(PxPhysics& physics, PxRigidBody& body0, const PxTransform& localFrame0, const PxVec3& attachment0,
+											 PxRigidBody& body1, const PxTransform& localFrame1, const PxVec3& attachment1,
+											 PxRigidBody& body2, const PxTransform& localFrame2, const PxVec3& attachment2)
+{
+	// for simplicity we only create a 2-body pulley joint here
+	mConstraint = physics.createConstraint(&body0, &body1, *this, sShaderTable, sizeof(PulleyJointData));
+	mBody[0] = &body0;
+	mBody[1] = &body1;
+	// keep these around in case the CoM gets relocated
+	mLocalPose[0] = localFrame0.getNormalized();
+	mLocalPose[1] = localFrame1.getNormalized();
 	// the data which will be fed to the joint solver and projection shaders
 	mData.attachment0 = attachment0;
 	mData.attachment1 = attachment1;
