@@ -71,6 +71,9 @@ public:
 	void			setAttachment1(const physx::PxVec3& pos);
 	physx::PxVec3	getAttachment1() const;
 
+	void			setAttachment2(const physx::PxVec3& pos);
+	physx::PxVec3	getAttachment2() const;
+
 	void			setDistance(physx::PxReal totalDistance);
 	physx::PxReal	getDistance() const;
 	
@@ -97,20 +100,23 @@ public:
 
 	struct PulleyJointData
 	{
-		physx::PxTransform c2b[2];
+		physx::PxTransform c2b[3];
 	
 		physx::PxVec3 attachment0;
 		physx::PxVec3 attachment1;
+		physx::PxVec3 attachment2;
 
 		physx::PxReal distance;
 		physx::PxReal ratio;
 		physx::PxReal tolerance;
 	};
 
-	physx::PxRigidBody*		mBody[2];
-	physx::PxTransform		mLocalPose[2];
+	physx::PxRigidBody*		mBody[3];
+	physx::PxTransform		mLocalPose[3];
 
 	physx::PxConstraint*	mConstraint;
+	physx::PxConstraint*	mConstraint1;
+
 	PulleyJointData			mData;
 
 	~PulleyJoint() {}

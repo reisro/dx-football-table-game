@@ -155,18 +155,27 @@ PulleyJoint::PulleyJoint(PxPhysics& physics, PxRigidBody& body0, const PxTransfo
 {
 	// for simplicity we only create a 2-body pulley joint here
 	mConstraint = physics.createConstraint(&body0, &body1, *this, sShaderTable, sizeof(PulleyJointData));
+	mConstraint1 = physics.createConstraint(&body1, &body2, *this, sShaderTable, sizeof(PulleyJointData));
+
 	mBody[0] = &body0;
 	mBody[1] = &body1;
+	mBody[2] = &body2;
+
 	// keep these around in case the CoM gets relocated
 	mLocalPose[0] = localFrame0.getNormalized();
 	mLocalPose[1] = localFrame1.getNormalized();
+	mLocalPose[2] = localFrame2.getNormalized();
+
 	// the data which will be fed to the joint solver and projection shaders
 	mData.attachment0 = attachment0;
 	mData.attachment1 = attachment1;
+	mData.attachment2 = attachment2;
+
 	mData.distance = 1.0f;
 	mData.ratio = 1.0f;
 	mData.c2b[0] = body0.getCMassLocalPose().transformInv(mLocalPose[0]);
 	mData.c2b[1] = body1.getCMassLocalPose().transformInv(mLocalPose[1]);
+	mData.c2b[2] = body2.getCMassLocalPose().transformInv(mLocalPose[2]);
 }
 
 void PulleyJoint::release()
@@ -196,6 +205,17 @@ void PulleyJoint::setAttachment1(const PxVec3& pos)
 PxVec3 PulleyJoint::getAttachment1() const
 {
 	return mData.attachment1;
+}
+
+void PulleyJoint::setAttachment2(const PxVec3& pos)
+{
+	mData.attachment2 = pos;
+	mConstraint->markDirty();
+}
+
+PxVec3 PulleyJoint::getAttachment2() const
+{
+	return mData.attachment2;
 }
 
 void PulleyJoint::setDistance(float totalDistance)
@@ -242,6 +262,7 @@ void PulleyJoint::onOriginShift(const PxVec3& shift)
 {
 	mData.attachment0 -= shift;
 	mData.attachment1 -= shift;
+	mData.attachment2 -= shift;
 }
 
 void* PulleyJoint::getExternalReference(PxU32& typeID)
