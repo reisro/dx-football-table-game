@@ -138,6 +138,13 @@ void YETransformComponent::setRotation(yeFloat x, yeFloat y, yeFloat z)
 	roll = x;
 	yaw = y;
 	pitch = z;
+
+	_mWorld = XMFLOAT4X4{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		roll, yaw, pitch, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		this->x, this->y, this->z, 1.0f
+	};
 }
 
 void YETransformComponent::setScale(yeFloat x, yeFloat y, yeFloat z)
