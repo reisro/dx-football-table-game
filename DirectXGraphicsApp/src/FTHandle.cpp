@@ -5,10 +5,10 @@
 FTHandle::FTHandle(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2):
 	YEGameObject(_game_context),
 	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_handle.fbx")),
-	_physics_component(new YEPhysicsComponent()),
 	_player_left(p1),
 	_player_right(p2)
 {
+	addComponent(_mesh_component);
 }
 
 FTHandle::~FTHandle()
@@ -33,7 +33,13 @@ void FTHandle::update(float _deltaTime)
 
 	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-	XMMATRIX globalPose = phsyX->GetGlobalPose(_player_left->_id);
+	XMMATRIX globalPose = phsyX->GetGlobalPose(_player_left->getPhysicsComponent()->_actorPhyicsID);
+
+	XMFLOAT4X4 world;
+	world._11 = globalPose.r[0].m128_f32[0]; world._12 = globalPose.r[0].m128_f32[1]; world._13 = globalPose.r[0].m128_f32[2]; world._14 = globalPose.r[0].m128_f32[3];
+	world._21 = globalPose.r[1].m128_f32[0]; world._12 = globalPose.r[1].m128_f32[1]; world._13 = globalPose.r[1].m128_f32[2]; world._14 = globalPose.r[1].m128_f32[3];
+	world._31 = globalPose.r[2].m128_f32[0]; world._12 = globalPose.r[2].m128_f32[1]; world._13 = globalPose.r[2].m128_f32[2]; world._14 = globalPose.r[2].m128_f32[3];
+	world._41 = globalPose.r[3].m128_f32[0] + 15.0f; world._12 = globalPose.r[3].m128_f32[1]; world._13 = globalPose.r[3].m128_f32[2]; world._14 = globalPose.r[3].m128_f32[3];
 
 	_transform->setTransformMatrix(globalPose);
 }

@@ -5,7 +5,7 @@
 FTBall::FTBall(const YEGameContext& _game_context):
 	YEGameObject(_game_context),
 	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_ball.fbx")),
-	_physics_component(new YEPhysicsComponent())
+	_physics_component(new YEPhysicsComponent(_game_context))
 {
 	addComponent(_mesh_component);
 	addComponent(_physics_component);
@@ -35,7 +35,7 @@ void FTBall::update(float _deltaTime)
 	{
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-		XMMATRIX globalPose = phsyX->GetGlobalPose(_id);
+		XMMATRIX globalPose = phsyX->GetGlobalPose(_physics_component->_actorPhyicsID);
 
 		_physics_component->getTransformComponent()->setTransformMatrix(globalPose);
 
