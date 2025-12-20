@@ -16,6 +16,11 @@ YEPhysicsComponent::YEPhysicsComponent(YEGameObject* owner):
 	SetGameObject(owner);
 }
 
+YEPhysicsComponent::YEPhysicsComponent(const YEGameContext& game_context)
+{
+	_actorPhyicsID = game_context.sceneObject->_physicsid++;
+}
+
 YEPhysicsComponent::~YEPhysicsComponent()
 {
 
