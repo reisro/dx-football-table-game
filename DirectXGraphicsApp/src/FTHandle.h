@@ -22,7 +22,6 @@ protected:
 	FTPlayer*			_player_right;
 	FTPlayer*			_player_left;
 	YEMeshComponent*	_mesh_component;
-	YEPhysicsComponent* _physics_component;
 };
 
 #endif _FT_HANDLE_H_

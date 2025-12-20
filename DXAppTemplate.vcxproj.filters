@@ -39,6 +39,9 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTHandlePlayer.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTFieldWalls.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
@@ -57,6 +60,9 @@
       <Filter>TableFootball</Filter>
     </ClInclude>
     <ClInclude Include="DirectXGraphicsApp\src\FTHandlePlayer.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTFieldWalls.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

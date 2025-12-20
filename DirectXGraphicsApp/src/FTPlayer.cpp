@@ -4,7 +4,7 @@
 FTPlayer::FTPlayer(const YEGameContext& _game_context):
 	YEGameObject(_game_context),
 	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_player.fbx")),
-	_physics_component(new YEPhysicsComponent())
+	_physics_component(new YEPhysicsComponent(_game_context))
 {
 	addComponent(_mesh_component);
 	addComponent(_physics_component);
@@ -31,19 +31,14 @@ void FTPlayer::update(float _deltaTime)
 	{
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-		XMMATRIX globalPose = phsyX->GetGlobalPose(_id);
+		XMMATRIX globalPose = phsyX->GetGlobalPose(_physics_component->_actorPhyicsID);
 
 		YELog("YEGameObject: id:" + std::to_string(_id));
 
-		_physics_component->getTransformComponent()->setPosition(
-			globalPose.r[3].m128_f32[0],
-			globalPose.r[3].m128_f32[1],
-			globalPose.r[3].m128_f32[2]);
-
 		_physics_component->getTransformComponent()->setTransformMatrix(globalPose);
 
-		YELog("Global Pose: X:" + std::to_string(globalPose.r[3].m128_f32[0]) +
+		/*YELog("Global Pose: X:" + std::to_string(globalPose.r[3].m128_f32[0]) +
 		" Y:" + std::to_string(globalPose.r[3].m128_f32[1]) +
-		" Z:" + std::to_string(globalPose.r[3].m128_f32[2]));
+		" Z:" + std::to_string(globalPose.r[3].m128_f32[2]));*/
 	}
 }

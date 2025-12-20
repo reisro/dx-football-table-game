@@ -4,6 +4,7 @@
 #include <FTPlayer.h>
 #include <FTPlayerWhite.h>
 #include <FTHandle.h>
+#include <FTFieldWalls.h>
 
 using namespace gamentry;
 
@@ -25,6 +26,8 @@ public:
 		football_field = new FTField(GetGameContext());
 		football_field->hasRigidBody = true;
 
+		football_walls = new FTFieldWalls(GetGameContext());
+
 		football_ball = new FTBall(GetGameContext());
 		football_ball->hasRigidBody = true;
 		
@@ -42,17 +45,19 @@ public:
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 0.0f, 0.0f));
 
+		football_walls->start();
+
 		football_ball->start();
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 3.0f, 0.0f));
 
-		football_player->start();
-		football_player->_transform->setPosition(new YEVector3(0.0f, 0.9f, 3.63704f));
+		football_player->start(); //3
+		football_player->_transform->setPosition(new YEVector3(0.0f, 0.85f, 3.63704f));
 
-		football_player2->start();
-		football_player2->_transform->setPosition(new YEVector3(3.0f, 0.9f, 3.63704f));
+		football_player2->start(); //4
+		football_player2->_transform->setPosition(new YEVector3(3.0f, 0.85f, 3.63704f));
 
 		football_handle->start();
-		//football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));
+		football_handle->_transform->setPosition(new YEVector3(0.0f, 1.15f, 3.62057f));
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -61,7 +66,6 @@ public:
 		
 		//moveDirection = YEVector3::Sum(*football_ball->GetPosition(), *newPosition);
 		
-		//football_field->update(static_cast<float>(_deltaTime));
 		football_ball->update(static_cast<float>(_deltaTime));
 		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
@@ -86,6 +90,7 @@ private:
 	FTPlayer* football_player2;
 	FTPlayerWhite* football_player_white;
 	FTHandle* football_handle;
+	FTFieldWalls* football_walls;
 
 	YEVector3* position;
 	YEVector3* newPosition;
