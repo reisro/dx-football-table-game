@@ -6,11 +6,12 @@
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
 #include "YEPhysicsComponent.h"
+#include "FTPlayer.h"
 
 class FTHandle : public YEGameObject
 {
 public:
-	FTHandle(const YEGameContext& _game_context, bool isEmpty);
+	FTHandle(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2);
 	virtual ~FTHandle();
 
 	void start() override;
@@ -18,9 +19,9 @@ public:
 	void update(float _deltaTime) override;
 
 protected:
-	YEMeshComponent*    _mesh_component;
-	YEMeshComponent*	_mesh_component1;
-	YEMeshComponent*	_mesh_component2;
+	FTPlayer*			_player_right;
+	FTPlayer*			_player_left;
+	YEMeshComponent*	_mesh_component;
 	YEPhysicsComponent* _physics_component;
 };
 
