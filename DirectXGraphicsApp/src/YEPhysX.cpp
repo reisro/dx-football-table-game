@@ -45,6 +45,17 @@ void YEPhysX::CreateDefaultPlane()
 	_scene->addActor(*groundPlane);
 }
 
+void YEPhysX::CreateStaticBox(YEVector3* pos, YEVector3* size)
+{
+	PxBoxGeometry boxGeometry(size->_x, size->_y, size->_z);
+
+	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
+
+	PxRigidStatic* staticBox = PxCreateStatic(*_physics, PxTransform(position), boxGeometry, *_material);
+
+	_scene->addActor(*staticBox);
+}
+
 void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 {
 	PxSphereGeometry sphereGeometry(radius);
@@ -199,7 +210,8 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	if (_input->keyDown(DIK_C))
 	{
-		rot < 100.0 ? rot += 0.1 : rot = 0.0; rotInc < 1.0 ? rotInc += 0.01 : rotInc = 0.0; std::cout << "Rot: " << rot << std::endl;
+		//rot < 100.0 ? rot += 0.1 : rot = 0.0; rotInc < 1.0 ? rotInc += 0.01 : rotInc = 0.0; std::cout << "Rot: " << rot << std::endl;
+		rot += 0.08f; rotInc += 0.1; if (rot > 16.0f) rot = 0.0f; if (rotInc > 5.0f) rotInc = 0.0f;
 	}
 
 	_joint->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
@@ -210,6 +222,13 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	{
 		attachedBodies[0]->setKinematicTarget(PxTransform(PxVec3(rightDir, attachedBodies[0]->getGlobalPose().p.y, attachedBodies[0]->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
 		attachedBodies[1]->setKinematicTarget(PxTransform(PxVec3(rightDir - 3.0f, attachedBodies[1]->getGlobalPose().p.y, attachedBodies[1]->getGlobalPose().p.z), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0))));
+
+		if (rightDir < -2.0f)
+			rightDir = -2.0f;
+		if (rightDir > 5.0f)
+			rightDir = 5.0f;
+
+		YELog("\nRot: " + std::to_string(rot));
 	}
 }
 

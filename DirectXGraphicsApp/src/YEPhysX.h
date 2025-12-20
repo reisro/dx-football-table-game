@@ -26,6 +26,8 @@ public:
 	// Static Creation Functions
 	void CreateDefaultPlane() override;
 
+	void CreateStaticBox(YEVector3* pos, YEVector3* size) override;
+
 	void CreateDynamicSphere(YEVector3* pos, yeFloat radius) override;
 
 	void CreateCustomRigidBody() override;
@@ -66,7 +68,7 @@ public:
 	static PxPvd*					_pvd;
 	static PxPvdTransport*			_transport;
 	
-	float rot;
+	float rot = 0.0f;
 	float rotInc = 0.0f;
 	float rightDir = 1.0f;
 	float leftDir = 1.0f;
