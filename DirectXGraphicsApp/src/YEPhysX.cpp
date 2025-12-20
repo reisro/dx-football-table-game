@@ -23,7 +23,6 @@ YEPhysX::YEPhysX()
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
-	actorGlobalPoses.push_back(XMMatrixIdentity());
 
 	_input = YEInput::GetInstance();
 }
@@ -275,12 +274,12 @@ void YEPhysX::RenderCallback()
 	PxScene* scene;
 	PxGetPhysics().getScenes(&scene, 1);
 
-	PxU32 nbActors = scene->getNbActors(PxActorTypeFlag::eRIGID_DYNAMIC | PxActorTypeFlag::eRIGID_STATIC);
+	PxU32 nbActors = scene->getNbActors(PxActorTypeFlag::eRIGID_DYNAMIC);
 
 	if(nbActors)
 	{
 		PxArray<PxRigidActor*> actors(nbActors);
-		scene->getActors(PxActorTypeFlag::eRIGID_DYNAMIC | PxActorTypeFlag::eRIGID_STATIC, reinterpret_cast<PxActor**>(&actors[0]), nbActors);
+		scene->getActors(PxActorTypeFlag::eRIGID_DYNAMIC, reinterpret_cast<PxActor**>(&actors[0]), nbActors);
 		for (PxU32 i = 0; i < nbActors; i++)
 		{
 			PxArray<PxRigidActor*> rigidActors(nbActors);
