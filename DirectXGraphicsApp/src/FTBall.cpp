@@ -39,8 +39,8 @@ void FTBall::update(float _deltaTime)
 
 		_physics_component->getTransformComponent()->setTransformMatrix(globalPose);
 
-		YELog("Global Pose: X:" + std::to_string(globalPose.r[3].m128_f32[0]) +
+		/*YELog("Global Pose: X:" + std::to_string(globalPose.r[3].m128_f32[0]) +
 		" Y:" + std::to_string(globalPose.r[3].m128_f32[1]) +
-		" Z:" + std::to_string(globalPose.r[3].m128_f32[2]));
+		" Z:" + std::to_string(globalPose.r[3].m128_f32[2]));*/
 	}
 }

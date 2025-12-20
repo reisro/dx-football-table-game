@@ -34,9 +34,9 @@ public:
 
 		football_player2 = new FTPlayer(GetGameContext());
 		football_player2->hasParent = true;
-		football_player2->hasRigidBody = true;	
+		football_player2->hasRigidBody = true;
 
-		football_handle = new FTHandle(GetGameContext(), true);
+		football_handle = new FTHandle(GetGameContext(), football_player, football_player2);
 
 		// Start Game Objects
 		football_field->start();
@@ -46,16 +46,13 @@ public:
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 3.0f, 0.0f));
 
 		football_player->start();
-		football_player->_transform->setPosition(new YEVector3(0.0f, 1.0f, 3.63704f));
+		football_player->_transform->setPosition(new YEVector3(0.0f, 0.9f, 3.63704f));
 
 		football_player2->start();
-		football_player2->_transform->setPosition(new YEVector3(3.0f, 1.0f, 3.63704f));
+		football_player2->_transform->setPosition(new YEVector3(3.0f, 0.9f, 3.63704f));
 
 		football_handle->start();
-		football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));
-
-		// Set initial position of the cube
-		position = YEVector3::Zero();
+		//football_handle->_transform->setPosition(new YEVector3(-0.67763f, 1.85f, 3.62057f));
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -66,7 +63,7 @@ public:
 		
 		//football_field->update(static_cast<float>(_deltaTime));
 		football_ball->update(static_cast<float>(_deltaTime));
-		
+		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
 		football_player2->update(static_cast<float>(_deltaTime));
 

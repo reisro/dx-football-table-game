@@ -17,6 +17,8 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
+	YEPhysicsComponent* getPhysicsComponent() { return _physics_component; }
+
 protected:
 	YEMeshComponent*	_mesh_component;
 	YEPhysicsComponent* _physics_component;
