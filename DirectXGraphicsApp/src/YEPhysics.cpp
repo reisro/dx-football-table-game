@@ -22,6 +22,10 @@ void YEPhysics::CreateDefaultPlane()
 {
 }
 
+void YEPhysics::CreateStaticBox(YEVector3* pos, YEVector3* size)
+{
+}
+
 void YEPhysics::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 {
 }
