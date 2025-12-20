@@ -19,7 +19,6 @@ public:
 
 protected:
 	YEMeshComponent* _mesh_component;
-	YEPhysicsComponent* _physics_component;
 };
 
 #endif _FT_FIELD_H_
