@@ -30,7 +30,7 @@ void YEPhysics::CreateCustomRigidBody()
 {
 }
 
-void YEPhysics::CreateJoint(const YEVector3& pos, int numberOfAttached)
+void YEPhysics::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached)
 {
 }
 

@@ -40,7 +40,8 @@ YEPhysX::~YEPhysX()
 
 void YEPhysX::CreateDefaultPlane()
 {
-	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0), *_material);
+	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0.18), *_material);
+
 	_scene->addActor(*groundPlane);
 }
 
@@ -62,30 +63,36 @@ void YEPhysX::CreateCustomRigidBody()
 {
 }
 
-void YEPhysX::CreateJoint(const YEVector3& pos, int numberOfAttached)
+void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached)
 {
 	PxBoxGeometry boxGeom(0.25f,0.9f, 0.15f);
+	PxVec3 newPos = PxVec3(pos._x - 1.92f, pos._y, pos._z);
 
 	switch (numberOfAttached)
 	{
 	case 1:
 		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, PxTransform(PxVec3(0.0, -0.25, 0.0))));
-		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
-			*attachedBodies[0], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)); 
+
+		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
 		
 		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+
+		_scene->addActor(*attachedBodies[0]);
 
 		break;
 
 	case 2:
-		for (size_t i = 0; i < 2; i++)
-			attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, 
-																PxTransform(PxVec3(0.0, -0.25, 0.0))));
+		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f));
+		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos1._x, pos1._y, pos1._z)), boxGeom, *_material, 1.0f));
+		
 		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
 			*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
 
 		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 		_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true); 
+
+		for (size_t i = 0; i < attachedBodies.size(); i++)
+			_scene->addActor(*attachedBodies[i]);
 
 		break;
 
@@ -101,15 +108,17 @@ void YEPhysX::CreateJoint(const YEVector3& pos, int numberOfAttached)
 		_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 		_joint->mBody[2]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 
+		for (size_t i = 0; i < attachedBodies.size(); i++)
+			_scene->addActor(*attachedBodies[i]);
+
 		break;
 
 	default:
 		YELog("\n[ERROR] Unsupported number of attached bodies for joint creation!");
+		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+											*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
 		return;
 	}
-
-	for (size_t i = 0; i < attachedBodies.size(); i++)
-		_scene->addActor(*attachedBodies[i]);
 }
 
 void YEPhysX::Setup()
@@ -168,12 +177,14 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	if(_input->keyDown(DIK_D))
 	{
-		_dynamicSphere->addForce(PxVec3(0.0002f, 0.0f, 0.0), PxForceMode::eIMPULSE);
+		//_dynamicSphere->addForce(PxVec3(0.0002f, 0.0f, 0.0), PxForceMode::eIMPULSE);
+		rightDir += 0.1; 
 	}
 
 	if (_input->keyDown(DIK_A))
 	{
-		_dynamicSphere->addForce(PxVec3(-0.0002f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		//_dynamicSphere->addForce(PxVec3(-0.0002f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		rightDir -= 0.1;
 	}
 
 	if (_input->keyDown(DIK_F))
@@ -192,8 +203,14 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	}
 
 	_joint->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
-	attachedBodies[0]->setKinematicTarget(PxTransform(PxVec3(0.0f, attachedBodies[0]->getGlobalPose().p.y, attachedBodies[0]->getGlobalPose().p.z), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0))));
-	attachedBodies[1]->setKinematicTarget(PxTransform(PxVec3(0.0f, attachedBodies[1]->getGlobalPose().p.y, attachedBodies[1]->getGlobalPose().p.z), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0))));
+
+	if (attachedBodies.size() < 2)
+		attachedBodies[0]->setKinematicTarget(PxTransform(PxVec3(rightDir, attachedBodies[0]->getGlobalPose().p.y, attachedBodies[0]->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+	else
+	{
+		attachedBodies[0]->setKinematicTarget(PxTransform(PxVec3(rightDir, attachedBodies[0]->getGlobalPose().p.y, attachedBodies[0]->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+		attachedBodies[1]->setKinematicTarget(PxTransform(PxVec3(rightDir - 3.0f, attachedBodies[1]->getGlobalPose().p.y, attachedBodies[1]->getGlobalPose().p.z), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0))));
+	}
 }
 
 void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)

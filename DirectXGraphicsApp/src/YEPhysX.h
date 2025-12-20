@@ -30,7 +30,7 @@ public:
 
 	void CreateCustomRigidBody() override;
 
-	void CreateJoint(const YEVector3& pos, int numberOfAttached) override;
+	void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached) override;
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
