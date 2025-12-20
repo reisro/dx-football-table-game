@@ -44,6 +44,7 @@ public:
 	YEGameObject* _parent;
 
 	UINT _id;
+	UINT _physicsid;
 
 	int _numberMeshes;
 	int _numberChildren;
