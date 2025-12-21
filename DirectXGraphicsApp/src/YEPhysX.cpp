@@ -64,6 +64,7 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 1.0f);
 
 	_dynamicSphere->setAngularDamping(0.5f);
+	_dynamicSphere->setMass(5.0f);
 	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
 
 	_scene->addActor(*_dynamicSphere);
@@ -187,24 +188,24 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	if(_input->keyDown(DIK_D))
 	{
-		_dynamicSphere->addForce(PxVec3(0.0002f, 0.0f, 0.0), PxForceMode::eIMPULSE);
+		_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0), PxForceMode::eIMPULSE);
 		//rightDir += 0.1; 
 	}
 
 	if (_input->keyDown(DIK_A))
 	{
-		_dynamicSphere->addForce(PxVec3(-0.0002f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
 		//rightDir -= 0.1;
 	}
 
 	if (_input->keyDown(DIK_F))
 	{
-		_dynamicSphere->addForce(PxVec3(0.0f, 0.0f, 0.0002f), PxForceMode::eIMPULSE);
+		_dynamicSphere->addForce(PxVec3(0.0f, 0.0f, 0.02f), PxForceMode::eIMPULSE);
 	}
 
 	if (_input->keyDown(DIK_S))
 	{
-		_dynamicSphere->addForce(PxVec3(0.0f, 0.0f, -0.0002f), PxForceMode::eIMPULSE);
+		_dynamicSphere->addForce(PxVec3(0.0f, 0.0f, -0.02f), PxForceMode::eIMPULSE);
 	}
 
 	if (_input->keyDown(DIK_C))
