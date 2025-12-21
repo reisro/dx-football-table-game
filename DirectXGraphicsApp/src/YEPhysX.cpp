@@ -187,14 +187,14 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	if(_input->keyDown(DIK_D))
 	{
-		//_dynamicSphere->addForce(PxVec3(0.0002f, 0.0f, 0.0), PxForceMode::eIMPULSE);
-		rightDir += 0.1; 
+		_dynamicSphere->addForce(PxVec3(0.0002f, 0.0f, 0.0), PxForceMode::eIMPULSE);
+		//rightDir += 0.1; 
 	}
 
 	if (_input->keyDown(DIK_A))
 	{
-		//_dynamicSphere->addForce(PxVec3(-0.0002f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
-		rightDir -= 0.1;
+		_dynamicSphere->addForce(PxVec3(-0.0002f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		//rightDir -= 0.1;
 	}
 
 	if (_input->keyDown(DIK_F))
