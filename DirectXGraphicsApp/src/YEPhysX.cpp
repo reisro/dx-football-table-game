@@ -23,6 +23,9 @@ YEPhysX::YEPhysX()
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
+	actorGlobalPoses.push_back(XMMatrixIdentity());
+	actorGlobalPoses.push_back(XMMatrixIdentity());
+	actorGlobalPoses.push_back(XMMatrixIdentity());
 
 	_input = YEInput::GetInstance();
 }
@@ -84,26 +87,51 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 	case 1:
 		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, PxTransform(PxVec3(0.0, -0.25, 0.0))));
 
-		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
-		
-		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+		if (_joint == nullptr)
+		{
+			_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
+			_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 
-		_scene->addActor(*attachedBodies[0]);
+			_scene->addActor(*attachedBodies[0]);
+		}
+		else
+		{
+			_joint1 = new PulleyJoint(*_physics, *attachedBodies[1], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+				*_joint->mBody[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
 
+			_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+
+			_scene->addActor(*attachedBodies[0]);
+		}
+			
 		break;
 
 	case 2:
 		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f));
 		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos1._x, pos1._y, pos1._z)), boxGeom, *_material, 1.0f));
 		
-		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
-			*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
+		if (_joint == nullptr)
+		{
+			_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+				*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
 
-		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
-		_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true); 
+			_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+			_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 
-		for (size_t i = 0; i < attachedBodies.size(); i++)
-			_scene->addActor(*attachedBodies[i]);
+			for (size_t i = 0; i < attachedBodies.size(); i++)
+				_scene->addActor(*attachedBodies[i]);
+		}
+		else
+		{
+			_joint1 = new PulleyJoint(*_physics, *attachedBodies[2], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+				*attachedBodies[3], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
+
+			_joint1->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+			_joint1->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+
+			for (size_t i = 2; i < attachedBodies.size(); i++)
+				_scene->addActor(*attachedBodies[i]);
+		}
 
 		break;
 

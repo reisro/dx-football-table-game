@@ -76,6 +76,7 @@ public:
 	PxRigidDynamic*					_dynamicSphere;
 	YEInput*						_input;
 	PulleyJoint*					_joint;
+	PulleyJoint*					_joint1;
 
 	std::vector<XMMATRIX> actorGlobalPoses;
 	std::vector<PxRigidDynamic*> attachedBodies;
