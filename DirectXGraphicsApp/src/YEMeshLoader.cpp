@@ -20,7 +20,7 @@ void YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFil
 	std::string filename = YEStringUtils::ConvertLPWSTRToString(pFileName);
 
 	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
+	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph | aiProcess_SplitLargeMeshes);
 
 	if (pScene == nullptr)
 		return;
