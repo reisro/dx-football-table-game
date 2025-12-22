@@ -10,7 +10,7 @@
 class FTPlayer : public YEGameObject
 {
 public:
-	FTPlayer(const YEGameContext& _game_context);
+	FTPlayer(const YEGameContext& _game_context, const wchar_t* _meshName);
 	virtual ~FTPlayer();
 
 	void start() override;
@@ -22,6 +22,7 @@ public:
 protected:
 	YEMeshComponent*	_mesh_component;
 	YEPhysicsComponent* _physics_component;
+	const wchar_t* _meshFilename;
 };
 
 #endif _FT_BALL_H_

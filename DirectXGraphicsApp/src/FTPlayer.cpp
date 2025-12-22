@@ -1,9 +1,9 @@
 #include "FTPlayer.h"
 #include <YEPhysX.h>
 
-FTPlayer::FTPlayer(const YEGameContext& _game_context):
+FTPlayer::FTPlayer(const YEGameContext& _game_context, const wchar_t* _meshName):
 	YEGameObject(_game_context),
-	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_player.fbx")),
+	_mesh_component(new YEMeshComponent(this, _meshName)),
 	_physics_component(new YEPhysicsComponent(_game_context))
 {
 	addComponent(_mesh_component);
