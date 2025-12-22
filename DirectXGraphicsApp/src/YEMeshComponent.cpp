@@ -66,6 +66,7 @@ void YEMeshComponent::SendToSceneObject()
 		}
 	}
 
+	// Erase when done with mesh loader
 	delete ModelMesh;
 	ModelMesh = nullptr;
 }

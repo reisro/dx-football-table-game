@@ -28,6 +28,8 @@ void YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFil
 	this->_directory = filename.substr(0, filename.find_last_of("/\\"));
 	
 	processNode(pScene->mRootNode, pScene);
+
+	importer.FreeScene();
 }
 
 std::vector<YEMesh> YEMeshLoader::getLoadedMeshes()

@@ -102,10 +102,6 @@ void YEMesh::SetIndices(ID3D11Device* device, const USHORT* indices, UINT count)
 {
 }
 
-void YEMesh::SetSubsetTable(std::vector<Subset>& subsetTable)
-{
-}
-
 bool YEMesh::DoTheImportThing(const std::string& pFile) 
 {
 	//// Create an instance of the Importer class
