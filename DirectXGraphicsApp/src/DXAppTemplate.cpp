@@ -4,6 +4,7 @@
 #include <FTPlayer.h>
 #include <FTPlayerWhite.h>
 #include <FTHandle.h>
+#include <FTSingleHandle.h>
 #include <FTFieldWalls.h>
 
 using namespace gamentry;
@@ -47,9 +48,18 @@ public:
 		football_player2_l->hasParent = true;
 		football_player2_l->hasRigidBody = true;
 
+		//football_keeper = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx");
+		//football_keeper->hasRigidBody = true;
+
+		//football_keeper_ai = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
+		//football_keeper_ai->hasRigidBody = true;
+
 		football_handle = new FTHandle(GetGameContext(), football_player, football_player2, L"C:\\Game Assets\\football_handle.fbx");
 
 		football_handle_player = new FTHandle(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
+
+		//football_handle_keeper = new FTSingleHandle(GetGameContext(), football_keeper, nullptr, L"C:\\Game Assets\\football_handle.fbx");
+		//football_handle_keeper1 = new FTSingleHandle(GetGameContext(), football_keeper_ai, nullptr, L"C:\\Game Assets\\football_handle.fbx");
 
 		// Start Game Objects
 		football_field->start();
@@ -77,6 +87,18 @@ public:
 
 		football_handle_player->start();
 		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.62057f));
+
+		//football_keeper->start(); //7
+		//football_keeper->_transform->setPosition(new YEVector3(0.0f, 0.85f, -11.0f));
+
+		//football_keeper_ai->start(); //8
+		//football_keeper_ai->_transform->setPosition(new YEVector3(0.0f, 0.85f, 11.0f));
+
+		//football_handle_keeper->start();
+		//football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 1.15f, -11.85f));
+
+		//football_handle_keeper1->start();
+		//football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 1.15f, 12.15f));
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -92,6 +114,10 @@ public:
 		football_handle_player->update(static_cast<float>(_deltaTime));
 		football_player_l->update(static_cast<float>(_deltaTime));
 		football_player2_l->update(static_cast<float>(_deltaTime));
+		//football_keeper->update(static_cast<float>(_deltaTime));
+		//football_handle_keeper->update(static_cast<float>(_deltaTime));
+		//football_keeper_ai->update(static_cast<float>(_deltaTime));
+		//football_handle_keeper1->update(static_cast<float>(_deltaTime));
 
 		forward_speed += 0.00000000001f;
 
@@ -112,9 +138,13 @@ private:
 	FTPlayer* football_player2;
 	FTPlayer* football_player_l;
 	FTPlayer* football_player2_l;
+	FTPlayer* football_keeper;
+	FTPlayer* football_keeper_ai;
 	FTPlayerWhite* football_player_white;
 	FTHandle* football_handle;
 	FTHandle* football_handle_player;
+	FTSingleHandle* football_handle_keeper;
+	FTSingleHandle* football_handle_keeper1;
 	FTFieldWalls* football_walls;
 
 	YEVector3* position;
