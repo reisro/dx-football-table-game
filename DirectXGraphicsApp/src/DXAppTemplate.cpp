@@ -83,7 +83,7 @@ public:
 		football_player_l->_transform->setPosition(new YEVector3(0.0f, 0.85f, -3.63704f));
 
 		football_player2_l->start(); //6
-		football_player2_l->_transform->setPosition(new YEVector3(3.0f, 0.85f, -3.63704f));
+		football_player2_l->_transform->setPosition(new YEVector3(6.0f, 0.85f, -3.63704f));
 
 		football_handle_player->start();
 		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.62057f));

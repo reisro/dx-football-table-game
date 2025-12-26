@@ -80,6 +80,8 @@ public:
 	void			setRatio(physx::PxReal ratio);
 	physx::PxReal	getRatio() const;
 
+	physx::PxI32    getNumBodies() const;
+
 	// PxConstraintConnector boilerplate
 
 	void*			prepareData();
@@ -118,6 +120,7 @@ public:
 	physx::PxConstraint*	mConstraint1;
 
 	PulleyJointData			mData;
+	physx::PxI32			mBodies;
 
 	~PulleyJoint() {}
 };

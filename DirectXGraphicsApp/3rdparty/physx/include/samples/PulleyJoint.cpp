@@ -240,6 +240,11 @@ float PulleyJoint::getRatio() const
 	return mData.ratio;
 }
 
+physx::PxI32 PulleyJoint::getNumBodies() const
+{
+	return physx::PxI32();
+}
+
 ///////////////////////////////////////////// PxConstraintConnector methods
 
 void* PulleyJoint::prepareData()

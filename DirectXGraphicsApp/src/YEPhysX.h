@@ -10,12 +10,21 @@
 #include "DirectXMath.h"
 #include "YEInput.h"
 #include <vector>
+#include <map>
 
 class PulleyJoint;
 
 using namespace DirectX;
 
 using namespace physx;
+
+struct PulleyJointBodyInfo
+{
+	PulleyJointBodyInfo(PxRigidDynamic* b, float o) : box(b), offset(o) {}
+
+	PxRigidDynamic* box;
+	float offset;
+};
 
 class DX_API YEPhysX : public YEPhysics
 {
@@ -33,6 +42,8 @@ public:
 	void CreateCustomRigidBody() override;
 
 	void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached) override;
+
+	void UpdateKinematicActors();
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
@@ -73,13 +84,22 @@ public:
 	float rightDir = 1.0f;
 	float leftDir = 1.0f;
 
+	int pulleyJoints = 0;
+	int pulleyJointID = 0;
+	int attachedBodiesCount = -1;
+	int attachedBodiesID = 0;
+
 	PxRigidDynamic*					_dynamicSphere;
 	YEInput*						_input;
 	PulleyJoint*					_joint;
 	PulleyJoint*					_joint1;
+	PulleyJoint*					_joint2;
+	PulleyJoint*					_joint3;
 
-	std::vector<XMMATRIX> actorGlobalPoses;
+	std::vector<XMMATRIX>		 actorGlobalPoses;
 	std::vector<PxRigidDynamic*> attachedBodies;
+	std::vector <PulleyJoint*>	 pulleyJointsList;
+	std::vector<PulleyJointBodyInfo> pulleyJointAttachedBodiesMap;
 };
 
 #endif _YE_PHYSX_H
