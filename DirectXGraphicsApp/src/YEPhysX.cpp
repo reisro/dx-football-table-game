@@ -219,14 +219,14 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	if(_input->keyDown(DIK_D))
 	{
-		_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0), PxForceMode::eIMPULSE);
-		//rightDir += 0.1; 
+		//_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0), PxForceMode::eIMPULSE);
+		rightDir += 0.1; 
 	}
 
 	if (_input->keyDown(DIK_A))
 	{
-		_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
-		//rightDir -= 0.1;
+		//_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		rightDir -= 0.1;
 	}
 
 	if (_input->keyDown(DIK_F))
@@ -247,9 +247,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	for (size_t i = 0; i < pulleyJointsList.size(); i++)
 		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
-
-	//pulleyJointsList[1]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
-	//pulleyJointsList[2]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
 
 	for (size_t i = 0; i < pulleyJointAttachedBodiesMap.size(); i++)
 		pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
@@ -276,11 +273,6 @@ void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)
 			const PxMat44 shapePose(PxShapeExt::getGlobalPose(*shapes[j], *actors[i]));
 			const PxGeometry& geom = shapes[j]->getGeometry();
 
-			if (geom.getType() == PxGeometryType::eSPHERE)
-			{
-				//std::cout << shapePose.column3.x << " " << shapePose.column3.y << " " << shapePose.column3.z << " " << shapePose.column0.w << std::endl;
-			}
-
 			XMFLOAT4X4 world;
 			world._11 = shapePose.column0.x; world._12 = shapePose.column0.y; world._13 = shapePose.column0.z; world._14 = shapePose.column0.w;
 			world._21 = shapePose.column1.x; world._22 = shapePose.column1.y; world._23 = shapePose.column1.z; world._24 = shapePose.column1.w;
@@ -288,12 +280,6 @@ void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)
 			world._41 = shapePose.column3.x; world._42 = shapePose.column3.y; world._43 = shapePose.column3.z; world._44 = shapePose.column3.w;
 
 			XMMATRIX mWorld = XMLoadFloat4x4(&world);
-
-			if (geom.getType() == PxGeometryType::eSPHERE)
-				//std::cout << shapePose.column3.x << " " << shapePose.column3.y << " " << shapePose.column3.z << " " << shapePose.column0.w << std::endl;
-
-			if (geom.getType() == PxGeometryType::eBOX)
-				std::cout << shapePose.column1.x << " " << shapePose.column1.y << " " << shapePose.column1.z << " " << shapePose.column0.w << std::endl;
 
 			actorGlobalPoses[i] = mWorld;
 		}
