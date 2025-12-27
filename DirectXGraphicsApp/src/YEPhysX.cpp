@@ -73,6 +73,7 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 	_dynamicSphere->setAngularDamping(0.5f);
 	_dynamicSphere->setMass(5.0f);
 	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
+	_dynamicSphere->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 
 	_scene->addActor(*_dynamicSphere);
 }
@@ -89,18 +90,21 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 	switch (numberOfAttached)
 	{
 	case 1:
-		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, PxTransform(PxVec3(0.0, -0.25, 0.0))));
+		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f));
 		attachedBodiesCount += 1;
 
-		if (pulleyJointsList[pulleyJointID] == nullptr)
-		{
-			pulleyJointsList[pulleyJointID] = new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
-			pulleyJointsList[pulleyJointID]->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)));
+		
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -1.0f));
 
-			_scene->addActor(*attachedBodies[0]);
+		pulleyJointsList[pulleyJointID]->mBodies = 1;
+		pulleyJointsList[pulleyJointID]->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 
-			pulleyJointID++; 
-		}
+		for (size_t i = attachedBodiesID; i < attachedBodies.size(); i++)
+			_scene->addActor(*attachedBodies[i]);
+
+		attachedBodiesID += 1;
+		pulleyJointID++; 
 			
 		break;
 
@@ -177,6 +181,7 @@ bool YEPhysX::Init()
 	sceneDesc.gravity = PxVec3(0.0f, -9.81f, 0.0f);
 	sceneDesc.cpuDispatcher = _dispatcher;
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
+	sceneDesc.flags |= PxSceneFlag::eENABLE_CCD;
 
 	_scene = _physics->createScene(sceneDesc);
 	_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
@@ -240,23 +245,21 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		rot += 0.08f; rotInc += 0.1; if (rot > 16.0f) rot = 0.0f; if (rotInc > 5.0f) rotInc = 0.0f;
 	}
 
-	pulleyJointsList[0]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
-	pulleyJointsList[1]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
+	for (size_t i = 0; i < pulleyJointsList.size(); i++)
+		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
 
-	if (attachedBodies.size() < 2)
-		attachedBodies[0]->setKinematicTarget(PxTransform(PxVec3(rightDir, attachedBodies[0]->getGlobalPose().p.y, attachedBodies[0]->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
-	else
-	{
-		for (size_t i = 0; i < pulleyJointAttachedBodiesMap.size(); i++)
-			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+	//pulleyJointsList[1]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
+	//pulleyJointsList[2]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
+
+	for (size_t i = 0; i < pulleyJointAttachedBodiesMap.size(); i++)
+		pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
 		
-		if (rightDir < -2.0f)
-			rightDir = -2.0f;
-		if (rightDir > 5.0f)
-			rightDir = 5.0f;
+	if (rightDir < -2.0f)
+		rightDir = -2.0f;
+	if (rightDir > 5.0f)
+		rightDir = 5.0f;
 
-		YELog("\nRot: " + std::to_string(rot));
-	}
+	YELog("\nRot: " + std::to_string(rot));
 }
 
 void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)
