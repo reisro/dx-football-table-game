@@ -18,6 +18,8 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
+	bool _isCPU;
+
 protected:
 	FTPlayer*			_player_right;
 	FTPlayer*			_player_left;

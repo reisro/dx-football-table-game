@@ -19,7 +19,7 @@ FTSingleHandle::~FTSingleHandle()
 void FTSingleHandle::start()
 {
 	YEPhysics::GetInstance()->CreateJoint(*_player_left->_transform->getPosition(),
-		*_player_left->_transform->getPosition(), 1);
+		*_player_left->_transform->getPosition(), 1, _isCPU);
 
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
 }
