@@ -20,10 +20,11 @@ using namespace physx;
 
 struct PulleyJointBodyInfo
 {
-	PulleyJointBodyInfo(PxRigidDynamic* b, float o) : box(b), offset(o) {}
+	PulleyJointBodyInfo(PxRigidDynamic* b, float o, bool input) : box(b), offset(o), receivesInput(input) {}
 
 	PxRigidDynamic* box;
 	float offset;
+	bool receivesInput;
 };
 
 class DX_API YEPhysX : public YEPhysics
@@ -41,9 +42,7 @@ public:
 
 	void CreateCustomRigidBody() override;
 
-	void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached) override;
-
-	void UpdateKinematicActors();
+	void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer) override;
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
@@ -66,6 +65,8 @@ public:
 	// Render callback for physics debug rendering
 	virtual void RenderCallback() override;
 
+	void SetKinematicPulleyJointBody(int id);
+
 	virtual XMMATRIX GetGlobalPose(UINT actorID);
 
 	static YEPhysX*					_instance;
@@ -79,7 +80,7 @@ public:
 	static PxPvd*					_pvd;
 	static PxPvdTransport*			_transport;
 	
-	float rot = 0.0f;
+	float rot = 3.0f;
 	float rotInc = 0.0f;
 	float rightDir = 1.0f;
 	float leftDir = 1.0f;
@@ -88,18 +89,16 @@ public:
 	int pulleyJointID = 0;
 	int attachedBodiesCount = -1;
 	int attachedBodiesID = 0;
+	int attachedBodiesKinematicID = 0;
 
 	PxRigidDynamic*					_dynamicSphere;
 	YEInput*						_input;
-	PulleyJoint*					_joint;
-	PulleyJoint*					_joint1;
-	PulleyJoint*					_joint2;
-	PulleyJoint*					_joint3;
 
-	std::vector<XMMATRIX>		 actorGlobalPoses;
-	std::vector<PxRigidDynamic*> attachedBodies;
-	std::vector <PulleyJoint*>	 pulleyJointsList;
+	std::vector<XMMATRIX>			 actorGlobalPoses;
+	std::vector<PxRigidDynamic*>	 attachedBodies;
+	std::vector <PulleyJoint*>		 pulleyJointsList;
 	std::vector<PulleyJointBodyInfo> pulleyJointAttachedBodiesMap;
+	std::vector<PxRigidDynamic*>	 pulleyJointAttachedBodies;
 };
 
 #endif _YE_PHYSX_H

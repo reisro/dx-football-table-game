@@ -27,7 +27,6 @@ YEPhysX::YEPhysX()
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
 	actorGlobalPoses.push_back(XMMatrixIdentity());
-	actorGlobalPoses.push_back(XMMatrixIdentity());
 
 	pulleyJointsList = std::vector<PulleyJoint*>();
 
@@ -82,7 +81,7 @@ void YEPhysX::CreateCustomRigidBody()
 {
 }
 
-void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached)
+void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer)
 {
 	PxBoxGeometry boxGeom(0.25f,0.9f, 0.15f);
 	PxVec3 newPos = PxVec3(pos._x - 1.92f, pos._y, pos._z);
@@ -95,7 +94,9 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 
 		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)));
 		
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -1.0f));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -1.0f, inputPlayer));
+
+		pulleyJointAttachedBodies.resize(attachedBodiesCount);
 
 		pulleyJointsList[pulleyJointID]->mBodies = 1;
 		pulleyJointsList[pulleyJointID]->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
@@ -116,8 +117,10 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount-1], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
 			*attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)));
 
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount - 1], 0.0f));
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -3.0f));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount-1], 0.0f, inputPlayer));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -3.0f, inputPlayer));
+
+		pulleyJointAttachedBodies.resize(attachedBodiesCount);
 
 		pulleyJointsList[pulleyJointID]->mBodies = 2;
 
@@ -136,13 +139,13 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 		for (size_t i = 0; i < 3; i++)
 			attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, PxTransform(PxVec3(0.0, -0.25, 0.0))));
 		
-		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+		/*_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
 											*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
 											*attachedBodies[2], PxTransform(PxVec3(0.0f, 2.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)); 
 		
 		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
 		_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
-		_joint->mBody[2]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+		_joint->mBody[2]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);*/
 
 		for (size_t i = 0; i < attachedBodies.size(); i++)
 			_scene->addActor(*attachedBodies[i]);
@@ -151,15 +154,10 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 
 	default:
 		YELog("\n[ERROR] Unsupported number of attached bodies for joint creation!");
-		_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
-											*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));
+		/*_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
+											*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));*/
 		return;
 	}
-}
-
-void YEPhysX::UpdateKinematicActors()
-{
-
 }
 
 void YEPhysX::Setup()
@@ -188,6 +186,7 @@ bool YEPhysX::Init()
 	_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_DYNAMIC, 1.0f);
 
 	PxPvdSceneClient* pvdClient = _scene->getScenePvdClient();
+
 	if (pvdClient)
 	{
 		pvdClient->setScenePvdFlag(PxPvdSceneFlag::eTRANSMIT_CONSTRAINTS, true);
@@ -241,15 +240,24 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	if (_input->keyDown(DIK_C))
 	{
-		//rot < 100.0 ? rot += 0.1 : rot = 0.0; rotInc < 1.0 ? rotInc += 0.01 : rotInc = 0.0; std::cout << "Rot: " << rot << std::endl;
-		rot += 0.08f; rotInc += 0.1; if (rot > 16.0f) rot = 0.0f; if (rotInc > 5.0f) rotInc = 0.0f;
+		rot += 0.08f; rotInc += 0.1; if (rot > 7.0f) rot = 3.0f; if (rotInc > 3.0f) rotInc = 0.0f;
+	}
+
+	if (_input->keyDown(DIK_V))
+	{
+		rot -= 0.08f; rotInc += 0.1; if (rot < 0.0f) rot = 3.0f; if (rotInc < -3.0f) rotInc = 0.0f;
 	}
 
 	for (size_t i = 0; i < pulleyJointsList.size(); i++)
 		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
 
 	for (size_t i = 0; i < pulleyJointAttachedBodiesMap.size(); i++)
-		pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+	{
+		if (pulleyJointAttachedBodiesMap[i].receivesInput)
+			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+	}
+
+	//pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
 		
 	if (rightDir < -2.0f)
 		rightDir = -2.0f;
@@ -304,6 +312,12 @@ void YEPhysX::RenderCallback()
 			Render(&actors[0], static_cast<PxU32>(actors.size()));
 		}
 	}
+}
+
+void YEPhysX::SetKinematicPulleyJointBody(int id)
+{
+	pulleyJointAttachedBodies[attachedBodiesKinematicID] = pulleyJointAttachedBodiesMap[id].box;
+	attachedBodiesKinematicID++;
 }
 
 XMMATRIX YEPhysX::GetGlobalPose(UINT actorID)
