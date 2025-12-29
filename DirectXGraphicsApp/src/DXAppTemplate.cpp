@@ -68,36 +68,40 @@ public:
 
 		football_walls->start();
 
-		football_ball->start();
+		football_ball->start(); //0
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 3.0f, 0.0f));
 
-		football_player->start(); //3
+		football_player->start(); //1
 		football_player->_transform->setPosition(new YEVector3(0.0f, 0.85f, 3.63704f));
 
-		football_player2->start(); //4
+		football_player2->start(); //2
 		football_player2->_transform->setPosition(new YEVector3(3.0f, 0.85f, 3.63704f));
 
+		football_handle->_isCPU = true;
 		football_handle->start();
 		football_handle->_transform->setPosition(new YEVector3(0.0f, 1.15f, 3.62057f));
 
-		football_player_l->start(); //5
+		football_player_l->start(); //3
 		football_player_l->_transform->setPosition(new YEVector3(0.0f, 0.85f, -3.63704f));
 
-		football_player2_l->start(); //6
+		football_player2_l->start(); //4
 		football_player2_l->_transform->setPosition(new YEVector3(6.0f, 0.85f, -3.63704f));
 
+		football_handle_player->_isCPU = false;
 		football_handle_player->start();
 		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.62057f));
 
-		football_keeper->start(); //7
+		football_keeper->start(); //5
 		football_keeper->_transform->setPosition(new YEVector3(3.0f, 0.85f, -9.25f));
 
-		football_keeper_ai->start(); //8
+		football_keeper_ai->start(); //6
 		football_keeper_ai->_transform->setPosition(new YEVector3(3.0f, 0.85f, 9.25f));
 
+		football_handle_keeper->_isCPU = false;
 		football_handle_keeper->start();
 		football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 1.15f, -9.25f));
 
+		football_handle_keeper1->_isCPU = true;
 		football_handle_keeper1->start();
 		football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 1.15f, 9.25f));
 	}
