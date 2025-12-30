@@ -1,0 +1,1 @@
+#include "YESpriteComponent.h"

@@ -279,6 +279,9 @@
     <ClInclude Include="3rdparty\physx\include\samples\PulleyJoint.h">
       <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
+    <ClInclude Include="src\YESpriteComponent.h">
+      <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -391,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="3rdparty\physx\include\samples\PulleyJoint.cpp">
       <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YESpriteComponent.cpp">
+      <Filter>Arquivos de Origem\Core\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
