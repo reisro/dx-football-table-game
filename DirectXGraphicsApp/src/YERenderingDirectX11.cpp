@@ -367,7 +367,7 @@ void YERenderingDirectX11::BeginFrame()
 	XMStoreFloat4x4(&mView, V);
 
 	// Initialize the projection matrix
-	XMMATRIX P = XMMatrixPerspectiveFovLH(0.45f*3.1415926535f, 1368 / (FLOAT)720, .2f, 1000.0f);
+	XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f*3.1415926535f, 1368 / (FLOAT)720, .2f, 1000.0f);
 	XMStoreFloat4x4(&mProj, P);
 
 	bool show_demo_window = true;
