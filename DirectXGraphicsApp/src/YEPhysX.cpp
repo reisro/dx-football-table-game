@@ -226,6 +226,21 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	{
 		//_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
 		rightDir -= 0.1;
+		YELog("PLAYER.........................");
+
+	}
+
+	if (_input->keyDown(DIK_Q))
+	{
+		//_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0), PxForceMode::eIMPULSE);
+		cpuRightDir += 0.1;
+	}
+
+	if (_input->keyDown(DIK_E))
+	{
+		//_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
+		cpuRightDir -= 0.1;
+		YELog("CPU.........................");
 	}
 
 	if (_input->keyDown(DIK_F))
@@ -248,6 +263,11 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		rot -= 0.08f; rotInc += 0.1; if (rot < 0.0f) rot = 3.0f; if (rotInc < -3.0f) rotInc = 0.0f;
 	}
 
+	if (_input->keyDown(DIK_N))
+	{
+		cpuRot -= 0.08f; cpuRotInc += 0.1; if (cpuRot < 0.0f) cpuRot = 3.0f; if (cpuRotInc < -3.0f) cpuRotInc = 0.0f;
+	}
+
 	for (size_t i = 0; i < pulleyJointsList.size(); i++)
 		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
 
@@ -256,13 +276,18 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		if (pulleyJointAttachedBodiesMap[i].receivesInput)
 			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
 		else
-			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, 0, 0), PxVec3(1, 0, 0))));
+			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(cpuRightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, cpuRot, cpuRotInc), PxVec3(1, 0, 0))));
 	}
 
 	if (rightDir < -2.0f)
 		rightDir = -2.0f;
 	if (rightDir > 5.0f)
 		rightDir = 5.0f;
+
+	if (cpuRightDir < -2.0f)
+		cpuRightDir = -2.0f;
+	if (cpuRightDir > 5.0f)
+		cpuRightDir = 5.0f;
 
 	YELog("\nRot: " + std::to_string(rot));
 }

@@ -84,6 +84,9 @@ public:
 	float rotInc = 0.0f;
 	float rightDir = 1.0f;
 	float leftDir = 1.0f;
+	float cpuRightDir = 0.0f;
+	float cpuRot = 0.0f;
+	float cpuRotInc = 0.0f;
 
 	int pulleyJoints = 0;
 	int pulleyJointID = 0;
