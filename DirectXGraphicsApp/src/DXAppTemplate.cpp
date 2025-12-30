@@ -99,11 +99,11 @@ public:
 
 		football_handle_keeper->_isCPU = false;
 		football_handle_keeper->start();
-		football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 1.15f, -9.25f));
+		football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 1.15f, -8.5f));
 
 		football_handle_keeper1->_isCPU = true;
 		football_handle_keeper1->start();
-		football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 1.15f, 9.25f));
+		football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 1.15f, 8.5f));
 	}
 
 	bool update(dxDouble _deltaTime) override

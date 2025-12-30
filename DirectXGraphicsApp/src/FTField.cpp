@@ -13,7 +13,7 @@ FTField::~FTField()
 
 void FTField::start()
 {
-	_mesh_component = new YEMeshComponent(this, L"C:\\Game Assets\\football_table_field.fbx");
+	_mesh_component = new YEMeshComponent(this, L"C:\\Game Assets\\football_table_field1.fbx");
 
 	addComponent(_mesh_component);
 
