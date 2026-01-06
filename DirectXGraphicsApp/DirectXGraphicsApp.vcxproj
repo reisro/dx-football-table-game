@@ -234,6 +234,7 @@
     <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
     <ClCompile Include="src\YEBaseComponent.cpp" />
+    <ClCompile Include="src\YEBehaviourTree.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
     <ClCompile Include="src\YEGameContext.cpp" />
     <ClCompile Include="src\YEInput.cpp" />

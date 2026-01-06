@@ -127,6 +127,9 @@
     <Filter Include="Arquivos de Cabeçalho\AI">
       <UniqueIdentifier>{7c0ab897-692f-4081-803a-7d21c68259ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Origem\AI">
+      <UniqueIdentifier>{e5d6be87-6047-45da-a7ab-d37601af9e06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -383,9 +386,6 @@
     <ClCompile Include="src\YESceneObject.cpp">
       <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\YEBaseComponent.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="src\YEGameContext.cpp">
       <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
@@ -405,6 +405,12 @@
       <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClCompile>
     <ClCompile Include="src\YESpriteComponent.cpp">
+      <Filter>Arquivos de Origem\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEBehaviourTree.cpp">
+      <Filter>Arquivos de Origem\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEBaseComponent.cpp">
       <Filter>Arquivos de Origem\Core\Components</Filter>
     </ClCompile>
   </ItemGroup>

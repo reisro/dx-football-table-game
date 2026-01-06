@@ -13,7 +13,7 @@ public:
 	virtual ~YEBehaviourTree();
 
 private:
-
+	YEBehaviourNode* rootNode;
 };
 
 #endif // _YE_BEHAVIOUR_TREE_H_
