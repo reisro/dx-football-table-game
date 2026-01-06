@@ -163,6 +163,7 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayer.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayerWhite.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandle.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\GoalieOpponentBehaviour.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\OpponentPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,7 @@
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayer.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayerWhite.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandle.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\GoalieOpponentBehaviour.h" />
     <ClInclude Include="DirectXGraphicsApp\src\OpponentPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

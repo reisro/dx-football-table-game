@@ -7,3 +7,8 @@ YEBehaviourAction::YEBehaviourAction(std::function<YEBehaviourStatus(void)> acti
 YEBehaviourAction::~YEBehaviourAction()
 {
 }
+
+YEBehaviourStatus YEBehaviourAction::Execute()
+{
+	return YEBehaviourStatus();
+}

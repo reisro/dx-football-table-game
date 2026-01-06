@@ -7,13 +7,13 @@
 #include "DXAPI.h"
 #include <functional>
 
-class DX_API YEBehaviourAction
+class DX_API YEBehaviourAction : public YEBehaviourNode
 {
 public:
 	YEBehaviourAction(std::function<YEBehaviourStatus(void)> action);
 	virtual ~YEBehaviourAction();
 
-	virtual void Action() = 0;
+	YEBehaviourStatus Execute() override;
 
 private:
 	std::function<YEBehaviourStatus(void)> _mAction;
