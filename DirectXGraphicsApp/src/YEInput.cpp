@@ -103,7 +103,7 @@ void YEInput::poll()
 
 bool YEInput::keyDown(int keycode)
 {
-	return (_mKeyboardState[keycode] & 0x80) != 0;
+	return (_mKeyboardState[keycode] & 0x8000) != 0;
 }
 
 bool YEInput::mouseButtonDown(int button)

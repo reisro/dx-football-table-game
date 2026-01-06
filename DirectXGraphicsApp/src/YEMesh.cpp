@@ -94,7 +94,10 @@ void YEMesh::Draw(IUnknown* context)
 
 	renderContext->IASetVertexBuffers(0, 1, &mVB, &stride, &offset);
 	renderContext->IASetIndexBuffer(mIB, DXGI_FORMAT_R32_UINT, 0);
-	renderContext->PSSetShaderResources(0, 1, &_textures[0].texture);
+	
+	if (!_textures.empty())
+		renderContext->PSSetShaderResources(0, 1, &_textures[0].texture);
+
 	renderContext->DrawIndexed(static_cast<UINT>(_indices.size()), 0, 0);
 }
 

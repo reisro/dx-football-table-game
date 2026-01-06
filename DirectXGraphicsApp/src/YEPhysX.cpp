@@ -227,7 +227,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		//_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
 		rightDir -= 0.1;
 		YELog("PLAYER.........................");
-
 	}
 
 	if (_input->keyDown(DIK_Q))
@@ -275,7 +274,7 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	{
 		if (pulleyJointAttachedBodiesMap[i].receivesInput)
 			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
-		else
+		if (!pulleyJointAttachedBodiesMap[i].receivesInput)
 			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(cpuRightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, cpuRot, cpuRotInc), PxVec3(1, 0, 0))));
 	}
 
