@@ -180,7 +180,9 @@
     <ClInclude Include="src\dxerr.h" />
     <ClInclude Include="src\VectorWrapper.h" />
     <ClInclude Include="src\YE3DMeshHelper.h" />
+    <ClInclude Include="src\YEBehaviourTree.h" />
     <ClInclude Include="src\YEComponents.h" />
+    <ClInclude Include="src\YEComposites.h" />
     <ClInclude Include="src\YEGameContext.h" />
     <ClInclude Include="src\YEInput.h" />
     <ClInclude Include="src\YEMesh.h" />

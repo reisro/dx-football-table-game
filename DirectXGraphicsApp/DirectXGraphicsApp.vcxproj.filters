@@ -124,6 +124,9 @@
     <Filter Include="Arquivos de Origem\Input">
       <UniqueIdentifier>{973907d7-ebff-46fb-9090-b3cfca95665a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\AI">
+      <UniqueIdentifier>{7c0ab897-692f-4081-803a-7d21c68259ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -281,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="src\YESpriteComponent.h">
       <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YEBehaviourTree.h">
+      <Filter>Arquivos de Cabeçalho\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YEComposites.h">
+      <Filter>Arquivos de Cabeçalho\AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
