@@ -1,0 +1,22 @@
+#pragma once
+
+#ifndef _YE_BEHAVIOUR_ACTION_H_
+#define _YE_BEHAVIOUR_ACTION_H_
+
+#include "YEComposites.h"
+#include "DXAPI.h"
+#include <functional>
+
+class DX_API YEBehaviourAction
+{
+public:
+	YEBehaviourAction(std::function<YEBehaviourStatus(void)> action);
+	virtual ~YEBehaviourAction();
+
+	virtual void Action() = 0;
+
+private:
+	std::function<YEBehaviourStatus(void)> _mAction;
+};
+
+#endif // _YE_BEHAVIOUR_ACTION_H_

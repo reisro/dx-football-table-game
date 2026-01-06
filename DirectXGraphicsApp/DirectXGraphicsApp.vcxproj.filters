@@ -294,6 +294,9 @@
     <ClInclude Include="src\YEComposites.h">
       <Filter>Arquivos de Cabeçalho\AI</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEBehaviourAction.h">
+      <Filter>Arquivos de Cabeçalho\AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -412,6 +415,9 @@
     </ClCompile>
     <ClCompile Include="src\YEBaseComponent.cpp">
       <Filter>Arquivos de Origem\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEBehaviourAction.cpp">
+      <Filter>Arquivos de Origem\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
