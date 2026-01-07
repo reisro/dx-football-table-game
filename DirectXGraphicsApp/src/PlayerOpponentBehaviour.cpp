@@ -15,5 +15,7 @@ YEBehaviourStatus PlayerOpponentBehaviour::Defend()
 
 YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 {
-	return YEBehaviourStatus();
+	YELog("PlayerOpponentBehaviour: Attack executed.");
+
+	return YEBehaviourStatus::SUCCESS;
 }
