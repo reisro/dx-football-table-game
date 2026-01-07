@@ -17,6 +17,9 @@ void FTPlayerWhite::start()
 	addComponent(_mesh_component);
 
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+
+	_behaviour_tree = new PlayerOpponentBehaviour();
+	_behaviour_tree->SetComposite(new YESelector()); // Set the root node appropriately
 }
 
 void FTPlayerWhite::shutdown()

@@ -45,9 +45,6 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandle.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXGraphicsApp\src\OpponentPlayer.cpp">
-      <Filter>TableFootball</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXGraphicsApp\src\PlayerOpponentBehaviour.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
@@ -77,10 +74,7 @@
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandle.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXGraphicsApp\src\OpponentPlayer.h">
-      <Filter>TableFootball</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXGraphicsApp\src\PlayeOpponentBehaviour.h">
+    <ClInclude Include="DirectXGraphicsApp\src\PlayerOpponentBehaviour.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

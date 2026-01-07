@@ -15,8 +15,9 @@ public:
 	YEBehaviourStatus Defend();
 	YEBehaviourStatus Attack();
 
-private:
 	YEBehaviourNode* rootNode;
+
+private:
 };
 
 #endif // _GOALIE_OPPONENT_BEHAVIOUR_H_

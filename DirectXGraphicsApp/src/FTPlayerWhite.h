@@ -5,6 +5,8 @@
 
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
+#include "YEBehaviourAction.h"
+#include "PlayerOpponentBehaviour.h"
 
 class FTPlayerWhite : public YEGameObject
 {
@@ -18,6 +20,7 @@ public:
 
 protected:
 	YEMeshComponent* _mesh_component;
+	PlayerOpponentBehaviour* _behaviour_tree;
 };
 
 #endif _FT_PLAYER_WHITE_H_

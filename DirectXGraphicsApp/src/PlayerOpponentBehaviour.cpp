@@ -1,4 +1,4 @@
-#include "PlayeOpponentBehaviour.h"
+#include "PlayerOpponentBehaviour.h"
 
 PlayerOpponentBehaviour::PlayerOpponentBehaviour()
 {
