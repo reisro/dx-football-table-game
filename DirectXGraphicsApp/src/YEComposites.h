@@ -3,6 +3,8 @@
 #ifndef YE_COMPOSITES_H
 #define YE_COMPOSITES_H
 
+#include <vector>
+
 enum class YEBehaviourStatus
 {
 	SUCCESS,
@@ -17,6 +19,9 @@ class YEBehaviourNode
 	virtual ~YEBehaviourNode() {}
 
 	virtual YEBehaviourStatus Execute() = 0;
+
+protected:
+	std::vector<YEBehaviourNode*> _children;
 };
 
 class YESequence : public YEBehaviourNode
@@ -25,7 +30,7 @@ class YESequence : public YEBehaviourNode
 		YESequence() {}
 		virtual ~YESequence() {}
 
-		YEBehaviourStatus Execute() override {}
+		YEBehaviourStatus Execute() override;
 };
 
 class YESelector : public YEBehaviourNode
@@ -34,7 +39,7 @@ class YESelector : public YEBehaviourNode
 		YESelector() {}
 		virtual ~YESelector() {}
 
-		YEBehaviourStatus Execute() override {}
+		YEBehaviourStatus Execute() override;
 };
 
 class YEPartialSequence : public YEBehaviourNode
@@ -43,7 +48,7 @@ class YEPartialSequence : public YEBehaviourNode
 		YEPartialSequence() {}
 		virtual ~YEPartialSequence() {}
 
-		YEBehaviourStatus Execute() override {}
+		YEBehaviourStatus Execute() override;
 };
 
 #endif // YE_COMPOSITES_H
