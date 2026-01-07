@@ -48,7 +48,7 @@
     <ClCompile Include="DirectXGraphicsApp\src\OpponentPlayer.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXGraphicsApp\src\GoalieOpponentBehaviour.cpp">
+    <ClCompile Include="DirectXGraphicsApp\src\PlayerOpponentBehaviour.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="DirectXGraphicsApp\src\OpponentPlayer.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXGraphicsApp\src\GoalieOpponentBehaviour.h">
+    <ClInclude Include="DirectXGraphicsApp\src\PlayeOpponentBehaviour.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

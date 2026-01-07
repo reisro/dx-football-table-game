@@ -6,13 +6,14 @@
 #include "YEBehaviourTree.h"
 #include "YEBehaviourAction.h"
 
-class GoalieOpponentBehaviour : public YEBehaviourTree
+class PlayerOpponentBehaviour : public YEBehaviourTree
 {
 public:
-	GoalieOpponentBehaviour();
-	virtual ~GoalieOpponentBehaviour();
+	PlayerOpponentBehaviour();
+	virtual ~PlayerOpponentBehaviour();
 
 	YEBehaviourStatus Defend();
+	YEBehaviourStatus Attack();
 
 private:
 	YEBehaviourNode* rootNode;
