@@ -12,6 +12,15 @@ public:
 	YEBehaviourTree();
 	virtual ~YEBehaviourTree();
 
+	YEBehaviourStatus Execute()
+	{
+		if (_compositeNode)
+		{
+			return _compositeNode->Execute();
+		}
+		return YEBehaviourStatus::FAILURE;
+	}
+
 	void SetComposite(YEBehaviourNode* composite) { _compositeNode = composite; }
 
 private:

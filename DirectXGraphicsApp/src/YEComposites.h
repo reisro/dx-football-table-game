@@ -3,6 +3,7 @@
 #ifndef YE_COMPOSITES_H
 #define YE_COMPOSITES_H
 
+#include "DXAPI.h"
 #include <vector>
 
 enum class YEBehaviourStatus
@@ -12,13 +13,18 @@ enum class YEBehaviourStatus
 	RUNNING
 };
 
-class YEBehaviourNode
+class DX_API YEBehaviourNode
 {
 	public:
 	YEBehaviourNode() {}
 	virtual ~YEBehaviourNode() {}
 
 	virtual YEBehaviourStatus Execute() = 0;
+
+	void AddChild(YEBehaviourNode* child)
+	{
+		_children.push_back(child);
+	}
 
 protected:
 	std::vector<YEBehaviourNode*> _children;
@@ -33,7 +39,7 @@ class YESequence : public YEBehaviourNode
 		YEBehaviourStatus Execute() override;
 };
 
-class YESelector : public YEBehaviourNode
+class DX_API YESelector : public YEBehaviourNode
 {
 	public:
 		YESelector() {}
