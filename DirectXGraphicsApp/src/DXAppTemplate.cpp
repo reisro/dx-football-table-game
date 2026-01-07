@@ -40,7 +40,7 @@ public:
 		football_player2->hasParent = true;
 		football_player2->hasRigidBody = true;
 
-		football_player_l = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx");
+		football_player_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx");
 		football_player_l->hasParent = true;
 		football_player_l->hasRigidBody = true;
 
@@ -135,7 +135,7 @@ private:
 	FTField* football_field;
 	FTPlayer* football_player;
 	FTPlayer* football_player2;
-	FTPlayer* football_player_l;
+	FTPlayerWhite* football_player_l;
 	FTPlayer* football_player2_l;
 	FTPlayer* football_keeper;
 	FTPlayer* football_keeper_ai;

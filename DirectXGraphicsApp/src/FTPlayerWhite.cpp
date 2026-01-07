@@ -1,8 +1,10 @@
 #include "FTPlayerWhite.h"
+#include <YEPhysX.h>
+#include <functional> 
 
-FTPlayerWhite::FTPlayerWhite(const YEGameContext& _game_context) :
-	YEGameObject(_game_context),
-	_mesh_component(nullptr)
+FTPlayerWhite::FTPlayerWhite(const YEGameContext& _game_context, const wchar_t* _meshName)
+	: FTPlayer(_game_context, _meshName)
+	, _behaviour_tree(nullptr)
 {
 }
 
@@ -12,14 +14,13 @@ FTPlayerWhite::~FTPlayerWhite()
 
 void FTPlayerWhite::start()
 {
-	_mesh_component = new YEMeshComponent(this, L"C:\\Game Assets\\football_player_white.fbx");
-
-	addComponent(_mesh_component);
-
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
-
 	_behaviour_tree = new PlayerOpponentBehaviour();
-	_behaviour_tree->SetComposite(new YESelector()); // Set the root node appropriately
+
+	YEBehaviourNode* rootNode = new YESelector();
+
+	rootNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::Attack, _behaviour_tree)));
+
+	_behaviour_tree->SetComposite(rootNode); // Set the root node appropriately
 }
 
 void FTPlayerWhite::shutdown()
@@ -28,5 +29,7 @@ void FTPlayerWhite::shutdown()
 
 void FTPlayerWhite::update(float _deltaTime)
 {
-	YEGameObject::update(_deltaTime);
+	FTPlayer::update(_deltaTime);
+
+	_behaviour_tree->Execute();
 }
