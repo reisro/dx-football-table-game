@@ -12,8 +12,10 @@ public:
 	YEBehaviourTree();
 	virtual ~YEBehaviourTree();
 
+	void SetComposite(YEBehaviourNode* composite) { _compositeNode = composite; }
+
 private:
-	YEBehaviourNode* rootNode;
+	YEBehaviourNode* _compositeNode;
 };
 
 #endif // _YE_BEHAVIOUR_TREE_H_
