@@ -42,12 +42,19 @@ public:
 	// returns the length of the vector
 	static XMVECTOR Magnitude(const YEVector3& vec);
 
+	yeFloat Magnitude() const { return sqrt(_x*_x+_y*_y+_z*_z); }
+
 	// returns the normalized vector
 	static inline YEVector3* Normalize(YEVector3& out, YEVector3& vec);
 
 	static inline YEVector3* Sum(const YEVector3& vec, const YEVector3& vec2)
 	{
 		return new YEVector3(vec._x + vec2._x, vec._y + vec2._y, vec._z + vec2._z);
+	};
+
+	static inline YEVector3* Subtract(const YEVector3& vec, const YEVector3& vec2)
+	{
+		return new YEVector3(vec._x - vec2._x, vec._y - vec2._y, vec._z - vec2._z);
 	};
 
 	static inline yeFloat Dot(const YEVector3& vec, const YEVector3& vec2);
