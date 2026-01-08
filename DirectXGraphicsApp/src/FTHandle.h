@@ -14,9 +14,9 @@ public:
 	FTHandle(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName);
 	virtual ~FTHandle();
 
-	void start() override;
-	void shutdown() override;
-	void update(float _deltaTime) override;
+	virtual void start() override;
+	virtual void shutdown() override;
+	virtual void update(float _deltaTime) override;
 
 	bool _isCPU;
 
