@@ -162,7 +162,7 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 
 void YEPhysX::RotateJointBody()
 {
-	cpuRot -= 0.08f; cpuRotInc += 0.1; if (cpuRot < 0.0f) cpuRot = 3.0f; if (cpuRotInc < -3.0f) cpuRotInc = 0.0f;
+	cpuRot += 0.04f; cpuRotInc += 0.65; if (cpuRot > 0.95f) cpuRot = 0.95f; if (cpuRotInc > 26.0f) cpuRotInc = 26.0f;
 }
 
 void YEPhysX::Setup()
@@ -293,7 +293,14 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	if (cpuRightDir > 5.0f)
 		cpuRightDir = 5.0f;
 
+	if (_dynamicSphere->getLinearVelocity().magnitude() > 12.0f)
+	{
+		PxVec3 v =_dynamicSphere->getLinearVelocity().getNormalized() * 12.0f;
+		_dynamicSphere->setLinearVelocity(v);
+	}
+
 	YELog("\nRot: " + std::to_string(rot));
+	YELog("\nYEPhysics: Ball Velocity %f" + std::to_string(_dynamicSphere->getLinearVelocity().magnitude()));
 }
 
 void YEPhysX::Render(PxRigidActor** actors, const PxU32 numActors)

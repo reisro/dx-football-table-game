@@ -89,6 +89,7 @@ public:
 	float cpuRightDir = 0.0f;
 	float cpuRot = 0.0f;
 	float cpuRotInc = 0.0f;
+	bool once = false;
 
 	int pulleyJoints = 0;
 	int pulleyJointID = 0;
