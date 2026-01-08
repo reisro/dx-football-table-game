@@ -22,12 +22,10 @@ void FTPlayerWhite::start()
 
 	YEBehaviourNode* rootNode = new YESelector();
 
-	//rootNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::Attack, _behaviour_tree)));
-	//rootNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::Deffend, _behaviour_tree)));
-
 	YESequence* sequenceNode = new YESequence();
 	sequenceNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::WatchBall, _behaviour_tree)));
 	sequenceNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::Attack, _behaviour_tree)));
+
 	rootNode->AddChild(sequenceNode);
 
 	_behaviour_tree->SetComposite(sequenceNode);

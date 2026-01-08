@@ -44,7 +44,7 @@ public:
 		football_player_l->hasParent = true;
 		football_player_l->hasRigidBody = true;
 
-		football_player2_l = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx");
+		football_player2_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx");
 		football_player2_l->hasParent = true;
 		football_player2_l->hasRigidBody = true;
 
@@ -115,6 +115,7 @@ public:
 		football_handle_player->update(static_cast<float>(_deltaTime));
 		football_player_l->DistanceFromTarget(football_ball);
 		football_player_l->update(static_cast<float>(_deltaTime));
+		football_player2_l->DistanceFromTarget(football_ball);
 		football_player2_l->update(static_cast<float>(_deltaTime));
 		football_keeper->update(static_cast<float>(_deltaTime));
 		football_handle_keeper->update(static_cast<float>(_deltaTime));
@@ -137,7 +138,7 @@ private:
 	FTPlayer* football_player;
 	FTPlayer* football_player2;
 	FTPlayerWhite* football_player_l;
-	FTPlayer* football_player2_l;
+	FTPlayerWhite* football_player2_l;
 	FTPlayer* football_keeper;
 	FTPlayer* football_keeper_ai;
 	FTPlayerWhite* football_player_white;

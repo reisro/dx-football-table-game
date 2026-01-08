@@ -32,6 +32,7 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 		phsyX->RotateJointBody();
+		phsyX->MoveJointBody();
 
 		return YEBehaviourStatus::SUCCESS;
 	}

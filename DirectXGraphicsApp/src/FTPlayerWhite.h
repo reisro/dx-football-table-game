@@ -25,7 +25,7 @@ protected:
 
 private:
 	FTBall* _football_ball;
-	yeFloat _ballDistanceThreshold = 1.20f;
+	yeFloat _ballDistanceThreshold = 1.10f;
 };
 
 #endif _FT_PLAYER_WHITE_H_
