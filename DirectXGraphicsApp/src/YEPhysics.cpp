@@ -38,6 +38,10 @@ void YEPhysics::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int num
 {
 }
 
+void YEPhysics::RotateJointBody()
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

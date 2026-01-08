@@ -44,6 +44,8 @@ public:
 
 	void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer) override;
 
+	void RotateJointBody() override;
+
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
 

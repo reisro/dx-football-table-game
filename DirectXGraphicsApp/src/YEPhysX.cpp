@@ -160,6 +160,11 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 	}
 }
 
+void YEPhysX::RotateJointBody()
+{
+	cpuRot -= 0.08f; cpuRotInc += 0.1; if (cpuRot < 0.0f) cpuRot = 3.0f; if (cpuRotInc < -3.0f) cpuRotInc = 0.0f;
+}
+
 void YEPhysX::Setup()
 {
 }

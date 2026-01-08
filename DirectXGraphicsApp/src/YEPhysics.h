@@ -21,6 +21,7 @@ public:
 	virtual void CreateDynamicSphere(YEVector3* pos, yeFloat radius);
 	virtual void CreateCustomRigidBody();
 	virtual void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer);
+	virtual void RotateJointBody();
 
 	static YEPhysics* GetInstance();
 
