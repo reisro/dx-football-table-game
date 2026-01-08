@@ -46,6 +46,8 @@ public:
 
 	void RotateJointBody() override;
 
+	void MoveJointBody() override;
+
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
 

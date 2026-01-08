@@ -71,7 +71,7 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 
 	_dynamicSphere->setAngularDamping(0.5f);
 	_dynamicSphere->setMass(5.0f);
-	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
+	_dynamicSphere->setLinearVelocity(PxVec3(2.0f, -1.0f, -2.0f));
 	_dynamicSphere->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 
 	_scene->addActor(*_dynamicSphere);
@@ -154,15 +154,18 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 
 	default:
 		YELog("\n[ERROR] Unsupported number of attached bodies for joint creation!");
-		/*_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
-											*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f));*/
 		return;
 	}
 }
 
 void YEPhysX::RotateJointBody()
 {
-	cpuRot += 0.04f; cpuRotInc += 0.65; if (cpuRot > 0.95f) cpuRot = 0.95f; if (cpuRotInc > 26.0f) cpuRotInc = 26.0f;
+	cpuRot += 0.05f; cpuRotInc += 0.65; if (cpuRot > 0.95f) cpuRot = 0.95f; if (cpuRotInc > 26.0f) cpuRotInc = 26.0f;
+}
+
+void YEPhysX::MoveJointBody()
+{
+	cpuRightDir += 0.05; if (cpuRightDir > 2.0f) cpuRightDir = 2.0f;
 }
 
 void YEPhysX::Setup()
@@ -283,19 +286,19 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(cpuRightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, cpuRot, cpuRotInc), PxVec3(1, 0, 0))));
 	}
 
-	if (rightDir < -2.0f)
-		rightDir = -2.0f;
-	if (rightDir > 5.0f)
-		rightDir = 5.0f;
+	if (rightDir < -2.4f)
+		rightDir = -2.4f;
+	if (rightDir > 5.4f)
+		rightDir = 5.4f;
 
 	if (cpuRightDir < -2.0f)
 		cpuRightDir = -2.0f;
 	if (cpuRightDir > 5.0f)
 		cpuRightDir = 5.0f;
 
-	if (_dynamicSphere->getLinearVelocity().magnitude() > 12.0f)
+	if (_dynamicSphere->getLinearVelocity().magnitude() > 20.0f)
 	{
-		PxVec3 v =_dynamicSphere->getLinearVelocity().getNormalized() * 12.0f;
+		PxVec3 v =_dynamicSphere->getLinearVelocity().getNormalized() * 20.0f;
 		_dynamicSphere->setLinearVelocity(v);
 	}
 

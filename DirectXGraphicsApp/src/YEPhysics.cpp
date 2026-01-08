@@ -42,6 +42,10 @@ void YEPhysics::RotateJointBody()
 {
 }
 
+void YEPhysics::MoveJointBody()
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

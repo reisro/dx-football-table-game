@@ -22,6 +22,7 @@ public:
 	virtual void CreateCustomRigidBody();
 	virtual void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer);
 	virtual void RotateJointBody();
+	virtual void MoveJointBody();
 
 	static YEPhysics* GetInstance();
 
