@@ -76,7 +76,7 @@ public:
 		football_player->_transform->setPosition(new YEVector3(0.0f, 0.85f, 3.85704f));
 
 		football_player2->start(); //2
-		football_player2->_transform->setPosition(new YEVector3(3.0f, 0.85f, 3.73704f));
+		football_player2->_transform->setPosition(new YEVector3(3.0f, 0.85f, 3.85704f));
 
 		football_handle->_isCPU = true;
 		football_handle->start();
