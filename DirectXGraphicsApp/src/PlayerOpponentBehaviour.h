@@ -12,12 +12,15 @@ public:
 	PlayerOpponentBehaviour();
 	virtual ~PlayerOpponentBehaviour();
 
-	YEBehaviourStatus Defend();
+	YEBehaviourStatus Deffend();
 	YEBehaviourStatus Attack();
+	YEBehaviourStatus WatchBall();
 
 	YEBehaviourNode* rootNode;
 
-private:
+	bool    _isDefending;
+	bool    _isBehind;
+	bool	_closeToShoot;
 };
 
 #endif // _GOALIE_OPPONENT_BEHAVIOUR_H_

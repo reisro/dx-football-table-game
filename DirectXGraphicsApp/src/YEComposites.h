@@ -30,7 +30,7 @@ protected:
 	std::vector<YEBehaviourNode*> _children;
 };
 
-class YESequence : public YEBehaviourNode
+class DX_API YESequence : public YEBehaviourNode
 {
 	public:
 		YESequence() {}
