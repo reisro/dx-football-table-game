@@ -18,7 +18,7 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	void DistanceFromTarget(YEGameObject* football_ball);
+	yeFloat DistanceFromTarget(YEGameObject* football_ball);
 
 protected:
 	PlayerOpponentBehaviour* _behaviour_tree;

@@ -18,7 +18,7 @@ void FTPlayerWhite::start()
 {
 	FTPlayer::start();
 
-	_behaviour_tree = new PlayerOpponentBehaviour();
+	/*_behaviour_tree = new PlayerOpponentBehaviour();
 
 	YEBehaviourNode* rootNode = new YESelector();
 
@@ -28,7 +28,7 @@ void FTPlayerWhite::start()
 
 	rootNode->AddChild(sequenceNode);
 
-	_behaviour_tree->SetComposite(sequenceNode);
+	_behaviour_tree->SetComposite(sequenceNode);*/
 }
 
 void FTPlayerWhite::shutdown()
@@ -38,17 +38,15 @@ void FTPlayerWhite::shutdown()
 void FTPlayerWhite::update(float _deltaTime)
 {
 	FTPlayer::update(_deltaTime);
-
-	_behaviour_tree->Execute();
 }
 
-void FTPlayerWhite::DistanceFromTarget(YEGameObject* football_ball)
+yeFloat FTPlayerWhite::DistanceFromTarget(YEGameObject* football_ball)
 {
 	YEVector3* diff = YEVector3::Subtract(*_transform->getPosition(), *football_ball->_transform->getPosition());
 
 	yeFloat distance = diff->Magnitude();
 
-	distance <= _ballDistanceThreshold ? _behaviour_tree->_closeToShoot = true : _behaviour_tree->_closeToShoot = false;
-
 	YELog("Ball Distance: " + std::to_string(diff->Magnitude()));
+
+	return distance;
 }
