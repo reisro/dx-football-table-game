@@ -3,6 +3,7 @@
 #include <FTField.h>
 #include <FTPlayer.h>
 #include <FTPlayerWhite.h>
+#include <FTHandleWhite.h>
 #include <FTHandle.h>
 #include <FTSingleHandle.h>
 #include <FTFieldWalls.h>
@@ -57,7 +58,7 @@ public:
 
 		football_handle = new FTHandle(GetGameContext(), football_player, football_player2, L"C:\\Game Assets\\football_handle.fbx");
 
-		football_handle_player = new FTHandle(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle_player = new FTHandleWhite(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
 
 		football_handle_keeper = new FTSingleHandle(GetGameContext(), football_keeper, football_keeper, L"C:\\Game Assets\\football_handle.fbx");
 		football_handle_keeper1 = new FTSingleHandle(GetGameContext(), football_keeper_ai, nullptr, L"C:\\Game Assets\\football_handle.fbx");
@@ -143,7 +144,7 @@ private:
 	FTPlayer* football_keeper_ai;
 	FTPlayerWhite* football_player_white;
 	FTHandle* football_handle;
-	FTHandle* football_handle_player;
+	FTHandleWhite* football_handle_player;
 	FTSingleHandle* football_handle_keeper;
 	FTSingleHandle* football_handle_keeper1;
 	FTFieldWalls* football_walls;

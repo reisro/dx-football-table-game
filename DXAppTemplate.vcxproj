@@ -160,6 +160,7 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTFieldWalls.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTHandle.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTHandlePlayer.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTHandleWhite.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayer.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayerWhite.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandle.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="DirectXGraphicsApp\src\FTFieldWalls.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTHandle.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTHandlePlayer.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTHandleWhite.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayer.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayerWhite.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandle.h" />

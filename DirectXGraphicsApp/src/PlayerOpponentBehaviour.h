@@ -14,6 +14,7 @@ public:
 
 	YEBehaviourStatus Deffend();
 	YEBehaviourStatus Attack();
+	YEBehaviourStatus MoveHandle();
 	YEBehaviourStatus WatchBall();
 
 	YEBehaviourNode* rootNode;

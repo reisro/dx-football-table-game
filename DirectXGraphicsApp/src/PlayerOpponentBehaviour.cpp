@@ -40,6 +40,11 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 	return YEBehaviourStatus::FAILURE;
 }
 
+YEBehaviourStatus PlayerOpponentBehaviour::MoveHandle()
+{
+	return YEBehaviourStatus::FAILURE;
+}
+
 YEBehaviourStatus PlayerOpponentBehaviour::WatchBall()
 {
 	YELog("PlayerOpponentBehaviour: Watching Ball executed.");
