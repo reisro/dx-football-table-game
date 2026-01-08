@@ -422,6 +422,9 @@
     <ClCompile Include="src\YESelector.cpp">
       <Filter>Arquivos de Origem\AI</Filter>
     </ClCompile>
+    <ClCompile Include="src\YESequence.cpp">
+      <Filter>Arquivos de Origem\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

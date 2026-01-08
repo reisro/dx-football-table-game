@@ -130,6 +130,12 @@ void YETransformComponent::setTransformMatrix(const DirectX::CXMMATRIX& mWorld)
 {
 	XMStoreFloat4x4(&_mWorld, mWorld);
 
+	_position.SetValue(new YEVector3(mWorld.r[3].m128_f32[0], mWorld.r[3].m128_f32[1], mWorld.r[3].m128_f32[2]));
+
+	x = _position._x;
+	y = _position._y;
+	z = _position._z;
+
 	Notify(); 
 }
 

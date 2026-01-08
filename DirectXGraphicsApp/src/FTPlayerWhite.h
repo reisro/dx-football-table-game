@@ -4,6 +4,7 @@
 #define _FT_PLAYER_WHITE_H_
 
 #include "FTPlayer.h"
+#include "FTBall.h"
 #include "YEBehaviourAction.h"
 #include "PlayerOpponentBehaviour.h"
 
@@ -17,8 +18,14 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
+	void DistanceFromTarget(YEGameObject* football_ball);
+
 protected:
 	PlayerOpponentBehaviour* _behaviour_tree;
+
+private:
+	FTBall* _football_ball;
+	yeFloat _ballDistanceThreshold = 1.20f;
 };
 
 #endif _FT_PLAYER_WHITE_H_

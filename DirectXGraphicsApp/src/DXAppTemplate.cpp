@@ -113,6 +113,7 @@ public:
 		football_player->update(static_cast<float>(_deltaTime));
 		football_player2->update(static_cast<float>(_deltaTime));
 		football_handle_player->update(static_cast<float>(_deltaTime));
+		football_player_l->DistanceFromTarget(football_ball);
 		football_player_l->update(static_cast<float>(_deltaTime));
 		football_player2_l->update(static_cast<float>(_deltaTime));
 		football_keeper->update(static_cast<float>(_deltaTime));
