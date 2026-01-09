@@ -190,9 +190,9 @@ void YE::YEApplication::Run(YEGame* gameApp)
 				// Game application state related resources update
 				_gameApp->update(YETimer::GetInstance()->GetDeltaTime());
 
-				YETimer::GetInstance()->UpdateLastTime();
+				YELog("FPS:" + std::to_string(YETimer::GetInstance()->GetDeltaTime()));
 
-				//YELog("Frame:" + std::to_string(frame_coutner));
+				YETimer::GetInstance()->UpdateLastTime();
 
 				frame_coutner++;
 			}
