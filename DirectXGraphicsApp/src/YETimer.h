@@ -31,6 +31,7 @@ public:
 	void			Tick();
 	dxInt64			GetTicks();
 	dxInt64			GetElapsedTime();
+	dxInt64			Countdown(yeInt targetTime);
 	void			NowTime();
 	dxDouble		GetDeltaTime();
 	dxInt64			GetPerformanceCounter();

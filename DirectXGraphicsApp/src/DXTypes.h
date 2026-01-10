@@ -15,7 +15,7 @@ typedef long                    dxInt32;
 typedef unsigned long           dxUInt32;
 typedef signed __int64          dxInt64;
 typedef unsigned __int64        dxUInt64;
-typedef int                     dxInt;
+typedef int                     yeInt;
 typedef unsigned int            dxUInt;
 typedef float                   yeFloat;
 typedef double                  dxDouble;
