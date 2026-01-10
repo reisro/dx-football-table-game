@@ -5,13 +5,16 @@ YEBehaviourStatus YESequence::Execute()
     for (YEBehaviourNode* child : _children)
     {
         YEBehaviourStatus status = child->Execute();
-        if (status == YEBehaviourStatus::FAILURE)
+        switch (status)
         {
-            return YEBehaviourStatus::FAILURE;
-        }
-        else if (status == YEBehaviourStatus::RUNNING)
-        {
-            return YEBehaviourStatus::RUNNING;
+        case YEBehaviourStatus::FAILURE:
+            return status;
+        case YEBehaviourStatus::RUNNING:
+            return status;
+        case YEBehaviourStatus::SUCCESS:
+            continue;
+		default:
+			continue;
         }
     }
 
