@@ -9,7 +9,7 @@ YEWinAppWindow::YEWinAppWindow()
 {
 }
 
-YEWinAppWindow::YEWinAppWindow(dxInt width, dxInt height):
+YEWinAppWindow::YEWinAppWindow(yeInt width, yeInt height):
     YEWindow(width, height)
 {
 }

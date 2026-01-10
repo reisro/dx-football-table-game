@@ -12,7 +12,7 @@ class DX_API YEWindow
 {
 public:
 						 YEWindow();
-						 YEWindow(dxInt width, dxInt height);
+						 YEWindow(yeInt width, yeInt height);
 						 YEWindow(const YEWindow& rhs);
 						 virtual ~YEWindow();
 					
@@ -26,8 +26,8 @@ public:
 	virtual void		 OnResize(YERenderer* renderer);
 
 public:
-	dxInt				 _width;
-	dxInt				 _height;
+	yeInt				 _width;
+	yeInt				 _height;
 
 protected:
 	static YEWindow*	 instance;

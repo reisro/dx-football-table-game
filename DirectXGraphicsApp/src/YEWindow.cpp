@@ -10,7 +10,7 @@ YEWindow::YEWindow():
 	Create();
 }
 
-YEWindow::YEWindow(dxInt width, dxInt height):
+YEWindow::YEWindow(yeInt width, yeInt height):
     _width(width),
     _height(height)
 {

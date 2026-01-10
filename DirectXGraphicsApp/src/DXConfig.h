@@ -48,8 +48,8 @@ namespace YEngineConfig
 
 	struct AppResolution
 	{
-		dxInt width;
-		dxInt height;
+		yeInt width;
+		yeInt height;
 	};
 
 	struct DX_API YEConfig

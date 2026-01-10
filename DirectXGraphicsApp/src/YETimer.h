@@ -8,11 +8,12 @@
 #include <chrono> 
 #include <timeapi.h>
 #include <profileapi.h>
+#include <string>
 
 using clock_c = std::chrono::high_resolution_clock;
 using seconds = std::chrono::duration<dxDouble>;
 
-class YETimer
+class DX_API YETimer
 {
 public:
 					YETimer();
@@ -31,7 +32,7 @@ public:
 	void			Tick();
 	dxInt64			GetTicks();
 	dxInt64			GetElapsedTime();
-	dxInt64			Countdown(yeInt targetTime);
+	yeInt			Countdown();
 	void			NowTime();
 	dxDouble		GetDeltaTime();
 	dxInt64			GetPerformanceCounter();

@@ -1,5 +1,6 @@
 #include "YETimer.h"
 #include <thread>
+#include <ctime>
 
 YETimer* YETimer::Singleton = 0;
 
@@ -64,17 +65,15 @@ dxInt64 YETimer::GetElapsedTime()
 	return deltatime.count();
 }
 
-dxInt64 YETimer::Countdown(yeInt targetTime)
+yeInt YETimer::Countdown()
 {
-	auto start = startTime;
+	auto start = startTime.time_since_epoch();
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(targetTime));
+	auto now_s = std::chrono::duration_cast<std::chrono::seconds>(start).count();
 
-	auto end = clock_c::now();
+	YELog("Countdown Start:"+std::to_string(std::chrono::duration_cast<std::chrono::seconds>(start).count()));
 
-	auto elapsed = end - start;
-
-	return elapsed.count();
+	return now_s;
 }
 
 void YETimer::NowTime()
