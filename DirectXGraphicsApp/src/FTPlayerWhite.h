@@ -6,7 +6,7 @@
 #include "FTPlayer.h"
 #include "FTBall.h"
 #include "YEBehaviourAction.h"
-#include "PlayerOpponentBehaviour.h"
+#include "YEVector3.h"
 
 class FTPlayerWhite : public FTPlayer
 {
@@ -18,14 +18,16 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	yeFloat DistanceFromTarget(YEGameObject* football_ball);
+	void DistanceFromTarget(YEGameObject* football_ball);
+	void DistanceFromCenter();
 
-protected:
-	PlayerOpponentBehaviour* _behaviour_tree;
-
+	yeFloat _distanceFromBall;
+	yeFloat _distanceFromCenter;
+	
 private:
 	FTBall* _football_ball;
 	yeFloat _ballDistanceThreshold = 1.10f;
+	YEVector3* _moveDirection;
 };
 
 #endif _FT_PLAYER_WHITE_H_

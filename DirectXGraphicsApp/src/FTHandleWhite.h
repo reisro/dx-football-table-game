@@ -4,6 +4,7 @@
 #define _FT_HANDLE_WHITE_H_
 
 #include "FTHandle.h"
+#include "FTPlayerWhite.h"
 #include "YEBehaviourAction.h"
 #include "PlayerOpponentBehaviour.h"
 
@@ -22,7 +23,8 @@ protected:
 	PlayerOpponentBehaviour* _behaviour_tree;
 
 private:
-
+	FTPlayerWhite* _player_left;
+	FTPlayerWhite* _player_right;
 };
 
 #endif 
