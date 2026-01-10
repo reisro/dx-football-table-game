@@ -5,6 +5,7 @@
 
 #include "YEBehaviourTree.h"
 #include "YEBehaviourAction.h"
+#include "YETimer.h"
 
 class PlayerOpponentBehaviour : public YEBehaviourTree
 {
@@ -22,6 +23,10 @@ public:
 	bool    _isDefending;
 	bool    _isBehind;
 	bool	_closeToShoot;
+	bool    _ballIsInMySide;
+
+private:
+	YETimer* _timer;
 };
 
 #endif // _GOALIE_OPPONENT_BEHAVIOUR_H_

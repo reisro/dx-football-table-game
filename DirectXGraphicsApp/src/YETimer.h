@@ -32,7 +32,7 @@ public:
 	void			Tick();
 	dxInt64			GetTicks();
 	dxInt64			GetElapsedTime();
-	yeInt			Countdown();
+	yeInt			Countdown(int duration);
 	void			NowTime();
 	dxDouble		GetDeltaTime();
 	dxInt64			GetPerformanceCounter();

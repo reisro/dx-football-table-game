@@ -1,7 +1,8 @@
 #include "PlayerOpponentBehaviour.h"
 #include "YEPhysX.h"
 
-PlayerOpponentBehaviour::PlayerOpponentBehaviour()
+PlayerOpponentBehaviour::PlayerOpponentBehaviour():
+	_timer(YETimer::GetInstance())
 {
 }
 
@@ -32,7 +33,7 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 		phsyX->RotateJointBody();
-		phsyX->MoveJointBody();
+		phsyX->MoveJointBody(0.05f);
 
 		return YEBehaviourStatus::SUCCESS;
 	}
@@ -42,6 +43,18 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 
 YEBehaviourStatus PlayerOpponentBehaviour::MoveHandle()
 {
+	if (!_closeToShoot)
+	{
+		YELog("PlayerOpponentBehaviour: Move Handle executed.");
+
+		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+		
+		if(_timer->Countdown(5))
+			phsyX->MoveJointBody(1);
+
+		return YEBehaviourStatus::SUCCESS;
+	}
+
 	return YEBehaviourStatus::FAILURE;
 }
 
@@ -57,6 +70,8 @@ YEBehaviourStatus PlayerOpponentBehaviour::WatchBall()
 			_isDefending = false;
 		else
 			_isDefending = true;
+
+		_closeToShoot = false;
 	}
 
 	return YEBehaviourStatus::SUCCESS;
