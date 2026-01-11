@@ -40,7 +40,7 @@ void AIPlayerOpponent::WatchBallDirection(FTBall* _football_ball)
 		_captureTime = true;
 	}
 
-	if (_timer->Countdown(3))
+	if (_timer->Countdown(1))
 	{
 		_currentBallPos = _football_ball->_transform->getPosition();
 		_captureTime = false;
