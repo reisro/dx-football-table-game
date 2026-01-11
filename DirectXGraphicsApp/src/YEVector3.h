@@ -39,6 +39,13 @@ public:
 	static inline YEVector3 Right() { return *new YEVector3(XMVectorSet(1.0f, .0f, 0.0f, .0f)); };
 	static inline YEVector3 Forward() { return *new YEVector3(XMVectorSet(.0f, .0f, 1.0f, .0f)); };
 
+	void operator=(const YEVector3& vec) {
+		_x = vec._x;
+		_y = vec._y;
+		_z = vec._z;
+		_u = vec._u;
+	}
+
 	// returns the length of the vector
 	static XMVECTOR Magnitude(const YEVector3& vec);
 
