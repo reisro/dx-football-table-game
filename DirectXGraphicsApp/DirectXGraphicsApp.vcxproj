@@ -198,6 +198,7 @@
     <ClInclude Include="src\YEStandardEffect.h" />
     <ClInclude Include="src\YEStringUtils.h" />
     <ClInclude Include="src\YETextureLoader.h" />
+    <ClInclude Include="src\YETimeBehaviourAction.h" />
     <ClInclude Include="src\YEVectorWrapper.h" />
     <ClInclude Include="src\YEApplication.h" />
     <ClInclude Include="src\DXConfig.h" />
@@ -207,7 +208,7 @@
     <ClInclude Include="src\YERenderer.h" />
     <ClInclude Include="src\YERenderingDirectX11.h" />
     <ClInclude Include="src\DXSubsystem.h" />
-    <ClInclude Include="src\DXTimer.h" />
+    <ClInclude Include="src\YETimer.h" />
     <ClInclude Include="src\DXTypes.h" />
     <ClInclude Include="src\YETransformComponent.h" />
     <ClInclude Include="src\YEVector3.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="src\YESpriteComponent.cpp" />
     <ClCompile Include="src\YEStandardEffect.cpp" />
     <ClCompile Include="src\YETextureLoader.cpp" />
+    <ClCompile Include="src\YETimeBehaviourAction.cpp" />
     <ClCompile Include="src\YETransformComponent.cpp" />
     <ClCompile Include="src\YEVector3.cpp" />
     <ClCompile Include="src\YEWinAppWindow.cpp" />

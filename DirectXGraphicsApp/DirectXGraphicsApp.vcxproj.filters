@@ -183,7 +183,7 @@
     <ClInclude Include="src\DXConfig.h">
       <Filter>Arquivos de Cabeçalho\System</Filter>
     </ClInclude>
-    <ClInclude Include="src\DXTimer.h">
+    <ClInclude Include="src\YETimer.h">
       <Filter>Arquivos de Cabeçalho\System</Filter>
     </ClInclude>
     <ClInclude Include="src\DXAPI.h">
@@ -295,6 +295,9 @@
       <Filter>Arquivos de Cabeçalho\AI</Filter>
     </ClInclude>
     <ClInclude Include="src\YEBehaviourAction.h">
+      <Filter>Arquivos de Cabeçalho\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YETimeBehaviourAction.h">
       <Filter>Arquivos de Cabeçalho\AI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -423,6 +426,9 @@
       <Filter>Arquivos de Origem\AI</Filter>
     </ClCompile>
     <ClCompile Include="src\YESequence.cpp">
+      <Filter>Arquivos de Origem\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YETimeBehaviourAction.cpp">
       <Filter>Arquivos de Origem\AI</Filter>
     </ClCompile>
   </ItemGroup>

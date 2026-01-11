@@ -154,6 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DirectXGraphicsApp\src\AIPlayerOpponent.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTBall.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTField.cpp" />
@@ -163,10 +164,12 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTHandleWhite.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayer.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayerWhite.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTScore.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandle.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\PlayerOpponentBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirectXGraphicsApp\src\AIPlayerOpponent.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTField.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTFieldWalls.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="DirectXGraphicsApp\src\FTHandleWhite.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayer.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayerWhite.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTScore.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandle.h" />
     <ClInclude Include="DirectXGraphicsApp\src\PlayerOpponentBehaviour.h" />
   </ItemGroup>
