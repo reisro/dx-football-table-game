@@ -7,6 +7,7 @@
 #include <FTHandle.h>
 #include <FTSingleHandle.h>
 #include <FTFieldWalls.h>
+#include <AIPlayerOpponent.h>
 
 using namespace gamentry;
 
@@ -63,6 +64,8 @@ public:
 		football_handle_keeper = new FTSingleHandle(GetGameContext(), football_keeper, football_keeper, L"C:\\Game Assets\\football_handle.fbx");
 		football_handle_keeper1 = new FTSingleHandle(GetGameContext(), football_keeper_ai, nullptr, L"C:\\Game Assets\\football_handle.fbx");
 
+		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player);
+
 		// Start Game Objects
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 0.0f, 0.0f));
@@ -83,10 +86,12 @@ public:
 		football_handle->_transform->setPosition(new YEVector3(0.0f, 1.15f, 3.62057f));
 
 		football_player_l->start(); //3
-		football_player_l->_transform->setPosition(new YEVector3(0.0f, 0.85f, -3.63704f));
+		football_player_l->_transform->setPosition(new YEVector3(-3.0f, 0.85f, -3.63704f));
+		football_player_l->DistanceFromCenter();
 
 		football_player2_l->start(); //4
-		football_player2_l->_transform->setPosition(new YEVector3(6.0f, 0.85f, -3.63704f));
+		football_player2_l->_transform->setPosition(new YEVector3(3.0f, 0.85f, -3.63704f));
+		football_player2_l->DistanceFromCenter();
 
 		football_handle_player->_isCPU = false;
 		football_handle_player->start();
@@ -110,6 +115,9 @@ public:
 	bool update(dxDouble _deltaTime) override
 	{				
 		football_ball->update(static_cast<float>(_deltaTime));
+		YELog("Football Ball Position: X:" + std::to_string(football_ball->_transform->getPosition()->_x) +
+			" Y:" + std::to_string(football_ball->_transform->getPosition()->_y) +
+			" Z:" + std::to_string(football_ball->_transform->getPosition()->_z));
 		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
 		football_player2->update(static_cast<float>(_deltaTime));
@@ -122,6 +130,7 @@ public:
 		football_handle_keeper->update(static_cast<float>(_deltaTime));
 		football_keeper_ai->update(static_cast<float>(_deltaTime));
 		football_handle_keeper1->update(static_cast<float>(_deltaTime));
+		ai_opponent->WatchBallDirection(football_ball);
 
 		return true;
 	}
@@ -148,6 +157,7 @@ private:
 	FTSingleHandle* football_handle_keeper;
 	FTSingleHandle* football_handle_keeper1;
 	FTFieldWalls* football_walls;
+	AIPlayerOpponent* ai_opponent;
 
 	YEVector3* position;
 	YEVector3* newPosition;
