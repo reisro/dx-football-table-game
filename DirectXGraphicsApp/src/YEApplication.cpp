@@ -179,22 +179,28 @@ void YE::YEApplication::Run(YEGame* gameApp)
 
 				YETimer::GetInstance()->NowTime();
 
-				// Render application frame
-				_renderer->Render();
-				
+				// Game application state related resources update
+				_gameApp->update(YETimer::GetInstance()->GetDeltaTime());
+
 				// Init physics simulations
 				instance->_physics->Simulate(YETimer::GetInstance()->GetDeltaTime());
 
-				#endif
+				// Render application frame
+				_renderer->Render();
 
-				// Game application state related resources update
-				_gameApp->update(YETimer::GetInstance()->GetDeltaTime());
+				#endif
 
 				YELog("FPS:" + std::to_string(YETimer::GetInstance()->GetDeltaTime()));
 
 				YETimer::GetInstance()->UpdateLastTime();
 
 				frame_coutner++;
+
+				/*if (_accumulator >= 1.0f)
+				{
+					_accumulator = 0.0f;
+					frame_coutner = 0;
+				}*/
 			}
 		}
 

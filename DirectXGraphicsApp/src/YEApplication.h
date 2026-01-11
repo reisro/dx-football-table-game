@@ -6,7 +6,7 @@
 
 #include "pch.h"
 #include "YEGame.h"
-#include "DXTimer.h"
+#include "YETimer.h"
 #include "YEWindow.h"
 #include "YEPhysics.h"
 #include "YEInput.h"
@@ -53,6 +53,7 @@ namespace YE
 		YEPhysics*			 _physics;
 		YEInput*			 _input;
 		YEGameContext		 _gameContext;
+		yeFloat				 _accumulator;
 		bool				 _isRunning;
 		bool				 _isInitialized;
 		bool				 _isLoopInitialized;
