@@ -33,7 +33,7 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 		phsyX->RotateJointBody();
-		phsyX->MoveJointBody(0.05f);
+		//phsyX->MoveJointBody(0.05f);
 
 		return YEBehaviourStatus::SUCCESS;
 	}
@@ -45,12 +45,23 @@ YEBehaviourStatus PlayerOpponentBehaviour::MoveHandle()
 {
 	if (!_closeToShoot)
 	{
-		YELog("PlayerOpponentBehaviour: Move Handle executed.");
-
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+
+		if (!_alignedWithBall && _goRight)
+		{
+			YELog("PlayerOpponentBehaviour: Move Handle Right executed.");
+
+			if (phsyX->MoveJointBody(1, -2.4f, 5.4f))
+				_canChangeDir = false;
+		}
 		
-		if(_timer->Countdown(5))
-			phsyX->MoveJointBody(1);
+		if (!_alignedWithBall && _goLeft)
+		{
+			YELog("PlayerOpponentBehaviour: Move Handle Left executed.");
+
+			if (phsyX->MoveJointBody(-1, -2.4f, 5.4f))
+				_canChangeDir = false;
+		}
 
 		return YEBehaviourStatus::SUCCESS;
 	}

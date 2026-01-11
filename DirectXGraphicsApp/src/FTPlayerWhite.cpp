@@ -27,7 +27,8 @@ void FTPlayerWhite::update(float _deltaTime)
 
 void FTPlayerWhite::DistanceFromTarget(YEGameObject* football_ball)
 {
-	_distanceFromBall = YEVector3::Subtract(*football_ball->_transform->getPosition(), *new YEVector3(_transform->getPosition()->_x, football_ball->_transform->getPosition()->_y, _transform->getPosition()->_z))->Magnitude();
+	_distanceFromBall = YEVector3::Subtract(*new YEVector3(football_ball->_transform->getPosition()->_x,0.0f, football_ball->_transform->getPosition()->_z),
+		*new YEVector3(_transform->getPosition()->_x,0.0f, _transform->getPosition()->_z))->Magnitude();
 }
 
 void FTPlayerWhite::DistanceFromCenter()

@@ -3,9 +3,9 @@
 
 FTHandleWhite::FTHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName)
 	: FTHandle(_game_context, p1, p2, meshName),
-	_player_left(reinterpret_cast<FTPlayerWhite*>(p1)),
-	_player_right(reinterpret_cast<FTPlayerWhite*>(p2)),
-	_behaviour_tree(nullptr) {}
+	_player_right(reinterpret_cast<FTPlayerWhite*>(p1)),
+	_player_left(reinterpret_cast<FTPlayerWhite*>(p2)),
+	_behaviour_tree(new PlayerOpponentBehaviour) {}
 
 FTHandleWhite::~FTHandleWhite()
 {
@@ -16,14 +16,11 @@ void FTHandleWhite::start()
 {
 	FTHandle::start();
 
-	_behaviour_tree = new PlayerOpponentBehaviour();
-
 	YEBehaviourNode* rootNode = new YESelector();
 
 	YESequence* sequenceNode = new YESequence();
 	sequenceNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::WatchBall, _behaviour_tree)));
 	sequenceNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::Attack, _behaviour_tree)));
-	//sequenceNode->AddChild(new YEBehaviourAction(std::bind(&PlayerOpponentBehaviour::Deffend, _behaviour_tree)));
 
 	rootNode->AddChild(sequenceNode);
 
@@ -55,5 +52,31 @@ void FTHandleWhite::update(float _deltaTime)
 		_behaviour_tree->_closeToShoot = false;
 	}
 
+	//if (_player_right->_distanceFromBall < _player_left->_distanceFromBall)
+	//{
+		//_behaviour_tree->_goRight = true;
+		//_behaviour_tree->_goLeft = false;
+
+		if (_player_right->_distanceFromBall < 3.638f)
+			_behaviour_tree->_alignedWithBall = true;
+		else
+			_behaviour_tree->_alignedWithBall = false;
+	//}
+	/*else
+	{
+		_behaviour_tree->_goLeft = true;
+		_behaviour_tree->_goRight = false;*/
+
+		if (_player_left->_distanceFromBall < 3.638f)
+			_behaviour_tree->_alignedWithBall = true;
+		else
+			_behaviour_tree->_alignedWithBall = false;
+	//}
+
 	_behaviour_tree->Execute();
+}
+
+PlayerOpponentBehaviour* FTHandleWhite::GetBehaviourTree()
+{
+	return _behaviour_tree;
 }

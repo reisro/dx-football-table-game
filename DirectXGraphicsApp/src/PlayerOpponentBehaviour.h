@@ -24,6 +24,10 @@ public:
 	bool    _isBehind;
 	bool	_closeToShoot;
 	bool    _ballIsInMySide;
+	bool	_goRight;
+	bool	_goLeft;
+	bool	_canChangeDir;
+	bool 	_alignedWithBall;
 
 private:
 	YETimer* _timer;
