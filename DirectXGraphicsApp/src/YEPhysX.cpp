@@ -67,11 +67,11 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 
 	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
-	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 1.0f);
+	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 1.0f, PxTransform(PxVec3(0.0f,0.03f,0.0f)));
 
 	_dynamicSphere->setAngularDamping(0.5f);
 	_dynamicSphere->setMass(5.0f);
-	_dynamicSphere->setLinearVelocity(PxVec3(2.0f, -1.0f, -2.0f));
+	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
 	_dynamicSphere->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 
 	_scene->addActor(*_dynamicSphere);
@@ -163,9 +163,30 @@ void YEPhysX::RotateJointBody()
 	cpuRot += 0.05f; cpuRotInc += 0.65; if (cpuRot > 0.95f) cpuRot = 0.95f; if (cpuRotInc > 26.0f) cpuRotInc = 26.0f;
 }
 
-void YEPhysX::MoveJointBody()
+bool YEPhysX::MoveJointBody(int dir, yeFloat left, yeFloat right)
 {
-	cpuRightDir += 0.05; if (cpuRightDir > 2.0f) cpuRightDir = 2.0f;
+	yeFloat limitLeft = left;
+	yeFloat limitRight = right;
+
+	if (dir == 1) 
+		cpuRightDir += 0.01; 
+	if (dir == -1)
+		cpuRightDir -= 0.01;
+
+	if (cpuRightDir < limitLeft)
+	{
+		cpuRightDir = limitLeft;
+
+		return true;
+	}
+	if (cpuRightDir > limitRight)
+	{
+		cpuRightDir = limitRight;
+
+		return true;
+	}
+
+	return false;
 }
 
 void YEPhysX::Setup()
@@ -237,17 +258,14 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		YELog("PLAYER.........................");
 	}
 
-	if (_input->keyDown(DIK_Q))
+	if (_input->keyDown(DIK_X))
 	{
-		//_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0), PxForceMode::eIMPULSE);
-		cpuRightDir += 0.1;
+		_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
 	}
 
-	if (_input->keyDown(DIK_E))
+	if (_input->keyDown(DIK_G))
 	{
-		//_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
-		cpuRightDir -= 0.1;
-		YELog("CPU.........................");
+		_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
 	}
 
 	if (_input->keyDown(DIK_F))
@@ -290,11 +308,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		rightDir = -2.4f;
 	if (rightDir > 5.4f)
 		rightDir = 5.4f;
-
-	if (cpuRightDir < -2.0f)
-		cpuRightDir = -2.0f;
-	if (cpuRightDir > 5.0f)
-		cpuRightDir = 5.0f;
 
 	if (_dynamicSphere->getLinearVelocity().magnitude() > 20.0f)
 	{

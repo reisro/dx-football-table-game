@@ -42,8 +42,9 @@ void YEPhysics::RotateJointBody()
 {
 }
 
-void YEPhysics::MoveJointBody()
+bool YEPhysics::MoveJointBody(int dir, yeFloat left, yeFloat right)
 {
+	return true;
 }
 
 YEPhysics* YEPhysics::GetInstance()
