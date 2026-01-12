@@ -65,7 +65,7 @@ public:
 		football_handle_keeper = new FTSingleHandle(GetGameContext(), football_keeper, football_keeper, L"C:\\Game Assets\\football_handle.fbx");
 		football_handle_keeper1 = new FTSingleHandleWhite(GetGameContext(), football_keeper_ai, L"C:\\Game Assets\\football_handle.fbx");
 
-		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player);
+		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper1);
 
 		// Start Game Objects
 		football_field->start();
@@ -87,16 +87,16 @@ public:
 		football_handle->_transform->setPosition(new YEVector3(0.0f, 1.15f, 3.62057f));
 
 		football_player_l->start(); //3
-		football_player_l->_transform->setPosition(new YEVector3(-3.0f, 0.85f, -3.63704f));
+		football_player_l->_transform->setPosition(new YEVector3(0.0f, 0.85f, -3.85704f));
 		football_player_l->DistanceFromCenter();
 
 		football_player2_l->start(); //4
-		football_player2_l->_transform->setPosition(new YEVector3(3.0f, 0.85f, -3.63704f));
+		football_player2_l->_transform->setPosition(new YEVector3(3.0f, 0.85f, -3.85704f));
 		football_player2_l->DistanceFromCenter();
 
 		football_handle_player->_isCPU = false;
 		football_handle_player->start();
-		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.25f, -3.72057f));
+		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.62057f));
 
 		football_keeper->start(); //5
 		football_keeper->_transform->setPosition(new YEVector3(3.0f, 0.85f, -9.25f));
@@ -110,7 +110,9 @@ public:
 
 		football_handle_keeper1->_isCPU = true;
 		football_handle_keeper1->start();
-		football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 1.15f, 8.5f));
+		football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 0.85f, 8.5f));
+
+		ai_opponent->start();
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -132,6 +134,7 @@ public:
 		football_keeper_ai->update(static_cast<float>(_deltaTime));
 		football_handle_keeper1->update(static_cast<float>(_deltaTime));
 		ai_opponent->WatchBallDirection(football_ball);
+		ai_opponent->update(static_cast<float>(_deltaTime));
 
 		return true;
 	}

@@ -71,7 +71,7 @@ void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
 
 	_dynamicSphere->setAngularDamping(0.5f);
 	_dynamicSphere->setMass(5.0f);
-	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 0.0f));
+	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 1.0f));
 	_dynamicSphere->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 
 	_scene->addActor(*_dynamicSphere);
@@ -94,7 +94,7 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 
 		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)));
 		
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -1.0f, inputPlayer));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], 0.0f, inputPlayer));
 
 		pulleyJointAttachedBodies.resize(attachedBodiesCount);
 
@@ -169,9 +169,9 @@ bool YEPhysX::MoveJointBody(int dir, yeFloat left, yeFloat right)
 	yeFloat limitRight = right;
 
 	if (dir == 1) 
-		cpuRightDir += 0.01; 
+		cpuRightDir += 0.03; 
 	if (dir == -1)
-		cpuRightDir -= 0.01;
+		cpuRightDir -= 0.03;
 
 	if (cpuRightDir < limitLeft)
 	{
@@ -187,6 +187,19 @@ bool YEPhysX::MoveJointBody(int dir, yeFloat left, yeFloat right)
 	}
 
 	return false;
+}
+
+void YEPhysX::MoveJointBodyToPosition(int dir)
+{
+	if (dir == 1)
+		cpuRightDir += 0.03;
+	if (dir == -1)
+		cpuRightDir -= 0.03;
+
+	if (cpuRightDir < -2.4f)
+		cpuRightDir = -2.4f;
+	if (cpuRightDir > 5.0f)
+		cpuRightDir = 5.0f;
 }
 
 void YEPhysX::Setup()

@@ -48,6 +48,8 @@ public:
 
 	bool MoveJointBody(int dir, yeFloat left, yeFloat right) override;
 
+	void MoveJointBodyToPosition(int dir) override;
+
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
 
@@ -86,7 +88,7 @@ public:
 	
 	float rot = 3.0f;
 	float rotInc = 0.0f;
-	float rightDir = 1.0f;
+	float rightDir = 0.0f;
 	float leftDir = 1.0f;
 	float cpuRightDir = 0.0f;
 	float cpuRot = 0.0f;
