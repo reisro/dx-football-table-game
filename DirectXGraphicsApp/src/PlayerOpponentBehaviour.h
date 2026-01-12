@@ -6,6 +6,7 @@
 #include "YEBehaviourTree.h"
 #include "YEBehaviourAction.h"
 #include "YETimer.h"
+#include "YEVector3.h"
 
 class PlayerOpponentBehaviour : public YEBehaviourTree
 {
@@ -28,6 +29,11 @@ public:
 	bool	_goLeft;
 	bool	_canChangeDir;
 	bool 	_alignedWithBall;
+
+	YEVector3	_BallPosition;
+	YEVector3	_P1Position;
+	YEVector3	_P2Position;
+	YEVector3	_KeeperPosition;
 
 private:
 	YETimer* _timer;

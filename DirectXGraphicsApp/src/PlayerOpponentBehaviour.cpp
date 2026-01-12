@@ -18,6 +18,8 @@ YEBehaviourStatus PlayerOpponentBehaviour::Deffend()
 
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
+		if (phsyX->MoveJointBody(1, -2.4f, 5.4f))
+
 		return YEBehaviourStatus::SUCCESS;
 	}
 	
