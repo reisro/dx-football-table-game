@@ -18,7 +18,10 @@ YEBehaviourStatus PlayerOpponentBehaviour::Deffend()
 
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-		if (phsyX->MoveJointBody(1, -2.4f, 5.4f))
+		if (_goRight && !_alignedWithBall)
+			phsyX->MoveJointBodyToPosition(1);
+		if (_goLeft && !_alignedWithBall)
+			phsyX->MoveJointBodyToPosition(-1);
 
 		return YEBehaviourStatus::SUCCESS;
 	}
@@ -74,18 +77,6 @@ YEBehaviourStatus PlayerOpponentBehaviour::MoveHandle()
 YEBehaviourStatus PlayerOpponentBehaviour::WatchBall()
 {
 	YELog("PlayerOpponentBehaviour: Watching Ball executed.");
-
-	if (_closeToShoot)
-		_isDefending = false;
-	else
-	{
-		if (_isBehind)
-			_isDefending = false;
-		else
-			_isDefending = true;
-
-		_closeToShoot = false;
-	}
 
 	return YEBehaviourStatus::SUCCESS;
 }
