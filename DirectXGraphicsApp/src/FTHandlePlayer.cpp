@@ -30,14 +30,14 @@ void FTHandlePlayer::update(float _deltaTime)
 	// Move Right Player
 	if (_yeInput->keyDown(DIK_A))
 	{
-		phsyX->MoveKinematicPulleyJointBody(0, 1, -2.4f, 5.0f);
-		phsyX->MoveKinematicPulleyJointBody(1, 1, -2.4f, 5.0f);
+		phsyX->MoveKinematicPulleyJointBody(0, 1, -2.4f, 5.2f);
+		phsyX->MoveKinematicPulleyJointBody(1, 1, -2.4f, 5.2f);
 	}
 
 	// Move Left Player
 	if (_yeInput->keyDown(DIK_D))
 	{
-		phsyX->MoveKinematicPulleyJointBody(0, -1, -2.4f, 5.0f);
-		phsyX->MoveKinematicPulleyJointBody(1, -1, -2.4f, 5.0f);
+		phsyX->MoveKinematicPulleyJointBody(0, -1, -2.4f, 5.2f);
+		phsyX->MoveKinematicPulleyJointBody(1, -1, -2.4f, 5.2f);
 	}
 }

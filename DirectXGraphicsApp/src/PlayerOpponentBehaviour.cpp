@@ -20,14 +20,14 @@ YEBehaviourStatus PlayerOpponentBehaviour::Deffend()
 
 		if (_goRight && !_alignedWithBall)
 		{
-			phsyX->MoveKinematicPulleyJointBody(2, 1, -2.4f, 5.0f);
-			phsyX->MoveKinematicPulleyJointBody(3, 1, -2.4f, 5.0f);
+			phsyX->MoveKinematicPulleyJointBody(2, 1, -2.4f, 5.2f);
+			phsyX->MoveKinematicPulleyJointBody(3, 1, -2.4f, 5.2f);
 			phsyX->MoveKinematicPulleyJointBody(4, 1, -1.7f, 1.5f);
 		}
 		if (_goLeft && !_alignedWithBall)
 		{
-			phsyX->MoveKinematicPulleyJointBody(2, -1, -2.4f, 5.0f);
-			phsyX->MoveKinematicPulleyJointBody(3, -1, -2.4f, 5.0f);
+			phsyX->MoveKinematicPulleyJointBody(2, -1, -2.4f, 5.2f);
+			phsyX->MoveKinematicPulleyJointBody(3, -1, -2.4f, 5.2f);
 			phsyX->MoveKinematicPulleyJointBody(4, -1, -1.7f, 1.5f);
 		}
 
