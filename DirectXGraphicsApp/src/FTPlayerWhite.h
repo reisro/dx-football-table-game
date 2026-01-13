@@ -23,6 +23,7 @@ public:
 
 	yeFloat _distanceFromBall;
 	yeFloat _distanceFromCenter;
+	yeFloat _distanceX;
 	
 private:
 	FTBall* _football_ball;

@@ -3,23 +3,21 @@
 #ifndef _FT_HANDLE_PLAYER_H_
 #define _FT_HANDLE_PLAYER_H_
 
-#include "YEGameObject.h"
-#include "YEMeshComponent.h"
-#include "YEPhysicsComponent.h"
+#include "FTHandle.h"
+#include "YEInput.h"
 
-class FTHandlePlayer : public YEGameObject
+class FTHandlePlayer : public FTHandle
 {
 public:
-	FTHandlePlayer(const YEGameContext& _game_context);
+	FTHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName);	
 	virtual ~FTHandlePlayer();
 
 	void start() override;
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-protected:
-	YEMeshComponent* _mesh_component;
-	YEPhysicsComponent* _physics_component;
+private:
+	YEInput* _yeInput;
 };
 
 #endif _FT_HANDLE_PLAYER_H_

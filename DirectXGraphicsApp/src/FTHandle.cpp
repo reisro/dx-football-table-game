@@ -40,7 +40,7 @@ void FTHandle::update(float _deltaTime)
 	world._11 = globalPose.r[0].m128_f32[0]; world._12 = globalPose.r[0].m128_f32[1]; world._13 = globalPose.r[0].m128_f32[2]; world._14 = globalPose.r[0].m128_f32[3];
 	world._21 = globalPose.r[1].m128_f32[0]; world._12 = globalPose.r[1].m128_f32[1]; world._13 = globalPose.r[1].m128_f32[2]; world._14 = globalPose.r[1].m128_f32[3];
 	world._31 = globalPose.r[2].m128_f32[0]; world._12 = globalPose.r[2].m128_f32[1]; world._13 = globalPose.r[2].m128_f32[2]; world._14 = globalPose.r[2].m128_f32[3];
-	world._41 = globalPose.r[3].m128_f32[0] + 15.0f; world._12 = globalPose.r[3].m128_f32[1]; world._13 = globalPose.r[3].m128_f32[2]; world._14 = globalPose.r[3].m128_f32[3];
+	world._41 = globalPose.r[3].m128_f32[0] +5.0f; world._12 = globalPose.r[3].m128_f32[1]; world._13 = globalPose.r[3].m128_f32[2]; world._14 = globalPose.r[3].m128_f32[3];
 
 	_transform->setTransformMatrix(globalPose);
 }

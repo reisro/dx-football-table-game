@@ -29,6 +29,10 @@ void FTPlayerWhite::DistanceFromTarget(YEGameObject* football_ball)
 {
 	_distanceFromBall = YEVector3::Subtract(*new YEVector3(football_ball->_transform->getPosition()->_x,0.0f, football_ball->_transform->getPosition()->_z),
 		*new YEVector3(_transform->getPosition()->_x,0.0f, _transform->getPosition()->_z))->Magnitude();
+
+	_distanceX = _transform->getPosition()->_x;
+
+	YELog("FTPlayerWhite: Distance X: " + std::to_string(_distanceX));
 }
 
 void FTPlayerWhite::DistanceFromCenter()

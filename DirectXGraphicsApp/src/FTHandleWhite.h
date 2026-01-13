@@ -7,7 +7,6 @@
 #include "FTPlayerWhite.h"
 #include "YEBehaviourAction.h"
 #include "YETimeBehaviourAction.h"
-#include "PlayerOpponentBehaviour.h"
 
 class FTHandleWhite: public FTHandle
 {
@@ -20,10 +19,8 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	PlayerOpponentBehaviour* GetBehaviourTree();
-
-protected:
-	PlayerOpponentBehaviour* _behaviour_tree;
+	FTPlayerWhite* GetPlayerLeft() const { return _player_left; }
+	FTPlayerWhite* GetPlayerRight() const { return _player_right; }
 
 private:
 	FTPlayerWhite* _player_left;
