@@ -23,6 +23,8 @@ public:
 	virtual void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer);
 	virtual void RotateJointBody();
 	virtual bool MoveJointBody(int dir, yeFloat left, yeFloat right);
+	virtual void MoveJointBodyToPosition(int dir);
+	virtual void MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right);
 
 	static YEPhysics* GetInstance();
 

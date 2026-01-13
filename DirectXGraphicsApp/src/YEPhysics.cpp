@@ -47,6 +47,14 @@ bool YEPhysics::MoveJointBody(int dir, yeFloat left, yeFloat right)
 	return true;
 }
 
+void YEPhysics::MoveJointBodyToPosition(int dir)
+{
+}
+
+void YEPhysics::MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right)
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

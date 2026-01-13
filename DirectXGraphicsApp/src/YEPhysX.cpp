@@ -94,7 +94,7 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 
 		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)));
 		
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], 0.0f, inputPlayer));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], 0.0f, 0.03f, inputPlayer));
 
 		pulleyJointAttachedBodies.resize(attachedBodiesCount);
 
@@ -117,8 +117,8 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount-1], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
 			*attachedBodies[attachedBodiesCount], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)));
 
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount-1], 0.0f, inputPlayer));
-		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -3.0f, inputPlayer));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount-1], 0.0f, 0.03f, inputPlayer));
+		pulleyJointAttachedBodiesMap.push_back(PulleyJointBodyInfo(attachedBodies[attachedBodiesCount], -3.0f, 0.03f, inputPlayer));
 
 		pulleyJointAttachedBodies.resize(attachedBodiesCount);
 
@@ -202,6 +202,22 @@ void YEPhysX::MoveJointBodyToPosition(int dir)
 		cpuRightDir = 5.0f;
 }
 
+void YEPhysX::MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right)
+{
+	yeFloat limitLeft = left;
+	yeFloat limitRight = right;
+
+	if (dir == 1)
+		pulleyJointAttachedBodiesMap[id].rightMoveDir += .03f;
+	if (dir == -1)
+		pulleyJointAttachedBodiesMap[id].rightMoveDir -= .03f;
+
+	if (pulleyJointAttachedBodiesMap[id].rightMoveDir < limitLeft)
+		pulleyJointAttachedBodiesMap[id].rightMoveDir = limitLeft;
+	if (pulleyJointAttachedBodiesMap[id].rightMoveDir > limitRight)
+		pulleyJointAttachedBodiesMap[id].rightMoveDir = limitRight;
+}
+
 void YEPhysX::Setup()
 {
 }
@@ -256,21 +272,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 
 	RenderCallback();
 
-	_input->poll();
-
-	if(_input->keyDown(DIK_D))
-	{
-		//_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0), PxForceMode::eIMPULSE);
-		rightDir += 0.1; 
-	}
-
-	if (_input->keyDown(DIK_A))
-	{
-		//_dynamicSphere->addForce(PxVec3(-0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
-		rightDir -= 0.1;
-		YELog("PLAYER.........................");
-	}
-
 	if (_input->keyDown(DIK_X))
 	{
 		_dynamicSphere->addForce(PxVec3(0.02f, 0.0f, 0.0f), PxForceMode::eIMPULSE);
@@ -296,11 +297,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		rot += 0.08f; rotInc += 0.1; if (rot > 7.0f) rot = 3.0f; if (rotInc > 3.0f) rotInc = 0.0f;
 	}
 
-	if (_input->keyDown(DIK_V))
-	{
-		rot -= 0.08f; rotInc += 0.1; if (rot < 0.0f) rot = 3.0f; if (rotInc < -3.0f) rotInc = 0.0f;
-	}
-
 	if (_input->keyDown(DIK_N))
 	{
 		cpuRot -= 0.08f; cpuRotInc += 0.1; if (cpuRot < 0.0f) cpuRot = 3.0f; if (cpuRotInc < -3.0f) cpuRotInc = 0.0f;
@@ -312,15 +308,10 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 	for (size_t i = 0; i < pulleyJointAttachedBodiesMap.size(); i++)
 	{
 		if (pulleyJointAttachedBodiesMap[i].receivesInput)
-			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(rightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].rightMoveDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
 		if (!pulleyJointAttachedBodiesMap[i].receivesInput)
-			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(cpuRightDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, cpuRot, cpuRotInc), PxVec3(1, 0, 0))));
+			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].rightMoveDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, cpuRot, cpuRotInc), PxVec3(1, 0, 0))));
 	}
-
-	if (rightDir < -2.4f)
-		rightDir = -2.4f;
-	if (rightDir > 5.4f)
-		rightDir = 5.4f;
 
 	if (_dynamicSphere->getLinearVelocity().magnitude() > 20.0f)
 	{

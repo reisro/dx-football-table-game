@@ -20,10 +20,11 @@ using namespace physx;
 
 struct PulleyJointBodyInfo
 {
-	PulleyJointBodyInfo(PxRigidDynamic* b, float o, bool input) : box(b), offset(o), receivesInput(input) {}
+	PulleyJointBodyInfo(PxRigidDynamic* b, float o, float md,  bool input) : box(b), offset(o), rightMoveDir(md), receivesInput(input) {}
 
 	PxRigidDynamic* box;
 	float offset;
+	float rightMoveDir;
 	bool receivesInput;
 };
 
@@ -49,6 +50,8 @@ public:
 	bool MoveJointBody(int dir, yeFloat left, yeFloat right) override;
 
 	void MoveJointBodyToPosition(int dir) override;
+
+	void MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right) override;
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
