@@ -4,7 +4,7 @@
 #include <FTPlayer.h>
 #include <FTPlayerWhite.h>
 #include <FTHandleWhite.h>
-#include <FTHandle.h>
+#include <FTHandlePlayer.h>
 #include <FTSingleHandle.h>
 #include <FTSingleHandleWhite.h>
 #include <FTFieldWalls.h>
@@ -55,10 +55,10 @@ public:
 		football_keeper->hasRigidBody = true;
 		football_keeper->hasParent = true;
 
-		football_keeper_ai = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
+		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
 		football_keeper_ai->hasRigidBody = true;
 
-		football_handle = new FTHandle(GetGameContext(), football_player, football_player2, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle = new FTHandlePlayer(GetGameContext(), football_player, football_player2, L"C:\\Game Assets\\football_handle.fbx");
 
 		football_handle_player = new FTHandleWhite(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
 
@@ -131,7 +131,10 @@ public:
 		football_player2_l->update(static_cast<float>(_deltaTime));
 		football_keeper->update(static_cast<float>(_deltaTime));
 		football_handle_keeper->update(static_cast<float>(_deltaTime));
+
 		football_keeper_ai->update(static_cast<float>(_deltaTime));
+		football_keeper_ai->DistanceFromTarget(football_ball);
+
 		football_handle_keeper1->update(static_cast<float>(_deltaTime));
 		ai_opponent->WatchBallDirection(football_ball);
 		ai_opponent->update(static_cast<float>(_deltaTime));
@@ -154,9 +157,9 @@ private:
 	FTPlayerWhite* football_player_l;
 	FTPlayerWhite* football_player2_l;
 	FTPlayer* football_keeper;
-	FTPlayer* football_keeper_ai;
+	FTPlayerWhite* football_keeper_ai;
 	FTPlayerWhite* football_player_white;
-	FTHandle* football_handle;
+	FTHandlePlayer* football_handle;
 	FTHandleWhite* football_handle_player;
 	FTSingleHandle* football_handle_keeper;
 	FTSingleHandleWhite* football_handle_keeper1;
