@@ -182,6 +182,9 @@ void YE::YEApplication::Run(YEGame* gameApp)
 				// Game application state related resources update
 				_gameApp->update(YETimer::GetInstance()->GetDeltaTime());
 
+				// Poll input devices
+				instance->_input->poll();
+
 				// Init physics simulations
 				instance->_physics->Simulate(YETimer::GetInstance()->GetDeltaTime());
 
