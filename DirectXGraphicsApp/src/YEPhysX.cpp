@@ -208,9 +208,9 @@ void YEPhysX::MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloa
 	yeFloat limitRight = right;
 
 	if (dir == 1)
-		pulleyJointAttachedBodiesMap[id].rightMoveDir += .03f;
+		pulleyJointAttachedBodiesMap[id].rightMoveDir += .05f;
 	if (dir == -1)
-		pulleyJointAttachedBodiesMap[id].rightMoveDir -= .03f;
+		pulleyJointAttachedBodiesMap[id].rightMoveDir -= .05f;
 
 	if (pulleyJointAttachedBodiesMap[id].rightMoveDir < limitLeft)
 		pulleyJointAttachedBodiesMap[id].rightMoveDir = limitLeft;

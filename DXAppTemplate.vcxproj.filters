@@ -60,6 +60,9 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandleWhite.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandlePlayer.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
@@ -99,6 +102,9 @@
       <Filter>TableFootball</Filter>
     </ClInclude>
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandleWhite.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandlePlayer.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>
