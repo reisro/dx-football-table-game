@@ -19,9 +19,17 @@ YEBehaviourStatus PlayerOpponentBehaviour::Deffend()
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 		if (_goRight && !_alignedWithBall)
-			phsyX->MoveJointBodyToPosition(1);
+		{
+			phsyX->MoveKinematicPulleyJointBody(2, 1, -2.4f, 5.0f);
+			phsyX->MoveKinematicPulleyJointBody(3, 1, -2.4f, 5.0f);
+			phsyX->MoveKinematicPulleyJointBody(4, 1, -1.7f, 1.5f);
+		}
 		if (_goLeft && !_alignedWithBall)
-			phsyX->MoveJointBodyToPosition(-1);
+		{
+			phsyX->MoveKinematicPulleyJointBody(2, -1, -2.4f, 5.0f);
+			phsyX->MoveKinematicPulleyJointBody(3, -1, -2.4f, 5.0f);
+			phsyX->MoveKinematicPulleyJointBody(4, -1, -1.7f, 1.5f);
+		}
 
 		return YEBehaviourStatus::SUCCESS;
 	}
@@ -58,6 +66,8 @@ YEBehaviourStatus PlayerOpponentBehaviour::MoveHandle()
 
 			if (phsyX->MoveJointBody(1, -2.4f, 5.4f))
 				_canChangeDir = false;
+
+			//phsyX->MoveKinematicPulleyJointBody(4);
 		}
 		
 		if (!_alignedWithBall && _goLeft)
