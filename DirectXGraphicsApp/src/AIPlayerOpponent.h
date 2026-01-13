@@ -30,6 +30,9 @@ private:
 	YEVector3* _lastBallPos;
 	YEVector3  footballPosAux;
 
+	yeFloat _pleftPosX;
+	yeFloat _prightPosX;
+
 	FTHandleWhite*		 _handleFront;
 	FTSingleHandleWhite* _handleKeeper;
 

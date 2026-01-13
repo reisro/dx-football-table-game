@@ -45,9 +45,6 @@ void AIPlayerOpponent::update(float _deltaTime)
 {
 	YEGameObject::update(_deltaTime);
 
-	_behaviour_tree->_P1Position = *_handleFront->GetPlayerLeft()->_transform->getPosition();
-	_behaviour_tree->_P2Position = *_handleFront->GetPlayerRight()->_transform->getPosition();
-
 	_behaviour_tree->Execute();
 }
 
@@ -100,8 +97,7 @@ void AIPlayerOpponent::WatchBallDirection(FTBall* _football_ball)
 	//}
 	//else
 	//{
-		if (_currentBallPos->_x >= _handleFront->GetPlayerLeft()->_transform->getPosition()->_x &&
-			_currentBallPos->_x <= _handleFront->GetPlayerRight()->_transform->getPosition()->_x)
+		if (_currentBallPos->_x >= x_left && _currentBallPos->_x <= x_right)
 		{
 			_behaviour_tree->_alignedWithBall = true;
 			_behaviour_tree->_goLeft = false;
@@ -111,7 +107,7 @@ void AIPlayerOpponent::WatchBallDirection(FTBall* _football_ball)
 		} 
 		else
 		{
-			if (_currentBallPos->_x < _handleFront->GetPlayerLeft()->_transform->getPosition()->_x)
+			if (_currentBallPos->_x < _pleftPosX)
 			{
 				if (_timer->Countdown(2))
 				{
@@ -121,7 +117,7 @@ void AIPlayerOpponent::WatchBallDirection(FTBall* _football_ball)
 					_behaviour_tree->_alignedWithBall = false;
 				}
 			}
-			else
+			else if (_currentBallPos->_x > _prightPosX)
 			{
 				if (_timer->Countdown(2))
 				{
