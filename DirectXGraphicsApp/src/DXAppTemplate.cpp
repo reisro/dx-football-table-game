@@ -6,6 +6,7 @@
 #include <FTHandleWhite.h>
 #include <FTHandlePlayer.h>
 #include <FTSingleHandle.h>
+#include <FTSingleHandlePlayer.h>
 #include <FTSingleHandleWhite.h>
 #include <FTFieldWalls.h>
 #include <AIPlayerOpponent.h>
@@ -62,7 +63,7 @@ public:
 
 		football_handle_player = new FTHandleWhite(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
 
-		football_handle_keeper = new FTSingleHandle(GetGameContext(), football_keeper, football_keeper, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper, L"C:\\Game Assets\\football_handle.fbx");
 		football_handle_keeper1 = new FTSingleHandleWhite(GetGameContext(), football_keeper_ai, L"C:\\Game Assets\\football_handle.fbx");
 
 		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper1);
@@ -161,7 +162,7 @@ private:
 	FTPlayerWhite* football_player_white;
 	FTHandlePlayer* football_handle;
 	FTHandleWhite* football_handle_player;
-	FTSingleHandle* football_handle_keeper;
+	FTSingleHandlePlayer* football_handle_keeper;
 	FTSingleHandleWhite* football_handle_keeper1;
 	FTFieldWalls* football_walls;
 	AIPlayerOpponent* ai_opponent;
