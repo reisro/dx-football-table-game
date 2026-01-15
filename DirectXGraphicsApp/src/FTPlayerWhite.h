@@ -26,7 +26,6 @@ public:
 	yeFloat _distanceX;
 	
 private:
-	FTBall* _football_ball;
 	yeFloat _ballDistanceThreshold = 1.10f;
 	YEVector3* _moveDirection;
 };

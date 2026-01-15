@@ -11,7 +11,7 @@
 class FTSingleHandle : public YEGameObject
 {
 public:
-	FTSingleHandle(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName);
+	FTSingleHandle(const YEGameContext& _game_context, FTPlayer* p1, const wchar_t* meshName);
 	virtual ~FTSingleHandle();
 
 	void start() override;
@@ -21,7 +21,6 @@ public:
 	bool _isCPU;
 
 protected:
-	FTPlayer* _player_right;
 	FTPlayer* _player_left;
 	YEMeshComponent* _mesh_component;
 	const wchar_t* _meshFilename;

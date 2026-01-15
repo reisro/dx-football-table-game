@@ -18,10 +18,10 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	FTPlayerWhite* GetKeeper() const { return _keeper; }
+	FTPlayerWhite* GetKeeper() const { return _player_left; }
 
 private:
-	FTPlayerWhite* _keeper;
+	FTPlayerWhite* _player_left;
 };
 
 #endif 

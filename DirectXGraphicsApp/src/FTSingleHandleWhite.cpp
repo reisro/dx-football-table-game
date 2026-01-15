@@ -2,8 +2,8 @@
 #include "YEPhysX.h"
 
 FTSingleHandleWhite::FTSingleHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, const wchar_t* meshName):
-	FTSingleHandle(_game_context, p1, p1, meshName),
-	_keeper(reinterpret_cast<FTPlayerWhite*>(p1))
+	FTSingleHandle(_game_context, p1, meshName),
+	_player_left(reinterpret_cast<FTPlayerWhite*>(p1))
 {
 }
 
@@ -25,7 +25,7 @@ void FTSingleHandleWhite::update(float _deltaTime)
 {
 	FTSingleHandle::update(_deltaTime);
 
-	YELog("FTSingleHandleWHite: Player from Ball : %f" + std::to_string(_keeper->_distanceFromBall));
+	YELog("FTSingleHandleWHite: Keeper from Ball : %f" + std::to_string(_player_left->_distanceFromBall));
 
 	//YELog("FTSingleHandleWhite: Keeper from Ball : %f" + std::to_string(_keeper->_distanceFromBall));
 	/*if (_keeper->_distanceFromBall < 0.35f)

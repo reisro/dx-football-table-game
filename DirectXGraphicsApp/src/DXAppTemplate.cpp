@@ -52,21 +52,24 @@ public:
 		football_player2_l->hasParent = true;
 		football_player2_l->hasRigidBody = true;
 
-		football_keeper = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx");
-		football_keeper->hasRigidBody = true;
-		football_keeper->hasParent = true;
-
-		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
+		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx");
 		football_keeper_ai->hasRigidBody = true;
+		//football_keeper_ai->hasParent = true;
 
+		football_keeper_player = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
+		football_keeper_player->hasRigidBody = true;
+
+		// handle Player
 		football_handle = new FTHandlePlayer(GetGameContext(), football_player, football_player2, L"C:\\Game Assets\\football_handle.fbx");
 
+		// handle AI
 		football_handle_player = new FTHandleWhite(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
+		
+		football_handle_keeper_ai = new FTSingleHandleWhite(GetGameContext(), football_keeper_ai, L"C:\\Game Assets\\football_handle.fbx");
 
-		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper, L"C:\\Game Assets\\football_handle.fbx");
-		football_handle_keeper1 = new FTSingleHandleWhite(GetGameContext(), football_keeper_ai, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper_player, L"C:\\Game Assets\\football_handle.fbx");
 
-		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper1);
+		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai);
 
 		// Start Game Objects
 		football_field->start();
@@ -99,19 +102,19 @@ public:
 		football_handle_player->start();
 		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.62057f));
 
-		football_keeper->start(); //5
-		football_keeper->_transform->setPosition(new YEVector3(3.0f, 0.85f, -9.25f));
+		football_keeper_ai->start(); //5
+		football_keeper_ai->_transform->setPosition(new YEVector3(3.0f, 0.85f, -9.25f));
 
-		football_keeper_ai->start(); //6
-		football_keeper_ai->_transform->setPosition(new YEVector3(3.0f, 0.85f, 8.85f));
+		football_handle_keeper_ai->_isCPU = false;
+		football_handle_keeper_ai->start();
+		football_handle_keeper_ai->_transform->setPosition(new YEVector3(0.0f, 0.85f, -8.5f));
 
-		football_handle_keeper->_isCPU = false;
+		football_keeper_player->start(); //6
+		football_keeper_player->_transform->setPosition(new YEVector3(3.0f, 0.85f, 8.85f));
+
+		football_handle_keeper->_isCPU = true;
 		football_handle_keeper->start();
-		football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 0.85f, -8.5f));
-
-		football_handle_keeper1->_isCPU = true;
-		football_handle_keeper1->start();
-		football_handle_keeper1->_transform->setPosition(new YEVector3(0.0f, 0.85f, 8.5f));
+		football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 0.85f, 8.5f));
 
 		ai_opponent->start();
 	}
@@ -122,21 +125,23 @@ public:
 		YELog("Football Ball Position: X:" + std::to_string(football_ball->_transform->getPosition()->_x) +
 			" Y:" + std::to_string(football_ball->_transform->getPosition()->_y) +
 			" Z:" + std::to_string(football_ball->_transform->getPosition()->_z));
+
 		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
 		football_player2->update(static_cast<float>(_deltaTime));
+
 		football_handle_player->update(static_cast<float>(_deltaTime));
 		football_player_l->DistanceFromTarget(football_ball);
 		football_player_l->update(static_cast<float>(_deltaTime));
 		football_player2_l->DistanceFromTarget(football_ball);
 		football_player2_l->update(static_cast<float>(_deltaTime));
-		football_keeper->update(static_cast<float>(_deltaTime));
-		football_handle_keeper->update(static_cast<float>(_deltaTime));
-
 		football_keeper_ai->update(static_cast<float>(_deltaTime));
 		football_keeper_ai->DistanceFromTarget(football_ball);
+		football_handle_keeper_ai->update(static_cast<float>(_deltaTime));
 
-		football_handle_keeper1->update(static_cast<float>(_deltaTime));
+		football_keeper_player->update(static_cast<float>(_deltaTime));
+		football_handle_keeper->update(static_cast<float>(_deltaTime));
+
 		ai_opponent->WatchBallDirection(football_ball);
 		ai_opponent->update(static_cast<float>(_deltaTime));
 
@@ -157,13 +162,13 @@ private:
 	FTPlayer* football_player2;
 	FTPlayerWhite* football_player_l;
 	FTPlayerWhite* football_player2_l;
-	FTPlayer* football_keeper;
 	FTPlayerWhite* football_keeper_ai;
+	FTPlayer* football_keeper_player;
 	FTPlayerWhite* football_player_white;
 	FTHandlePlayer* football_handle;
 	FTHandleWhite* football_handle_player;
 	FTSingleHandlePlayer* football_handle_keeper;
-	FTSingleHandleWhite* football_handle_keeper1;
+	FTSingleHandleWhite* football_handle_keeper_ai;
 	FTFieldWalls* football_walls;
 	AIPlayerOpponent* ai_opponent;
 
