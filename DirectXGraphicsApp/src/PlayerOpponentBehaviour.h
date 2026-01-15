@@ -24,11 +24,14 @@ public:
 	bool    _isDefending;
 	bool    _isBehind;
 	bool	_closeToShoot;
+	bool	_frontCanShoot;
+	bool	_keeperCanShoot;
 	bool    _ballIsInMySide;
 	bool	_goRight;
 	bool	_goLeft;
 	bool	_canChangeDir;
-	bool 	_alignedWithBall;
+	bool 	_handleAlignedWithBall;
+	bool 	_keeperAlignedWithBall;
 
 	YEVector3	_BallPosition;
 	YEVector3	_P1Position;

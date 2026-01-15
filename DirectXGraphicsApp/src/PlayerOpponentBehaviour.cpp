@@ -18,18 +18,7 @@ YEBehaviourStatus PlayerOpponentBehaviour::Deffend()
 
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-		if (_goRight && !_alignedWithBall)
-		{
-			phsyX->MoveKinematicPulleyJointBody(2, 1, -2.4f, 5.2f);
-			phsyX->MoveKinematicPulleyJointBody(3, 1, -2.4f, 5.2f);
-			phsyX->MoveKinematicPulleyJointBody(4, 1, -1.7f, 1.5f);
-		}
-		if (_goLeft && !_alignedWithBall)
-		{
-			phsyX->MoveKinematicPulleyJointBody(2, -1, -2.4f, 5.2f);
-			phsyX->MoveKinematicPulleyJointBody(3, -1, -2.4f, 5.2f);
-			phsyX->MoveKinematicPulleyJointBody(4, -1, -1.7f, 1.5f);
-		}
+		phsyX->ResetRotatePulleyJointBody(4);
 
 		return YEBehaviourStatus::SUCCESS;
 	}
@@ -45,8 +34,14 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-		phsyX->RotateJointBody();
-		//phsyX->MoveJointBody(0.05f);
+		if (_frontCanShoot)
+		{
+			phsyX->RotatePulleyJointBody(2);
+			phsyX->RotatePulleyJointBody(3);
+		}
+		
+		if (_keeperCanShoot)
+			phsyX->RotatePulleyJointBody(4);
 
 		return YEBehaviourStatus::SUCCESS;
 	}
@@ -56,32 +51,38 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 
 YEBehaviourStatus PlayerOpponentBehaviour::MoveHandle()
 {
-	if (!_closeToShoot)
+	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+
+	if (_goRight && !_handleAlignedWithBall)
 	{
-		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
-
-		if (!_alignedWithBall && _goRight)
-		{
-			YELog("PlayerOpponentBehaviour: Move Handle Right executed.");
-
-			if (phsyX->MoveJointBody(1, -2.4f, 5.4f))
-				_canChangeDir = false;
-
-			//phsyX->MoveKinematicPulleyJointBody(4);
-		}
+		phsyX->MoveKinematicPulleyJointBody(2, 1, -2.4f, 5.2f);
+		phsyX->MoveKinematicPulleyJointBody(3, 1, -2.4f, 5.2f);
 		
-		if (!_alignedWithBall && _goLeft)
-		{
-			YELog("PlayerOpponentBehaviour: Move Handle Left executed.");
+		if (_isDefending)
+			phsyX->MoveKinematicPulleyJointBody(4, 1, -1.7f, 1.5f);
+		else
+			phsyX->MoveKinematicPulleyJointBody(4, 1, -2.4f, 5.2f);
+	}
+	if (_goLeft && !_handleAlignedWithBall)
+	{
+		phsyX->MoveKinematicPulleyJointBody(2, -1, -2.4f, 5.2f);
+		phsyX->MoveKinematicPulleyJointBody(3, -1, -2.4f, 5.2f);
 
-			if (phsyX->MoveJointBody(-1, -2.4f, 5.4f))
-				_canChangeDir = false;
-		}
-
-		return YEBehaviourStatus::SUCCESS;
+		if (_isDefending)
+			phsyX->MoveKinematicPulleyJointBody(4, -1, -1.7f, 1.5f);
+		else
+			phsyX->MoveKinematicPulleyJointBody(4, -1, -2.4f, 5.2f);
 	}
 
-	return YEBehaviourStatus::FAILURE;
+	if (!_keeperAlignedWithBall)
+	{
+		if (_BallPosition._x > _KeeperPosition._x + 0.2f)
+			phsyX->MoveKinematicPulleyJointBody(4, 1, -1.7f, 1.5f);
+		if (_BallPosition._x < _KeeperPosition._x - 0.2f)
+			phsyX->MoveKinematicPulleyJointBody(4, -1, -1.7f, 1.5f);
+	}
+
+	return YEBehaviourStatus::SUCCESS;
 }
 
 YEBehaviourStatus PlayerOpponentBehaviour::WatchBall()
