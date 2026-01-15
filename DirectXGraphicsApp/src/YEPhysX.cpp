@@ -328,11 +328,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		rot += 0.08f; rotInc += 0.1; if (rot > 7.0f) rot = 3.0f; if (rotInc > 3.0f) rotInc = 0.0f;
 	}
 
-	if (_input->keyDown(DIK_N))
-	{
-		cpuRot -= 0.08f; cpuRotInc += 0.1; if (cpuRot < 0.0f) cpuRot = 3.0f; if (cpuRotInc < -3.0f) cpuRotInc = 0.0f;
-	}
-
 	for (size_t i = 0; i < pulleyJointsList.size(); i++)
 		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
 
