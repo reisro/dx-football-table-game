@@ -25,6 +25,8 @@ public:
 	virtual bool MoveJointBody(int dir, yeFloat left, yeFloat right);
 	virtual void MoveJointBodyToPosition(int dir);
 	virtual void MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right);
+	virtual void RotatePulleyJointBody(int id);
+	virtual void ResetRotatePulleyJointBody(int id);
 
 	static YEPhysics* GetInstance();
 

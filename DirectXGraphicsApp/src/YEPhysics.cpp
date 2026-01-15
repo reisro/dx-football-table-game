@@ -55,6 +55,15 @@ void YEPhysics::MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFl
 {
 }
 
+void YEPhysics::RotatePulleyJointBody(int id)
+{
+}
+
+void YEPhysics::ResetRotatePulleyJointBody(int id)
+{
+
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

@@ -25,6 +25,8 @@ struct PulleyJointBodyInfo
 	PxRigidDynamic* box;
 	float offset;
 	float rightMoveDir;
+	float cpuRot=0.0f;
+	float cpuRotInc=0.0f;
 	bool receivesInput;
 };
 
@@ -52,6 +54,12 @@ public:
 	void MoveJointBodyToPosition(int dir) override;
 
 	void MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right) override;
+
+	void RotatePulleyJointBody(int id) override;
+
+	void ResetRotatePulleyJointBody(int id) override;
+
+	void ResetDynamicSphere();
 
 	// Starts up all procedures for a specific susbsystem
 	virtual void Setup() override;
