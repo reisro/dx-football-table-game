@@ -12,8 +12,8 @@ YEGameObject::YEGameObject():
 	_transform->_gameObject = this;
 }
 
-YEGameObject::YEGameObject(const YEGameContext& _game_context, bool isEmpty):
-_game_object_name{ "Game Object" },
+YEGameObject::YEGameObject(const char object_name, const YEGameContext& _game_context, bool isEmpty = false):
+_game_object_name{ "object_name" },
 _id{ _game_context.sceneObject->_meshid++ }
 {
 	// Every game object has a transform component by default
