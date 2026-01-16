@@ -1,6 +1,7 @@
 #include "FTScore.h"
 
-FTScore::FTScore(const YEGameContext& _game_context)
+FTScore::FTScore(const YEGameContext& _game_context):
+	YEGameObject("Football Score", _game_context)
 {
 }
 

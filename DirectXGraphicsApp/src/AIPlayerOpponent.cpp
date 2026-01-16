@@ -1,7 +1,7 @@
 #include "AIPlayerOpponent.h"
 
 AIPlayerOpponent::AIPlayerOpponent(const YEGameContext& _game_context, FTHandleWhite* handle, FTSingleHandleWhite* keeper):
-	YEGameObject(_game_context), _handleFront(handle), _captureTime(false), _handleKeeper(keeper), 
+	YEGameObject("AI Player Opponent", _game_context), _handleFront(handle), _captureTime(false), _handleKeeper(keeper),
 	_behaviour_tree(new PlayerOpponentBehaviour())
 {
 	_currentBallPos = YEVector3::Zero();

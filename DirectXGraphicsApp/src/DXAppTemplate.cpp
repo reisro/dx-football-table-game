@@ -10,6 +10,7 @@
 #include <FTSingleHandleWhite.h>
 #include <FTFieldWalls.h>
 #include <AIPlayerOpponent.h>
+#include <FTScore.h>
 
 using namespace gamentry;
 
@@ -71,6 +72,8 @@ public:
 
 		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai);
 
+		football_score = new FTScore(GetGameContext());
+
 		// Start Game Objects
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 0.0f, 0.0f));
@@ -126,6 +129,10 @@ public:
 			" Y:" + std::to_string(football_ball->_transform->getPosition()->_y) +
 			" Z:" + std::to_string(football_ball->_transform->getPosition()->_z));
 
+		/*if (football_ball->_transform->getPosition()->_z < football_keeper_ai->_transform->getPosition()->_z ||
+			football_ball->_transform->getPosition()->_z > football_keeper_player->_transform->getPosition()->_z)
+			football_score->ResetScores();*/
+
 		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
 		football_player2->update(static_cast<float>(_deltaTime));
@@ -170,6 +177,8 @@ private:
 	FTSingleHandlePlayer* football_handle_keeper;
 	FTSingleHandleWhite* football_handle_keeper_ai;
 	FTFieldWalls* football_walls;
+	FTScore* football_score;
+
 	AIPlayerOpponent* ai_opponent;
 
 	YEVector3* position;

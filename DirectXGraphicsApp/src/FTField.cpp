@@ -2,7 +2,7 @@
 #include <YEPhysX.h>
 
 FTField::FTField(const YEGameContext& _game_context):
-	YEGameObject(_game_context),
+	YEGameObject("Football Field", _game_context),
 	_mesh_component(nullptr)
 {
 }

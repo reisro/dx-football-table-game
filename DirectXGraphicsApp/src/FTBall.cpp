@@ -3,7 +3,7 @@
 #include <YEPhysX.h>
 
 FTBall::FTBall(const YEGameContext& _game_context):
-	YEGameObject(_game_context),
+	YEGameObject("Football Ball", _game_context),
 	_mesh_component(new YEMeshComponent(this, L"C:\\Game Assets\\football_ball.fbx")),
 	_physics_component(new YEPhysicsComponent(_game_context))
 {

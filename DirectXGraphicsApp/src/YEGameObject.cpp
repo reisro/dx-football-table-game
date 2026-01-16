@@ -12,7 +12,7 @@ YEGameObject::YEGameObject():
 	_transform->_gameObject = this;
 }
 
-YEGameObject::YEGameObject(const char* object_name, const YEGameContext& _game_context, bool isEmpty = false):
+YEGameObject::YEGameObject(const char* object_name, const YEGameContext& _game_context, bool isEmpty):
 _game_object_name{ object_name },
 _id{ _game_context.sceneObject->_meshid++ }
 {

@@ -2,7 +2,7 @@
 #include <YEPhysX.h>
 
 FTFieldWalls::FTFieldWalls(const YEGameContext& _game_context) :
-	YEGameObject(_game_context)
+	YEGameObject("Football Walls", _game_context)
 {
 }
 

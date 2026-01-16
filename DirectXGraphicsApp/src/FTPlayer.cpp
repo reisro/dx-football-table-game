@@ -2,7 +2,7 @@
 #include <YEPhysX.h>
 
 FTPlayer::FTPlayer(const YEGameContext& _game_context, const wchar_t* _meshName):
-	YEGameObject(_game_context),
+	YEGameObject("Football Player", _game_context),
 	_mesh_component(new YEMeshComponent(this, _meshName)),
 	_physics_component(new YEPhysicsComponent(_game_context))
 {
