@@ -50,7 +50,7 @@ void YEPhysX::CreateDefaultPlane()
 	_scene->addActor(*groundPlane);
 }
 
-void YEPhysX::CreateStaticBox(YEVector3* pos, YEVector3* size)
+void YEPhysX::CreateStaticBox(const char* name, YEVector3* pos, YEVector3* size)
 {
 	PxBoxGeometry boxGeometry(size->_x, size->_y, size->_z);
 
@@ -61,7 +61,7 @@ void YEPhysX::CreateStaticBox(YEVector3* pos, YEVector3* size)
 	_scene->addActor(*staticBox);
 }
 
-void YEPhysX::CreateDynamicSphere(YEVector3* pos, yeFloat radius)
+void YEPhysX::CreateDynamicSphere(const char* name, YEVector3* pos, yeFloat radius)
 {
 	PxSphereGeometry sphereGeometry(radius);
 
@@ -344,6 +344,19 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		PxVec3 v =_dynamicSphere->getLinearVelocity().getNormalized() * 20.0f;
 		_dynamicSphere->setLinearVelocity(v);
 	}
+
+	/*if (_scene->raycast(_dynamicSphere->getGlobalPose().getNormalized().p,
+		PxVec3(0.0f,0.0f,_dynamicSphere->getGlobalPose().p.getNormalized().z), 2.0f, hit))
+	{
+		if (hit.block.actor != nullptr)
+		{
+			PxRaycastHit raycastHit = hit.block;
+			PxActor* hitActor = raycastHit.actor;
+
+			if (hitActor->getType() == PxActorTypeFlag::eRIGID_STATIC)
+				YELogCStr(hitActor->getName());
+		}
+	}*/
 
 	YELog("\nRot: " + std::to_string(rot));
 	YELog("\nYEPhysics: Ball Velocity %f" + std::to_string(_dynamicSphere->getLinearVelocity().magnitude()));

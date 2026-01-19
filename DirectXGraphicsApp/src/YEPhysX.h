@@ -39,9 +39,9 @@ public:
 	// Static Creation Functions
 	void CreateDefaultPlane() override;
 
-	void CreateStaticBox(YEVector3* pos, YEVector3* size) override;
+	void CreateStaticBox(const char* name, YEVector3* pos, YEVector3* size) override;
 
-	void CreateDynamicSphere(YEVector3* pos, yeFloat radius) override;
+	void CreateDynamicSphere(const char* name, YEVector3* pos, yeFloat radius) override;
 
 	void CreateCustomRigidBody() override;
 
@@ -96,6 +96,8 @@ public:
 	static PxMaterial*				_material;
 	static PxPvd*					_pvd;
 	static PxPvdTransport*			_transport;
+
+	PxRaycastBuffer hit;
 	
 	float rot = 3.0f;
 	float rotInc = 0.0f;
