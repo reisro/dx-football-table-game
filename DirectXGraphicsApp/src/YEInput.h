@@ -39,9 +39,9 @@ public:
 private:
 	static YEInput* _instance;
 	
-	IDirectInput8*		 _dInput;
-	IDirectInputDevice8* _dInputDeviceKeyboard;
-	IDirectInputDevice8* _dInputDeviceMouse;
+	LPDIRECTINPUT8		 _dInput;
+	LPDIRECTINPUTDEVICE8 _dInputDeviceKeyboard;
+	LPDIRECTINPUTDEVICE8 _dInputDeviceMouse;
 
 	char				 _mKeyboardState[256];
 	DIMOUSESTATE2		 _mMouseState;

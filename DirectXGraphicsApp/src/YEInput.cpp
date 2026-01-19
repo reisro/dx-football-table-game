@@ -49,16 +49,50 @@ bool YEInput::Init()
 		IID_IDirectInput8, (void**)&_dInput, 0));
 
 	// Keyboard device initalization
-	HR(_dInput->CreateDevice(GUID_SysKeyboard, &_dInputDeviceKeyboard, 0));
-	HR(_dInputDeviceKeyboard->SetDataFormat(&c_dfDIKeyboard));
-	HR(_dInputDeviceKeyboard->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
-	HR(_dInputDeviceKeyboard->Acquire());
+	HRESULT hr = (_dInput->CreateDevice(GUID_SysKeyboard, &_dInputDeviceKeyboard, 0));
+
+	hr = _dInputDeviceKeyboard->SetDataFormat(&c_dfDIKeyboard);
+	hr = (_dInputDeviceKeyboard->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
+	hr = (_dInputDeviceKeyboard->Acquire());
+
+	if (FAILED(hr))
+	{
+		YELog("Failed to create keyboard device...");
+		return false;
+	}
 
 	// Mouse device initalization
-	HR(_dInput->CreateDevice(GUID_SysMouse, &_dInputDeviceMouse, 0));
-	HR(_dInputDeviceMouse->SetDataFormat(&c_dfDIMouse2));
-	HR(_dInputDeviceMouse->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_NONEXCLUSIVE | DISCL_FOREGROUND));
-	HR(_dInputDeviceMouse->Acquire());
+	hr = _dInput->CreateDevice(GUID_SysMouse, &_dInputDeviceMouse, 0);
+	
+	if (FAILED(hr))
+	{
+		YELog("Failed to create mouse device...");
+		return false;
+	}
+
+	hr = _dInputDeviceMouse->SetDataFormat(&c_dfDIMouse2);
+
+	if (FAILED(hr))
+	{
+		YELog("Failed to set data format...");
+		return false;
+	}
+
+	hr = (_dInputDeviceMouse->SetCooperativeLevel(outputWindow->GetWindowsHandle(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE));
+
+	if (FAILED(hr))
+	{
+		YELog("Failed to set cooperative level...");
+		return false;
+	}
+
+	hr  = _dInputDeviceMouse->Acquire();
+
+	if (FAILED(hr))
+	{
+		YELog("Failed to acquire mouse device...");
+		return false;
+	}
 
 	return true;
 }
@@ -87,7 +121,7 @@ void YEInput::poll()
 		}
 	}
 
-	hr = _dInputDeviceMouse->GetDeviceState(sizeof(DIMOUSESTATE2), (LPVOID)&_mKeyboardState);
+	hr = _dInputDeviceMouse->GetDeviceState(sizeof(DIMOUSESTATE), &_mMouseState);
 
 	if (FAILED(hr))
 	{
@@ -96,6 +130,7 @@ void YEInput::poll()
 		{
 			// if lost set to zero
 			ZeroMemory(&_mMouseState, sizeof(_mMouseState));
+
 			_dInputDeviceMouse->Acquire();
 		}
 	}
