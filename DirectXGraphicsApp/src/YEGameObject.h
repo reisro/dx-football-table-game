@@ -55,11 +55,12 @@ public:
 	bool hasRigidBody;
 
 protected:
+	const char* _game_object_name;
+
 	YEVectorWrapper<YEBaseComponent*> _components;
 	YEVectorWrapper<YEGameObject*>	  _children;
 	
 private:
-	const char* _game_object_name;
 	YEVector3* position;
 };
 
