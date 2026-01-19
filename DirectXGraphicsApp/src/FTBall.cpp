@@ -20,7 +20,7 @@ void FTBall::start()
 	// initialize mesh component to load its mesh
 	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
 
-	YEPhysics::GetInstance()->CreateDynamicSphere(new YEVector3(.0f,4.0f,0.0f), 0.15f);
+	YEPhysics::GetInstance()->CreateDynamicSphere(_game_object_name, new YEVector3(.0f,4.0f,0.0f), 0.15f);
 }
 
 void FTBall::shutdown()
