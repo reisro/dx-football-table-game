@@ -65,6 +65,11 @@ static void YELog(std::string msg)
 	std::cout << msg << std::endl;
 }
 
+static void YELogCStr(const char* msg)
+{
+	printf("%s\n", msg);
+}
+
 //---------------------------------------------------------------------------------------
 // Convenience macro for releasing COM objects.
 //---------------------------------------------------------------------------------------
