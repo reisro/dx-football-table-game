@@ -4,6 +4,7 @@
 #define _H_FT_SCORE_H_
 
 #include "YEGameObject.h"
+#include "YEPhysX.h"
 
 class FTScore : public YEGameObject
 {
@@ -24,6 +25,9 @@ class FTScore : public YEGameObject
 	{ 
 		_playerScore = 0; 
 		_aiScore = 0; 
+
+		YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+		physics->ResetDynamicSphere();
 	}
 
 private:
