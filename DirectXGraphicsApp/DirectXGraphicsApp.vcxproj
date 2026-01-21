@@ -198,6 +198,7 @@
     <ClInclude Include="src\YESceneObject.h" />
     <ClInclude Include="src\YESprite.h" />
     <ClInclude Include="src\YESpriteComponent.h" />
+    <ClInclude Include="src\YESpriteShader.h" />
     <ClInclude Include="src\YEStandardEffect.h" />
     <ClInclude Include="src\YEStringUtils.h" />
     <ClInclude Include="src\YETextureLoader.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="src\YESequence.cpp" />
     <ClCompile Include="src\YESprite.cpp" />
     <ClCompile Include="src\YESpriteComponent.cpp" />
+    <ClCompile Include="src\YESpriteShader.cpp" />
     <ClCompile Include="src\YEStandardEffect.cpp" />
     <ClCompile Include="src\YETextureLoader.cpp" />
     <ClCompile Include="src\YETimeBehaviourAction.cpp" />

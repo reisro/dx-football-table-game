@@ -312,6 +312,9 @@
     <ClInclude Include="3rdparty\texture\WICTextureLoader.h">
       <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
+    <ClInclude Include="src\YESpriteShader.h">
+      <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -451,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="3rdparty\texture\WICTextureLoader.cpp">
       <Filter>Arquivos de Origem\3rdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YESpriteShader.cpp">
+      <Filter>Arquivos de Origem\Core\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
