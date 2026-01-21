@@ -67,10 +67,10 @@ void YEPhysX::CreateDynamicSphere(const char* name, YEVector3* pos, yeFloat radi
 
 	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
-	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 1.0f, PxTransform(PxVec3(0.0f,0.03f,0.0f)));
+	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 0.1f, PxTransform(PxVec3(0.0f,0.03f,0.0f)));
 
 	_dynamicSphere->setAngularDamping(0.5f);
-	_dynamicSphere->setMass(5.0f);
+	_dynamicSphere->setMass(10.0f);
 	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 1.0f));
 	_dynamicSphere->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 
@@ -344,6 +344,9 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		PxVec3 v =_dynamicSphere->getLinearVelocity().getNormalized() * 20.0f;
 		_dynamicSphere->setLinearVelocity(v);
 	}
+
+	if (_dynamicSphere->getGlobalPose().p.y < 0.1f)
+		_dynamicSphere->setRigidDynamicLockFlags(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y);
 
 	/*if (_scene->raycast(_dynamicSphere->getGlobalPose().getNormalized().p,
 		PxVec3(0.0f,0.0f,_dynamicSphere->getGlobalPose().p.getNormalized().z), 2.0f, hit))
