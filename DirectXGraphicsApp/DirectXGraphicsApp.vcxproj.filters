@@ -130,6 +130,9 @@
     <Filter Include="Arquivos de Origem\AI">
       <UniqueIdentifier>{e5d6be87-6047-45da-a7ab-d37601af9e06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Origem\3rdparty">
+      <UniqueIdentifier>{547887af-eaf5-42ac-8b05-b481581d9774}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -300,6 +303,15 @@
     <ClInclude Include="src\YETimeBehaviourAction.h">
       <Filter>Arquivos de Cabeçalho\AI</Filter>
     </ClInclude>
+    <ClInclude Include="src\YESprite.h">
+      <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\texture\DDSTextureLoader.h">
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdparty\texture\WICTextureLoader.h">
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -430,6 +442,15 @@
     </ClCompile>
     <ClCompile Include="src\YETimeBehaviourAction.cpp">
       <Filter>Arquivos de Origem\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YESprite.cpp">
+      <Filter>Arquivos de Origem\Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\texture\DDSTextureLoader.cpp">
+      <Filter>Arquivos de Origem\3rdparty</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\texture\WICTextureLoader.cpp">
+      <Filter>Arquivos de Origem\3rdparty</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

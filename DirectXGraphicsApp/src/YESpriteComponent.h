@@ -22,7 +22,6 @@ public:
 	virtual void update(float _deltaTime) override;
 
 private:
-	
 };
 
 #endif
