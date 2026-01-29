@@ -11,6 +11,7 @@
 #include <FTFieldWalls.h>
 #include <AIPlayerOpponent.h>
 #include <FTScore.h>
+#include <FTGameRoom.h>
 
 using namespace gamentry;
 
@@ -55,7 +56,6 @@ public:
 
 		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx");
 		football_keeper_ai->hasRigidBody = true;
-		//football_keeper_ai->hasParent = true;
 
 		football_keeper_player = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
 		football_keeper_player->hasRigidBody = true;
@@ -178,6 +178,7 @@ private:
 	FTSingleHandleWhite* football_handle_keeper_ai;
 	FTFieldWalls* football_walls;
 	FTScore* football_score;
+	FTGameRoom* game_room;
 
 	AIPlayerOpponent* ai_opponent;
 
