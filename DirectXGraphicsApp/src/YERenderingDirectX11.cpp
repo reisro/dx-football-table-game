@@ -101,7 +101,7 @@ bool YERenderingDirectX11::Init()
 		ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
 
 		// fill the swap chain description struct
-		swapChainDesc.BufferCount = 1;                                    // one back buffer
+		swapChainDesc.BufferCount = 2;                                    // one back buffer
 		swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
 		swapChainDesc.Width = 1368;
 		swapChainDesc.Height = 720;
@@ -179,6 +179,7 @@ bool YERenderingDirectX11::Init()
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0;
 	hr = d3dDevice->CreateDepthStencilView(depthStencilBuffer, 0, &depthStencilView);
+
 	if (FAILED(hr))
 	{
 		YELog("Depth Stencil View couldn't be created!");
@@ -210,6 +211,12 @@ bool YERenderingDirectX11::Init()
 
 	outputWindow->Show();
 
+	m_SpriteShader = std::make_unique<YESpriteShader>(this);
+	m_SpriteShader->Load();
+
+	m_Sprite = std::make_unique<YESprite>(this);
+	m_Sprite->Create();
+
 	// Make process DPI aware and obtain main monitor scale
 	ImGui_ImplWin32_EnableDpiAwareness();
 	float main_scale = ImGui_ImplWin32_GetDpiScaleForMonitor(::MonitorFromPoint(POINT{ 0, 0 }, MONITOR_DEFAULTTOPRIMARY));
@@ -240,8 +247,8 @@ bool YERenderingDirectX11::Init()
 
 void YERenderingDirectX11::PostInit()
 {
-	if (createGeometryCmd)
-		CreateDefaultCube();
+	//if (createGeometryCmd)
+		//CreateDefaultCube();
 
 	InitPipeline();
 
@@ -269,11 +276,27 @@ void YERenderingDirectX11::PostInit()
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	sampDesc.MinLOD = 0;
-	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	sampDesc.MaxLOD = 1000.0f;
 
 	hr = d3dDevice->CreateSamplerState(&sampDesc, &texSamplerState);
 	if (FAILED(hr))
 		YELog("Texture sampler state couldn't be created");
+
+	/*D3D11_SAMPLER_DESC sampDesc;
+	ZeroMemory(&sampDesc, sizeof(sampDesc));
+	sampDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	sampDesc.MipLODBias = 0;
+	sampDesc.MaxAnisotropy = D3D11_REQ_MAXANISOTROPY;
+	sampDesc.MinLOD = 0;
+	sampDesc.MaxLOD = 1000.0f;
+
+	hr = d3dDevice->CreateSamplerState(&sampDesc, m_SamplerState.GetAddressOf());
+	if (FAILED(hr))
+		YELog("Texture sampler state couldn't be created");*/
 }
 
 void YERenderingDirectX11::Clean()
@@ -317,7 +340,6 @@ void YERenderingDirectX11::CreateRenderTargetView()
 	// use the back buffer address to create the render target
 	d3dDevice->CreateRenderTargetView(tBackBuffer, nullptr, &mainRenderTargetView);
 	tBackBuffer->Release();
-
 }
 
 void YERenderingDirectX11::SetViewport()
@@ -332,6 +354,37 @@ void YERenderingDirectX11::SetViewport()
 	viewport.Height = 720;
 
 	d3dDeviceContext->RSSetViewports(1, &viewport);
+}
+
+void YERenderingDirectX11::UpdateSpriteConstantBuffer(float pitch_radians, float yaw_radians, float roll_radians)
+{
+	DirectX::XMMATRIX world = DirectX::XMMatrixIdentity();
+
+	m_PitchRadians += pitch_radians;
+	m_YawRadians += yaw_radians;
+	m_PitchRadians = std::clamp<float>(m_PitchRadians, -(DirectX::XM_PIDIV2 - 0.1f), DirectX::XM_PIDIV2 - 0.1f);
+
+	// Convert Spherical to Cartesian coordinates.
+	DirectX::XMMATRIX rotation_matrix = DirectX::XMMatrixRotationRollPitchYaw(m_PitchRadians, m_YawRadians, 0);
+	DirectX::XMVECTOR position = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	position = XMVector3TransformCoord(position, rotation_matrix);
+
+	SpriteBuffer world_buffer = {};
+	world_buffer.world = DirectX::XMMatrixTranspose(world);
+	world_buffer.view = DirectX::XMMatrixTranspose(_cameraView);
+	world_buffer.projection = DirectX::XMMatrixTranspose(_cameraProjection);
+
+	DirectX::XMStoreFloat4(&mPosition, position);
+
+	world_buffer.cameraPosition = mPosition;
+
+	m_SpriteShader->UpdateWorldConstantBuffer(world_buffer);
+}
+
+void YERenderingDirectX11::UpdateWorldConstantBuffer(const SpriteBuffer& worldBuffer)
+{
+	ID3D11DeviceContext* context = (ID3D11DeviceContext*)this->GetDeviceContext();
+	context->UpdateSubresource(m_WorldConstantBuffer.Get(), 0, nullptr, &worldBuffer, 0, 0);
 }
 
 void YERenderingDirectX11::Render()
@@ -363,8 +416,8 @@ void YERenderingDirectX11::BeginFrame()
 	XMVECTOR target = XMVectorZero();
 	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
-	XMMATRIX V = XMMatrixLookAtLH(pos, target, up);
-	XMStoreFloat4x4(&mView, V);
+	_cameraView = XMMatrixLookAtLH(pos, target, up);
+	XMStoreFloat4x4(&mView, _cameraView);
 
 	// Initialize the projection matrix
 	XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f*3.1415926535f, 1368 / (FLOAT)720, .2f, 1000.0f);
@@ -377,22 +430,23 @@ void YERenderingDirectX11::BeginFrame()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::ShowDemoWindow(&show_demo_window);
+	ImGui::SetNextWindowBgAlpha(0.0);
+	ImGui::SetNextWindowSize(ImVec2(540, 309));
 
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
 	{
 		static float f = 0.0f;
 		static int counter = 0;
-
-		ImGui::Begin("Hello, world!");
-		ImGui::Text("Hello World.");
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
+		ImGui::Begin("Hello, world!", NULL, window_flags);
+		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[0]._texture, ImVec2(540,309));
 		ImGui::End();
 	}
 
 	ImGui::Render();
 
 	// Rendering
-	const float clear_color_with_alpha[4] = { 0.33f, 0.41f, 0.18f, 1.0f };
+	const float clear_color_with_alpha[4] = { 0.161f, 0.161f, 0.157f, 1.0f };
 	
 	// set the render target as the back buffer
 	d3dDeviceContext->ClearRenderTargetView(mainRenderTargetView, clear_color_with_alpha);
@@ -406,9 +460,10 @@ void YERenderingDirectX11::BeginFrame()
 
 	// Check if there are meshes loaded
 	if (_sceneObject->_meshesToRender.size() == 0)
-	{
 		YELog("No meshes loaded to render.");
-	}
+
+	if (_sceneObject->_spritesToRender.size() == 0)
+		YELog("No sprites to render.");
 
 	XMMATRIX world;
 	XMMATRIX view;
@@ -440,6 +495,8 @@ void YERenderingDirectX11::BeginFrame()
 		_sceneObject->Draw(d3dDeviceContext, i);
 	}
 
+	//d3dDeviceContext->DrawIndexed(36, 0, 0);
+
 	//for (size_t i = 0; i < _sceneObject->_meshesToRender.size(); i++)
 	//{
 	//	XMMATRIX world = XMLoadFloat4x4(&_sceneObject->_meshesToRender[i]._mWorld);
@@ -451,42 +508,52 @@ void YERenderingDirectX11::BeginFrame()
 	//	//XMMATRIX view = XMLoadFloat4x4(&mView);
 	//	//XMMATRIX proj = XMLoadFloat4x4(&mProj);
 
-	//	// if exists a default technique implemented
-	//	if (standardEffect->TransformationTechnique)
-	//	{
-	//		//fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&viewProj));
-	//		D3DX11_TECHNIQUE_DESC techniqueDesc;
-	//		standardEffect->TransformationTechnique->GetDesc(&techniqueDesc);
-	//		for (UINT p = 0; p < techniqueDesc.Passes; ++p)
-	//		{
-	//			// Set effect parameters
-	//			standardEffect->SetEyePosW(XMFLOAT3(x, y, z));
-	//			standardEffect->world = {
-	//				1.0f, 0.0f, 0.0f, 0.0f,
-	//				0.0f, 1.0f, 0.0f, 0.0f,
-	//				0.0f, 0.0f, 1.0f, 0.0f,
-	//				0.0f, 0.0f, -5.0f, 1.0f
-	//			};
+		// if exists a default technique implemented
+		//if (standardEffect->TransformationTechnique)
+		//{
+		//	//fxWorldViewProj->SetMatrix(reinterpret_cast<float*>(&viewProj));
+		//	D3DX11_TECHNIQUE_DESC techniqueDesc;
+		//	standardEffect->TransformationTechnique->GetDesc(&techniqueDesc);
+		//	for (UINT p = 0; p < techniqueDesc.Passes; ++p)
+		//	{
+		//		// Set effect parameters
+		//		standardEffect->SetEyePosW(XMFLOAT3(x, y, z));
+		//		standardEffect->world = {
+		//			1.0f, 0.0f, 0.0f, 0.0f,
+		//			0.0f, 1.0f, 0.0f, 0.0f,
+		//			0.0f, 0.0f, 1.0f, 0.0f,
+		//			0.0f, 0.0f, -5.0f, 1.0f
+		//		};
 
-	//			XMMATRIX world = XMLoadFloat4x4(&standardEffect->world);
-	//			XMMATRIX worldInvTranspose = YEMath::MatrixHelper::InverseTranspose(world);
-	//			XMMATRIX worldViewProj = world * view * proj;
+		//		XMMATRIX world = XMLoadFloat4x4(&standardEffect->world);
+		//		XMMATRIX worldInvTranspose = YEMath::MatrixHelper::InverseTranspose(world);
+		//		XMMATRIX worldViewProj = world * view * proj;
 
-	//			standardEffect->SetWorld(world);
-	//			standardEffect->SetWorldInvTranspose(worldInvTranspose);
-	//			standardEffect->SetWorldViewProj(worldViewProj);
-	//			standardEffect->TransformationTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
+		//		standardEffect->SetWorld(world);
+		//		standardEffect->SetWorldInvTranspose(worldInvTranspose);
+		//		standardEffect->SetWorldViewProj(worldViewProj);
+		//		standardEffect->TransformationTechnique->GetPassByIndex(p)->Apply(0, d3dDeviceContext);
 
-	//			//XMMATRIX world = XMLoadFloat4x4(&mWorld);
+		//		//XMMATRIX world = XMLoadFloat4x4(&mWorld);
 
-	//	//		// 36 indices for the box.
-	//			//d3dDeviceContext->DrawIndexed(36, 0, 0);
-	//		}
+		//		// 36 indices for the box.
+		//		d3dDeviceContext->DrawIndexed(36, 0, 0);
+		//	}
 
 	//		// Draw the scene objects
 	//		_sceneObject->Draw(d3dDeviceContext);
-	//	}
+		//}
 	//}
+
+	
+	//m_SpriteShader->Use();
+
+	//UpdateSpriteConstantBuffer(x,y,z);
+
+	/*ID3D11DeviceContext* context = d3dDeviceContext;
+	context->PSSetSamplers(0, 1, &texSamplerState);*/
+
+	//m_Sprite->Render();
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
@@ -575,9 +642,9 @@ void YERenderingDirectX11::CreateDefaultCube()
 	iinitData.pSysMem = indices;
 	HRESULT res = d3dDevice->CreateBuffer(&ibd, &iinitData, &mCubeIB);
 
-	//BuildFX();
+	BuildFX();
 
-	//CreateVertexLayout();
+	CreateVertexLayout();
 }
 
 void YERenderingDirectX11::LoadMesh(const wchar_t* pFileName)

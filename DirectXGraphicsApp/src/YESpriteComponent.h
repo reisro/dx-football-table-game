@@ -6,6 +6,7 @@
 
 #include "YEBaseComponent.h"
 #include "YEGameContext.h"
+#include "YESprite.h"
 
 class YEPhysics;
 
@@ -21,7 +22,10 @@ public:
 	virtual void shutdown() override;
 	virtual void update(float _deltaTime) override;
 
+	void LoadTexture(const char* pFileName, int width, int height);
+
 private:
+	YESprite* _sprite;
 };
 
 #endif

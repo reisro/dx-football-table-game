@@ -6,6 +6,8 @@
 #include "YERenderer.h"
 #include "YEWinAppWindow.h"
 #include "YEStandardEffect.h"
+#include "YESprite.h"
+#include "YESpriteShader.h"
 #include "d3dx11Effect.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -55,6 +57,8 @@ public:
 	HRESULT CompileShaderFromFile(LPCWSTR pFileName, const D3D_SHADER_MACRO* pDefines, LPCSTR pEntryPoint, LPCSTR pShaderModel, ID3DBlob** ppBytecodeBlob);
 	void CreateRenderTargetView();
 	void SetViewport();
+	void UpdateSpriteConstantBuffer(float pitch_radians, float yaw_radians, float roll_radians);
+	void UpdateWorldConstantBuffer(const SpriteBuffer& worldBuffer);
 	
 	void Render() override;
 	void BeginFrame() override;
@@ -112,6 +116,18 @@ private:
 	XMFLOAT4X4                  mWorld;
 	XMFLOAT4X4                  mView;
 	XMFLOAT4X4                  mProj;
+	XMFLOAT4					mPosition;
+
+	XMMATRIX					_cameraView;
+	XMMATRIX					_cameraProjection;
+
+	std::unique_ptr<YESprite> m_Sprite = nullptr;
+	std::unique_ptr<YESpriteShader> m_SpriteShader = nullptr;
+	ComPtr<ID3D11Buffer> m_WorldConstantBuffer = nullptr;
+	ComPtr<ID3D11SamplerState> m_SamplerState;
+
+	float m_PitchRadians = 0.0f;
+	float m_YawRadians = 0.0f;
 };
 
 #endif YE_RENDERINGDX11_H

@@ -5,6 +5,7 @@
 
 #include "YEBaseComponent.h"
 #include "YEMesh.h"
+#include "YESprite.h"
 #include <DirectXMath.h>
 #include "YEObserver.h"
 
@@ -23,6 +24,7 @@ public:
 	virtual void Update(UINT id, DirectX::CXMMATRIX M) override;
 
 	std::vector<YEMesh> _meshesToRender;
+	std::vector<YESprite> _spritesToRender;
 	std::map<UINT, XMFLOAT4X4> _meshesWorld;
 
 	UINT _meshid;

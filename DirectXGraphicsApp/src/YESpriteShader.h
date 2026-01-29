@@ -12,7 +12,7 @@ using Microsoft::WRL::ComPtr;
 
 class YERenderer;
 
-struct WorldBuffer
+struct SpriteBuffer
 {
 	DirectX::XMMATRIX world;
 	DirectX::XMMATRIX view;
@@ -43,7 +43,7 @@ public:
 	void Use();
 
 	// Update the model view projection constant buffer
-	void UpdateWorldConstantBuffer(const WorldBuffer& worldBuffer);
+	void UpdateWorldConstantBuffer(const SpriteBuffer& worldBuffer);
 
 	// Update texture buffer
 	void UpdateAnimationConstantBuffer(const AnimationBuffer& buffer);
