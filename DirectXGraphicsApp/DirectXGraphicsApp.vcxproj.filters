@@ -133,6 +133,12 @@
     <Filter Include="Arquivos de Origem\3rdparty">
       <UniqueIdentifier>{547887af-eaf5-42ac-8b05-b481581d9774}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Audio">
+      <UniqueIdentifier>{9005da00-bcc2-428a-a718-ffdc5ef08bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Audio">
+      <UniqueIdentifier>{675f0c65-308e-41d7-aa30-4a2e9b6de6f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdparty\dear_imgui\imconfig.h">
@@ -318,6 +324,9 @@
     <ClInclude Include="src\stb_image.h">
       <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEAudio.h">
+      <Filter>Arquivos de Cabeçalho\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -460,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="src\YESpriteShader.cpp">
       <Filter>Arquivos de Origem\Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEAudio.cpp">
+      <Filter>Arquivos de Origem\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
