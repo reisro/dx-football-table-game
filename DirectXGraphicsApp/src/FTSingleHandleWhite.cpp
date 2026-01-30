@@ -25,7 +25,7 @@ void FTSingleHandleWhite::update(float _deltaTime)
 {
 	FTSingleHandle::update(_deltaTime);
 
-	YELog("FTSingleHandleWHite: Keeper from Ball : %f" + std::to_string(_player_left->_distanceFromBall));
+	//YELog("FTSingleHandleWHite: Keeper from Ball : %f" + std::to_string(_player_left->_distanceFromBall));
 
 	//YELog("FTSingleHandleWhite: Keeper from Ball : %f" + std::to_string(_keeper->_distanceFromBall));
 	/*if (_keeper->_distanceFromBall < 0.35f)

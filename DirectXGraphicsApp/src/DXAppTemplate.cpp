@@ -12,6 +12,8 @@
 #include <AIPlayerOpponent.h>
 #include <FTScore.h>
 #include <FTGameRoom.h>
+#include <FTScoreMarker.h>
+#include <FTGameMainMenu.h>
 
 using namespace gamentry;
 
@@ -74,6 +76,13 @@ public:
 
 		football_score = new FTScore(GetGameContext());
 
+		// Score markers 3D game objects
+		score_marker_player = new FTScoreMarker(GetGameContext());
+		score_marker_ai = new FTScoreMarker(GetGameContext());
+
+		// Game Main Menu Sprite Game Object
+		main_menu = new FTGameMainMenu(GetGameContext());
+
 		// Start Game Objects
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 0.0f, 0.0f));
@@ -94,19 +103,19 @@ public:
 		football_handle->_transform->setPosition(new YEVector3(0.0f, 1.15f, 3.62057f));
 
 		football_player_l->start(); //3
-		football_player_l->_transform->setPosition(new YEVector3(0.0f, 0.85f, -3.85704f));
+		football_player_l->_transform->setPosition(new YEVector3(0.0f, 0.85f, -3.48704f));
 		football_player_l->DistanceFromCenter();
 
 		football_player2_l->start(); //4
-		football_player2_l->_transform->setPosition(new YEVector3(3.0f, 0.85f, -3.85704f));
+		football_player2_l->_transform->setPosition(new YEVector3(3.0f, 0.85f, -3.48704f));
 		football_player2_l->DistanceFromCenter();
 
 		football_handle_player->_isCPU = false;
 		football_handle_player->start();
-		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.62057f));
+		football_handle_player->_transform->setPosition(new YEVector3(0.0f, 1.15f, -3.02057f));
 
 		football_keeper_ai->start(); //5
-		football_keeper_ai->_transform->setPosition(new YEVector3(3.0f, 0.85f, -9.25f));
+		football_keeper_ai->_transform->setPosition(new YEVector3(3.0f, 0.85f, -8.5f));
 
 		football_handle_keeper_ai->_isCPU = false;
 		football_handle_keeper_ai->start();
@@ -120,6 +129,20 @@ public:
 		football_handle_keeper->_transform->setPosition(new YEVector3(0.0f, 0.85f, 8.5f));
 
 		ai_opponent->start();
+
+		score_marker_player->start();
+		score_marker_player->_isPositiveOffset = false;
+		score_marker_player->SetInitialPosition(1.7f);
+		score_marker_player->SetMarkerOffset(0.34333f);
+		score_marker_player->PlaceMarkerAt(6);
+
+		score_marker_ai->start();
+		score_marker_ai->_isPositiveOffset = true;
+		score_marker_ai->SetInitialPosition(-1.6f);
+		score_marker_ai->SetMarkerOffset(0.35333f);
+		score_marker_ai->PlaceMarkerAt(4);
+
+		main_menu->start();
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -178,7 +201,10 @@ private:
 	FTSingleHandleWhite* football_handle_keeper_ai;
 	FTFieldWalls* football_walls;
 	FTScore* football_score;
+	FTScoreMarker* score_marker_player;
+	FTScoreMarker* score_marker_ai;
 	FTGameRoom* game_room;
+	FTGameMainMenu* main_menu;
 
 	AIPlayerOpponent* ai_opponent;
 

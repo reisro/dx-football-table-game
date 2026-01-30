@@ -121,19 +121,19 @@ void YEInput::poll()
 		}
 	}
 
-	hr = _dInputDeviceMouse->GetDeviceState(sizeof(DIMOUSESTATE), &_mMouseState);
+	//hr = _dInputDeviceMouse->GetDeviceState(sizeof(DIMOUSESTATE), &_mMouseState);
 
-	if (FAILED(hr))
-	{
-		// If the mouse lost focus or was not acquired then try to get control back.
-		if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
-		{
-			// if lost set to zero
-			ZeroMemory(&_mMouseState, sizeof(_mMouseState));
+	//if (FAILED(hr))
+	//{
+	//	// If the mouse lost focus or was not acquired then try to get control back.
+	//	if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
+	//	{
+	//		// if lost set to zero
+	//		ZeroMemory(&_mMouseState, sizeof(_mMouseState));
 
-			_dInputDeviceMouse->Acquire();
-		}
-	}
+	//		_dInputDeviceMouse->Acquire();
+	//	}
+	//}
 }
 
 bool YEInput::keyDown(int keycode)

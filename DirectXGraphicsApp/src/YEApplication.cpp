@@ -1,5 +1,6 @@
 #include "YEApplication.h"
 #include "YEGameContext.h"
+#include <thread>
 
 using namespace YE;
 
@@ -10,7 +11,9 @@ YEApplication* YEApplication::instance = 0;
 // Constructor
 //-----------------------------------------------------------------------------
 YEApplication::YEApplication():
-	_isRunning {false}
+	_isRunning {false},
+	_targetFPS {60.0},
+	_frameDuration {1.0/_targetFPS}
 {
 }
 
@@ -116,7 +119,7 @@ void YE::YEApplication::CreatePrimitive(GamePrimitives primitive)
 {
 	if (instance->_renderer)
 	{
-		instance->_renderer->createGeometryCmd = false;
+		instance->_renderer->createGeometryCmd = true;
 
 		switch (primitive)
 		{
@@ -193,17 +196,17 @@ void YE::YEApplication::Run(YEGame* gameApp)
 
 				#endif
 
-				YELog("FPS:" + std::to_string(YETimer::GetInstance()->GetDeltaTime()));
+				YELog("FPS:" + std::to_string(YETimer::GetInstance()->GetDeltaTime() * 1000.0f));
 
 				YETimer::GetInstance()->UpdateLastTime();
 
-				frame_coutner++;
-
-				/*if (_accumulator >= 1.0f)
+				if (YETimer::GetInstance()->GetElapsedTime() < _frameDuration)
 				{
-					_accumulator = 0.0f;
-					frame_coutner = 0;
-				}*/
+					long long deltaFrameTime = (long long)(_frameDuration - YETimer::GetInstance()->GetElapsedTime());
+					auto delay = std::chrono::milliseconds(deltaFrameTime);
+					std::this_thread::sleep_for(delay);
+					YELog("Frame Delay:" + std::to_string(delay.count()));
+				}
 			}
 		}
 

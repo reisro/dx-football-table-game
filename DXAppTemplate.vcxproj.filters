@@ -63,6 +63,15 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandlePlayer.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTGameRoom.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTGameMainMenu.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTScoreMarker.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
@@ -105,6 +114,15 @@
       <Filter>TableFootball</Filter>
     </ClInclude>
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandlePlayer.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTGameRoom.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTGameMainMenu.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTScoreMarker.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

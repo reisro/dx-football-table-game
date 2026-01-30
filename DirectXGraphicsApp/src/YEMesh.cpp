@@ -70,7 +70,7 @@ void YEMesh::PrepareMesh(IUnknown* device)
 	D3D11_BUFFER_DESC ibufferDesc;
 	ibufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
 	ibufferDesc.ByteWidth = static_cast<UINT>(sizeof(UINT) * _indices.size());
-	ibufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	ibufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibufferDesc.CPUAccessFlags = 0;
 	ibufferDesc.MiscFlags = 0;
 	ibufferDesc.StructureByteStride = 0;

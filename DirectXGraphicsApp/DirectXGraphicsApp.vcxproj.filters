@@ -315,6 +315,9 @@
     <ClInclude Include="src\YESpriteShader.h">
       <Filter>Arquivos de Cabeçalho\Core\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\stb_image.h">
+      <Filter>Arquivos de Cabeçalho\3rdparty</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">

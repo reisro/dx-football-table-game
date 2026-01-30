@@ -67,7 +67,7 @@ void YEPhysX::CreateDynamicSphere(const char* name, YEVector3* pos, yeFloat radi
 
 	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
-	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 0.1f, PxTransform(PxVec3(0.0f,0.03f,0.0f)));
+	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 3.0f, PxTransform(PxVec3(0.0f,0.03f,0.0f)));
 
 	_dynamicSphere->setAngularDamping(0.5f);
 	_dynamicSphere->setMass(10.0f);

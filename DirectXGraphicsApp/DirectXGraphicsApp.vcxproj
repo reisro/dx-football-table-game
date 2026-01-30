@@ -180,6 +180,7 @@
     <ClInclude Include="src\DefaultCube.h" />
     <ClInclude Include="src\DXAPI.h" />
     <ClInclude Include="src\dxerr.h" />
+    <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\VectorWrapper.h" />
     <ClInclude Include="src\YE3DMeshHelper.h" />
     <ClInclude Include="src\YEBehaviourAction.h" />

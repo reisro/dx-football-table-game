@@ -430,16 +430,28 @@ void YERenderingDirectX11::BeginFrame()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::SetNextWindowBgAlpha(0.0);
-	ImGui::SetNextWindowSize(ImVec2(540, 309));
+	//ImGui::SetNextWindowBgAlpha(0.0);
+	//ImGui::SetNextWindowSize(ImVec2(540, 309));
 
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
 	{
 		static float f = 0.0f;
 		static int counter = 0;
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
-		ImGui::Begin("Hello, world!", NULL, window_flags);
+		ImGui::SetNextWindowPos(ImVec2(400, 10));
+		ImGui::Begin("Main, menu!", NULL, window_flags);
 		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[0]._texture, ImVec2(540,309));
+		ImGui::End();
+	}
+
+	ImGui::SetNextWindowBgAlpha(0.0);
+	ImGui::SetNextWindowSize(ImVec2(300, 100));
+	ImGui::SetNextWindowPos(ImVec2(550, 550));
+	ImGui::GetFont()->Scale = 2.0;
+	{
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
+		ImGui::Begin("Score:",NULL, window_flags);
+		ImGui::Text("Press Space to begin");
 		ImGui::End();
 	}
 
