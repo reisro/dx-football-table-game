@@ -7,6 +7,7 @@ YEAudio::YEAudio():
 
 YEAudio::~YEAudio()
 {
+	Shutdown();
 }
 
 bool YEAudio::initialize()
@@ -58,6 +59,23 @@ bool YEAudio::initialize()
 	YELog("YEAudio: FMOD initializaed successfully...");
 
 	return true;
+}
+
+void YEAudio::Update()
+{
+	if (_mSystem)
+	{
+		_mSystem->update();
+	}
+}
+
+void YEAudio::Shutdown()
+{
+	if (_mSystem) 
+	{
+		_mSystem->release();
+		_mSystem = nullptr;
+	}
 }
 
 bool YEAudio::CheckError(FMOD_RESULT result, const char* context)

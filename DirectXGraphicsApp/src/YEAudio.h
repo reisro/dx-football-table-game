@@ -14,7 +14,12 @@ public:
 	virtual ~YEAudio();
 
 	bool initialize();
+	void Update();
+	void Shutdown();
+
 	bool CheckError(FMOD_RESULT result, const char* context);
+
+	FMOD::System* GetSystem() { return _mSystem; }
 
 private:
 	FMOD::System* _mSystem;
