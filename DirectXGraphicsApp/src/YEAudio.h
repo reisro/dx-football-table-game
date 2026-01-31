@@ -4,8 +4,8 @@
 #define _YE_AUDIO_H_
 
 #include "DXAPI.h"
-#include <fmod.hpp>
-#include <fmod_errors.h>
+#include "fmod.hpp"
+#include "fmod_errors.h"
 #include <unordered_map>
 
 class DX_API YEAudio

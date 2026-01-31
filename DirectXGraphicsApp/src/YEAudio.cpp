@@ -97,13 +97,13 @@ bool YEAudio::LoadSound(const char* filename, const char* soundName)
 
 	// Create sound with default mode
 	// FMOD_DEFAULT = FMOD_LOOP_OFF | FMOD_2D | FMOD_CREATESAMPLE
-	result = _mSystem->createSound(filename, FMOD_DEFAULT, nullptr, &sound);
+	result = _mSystem->createSound(soundName, FMOD_DEFAULT, nullptr, &sound);
 
 	if (!CheckError(result, "createSound"))
 		return false;
 
 	// Store sound in map for later retrieval
-	_loadedSounds[soundName] = sound;
+	_loadedSounds[filename] = sound;
 
 	YELog("YEAudio: " + std::string(soundName));
 

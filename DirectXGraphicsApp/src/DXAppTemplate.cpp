@@ -13,6 +13,7 @@
 #include <FTScore.h>
 #include <FTGameRoom.h>
 #include <FTScoreMarker.h>
+#include <FTBackgroundSoundtrack.h>
 #include <FTGameMainMenu.h>
 
 using namespace gamentry;
@@ -80,6 +81,9 @@ public:
 		score_marker_player = new FTScoreMarker(GetGameContext());
 		score_marker_ai = new FTScoreMarker(GetGameContext());
 
+		// Game Audio Soundtrack
+		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
+
 		// Game Main Menu Sprite Game Object
 		main_menu = new FTGameMainMenu(GetGameContext());
 
@@ -141,6 +145,8 @@ public:
 		score_marker_ai->SetInitialPosition(-1.6f);
 		score_marker_ai->SetMarkerOffset(0.35333f);
 		score_marker_ai->PlaceMarkerAt(4);
+
+		background_soundtrack->start();
 
 		main_menu->start();
 	}
@@ -204,6 +210,7 @@ private:
 	FTScoreMarker* score_marker_player;
 	FTScoreMarker* score_marker_ai;
 	FTGameRoom* game_room;
+	FTBackgroundSoundtrack* background_soundtrack;
 	FTGameMainMenu* main_menu;
 
 	AIPlayerOpponent* ai_opponent;

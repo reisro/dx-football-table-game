@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;BX_CONFIG_DEBUG=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\DirectXGraphicsApp\src;.\DirectXGraphicsApp\bgfx\include;.\DirectXGraphicsApp\bx\include;.\DirectXGraphicsApp\bx\include\compat\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\DirectXGraphicsApp\src;.\DirectXGraphicsApp\bgfx\include;.\DirectXGraphicsApp\bx\include;.\DirectXGraphicsApp\bx\include\compat\msvc;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/Zc:__cplusplus </AdditionalOptions>
@@ -128,8 +128,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;$(BGFX_SDK)\.build\win64_vs2022\bin;.\3rdparty\assimp\lib\x64;.\lib\Debug\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x64;$(BGFX_SDK)\.build\win64_vs2022\bin;.\3rdparty\assimp\lib\x64;.\lib\Debug\x64;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bgfxDebug.lib;bxDebug.lib;bimgDebug.lib;fmodL_vc.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="DirectXGraphicsApp\src\AIPlayerOpponent.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTBackgroundSoundtrack.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTBall.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTField.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTFieldWalls.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\AIPlayerOpponent.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTBackgroundSoundtrack.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTField.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTFieldWalls.h" />
