@@ -22,6 +22,7 @@ public:
 
 private:
 	const char* _soundBankLocation;
+	YEAudio* _audioEngine;
 };
 
 #endif
