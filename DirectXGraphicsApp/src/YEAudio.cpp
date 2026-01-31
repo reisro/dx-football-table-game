@@ -89,3 +89,63 @@ bool YEAudio::CheckError(FMOD_RESULT result, const char* context)
 
 	return true;
 }
+
+bool YEAudio::LoadSound(const char* filename, const char* soundName)
+{
+	FMOD_RESULT result;
+	FMOD::Sound* sound = nullptr;
+
+	// Create sound with default mode
+	// FMOD_DEFAULT = FMOD_LOOP_OFF | FMOD_2D | FMOD_CREATESAMPLE
+	result = _mSystem->createSound(filename, FMOD_DEFAULT, nullptr, &sound);
+
+	if (!CheckError(result, "createSound"))
+		return false;
+
+	// Store sound in map for later retrieval
+	_loadedSounds[soundName] = sound;
+
+	YELog("YEAudio: " + std::string(soundName));
+
+	return true;
+}
+
+void YEAudio::UnloadSound(const char* filename)
+{
+	auto it = _loadedSounds.find(filename);
+
+	if (it != _loadedSounds.end())
+	{
+		it->second->release();
+
+		_loadedSounds.erase(it);
+	}
+}
+
+FMOD::Channel* YEAudio::PlaySound(const char* soundName, bool paused)
+{
+	auto it = _loadedSounds.find(soundName);
+	
+	if (it == _loadedSounds.end())
+	{
+		YELog("Sound not found: " + std::string(soundName));
+
+		return nullptr;
+	}
+
+	FMOD::Channel* channel = nullptr;
+	
+	FMOD_RESULT result;
+
+	// Play Sound
+	// Parameters: sound, channelGroup, paused, channel
+	result = _mSystem->playSound(it->second,
+		nullptr,
+		paused,
+		&channel);
+
+	if (!CheckError(result, "playSound"))
+		return nullptr;
+
+	return channel;
+}
