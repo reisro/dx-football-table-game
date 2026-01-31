@@ -184,6 +184,7 @@
     <ClInclude Include="src\VectorWrapper.h" />
     <ClInclude Include="src\YE3DMeshHelper.h" />
     <ClInclude Include="src\YEAudio.h" />
+    <ClInclude Include="src\YEAudioComponent.h" />
     <ClInclude Include="src\YEBehaviourAction.h" />
     <ClInclude Include="src\YEBehaviourTree.h" />
     <ClInclude Include="src\YEComponents.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="src\dxerr.cpp" />
     <ClCompile Include="src\YEApplication.cpp" />
     <ClCompile Include="src\YEAudio.cpp" />
+    <ClCompile Include="src\YEAudioComponent.cpp" />
     <ClCompile Include="src\YEBaseComponent.cpp" />
     <ClCompile Include="src\YEBehaviourAction.cpp" />
     <ClCompile Include="src\YEBehaviourTree.cpp" />
