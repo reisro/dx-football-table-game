@@ -6,6 +6,8 @@
 #include "YEGameObject.h"
 #include "YEPhysicsComponent.h"
 #include "YEObserver.h"
+#include <FTScore.h>
+#include <FTScoreMarker.h>
 
 class FTFieldWalls : public YEGameObject, public YEPhysicsColliderListener
 {
@@ -19,6 +21,10 @@ public:
 
 	virtual void OnNotify(const char* name) override;
 
+private:
+	FTScore* football_score;
+	FTScoreMarker* score_marker_player;
+	FTScoreMarker* score_marker_ai;
 };
 
 #endif _FT_FIELD_WALLS_H_

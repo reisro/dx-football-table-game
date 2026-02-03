@@ -10,9 +10,7 @@
 #include <FTSingleHandleWhite.h>
 #include <FTFieldWalls.h>
 #include <AIPlayerOpponent.h>
-#include <FTScore.h>
 #include <FTGameRoom.h>
-#include <FTScoreMarker.h>
 #include <FTBackgroundSoundtrack.h>
 #include <FTGameMainMenu.h>
 
@@ -75,12 +73,6 @@ public:
 
 		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai);
 
-		football_score = new FTScore(GetGameContext());
-
-		// Score markers 3D game objects
-		score_marker_player = new FTScoreMarker(GetGameContext());
-		score_marker_ai = new FTScoreMarker(GetGameContext());
-
 		// Game Audio Soundtrack
 		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
 
@@ -134,18 +126,6 @@ public:
 
 		ai_opponent->start();
 
-		score_marker_player->start();
-		score_marker_player->_isPositiveOffset = false;
-		score_marker_player->SetInitialPosition(1.7f);
-		score_marker_player->SetMarkerOffset(0.34333f);
-		score_marker_player->PlaceMarkerAt(6);
-
-		score_marker_ai->start();
-		score_marker_ai->_isPositiveOffset = true;
-		score_marker_ai->SetInitialPosition(-1.6f);
-		score_marker_ai->SetMarkerOffset(0.35333f);
-		score_marker_ai->PlaceMarkerAt(4);
-
 		background_soundtrack->start();
 
 		main_menu->start();
@@ -157,10 +137,6 @@ public:
 		YELog("Football Ball Position: X:" + std::to_string(football_ball->_transform->getPosition()->_x) +
 			" Y:" + std::to_string(football_ball->_transform->getPosition()->_y) +
 			" Z:" + std::to_string(football_ball->_transform->getPosition()->_z));
-
-		/*if (football_ball->_transform->getPosition()->_z < football_keeper_ai->_transform->getPosition()->_z ||
-			football_ball->_transform->getPosition()->_z > football_keeper_player->_transform->getPosition()->_z)
-			football_score->ResetScores();*/
 
 		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
@@ -207,9 +183,6 @@ private:
 	FTSingleHandlePlayer* football_handle_keeper;
 	FTSingleHandleWhite* football_handle_keeper_ai;
 	FTFieldWalls* football_walls;
-	FTScore* football_score;
-	FTScoreMarker* score_marker_player;
-	FTScoreMarker* score_marker_ai;
 	FTGameRoom* game_room;
 	FTBackgroundSoundtrack* background_soundtrack;
 	FTGameMainMenu* main_menu;
