@@ -9,6 +9,7 @@
 #include "YEVector3.h"
 #include "DirectXMath.h"
 #include "YEInput.h"
+#include "YEObserver.h"
 #include <vector>
 #include <map>
 
@@ -36,7 +37,7 @@ enum CollisionGroups
 	LAYER_IGNORE = 1 << 2
 };
 
-class DX_API YEPhysX : public YEPhysics
+class DX_API YEPhysX : public YEPhysics, YEPhysicsColliderTransmitter
 {
 public:
 	YEPhysX();
@@ -92,6 +93,10 @@ public:
 
 	virtual XMMATRIX GetGlobalPose(UINT actorID);
 
+	void Attach(YEPhysicsColliderListener* observer) override;
+
+	void NotifyCollision(const char* actorName) override;
+
 	static YEPhysX*					_instance;
 	static PxFoundation*			_foundation;
 	static PxDefaultAllocator		_allocator;
@@ -126,6 +131,8 @@ public:
 	std::vector <PulleyJoint*>		 pulleyJointsList;
 	std::vector<PulleyJointBodyInfo> pulleyJointAttachedBodiesMap;
 	std::vector<PxRigidDynamic*>	 pulleyJointAttachedBodies;
+
+	std::list<YEPhysicsColliderListener*> _collision_listeners;
 };
 
 #endif _YE_PHYSX_H

@@ -5,8 +5,9 @@
 
 #include "YEGameObject.h"
 #include "YEPhysicsComponent.h"
+#include "YEObserver.h"
 
-class FTFieldWalls : public YEGameObject
+class FTFieldWalls : public YEGameObject, public YEPhysicsColliderListener
 {
 public:
 	FTFieldWalls(const YEGameContext& _game_context);
@@ -15,6 +16,8 @@ public:
 	void start() override;
 	void shutdown() override;
 	void update(float _deltaTime) override;
+
+	virtual void OnNotify(const char* name) override;
 
 };
 

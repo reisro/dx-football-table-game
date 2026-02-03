@@ -10,6 +10,21 @@ public:
 	virtual void Update(UINT id, DirectX::CXMMATRIX M) = 0;
 };
 
+class YEPhysicsColliderListener
+{
+	public:
+	virtual ~YEPhysicsColliderListener() {};
+	virtual void OnNotify(const char* name) = 0;
+};
+
+class YEPhysicsColliderTransmitter
+{
+public:
+	virtual ~YEPhysicsColliderTransmitter() {};
+	virtual void Attach(YEPhysicsColliderListener* observer) = 0;
+	virtual void NotifyCollision(const char* actorName) = 0;
+};
+
 class IYETransformComponentChange
 {
 public:

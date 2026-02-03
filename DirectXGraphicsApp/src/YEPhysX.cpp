@@ -44,6 +44,8 @@ YEPhysX::YEPhysX()
 	pulleyJointsList = std::vector<PulleyJoint*>();
 
 	_input = YEInput::GetInstance();
+
+	_collision_listeners = std::list<YEPhysicsColliderListener*>();
 }
 
 YEPhysX::~YEPhysX()
@@ -391,10 +393,11 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 			PxActor* actor = reinterpret_cast<PxActor*>(raycastHit.actor);
 
 			YELogCStr(actor->getName());
+
+			NotifyCollision(actor->getName());
 		}
 	}
 
-	//YELog("\nRot: " + std::to_string(pulleyJointAttachedBodiesMap[1].cpuRot));
 	YELog("\nYEPhysics: Ball Velocity %f" + std::to_string(_dynamicSphere->getLinearVelocity().magnitude()));
 }
 
@@ -454,4 +457,17 @@ void YEPhysX::SetKinematicPulleyJointBody(int id)
 XMMATRIX YEPhysX::GetGlobalPose(UINT actorID)
 {
 	return actorGlobalPoses[actorID];
+}
+
+void YEPhysX::Attach(YEPhysicsColliderListener* observer)
+{
+	_collision_listeners.push_back(observer);
+}
+
+void YEPhysX::NotifyCollision(const char* actorName)
+{
+	for (auto& listener : _collision_listeners)
+	{
+		listener->OnNotify(actorName);
+	}
 }

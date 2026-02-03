@@ -22,6 +22,10 @@ void FTFieldWalls::start()
 	// nets
 	YEPhysics::GetInstance()->CreateStaticBox("Net PlayerAI ", new YEVector3(0.0f, 0.0f, -12.5f), new YEVector3(1.6f, 2.5f, 1.0f));
 	YEPhysics::GetInstance()->CreateStaticBox("Net Player", new YEVector3(0.0f, 0.0f, 12.5f), new YEVector3(1.6f, 2.5f, 1.0f));
+
+	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+	
+	phsyX->Attach(this);
 }
 
 void FTFieldWalls::shutdown()
@@ -31,4 +35,19 @@ void FTFieldWalls::shutdown()
 void FTFieldWalls::update(float _deltaTime)
 {
 	YEGameObject::update(_deltaTime);
+}
+
+void FTFieldWalls::OnNotify(const char* name)
+{
+	static bool once = false;
+
+	if (!once)
+	{
+		once = true;
+		
+		if (name == "Net Player")
+			YELog("Collision with Left Wall detected!");
+		else if (name == "Net PlayerAI")
+			YELog("Collision with Right Wall detected!");
+	}
 }
