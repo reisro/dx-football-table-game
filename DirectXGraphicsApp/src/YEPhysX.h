@@ -30,6 +30,12 @@ struct PulleyJointBodyInfo
 	bool receivesInput;
 };
 
+enum CollisionGroups
+{
+	LAYER_DEFAULT = 1 << 0,
+	LAYER_IGNORE = 1 << 2
+};
+
 class DX_API YEPhysX : public YEPhysics
 {
 public:
@@ -55,7 +61,7 @@ public:
 
 	void MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloat right) override;
 
-	void RotatePulleyJointBody(int id) override;
+	void RotatePulleyJointBody(int id, yeFloat rot, yeFloat rotInc, yeFloat limitRot, yeFloat limitRotInc, yeFloat restart) override;
 
 	void ResetRotatePulleyJointBody(int id) override;
 
@@ -99,8 +105,6 @@ public:
 
 	PxRaycastBuffer hit;
 	
-	float rot = 3.0f;
-	float rotInc = 0.0f;
 	float rightDir = 0.0f;
 	float leftDir = 1.0f;
 	float cpuRightDir = 0.0f;

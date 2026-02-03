@@ -18,6 +18,8 @@ YEBehaviourStatus PlayerOpponentBehaviour::Deffend()
 
 		YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
+		phsyX->ResetRotatePulleyJointBody(2);
+		phsyX->ResetRotatePulleyJointBody(3);
 		phsyX->ResetRotatePulleyJointBody(4);
 
 		return YEBehaviourStatus::SUCCESS;
@@ -36,12 +38,12 @@ YEBehaviourStatus PlayerOpponentBehaviour::Attack()
 
 		if (_frontCanShoot)
 		{
-			phsyX->RotatePulleyJointBody(2);
-			phsyX->RotatePulleyJointBody(3);
+			phsyX->RotatePulleyJointBody(2, -0.08f, 0.45f, 0.95f, 26.0f, 0.95f);
+			phsyX->RotatePulleyJointBody(3, -0.08f, 0.45f, 0.95f, 26.0f, 0.95f);
 		}
 		
 		if (_keeperCanShoot)
-			phsyX->RotatePulleyJointBody(4);
+			phsyX->RotatePulleyJointBody(4, -0.03f, 0.45f, 0.95f, 26.0f, 0.95f);
 
 		return YEBehaviourStatus::SUCCESS;
 	}

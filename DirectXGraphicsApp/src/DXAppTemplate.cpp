@@ -171,6 +171,7 @@ public:
 		football_player_l->update(static_cast<float>(_deltaTime));
 		football_player2_l->DistanceFromTarget(football_ball);
 		football_player2_l->update(static_cast<float>(_deltaTime));
+
 		football_keeper_ai->update(static_cast<float>(_deltaTime));
 		football_keeper_ai->DistanceFromTarget(football_ball);
 		football_handle_keeper_ai->update(static_cast<float>(_deltaTime));

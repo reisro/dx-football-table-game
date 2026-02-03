@@ -1,7 +1,8 @@
 #include "YEAudioComponent.h"
 
-YEAudioComponent::YEAudioComponent():
-	_audioEngine(new YEAudio)
+YEAudioComponent::YEAudioComponent(bool looping):
+	_audioEngine(new YEAudio),
+	_loop(looping)
 {
 }
 
@@ -22,14 +23,14 @@ void YEAudioComponent::update(float _deltaTime)
 {
 }
 
-void YEAudioComponent::LoadSound(const char* file)
+void YEAudioComponent::LoadSound(const char* name, const char* file)
 {
-	_audioEngine->LoadSound("Background", file);
+	_audioEngine->LoadSound(name, file);
 }
 
-void YEAudioComponent::PlaySound()
+void YEAudioComponent::PlaySound(const char* name)
 {
-	_audioEngine->PlaySound("Background");
+	_audioEngine->PlaySound(name, false, 0.5f, 1);
 }
 
 void YEAudioComponent::StopSound()

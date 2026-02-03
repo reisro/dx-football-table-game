@@ -41,6 +41,14 @@ void FTHandlePlayer::update(float _deltaTime)
 		phsyX->MoveKinematicPulleyJointBody(1, -1, -2.4f, 5.2f);
 	}
 
+	// Rotate Handle Players
+	if (_yeInput->keyDown(DIK_C))
+	{
+		phsyX->RotatePulleyJointBody(0, 0.08f, 0.1f, 7.0f, 3.0f, 3.0f);
+		phsyX->RotatePulleyJointBody(1, 0.08f, 0.1f, 7.0f, 3.0f, 3.0f);
+	}
+
+	// Reset Dynamic Sphere Position
 	if (_yeInput->keyDown(DIK_R))
 		phsyX->ResetDynamicSphere();
 }

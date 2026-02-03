@@ -34,4 +34,9 @@ void FTSingleHandleWhite::update(float _deltaTime)
 	{
 		_behaviour_tree->_closeToShoot = false;
 	}*/
+
+	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+
+	// Update Pulley Joint Bodies
+	//phsyX->SetKinematicPulleyJointBody(4);
 }

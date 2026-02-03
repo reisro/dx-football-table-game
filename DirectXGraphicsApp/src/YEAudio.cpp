@@ -1,4 +1,5 @@
 #include "YEAudio.h"
+#include "YEAudio.h"
 
 YEAudio::YEAudio():
 	_mSystem(nullptr)
@@ -90,20 +91,20 @@ bool YEAudio::CheckError(FMOD_RESULT result, const char* context)
 	return true;
 }
 
-bool YEAudio::LoadSound(const char* filename, const char* soundName)
+bool YEAudio::LoadSound(const char* soundName, const char* filename)
 {
 	FMOD_RESULT result;
 	FMOD::Sound* sound = nullptr;
 
 	// Create sound with default mode
 	// FMOD_DEFAULT = FMOD_LOOP_OFF | FMOD_2D | FMOD_CREATESAMPLE
-	result = _mSystem->createSound(soundName, FMOD_DEFAULT, nullptr, &sound);
+	result = _mSystem->createSound(filename, FMOD_LOOP_NORMAL, nullptr, &sound);
 
 	if (!CheckError(result, "createSound"))
 		return false;
 
 	// Store sound in map for later retrieval
-	_loadedSounds[filename] = sound;
+	_loadedSounds[soundName] = sound;
 
 	YELog("YEAudio: " + std::string(soundName));
 
@@ -122,7 +123,7 @@ void YEAudio::UnloadSound(const char* filename)
 	}
 }
 
-FMOD::Channel* YEAudio::PlaySound(const char* soundName, bool paused)
+FMOD::Channel* YEAudio::PlaySound(const char* soundName, bool paused, float volume, int prority)
 {
 	auto it = _loadedSounds.find(soundName);
 	
@@ -145,6 +146,18 @@ FMOD::Channel* YEAudio::PlaySound(const char* soundName, bool paused)
 		&channel);
 
 	if (!CheckError(result, "playSound"))
+		return nullptr;
+
+	// Set volume
+	result = channel->setVolume(volume);
+
+	if (!CheckError(result, "setVolume"))
+		return nullptr;
+
+	// Set priority
+	result = channel->setPriority(prority);
+
+	if (!CheckError(result, "setPriority"))
 		return nullptr;
 
 	return channel;

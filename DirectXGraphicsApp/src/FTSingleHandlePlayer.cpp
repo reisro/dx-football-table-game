@@ -26,18 +26,12 @@ void FTSingleHandlePlayer::update(float _deltaTime)
 
 	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
-	if (_yeInput->mouseButtonDown(1))
-	{
-		phsyX->MoveKinematicPulleyJointBody(5, 1, -5.0f, 5.3f);
-	}
+	if (_yeInput->keyDown(DIK_UP))
+		phsyX->RotatePulleyJointBody(5, 0.08f, 0.1f, 7.0f, 3.0f, 3.0f);
 
 	if(_yeInput->keyDown(DIK_LEFT))
-	{
 		phsyX->MoveKinematicPulleyJointBody(5, 1, -5.0f, 5.3f);
-	}
 	
 	if (_yeInput->keyDown(DIK_RIGHT))
-	{
 		phsyX->MoveKinematicPulleyJointBody(5, -1, -5.0f, 5.3f);
-	}
 }

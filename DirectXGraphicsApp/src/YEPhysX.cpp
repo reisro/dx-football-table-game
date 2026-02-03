@@ -15,6 +15,19 @@ PxPvdTransport* YEPhysX::_transport = nullptr;
 
 #define PVD_HOST "127.0.0.1"
 
+PxFilterData CreateFilterData(uint32_t layerMask);
+
+PxFilterData CreateFilterData(uint32_t layerMask)
+{
+	PxFilterData fd;
+	fd.word0 = layerMask;
+	fd.word1 = 0,
+	fd.word2 = 0;
+	fd.word3 = 0;
+
+	return fd;
+}
+
 YEPhysX::YEPhysX()
 {
 	YELog("\nCreated Physics instance....");
@@ -46,6 +59,7 @@ YEPhysX::~YEPhysX()
 void YEPhysX::CreateDefaultPlane()
 {
 	PxRigidStatic* groundPlane = PxCreatePlane(*_physics, PxPlane(0, 1, 0, 0.18), *_material);
+	groundPlane->setName("Ground Plane");
 
 	_scene->addActor(*groundPlane);
 }
@@ -58,6 +72,11 @@ void YEPhysX::CreateStaticBox(const char* name, YEVector3* pos, YEVector3* size)
 
 	PxRigidStatic* staticBox = PxCreateStatic(*_physics, PxTransform(position), boxGeometry, *_material);
 
+	PxShape* shapes[1];
+	staticBox->getShapes(shapes, 1);
+	shapes[0]->setQueryFilterData(CreateFilterData(CollisionGroups::LAYER_DEFAULT));
+	staticBox->setName(name);
+
 	_scene->addActor(*staticBox);
 }
 
@@ -68,11 +87,17 @@ void YEPhysX::CreateDynamicSphere(const char* name, YEVector3* pos, yeFloat radi
 	PxVec3 position = PxVec3(pos->_x, pos->_y, pos->_z);
 	
 	_dynamicSphere = PxCreateDynamic(*_physics, PxTransform(position), sphereGeometry, *_material, 3.0f, PxTransform(PxVec3(0.0f,0.03f,0.0f)));
+	
+	PxShape* shapes[1];
+	_dynamicSphere->getShapes(shapes, 1);
+	shapes[0]->setQueryFilterData(CreateFilterData(CollisionGroups::LAYER_IGNORE));
+	_dynamicSphere->setName(name);
 
 	_dynamicSphere->setAngularDamping(0.5f);
 	_dynamicSphere->setMass(10.0f);
-	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 1.0f));
+	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, 0.0f, 1.0f));
 	_dynamicSphere->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
+	_dynamicSphere->setMaxLinearVelocity(20.0f);
 
 	_scene->addActor(*_dynamicSphere);
 }
@@ -85,6 +110,9 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 {
 	PxBoxGeometry boxGeom(0.25f,0.9f, 0.15f);
 	PxVec3 newPos = PxVec3(pos._x - 1.92f, pos._y, pos._z);
+
+	PxRigidDynamic* bodyA;
+	PxRigidDynamic* bodyB;
 
 	switch (numberOfAttached)
 	{
@@ -110,8 +138,15 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 		break;
 
 	case 2:
-		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f));
-		attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos1._x, pos1._y, pos1._z)), boxGeom, *_material, 1.0f));
+		
+		bodyA = PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f);
+		bodyA->setName("Pulley Joint Body A");
+		bodyB = PxCreateDynamic(*_physics, PxTransform(PxVec3(pos1._x, pos1._y, pos1._z)), boxGeom, *_material, 1.0f);
+		bodyB->setName("Pulley Joint Body B");
+
+		attachedBodies.push_back(bodyA);
+		attachedBodies.push_back(bodyB);
+
 		attachedBodiesCount += 2;
 		
 		pulleyJointsList.push_back(new PulleyJoint(*_physics, *attachedBodies[attachedBodiesCount-1], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
@@ -218,15 +253,15 @@ void YEPhysX::MoveKinematicPulleyJointBody(int id, int dir, yeFloat left, yeFloa
 		pulleyJointAttachedBodiesMap[id].rightMoveDir = limitRight;
 }
 
-void YEPhysX::RotatePulleyJointBody(int id)
+void YEPhysX::RotatePulleyJointBody(int id, yeFloat rot, yeFloat rotInc, yeFloat limitRot, yeFloat limitRotInc, yeFloat restart)
 {
-	pulleyJointAttachedBodiesMap[id].cpuRot -= 0.03f; 
-	pulleyJointAttachedBodiesMap[id].cpuRotInc += 0.45;
+	pulleyJointAttachedBodiesMap[id].cpuRot += rot; 
+	pulleyJointAttachedBodiesMap[id].cpuRotInc += rotInc;
 
-	if (pulleyJointAttachedBodiesMap[id].cpuRot > 0.95f) 
-		pulleyJointAttachedBodiesMap[id].cpuRot = 0.95f; 
+	if (pulleyJointAttachedBodiesMap[id].cpuRot > limitRot) 
+		pulleyJointAttachedBodiesMap[id].cpuRot = restart; 
 
-	if(pulleyJointAttachedBodiesMap[id].cpuRotInc > 26.0f)
+	if(pulleyJointAttachedBodiesMap[id].cpuRotInc > limitRotInc)
 		pulleyJointAttachedBodiesMap[id].cpuRotInc = 0.0f;
 }
 
@@ -323,45 +358,43 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		_dynamicSphere->addForce(PxVec3(0.0f, 0.0f, -0.02f), PxForceMode::eIMPULSE);
 	}
 
-	if (_input->keyDown(DIK_C))
-	{
-		rot += 0.08f; rotInc += 0.1; if (rot > 7.0f) rot = 3.0f; if (rotInc > 3.0f) rotInc = 0.0f;
-	}
-
 	for (size_t i = 0; i < pulleyJointsList.size(); i++)
-		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, rot, rotInc), PxVec3(1, 0, 0)));
+		pulleyJointsList[i]->mLocalPose[0] = PxTransform(PxVec3(0.0f, 0.0f, 0.0f), PxQuat(PxLerp(0.0, cpuRot, cpuRotInc), PxVec3(1, 0, 0)));
 
 	for (size_t i = 0; i < pulleyJointAttachedBodiesMap.size(); i++)
 	{
 		if (pulleyJointAttachedBodiesMap[i].receivesInput)
-			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].rightMoveDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, rot, rotInc), PxVec3(1, 0, 0))));
+			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].rightMoveDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, pulleyJointAttachedBodiesMap[i].cpuRot, pulleyJointAttachedBodiesMap[i].cpuRotInc), PxVec3(1, 0, 0))));
 		if (!pulleyJointAttachedBodiesMap[i].receivesInput)
 			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].rightMoveDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, pulleyJointAttachedBodiesMap[i].cpuRot, pulleyJointAttachedBodiesMap[i].cpuRotInc), PxVec3(1, 0, 0))));
 	}
 
-	if (_dynamicSphere->getLinearVelocity().magnitude() > 20.0f)
-	{
-		PxVec3 v =_dynamicSphere->getLinearVelocity().getNormalized() * 20.0f;
-		_dynamicSphere->setLinearVelocity(v);
-	}
+	//if (!_dynamicSphere->getGlobalPose().p.y < 0.0001f)
+		//_dynamicSphere->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, true);
 
-	if (_dynamicSphere->getGlobalPose().p.y < 0.1f)
-		_dynamicSphere->setRigidDynamicLockFlags(PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y);
+	// Raycast ignoring Layer mask
+	uint32_t queryMask = ~(LAYER_IGNORE);
 
-	/*if (_scene->raycast(_dynamicSphere->getGlobalPose().getNormalized().p,
-		PxVec3(0.0f,0.0f,_dynamicSphere->getGlobalPose().p.getNormalized().z), 2.0f, hit))
+	PxQueryFilterData filterData;
+	filterData.data.word0 = queryMask;
+	filterData.flags = PxQueryFlag::eSTATIC;
+
+	PxVec3 unitDir = PxVec3(0.0f,0.0f,_dynamicSphere->getGlobalPose().p.z);
+	PxVec3 dir = unitDir.getNormalized();
+
+	if (_scene->raycast(_dynamicSphere->getGlobalPose().p, dir, 1.0f, hit, PxHitFlag::eDEFAULT, filterData))
 	{
 		if (hit.block.actor != nullptr)
 		{
 			PxRaycastHit raycastHit = hit.block;
-			PxActor* hitActor = raycastHit.actor;
+			
+			PxActor* actor = reinterpret_cast<PxActor*>(raycastHit.actor);
 
-			if (hitActor->getType() == PxActorTypeFlag::eRIGID_STATIC)
-				YELogCStr(hitActor->getName());
+			YELogCStr(actor->getName());
 		}
-	}*/
+	}
 
-	YELog("\nRot: " + std::to_string(rot));
+	//YELog("\nRot: " + std::to_string(pulleyJointAttachedBodiesMap[1].cpuRot));
 	YELog("\nYEPhysics: Ball Velocity %f" + std::to_string(_dynamicSphere->getLinearVelocity().magnitude()));
 }
 

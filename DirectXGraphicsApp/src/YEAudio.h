@@ -19,10 +19,11 @@ public:
 	void Shutdown();
 
 	bool CheckError(FMOD_RESULT result, const char* context);
-	bool LoadSound(const char* filename, const char* soundName);
+	bool LoadSound(const char* soundName, const char* filename);
 	void UnloadSound(const char* filename);
+	void SetVolume(const char* soundName, float volume);
 
-	FMOD::Channel* PlaySound(const char* soundName, bool paused = false);
+	FMOD::Channel* PlaySound(const char* soundName, bool paused = false, float volume=1.0f, int priority=1);
 	FMOD::System*  GetSystem() { return _mSystem; }
 
 private:

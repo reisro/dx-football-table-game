@@ -1,6 +1,7 @@
 #include "FTHandleWhite.h"
 #include <FTPlayerWhite.h>
 #include "FTSingleHandleWhite.h"
+#include "YEPhysX.h"
 
 FTHandleWhite::FTHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName)
 	: FTHandle(_game_context, p1, p2, meshName),
@@ -16,8 +17,6 @@ FTHandleWhite::~FTHandleWhite()
 void FTHandleWhite::start()
 {
 	FTHandle::start();
-
-	
 }
 
 void FTHandleWhite::shutdown()
@@ -29,7 +28,13 @@ void FTHandleWhite::update(float _deltaTime)
 {
 	FTHandle::update(_deltaTime);
 
+	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+
 	YELog("FTHandleWHite: Player Left from Ball : %f" + std::to_string(_player_left->_distanceFromBall));
 	YELog("FTHandleWHite: Player Right from Ball : %f" + std::to_string(_player_right->_distanceFromBall));
 	YELog("FTHandleWHite: Player Right from Center : %f" + std::to_string(_player_right->_distanceFromCenter));
+
+	// Update Pulley Joint Bodies
+	//phsyX->SetKinematicPulleyJointBody(2);
+	//phsyX->SetKinematicPulleyJointBody(3);
 }
