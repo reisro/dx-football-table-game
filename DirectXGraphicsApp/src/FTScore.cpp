@@ -8,6 +8,10 @@ FTScore::FTScore(const YEGameContext& _game_context):
 	// Score markers 3D game objects
 	_score_marker_player = new FTScoreMarker(_game_context);
 	_score_marker_ai = new FTScoreMarker(_game_context);
+
+	addComponent(_goal_sound_component);
+
+	_goal_widget_ui = new FTGoalWidgetUI(_game_context);
 }
 
 FTScore::~FTScore()
@@ -29,12 +33,11 @@ void FTScore::start()
 	_score_marker_ai->PlaceMarkerAt(0);
 
 	_goal_sound_component->start();
-
 	_goal_sound_component->LoadSound("Goal SFX", _soundFilename);
-
 	_goal_sound_component->SetVolume(1.0f);
-
 	_goal_sound_component->SetPriority(1);
+
+	_goal_widget_ui->start();
 }
 
 void FTScore::shutdown()
@@ -54,6 +57,8 @@ void FTScore::IncrementScore(const char* player)
 		ResetScores();
 
 		PlayGoalSound();
+
+		_goal_widget_ui->Show();
 	}
 	else if (strcmp(player, "Net PlayerAI") == 0)
 	{
@@ -62,6 +67,8 @@ void FTScore::IncrementScore(const char* player)
 		ResetScores();
 
 		PlayGoalSound();
+
+		_goal_widget_ui->Show();
 	}
 }
 

@@ -17,6 +17,8 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
+	void SetGameMenuText();
+
 protected:
 	YESpriteComponent* _sprite_component;
 

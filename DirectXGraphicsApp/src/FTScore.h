@@ -7,10 +7,11 @@
 #include "YEPhysX.h"
 #include "YEAudioComponent.h"
 #include <FTScoreMarker.h>
+#include <FTGoalWidgetUI.h>
 
 class FTScore : public YEGameObject
 {
-	public:
+public:
 	FTScore(const YEGameContext& _game_context);
 	virtual ~FTScore();
 
@@ -35,6 +36,7 @@ class FTScore : public YEGameObject
 private:
 	FTScoreMarker*    _score_marker_player;
 	FTScoreMarker*    _score_marker_ai;
+	FTGoalWidgetUI*	  _goal_widget_ui;
 	YEAudioComponent* _goal_sound_component;
 	const char*       _soundFilename;
 	int               _playerScore;

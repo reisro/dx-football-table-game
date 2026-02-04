@@ -46,5 +46,5 @@ void YESpriteComponent::RemoveTexture()
 {
 	YERenderer* renderer = YERenderer::GetInstance();
 
-	renderer->GetSceneObject()->_on_off = false;
+	renderer->GetSceneObject()->_sceneUI.showUI = false;
 }

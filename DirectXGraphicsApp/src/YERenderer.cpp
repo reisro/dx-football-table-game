@@ -87,7 +87,7 @@ void YERenderer::CreatePixelLayout()
 {
 }
 
-void YERenderer::OnRenderUI(bool* open, const char* msg)
+void YERenderer::OnRenderUI(bool* open, int spriteid, const char* msg)
 {
 }
 

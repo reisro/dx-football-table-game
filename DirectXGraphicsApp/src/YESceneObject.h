@@ -11,6 +11,13 @@
 
 using namespace DirectX;
 
+struct SceneUI
+{
+	bool        showUI;
+	int			spriteID;
+	const char* textMsg;
+};
+
 class DX_API YESceneObject: public IYETransformComponentListener
 {
 public:
@@ -28,7 +35,8 @@ public:
 	std::map<UINT, XMFLOAT4X4> _meshesWorld;
 
 	bool* _showSprite;
-	bool _on_off;
+
+	SceneUI _sceneUI;
 
 	UINT _meshid;
 	UINT _physicsid;

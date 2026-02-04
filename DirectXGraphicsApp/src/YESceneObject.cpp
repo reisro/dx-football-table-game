@@ -4,7 +4,7 @@ YESceneObject::YESceneObject()
 {
 	_meshesToRender = std::vector<YEMesh>();
 
-	_on_off = true;
+	_sceneUI.showUI = true;
 }
 
 YESceneObject::~YESceneObject()

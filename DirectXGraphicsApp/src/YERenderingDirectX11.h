@@ -70,7 +70,7 @@ public:
 	void BuildFX() override;
 	void CreateVertexLayout() override;
 	void CreatePixelLayout() override;
-	void OnRenderUI(bool* open, const char* msg) override;
+	void OnRenderUI(bool* open, int spriteid, const char* msg) override;
 	IUnknown* GetDevice() override;
 	IUnknown* GetDeviceContext() override;
 

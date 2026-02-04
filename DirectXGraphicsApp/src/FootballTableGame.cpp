@@ -34,6 +34,9 @@ public:
 		football_field = new FTField(GetGameContext());
 		football_field->hasRigidBody = true;
 
+		// Game Main Menu Sprite Game Object
+		main_menu = new FTGameMainMenu(GetGameContext());
+
 		football_walls = new FTFieldWalls(GetGameContext());
 
 		football_ball = new FTBall(GetGameContext());
@@ -76,14 +79,9 @@ public:
 		// Game Audio Soundtrack
 		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
 
-		// Game Main Menu Sprite Game Object
-		main_menu = new FTGameMainMenu(GetGameContext());
-
 		// Start Game Objects
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 0.0f, 0.0f));
-
-		football_walls->start();
 
 		football_ball->start(); //0
 		football_ball->_transform->setPosition(new YEVector3(0.0f, 3.0f, 0.0f));
@@ -129,6 +127,8 @@ public:
 		background_soundtrack->start();
 
 		main_menu->start();
+
+		football_walls->start();
 	}
 
 	bool update(dxDouble _deltaTime) override

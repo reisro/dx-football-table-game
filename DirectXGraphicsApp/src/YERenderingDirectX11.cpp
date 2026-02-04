@@ -448,8 +448,8 @@ void YERenderingDirectX11::BeginFrame()
 	//ImGui::SetNextWindowSize(ImVec2(540, 309));
 	static bool show_another_window = false;
 
-	if (_sceneObject->_on_off)
-		OnRenderUI(&_sceneObject->_on_off, "");
+	if (_sceneObject->_sceneUI.showUI)
+		OnRenderUI(&_sceneObject->_sceneUI.showUI, _sceneObject->_sceneUI.spriteID, _sceneObject->_sceneUI.textMsg);
 
 	ImGui::Render();
 
@@ -719,7 +719,7 @@ void YERenderingDirectX11::CreatePixelLayout()
 {
 }
 
-void YERenderingDirectX11::OnRenderUI(bool* open, const char* msg)
+void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg)
 {
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
 	static float f = 0.0f;
@@ -730,7 +730,7 @@ void YERenderingDirectX11::OnRenderUI(bool* open, const char* msg)
 
 	if (ImGui::Begin("Main, menu!", open, window_flags))
 	{
-		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[0]._texture, ImVec2(540, 309));
+		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[spriteid]._texture, ImVec2(540, 309));
 	}
 	ImGui::End();
 
