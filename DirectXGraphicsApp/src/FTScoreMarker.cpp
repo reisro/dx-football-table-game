@@ -1,4 +1,5 @@
 #include "FTScoreMarker.h"
+#include <FTFieldWalls.h>
 
 FTScoreMarker::FTScoreMarker(const YEGameContext& _game_context):
 	YEGameObject("FTScoreMarker", _game_context),
@@ -39,8 +40,13 @@ void FTScoreMarker::SetMarkerOffset(float offset)
 
 void FTScoreMarker::PlaceMarkerAt(int number)
 {
-	if (_isPositiveOffset)
-		_transform->setPosition(_marker_pos+(_marker_offset*number), 1.35f, -10.2f);
-	else
-		_transform->setPosition(_marker_pos-(_marker_offset*number), 1.35f, 10.2f);
+	if (!_markerUpdated)
+	{
+		if (_isPositiveOffset)
+			_transform->setPosition(_marker_pos + (_marker_offset * number), 1.35f, -10.2f);
+		else
+			_transform->setPosition(_marker_pos - (_marker_offset * number), 1.35f, 10.2f);
+	}
+
+	_markerUpdated = true;
 }

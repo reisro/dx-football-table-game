@@ -19,7 +19,8 @@ public:
 	void Shutdown();
 
 	bool CheckError(FMOD_RESULT result, const char* context);
-	bool LoadSound(const char* soundName, const char* filename);
+	bool LoadLoopSound(const char* soundName, const char* filename);
+	bool LoadOneShotSound(const char* soundName, const char* filename);
 	void UnloadSound(const char* filename);
 	void SetVolume(const char* soundName, float volume);
 

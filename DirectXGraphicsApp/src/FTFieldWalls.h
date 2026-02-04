@@ -7,7 +7,7 @@
 #include "YEPhysicsComponent.h"
 #include "YEObserver.h"
 #include <FTScore.h>
-#include <FTScoreMarker.h>
+#include <functional>
 
 class FTFieldWalls : public YEGameObject, public YEPhysicsColliderListener
 {
@@ -22,9 +22,10 @@ public:
 	virtual void OnNotify(const char* name) override;
 
 private:
+	bool _updatedScore;
 	FTScore* football_score;
-	FTScoreMarker* score_marker_player;
-	FTScoreMarker* score_marker_ai;
+
+	std::function<void (const char*)> action;
 };
 
 #endif _FT_FIELD_WALLS_H_

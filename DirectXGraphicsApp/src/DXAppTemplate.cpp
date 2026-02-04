@@ -16,14 +16,14 @@
 
 using namespace gamentry;
 
-class Cube: public YEGame
+class FootballTableGame: public YEGame
 {
 public:
-	Cube() : YEGame("Default Cube")
+	FootballTableGame() : YEGame("Football Table")
 	{
 	}
 
-	Cube(const char* _game_name) :
+	FootballTableGame(const char* _game_name) :
 		YEGame(_game_name)
 	{
 	}
@@ -201,4 +201,4 @@ private:
 	XMFLOAT4X4 mView;
 };
 
-WINDOW_MAIN_ENTRY(Cube);
+WINDOW_MAIN_ENTRY(FootballTableGame);

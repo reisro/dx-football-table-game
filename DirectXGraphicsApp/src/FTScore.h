@@ -5,6 +5,7 @@
 
 #include "YEGameObject.h"
 #include "YEPhysX.h"
+#include "YEAudioComponent.h"
 #include <FTScoreMarker.h>
 
 class FTScore : public YEGameObject
@@ -19,21 +20,25 @@ class FTScore : public YEGameObject
 
 	int GetPlayerScore() const { return _playerScore; }
 	int GetAIScore() const { return _aiScore; }
-	void IncrementPlayerScore() { _playerScore++; }
-	void IncrementAIScore() { _aiScore++; }
-	
+	void IncrementScore(const char* player);
+	void PlayGoalSound();
+
 	void ResetScores() 
 	{ 
-		_playerScore = 0; 
-		_aiScore = 0; 
-
 		YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 		physics->ResetDynamicSphere();
+
+		_score_marker_ai->ResetMarkerUpdate();
+		_score_marker_player->ResetMarkerUpdate();
 	}
 
 private:
-	int _playerScore;
-	int _aiScore;
+	FTScoreMarker*    _score_marker_player;
+	FTScoreMarker*    _score_marker_ai;
+	YEAudioComponent* _goal_sound_component;
+	const char*       _soundFilename;
+	int               _playerScore;
+	int               _aiScore;
 };
 
 #endif _H_FT_SCORE_H_

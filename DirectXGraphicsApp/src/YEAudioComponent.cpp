@@ -25,7 +25,10 @@ void YEAudioComponent::update(float _deltaTime)
 
 void YEAudioComponent::LoadSound(const char* name, const char* file)
 {
-	_audioEngine->LoadSound(name, file);
+	if (_loop)
+		_audioEngine->LoadLoopSound(name, file);
+	else
+		_audioEngine->LoadOneShotSound(name, file);
 }
 
 void YEAudioComponent::PlaySound(const char* name)

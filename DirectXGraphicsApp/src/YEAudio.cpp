@@ -91,7 +91,7 @@ bool YEAudio::CheckError(FMOD_RESULT result, const char* context)
 	return true;
 }
 
-bool YEAudio::LoadSound(const char* soundName, const char* filename)
+bool YEAudio::LoadLoopSound(const char* soundName, const char* filename)
 {
 	FMOD_RESULT result;
 	FMOD::Sound* sound = nullptr;
@@ -99,6 +99,26 @@ bool YEAudio::LoadSound(const char* soundName, const char* filename)
 	// Create sound with default mode
 	// FMOD_DEFAULT = FMOD_LOOP_OFF | FMOD_2D | FMOD_CREATESAMPLE
 	result = _mSystem->createSound(filename, FMOD_LOOP_NORMAL, nullptr, &sound);
+
+	if (!CheckError(result, "createSound"))
+		return false;
+
+	// Store sound in map for later retrieval
+	_loadedSounds[soundName] = sound;
+
+	YELog("YEAudio: " + std::string(soundName));
+
+	return true;
+}
+
+bool YEAudio::LoadOneShotSound(const char* soundName, const char* filename)
+{
+	FMOD_RESULT result;
+	FMOD::Sound* sound = nullptr;
+
+	// Create sound with default mode
+	// FMOD_DEFAULT = FMOD_LOOP_OFF | FMOD_2D | FMOD_CREATESAMPLE
+	result = _mSystem->createSound(filename, FMOD_LOOP_OFF, nullptr, &sound);
 
 	if (!CheckError(result, "createSound"))
 		return false;
@@ -121,6 +141,10 @@ void YEAudio::UnloadSound(const char* filename)
 
 		_loadedSounds.erase(it);
 	}
+}
+
+void YEAudio::SetVolume(const char* soundName, float volume)
+{
 }
 
 FMOD::Channel* YEAudio::PlaySound(const char* soundName, bool paused, float volume, int prority)

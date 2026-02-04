@@ -19,11 +19,13 @@ public:
 	void SetInitialPosition(float pos);
 	void SetMarkerOffset(float offset);
 	void PlaceMarkerAt(int number);
+	void ResetMarkerUpdate() { _markerUpdated = false; }
 
 	bool _isPositiveOffset;
 
 private:
 	YEMeshComponent* _mesh_component;
+	bool			 _markerUpdated;
 	float			 _marker_offset;
 	float			 _marker_pos;
 	float            _marker_startPos;
