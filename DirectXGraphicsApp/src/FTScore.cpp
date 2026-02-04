@@ -55,7 +55,7 @@ void FTScore::IncrementScore(const char* player)
 
 		PlayGoalSound();
 	}
-	else if (strcmp(player, "Net Player AI") == 0)
+	else if (strcmp(player, "Net PlayerAI") == 0)
 	{
 		_score_marker_player->PlaceMarkerAt(++_playerScore);
 
