@@ -41,3 +41,10 @@ void YESpriteComponent::LoadTexture(const char* pFileName, int width, int height
 
 	renderer->GetSceneObject()->_spritesToRender.push_back(*_sprite);
 }
+
+void YESpriteComponent::RemoveTexture()
+{
+	YERenderer* renderer = YERenderer::GetInstance();
+
+	renderer->GetSceneObject()->_on_off = false;
+}

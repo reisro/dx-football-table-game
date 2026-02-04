@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXGraphicsApp\src\AIPlayerOpponent.cpp" />
-    <ClCompile Include="DirectXGraphicsApp\src\DXAppTemplate.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FootballTableGame.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTBackgroundSoundtrack.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTBall.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTField.cpp" />

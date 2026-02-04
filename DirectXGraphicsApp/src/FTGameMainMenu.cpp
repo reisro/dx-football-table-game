@@ -15,6 +15,8 @@ FTGameMainMenu::~FTGameMainMenu()
 void FTGameMainMenu::start()
 {
 	_sprite_component->LoadTexture("C:\\Game Assets\\TEXTURES\\ftgame_logo.png", image_width, image_height);
+
+	_input = YEInput::GetInstance();
 }
 
 void FTGameMainMenu::shutdown()
@@ -23,4 +25,6 @@ void FTGameMainMenu::shutdown()
 
 void FTGameMainMenu::update(float _deltaTime)
 {
+	if (_input->keyDown(DIK_SPACE))
+		_sprite_component->RemoveTexture();
 }

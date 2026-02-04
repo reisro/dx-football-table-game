@@ -11,14 +11,14 @@
 class FTPlayerWhite : public FTPlayer
 {
 public:
-	FTPlayerWhite(const YEGameContext& _game_context, const wchar_t* _meshName);
+	FTPlayerWhite(const YEGameContext& _game_context, const wchar_t* _meshName, YEGameObject* target);
 	virtual ~FTPlayerWhite();
 
 	void start() override;
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	void DistanceFromTarget(YEGameObject* football_ball);
+	void DistanceFromTarget();
 	void DistanceFromCenter();
 
 	yeFloat _distanceFromBall;
@@ -26,8 +26,9 @@ public:
 	yeFloat _distanceX;
 	
 private:
-	yeFloat _ballDistanceThreshold = 1.10f;
-	YEVector3* _moveDirection;
+	yeFloat       _ballDistanceThreshold = 1.10f;
+	YEVector3*	  _moveDirection;
+	YEGameObject* _football_ball;
 };
 
 #endif _FT_PLAYER_WHITE_H_

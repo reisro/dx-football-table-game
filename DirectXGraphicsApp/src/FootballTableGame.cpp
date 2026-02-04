@@ -47,15 +47,15 @@ public:
 		football_player2->hasParent = true;
 		football_player2->hasRigidBody = true;
 
-		football_player_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx");
+		football_player_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx", football_ball);
 		football_player_l->hasParent = true;
 		football_player_l->hasRigidBody = true;
 
-		football_player2_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx");
+		football_player2_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx", football_ball);
 		football_player2_l->hasParent = true;
 		football_player2_l->hasRigidBody = true;
 
-		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx");
+		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx", football_ball);
 		football_keeper_ai->hasRigidBody = true;
 
 		football_keeper_player = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
@@ -71,7 +71,7 @@ public:
 
 		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper_player, L"C:\\Game Assets\\football_handle.fbx");
 
-		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai);
+		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai, football_ball);
 
 		// Game Audio Soundtrack
 		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
@@ -134,29 +134,24 @@ public:
 	bool update(dxDouble _deltaTime) override
 	{				
 		football_ball->update(static_cast<float>(_deltaTime));
-		YELog("Football Ball Position: X:" + std::to_string(football_ball->_transform->getPosition()->_x) +
-			" Y:" + std::to_string(football_ball->_transform->getPosition()->_y) +
-			" Z:" + std::to_string(football_ball->_transform->getPosition()->_z));
 
 		football_handle->update(static_cast<float>(_deltaTime));
 		football_player->update(static_cast<float>(_deltaTime));
 		football_player2->update(static_cast<float>(_deltaTime));
 
 		football_handle_player->update(static_cast<float>(_deltaTime));
-		football_player_l->DistanceFromTarget(football_ball);
 		football_player_l->update(static_cast<float>(_deltaTime));
-		football_player2_l->DistanceFromTarget(football_ball);
 		football_player2_l->update(static_cast<float>(_deltaTime));
 
 		football_keeper_ai->update(static_cast<float>(_deltaTime));
-		football_keeper_ai->DistanceFromTarget(football_ball);
 		football_handle_keeper_ai->update(static_cast<float>(_deltaTime));
 
 		football_keeper_player->update(static_cast<float>(_deltaTime));
 		football_handle_keeper->update(static_cast<float>(_deltaTime));
 
-		ai_opponent->WatchBallDirection(football_ball);
 		ai_opponent->update(static_cast<float>(_deltaTime));
+
+		main_menu->update(static_cast<float>(_deltaTime));
 
 		return true;
 	}

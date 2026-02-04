@@ -5,6 +5,7 @@
 
 #include "YEGameObject.h"
 #include "YESpriteComponent.h"
+#include <YEInput.h>
 
 class FTGameMainMenu : public YEGameObject
 {
@@ -22,6 +23,7 @@ protected:
 private:
 	int image_width;
 	int image_height;
+	YEInput* _input;
 };
 
 #endif _FT_GAME_MAIN_MENU_H_

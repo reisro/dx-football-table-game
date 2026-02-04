@@ -23,6 +23,7 @@ public:
 	virtual void update(float _deltaTime) override;
 
 	void LoadTexture(const char* pFileName, int width, int height);
+	void RemoveTexture();
 
 private:
 	YESprite* _sprite;

@@ -87,6 +87,10 @@ void YERenderer::CreatePixelLayout()
 {
 }
 
+void YERenderer::OnRenderUI(bool* open, const char* msg)
+{
+}
+
 IUnknown* YERenderer::GetDevice()
 {
     return _device;

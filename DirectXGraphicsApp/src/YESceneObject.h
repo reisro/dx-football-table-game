@@ -27,6 +27,9 @@ public:
 	std::vector<YESprite> _spritesToRender;
 	std::map<UINT, XMFLOAT4X4> _meshesWorld;
 
+	bool* _showSprite;
+	bool _on_off;
+
 	UINT _meshid;
 	UINT _physicsid;
 	UINT _internalid;

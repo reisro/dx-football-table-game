@@ -3,6 +3,8 @@
 YESceneObject::YESceneObject()
 {
 	_meshesToRender = std::vector<YEMesh>();
+
+	_on_off = true;
 }
 
 YESceneObject::~YESceneObject()

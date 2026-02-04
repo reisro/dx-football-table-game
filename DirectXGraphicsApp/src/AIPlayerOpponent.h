@@ -14,14 +14,14 @@
 class AIPlayerOpponent: public YEGameObject
 {
 public:
-	AIPlayerOpponent(const YEGameContext& _game_context, FTHandleWhite* handle, FTSingleHandleWhite* keeper);
+	AIPlayerOpponent(const YEGameContext& _game_context, FTHandleWhite* handle, FTSingleHandleWhite* keeper, YEGameObject* _football_ball);
 	virtual ~AIPlayerOpponent();
 
 	void start() override;
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	void WatchBallDirection(FTBall* _football_ball);
+	void WatchBallDirection();
 
 private:
 	PlayerOpponentBehaviour* _behaviour_tree;
@@ -35,6 +35,8 @@ private:
 
 	FTHandleWhite*		 _handleFront;
 	FTSingleHandleWhite* _handleKeeper;
+
+	YEGameObject* _target;
 
 	YETimer*   _timer;
 	bool	   _captureTime;

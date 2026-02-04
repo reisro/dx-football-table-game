@@ -398,7 +398,7 @@ void YERenderingDirectX11::BeginFrame()
 	static float x = 2.2f;
 	static float z = -4.53f;
 
-	if (GetAsyncKeyState('1') & 0x8000)
+	/*if (GetAsyncKeyState('1') & 0x8000)
 		x += 0.06f;
 	if (GetAsyncKeyState('2') & 0x8000)
 		y += 0.06f;
@@ -409,7 +409,21 @@ void YERenderingDirectX11::BeginFrame()
 	if (GetAsyncKeyState('5') & 0x8000)
 		y -= 0.06f;
 	if (GetAsyncKeyState('6') & 0x8000)
-		z -= 0.06f;
+		z -= 0.06f;*/
+
+	x -= 0.05f;
+	if (x <= 0.28f)
+		x = 0.28f;
+	y += 0.02f;
+	if (y >= 13.86f)
+		y = 13.86f;
+	z += 0.09f;
+	if (z >= 18.27f)
+		z = 18.27f;
+
+	//0.28 13.86 18.27 gameplay
+	YELog("Camera Position X: %.2f Y: %.2f Z: %.2f" + std::to_string(x) + "," + std::to_string(y) + "," +
+		std::to_string(z));
 
 	// Build the view matrix.
 	XMVECTOR pos = XMVectorSet(x, y, z, 1.0f);
@@ -432,28 +446,10 @@ void YERenderingDirectX11::BeginFrame()
 
 	//ImGui::SetNextWindowBgAlpha(0.0);
 	//ImGui::SetNextWindowSize(ImVec2(540, 309));
+	static bool show_another_window = false;
 
-	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-	{
-		static float f = 0.0f;
-		static int counter = 0;
-		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
-		ImGui::SetNextWindowPos(ImVec2(400, 10));
-		ImGui::Begin("Main, menu!", NULL, window_flags);
-		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[0]._texture, ImVec2(540,309));
-		ImGui::End();
-	}
-
-	ImGui::SetNextWindowBgAlpha(0.0);
-	ImGui::SetNextWindowSize(ImVec2(300, 100));
-	ImGui::SetNextWindowPos(ImVec2(550, 550));
-	ImGui::GetFont()->Scale = 2.0;
-	{
-		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
-		ImGui::Begin("Score:",NULL, window_flags);
-		ImGui::Text("Press Space to begin");
-		ImGui::End();
-	}
+	if (_sceneObject->_on_off)
+		OnRenderUI(&_sceneObject->_on_off, "");
 
 	ImGui::Render();
 
@@ -721,6 +717,33 @@ void YERenderingDirectX11::CreateVertexLayout()
 
 void YERenderingDirectX11::CreatePixelLayout()
 {
+}
+
+void YERenderingDirectX11::OnRenderUI(bool* open, const char* msg)
+{
+	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+	static float f = 0.0f;
+	static int counter = 0;
+
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
+	ImGui::SetNextWindowPos(ImVec2(400, 100));
+
+	if (ImGui::Begin("Main, menu!", open, window_flags))
+	{
+		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[0]._texture, ImVec2(540, 309));
+	}
+	ImGui::End();
+
+	ImGui::SetNextWindowBgAlpha(0.0);
+	ImGui::SetNextWindowSize(ImVec2(300, 100));
+	ImGui::SetNextWindowPos(ImVec2(550, 500));
+	ImGui::GetFont()->Scale = 2.0;
+	{
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
+		ImGui::Begin("Text HUD", NULL, window_flags);
+		ImGui::Text(msg);
+		ImGui::End();
+	}
 }
 
 IUnknown* YERenderingDirectX11::GetDevice()

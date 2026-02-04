@@ -1,8 +1,8 @@
 #include "AIPlayerOpponent.h"
 
-AIPlayerOpponent::AIPlayerOpponent(const YEGameContext& _game_context, FTHandleWhite* handle, FTSingleHandleWhite* keeper):
+AIPlayerOpponent::AIPlayerOpponent(const YEGameContext& _game_context, FTHandleWhite* handle, FTSingleHandleWhite* keeper, YEGameObject* _football_ball):
 	YEGameObject("AI Player Opponent", _game_context), _handleFront(handle), _captureTime(false), _handleKeeper(keeper),
-	_behaviour_tree(new PlayerOpponentBehaviour())
+	_behaviour_tree(new PlayerOpponentBehaviour()), _target(_football_ball)
 {
 	_currentBallPos = YEVector3::Zero();
 	_lastBallPos = YEVector3::Zero();
@@ -45,11 +45,13 @@ void AIPlayerOpponent::update(float _deltaTime)
 	YEGameObject::update(_deltaTime);
 
 	_behaviour_tree->Execute();
+
+	WatchBallDirection();
 }
 
-void AIPlayerOpponent::WatchBallDirection(FTBall* _football_ball)
+void AIPlayerOpponent::WatchBallDirection()
 {
-	_currentBallPos = _football_ball->_transform->getPosition();
+	_currentBallPos = _target->_transform->getPosition();
 
 	yeFloat distanceZ = _currentBallPos->_z;
 	YELog("AI Player Opponent: Ball Direction Z: " + std::to_string(distanceZ));
