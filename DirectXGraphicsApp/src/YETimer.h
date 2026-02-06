@@ -32,6 +32,7 @@ public:
 	void			Tick();
 	dxInt64			GetTicks();
 	dxInt64			GetElapsedTime();
+	std::chrono::steady_clock::duration GetCurrTime();
 	bool			Countdown(int duration);
 	void			ResetCountdown();
 	void			NowTime();

@@ -65,6 +65,11 @@ dxInt64 YETimer::GetElapsedTime()
 	return deltatime.count();
 }
 
+std::chrono::steady_clock::duration YETimer::GetCurrTime()
+{
+	return startTime.time_since_epoch();
+}
+
 bool YETimer::Countdown(int duration)
 {
 	bool returnValue = false;
@@ -74,15 +79,15 @@ bool YETimer::Countdown(int duration)
 
 	auto start = startTime.time_since_epoch();
 
-	auto now_s = std::chrono::duration_cast<std::chrono::seconds>(start).count();
+	auto now_s = std::chrono::duration_cast<std::chrono::seconds>(clock_c::now().time_since_epoch());
 
 	if (!getTime)
 	{
-		reachTime = now_s + duration;
+		reachTime = now_s.count() + duration;
 		getTime = true;
 	}
 
-	if (now_s > reachTime)
+	if (now_s.count() > reachTime)
 	{
 		getTime = false;
 
@@ -94,7 +99,7 @@ bool YETimer::Countdown(int duration)
 
 void YETimer::ResetCountdown()
 {
-	
+	//getTime = false;
 }
 
 void YETimer::NowTime()
