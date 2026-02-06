@@ -20,6 +20,7 @@ public:
 	void start() override;
 	void shutdown() override;
 	void update(float _deltaTime) override;
+	void Play();
 
 	void WatchBallDirection();
 
@@ -39,6 +40,8 @@ private:
 	YEGameObject* _target;
 
 	YETimer*   _timer;
+	
+	bool		_active;
 	bool	   _captureTime;
 };
 

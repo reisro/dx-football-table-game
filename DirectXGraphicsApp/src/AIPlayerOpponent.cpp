@@ -44,9 +44,17 @@ void AIPlayerOpponent::update(float _deltaTime)
 {
 	YEGameObject::update(_deltaTime);
 
-	_behaviour_tree->Execute();
+	if (_active)
+	{
+		_behaviour_tree->Execute();
 
-	WatchBallDirection();
+		WatchBallDirection();
+	}
+}
+
+void AIPlayerOpponent::Play()
+{
+	_active = true;
 }
 
 void AIPlayerOpponent::WatchBallDirection()
