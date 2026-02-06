@@ -90,6 +90,11 @@ void YEGameObject::SetPosition(YEVector3* pos)
 	_transform->setPosition(pos);
 }
 
+YEGameContext YEGameObject::GetGameContext() 
+{
+	return GetGameContext();
+}
+
 YEVector3* YEGameObject::GetPosition() const
 {
 	return _transform->getPosition();

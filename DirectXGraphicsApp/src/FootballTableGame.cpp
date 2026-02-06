@@ -11,8 +11,10 @@
 #include <FTFieldWalls.h>
 #include <AIPlayerOpponent.h>
 #include <FTGameRoom.h>
+#include <FTReferee.h>
 #include <FTBackgroundSoundtrack.h>
 #include <FTGameMainMenu.h>
+#include <FTPlayerInstructions.h>
 
 using namespace gamentry;
 
@@ -30,12 +32,16 @@ public:
 
 	void init() override
 	{
+		SetGameStatus(GameStatus::MainMenu);
+
 		// Game Objects creation
 		football_field = new FTField(GetGameContext());
 		football_field->hasRigidBody = true;
 
 		// Game Main Menu Sprite Game Object
 		main_menu = new FTGameMainMenu(GetGameContext());
+
+		game_instructions = new FTPlayerInstructions(GetGameContext());
 
 		football_walls = new FTFieldWalls(GetGameContext());
 
@@ -75,6 +81,8 @@ public:
 		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper_player, L"C:\\Game Assets\\football_handle.fbx");
 
 		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai, football_ball);
+
+		referee = new FTReferee(GetGameContext());
 
 		// Game Audio Soundtrack
 		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
@@ -124,11 +132,16 @@ public:
 
 		ai_opponent->start();
 
+		referee->start();
+
 		background_soundtrack->start();
 
 		main_menu->start();
+		game_instructions->start();
 
 		football_walls->start();
+
+		BindEventFunctions();
 	}
 
 	bool update(dxDouble _deltaTime) override
@@ -152,6 +165,9 @@ public:
 		ai_opponent->update(static_cast<float>(_deltaTime));
 
 		main_menu->update(static_cast<float>(_deltaTime));
+		game_instructions->update(static_cast<float>(_deltaTime));
+
+		football_walls->update(static_cast<float>(_deltaTime));
 
 		return true;
 	}
@@ -159,6 +175,25 @@ public:
 	virtual void shutdown() override
 	{
 		YELog("Shutdown Cube Game...");
+	}
+
+	void BindEventFunctions()
+	{
+		main_menu->OnMainMenuKeyPressed = std::bind(&FTPlayerInstructions::SetGameMenuText, game_instructions);
+		game_instructions->OnPKeyPressed = std::bind(&FTReferee::BoolWhistle, referee);
+		football_walls->OnCloseGoalWidget = std::bind(&FTReferee::BoolWhistle, referee);
+	}
+
+	void SetGameStatus(GameStatus status)
+	{
+		GetGameContext().gameState.SetGameStatus(status);
+	}
+
+	static FootballTableGame* GetInstance()
+	{
+		static FootballTableGame instance;
+
+		return &instance;
 	}
 
 private:
@@ -179,8 +214,10 @@ private:
 	FTSingleHandleWhite* football_handle_keeper_ai;
 	FTFieldWalls* football_walls;
 	FTGameRoom* game_room;
+	FTReferee* referee;
 	FTBackgroundSoundtrack* background_soundtrack;
 	FTGameMainMenu* main_menu;
+	FTPlayerInstructions* game_instructions;
 
 	AIPlayerOpponent* ai_opponent;
 

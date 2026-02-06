@@ -6,6 +6,7 @@
 #include "YEGameObject.h"
 #include "YESpriteComponent.h"
 #include <YEInput.h>
+#include <functional>
 
 class FTGameMainMenu : public YEGameObject
 {
@@ -19,12 +20,17 @@ public:
 
 	void SetGameMenuText();
 
+	std::function<void(void)> OnMainMenuKeyPressed;
+
 protected:
 	YESpriteComponent* _sprite_component;
 
 private:
 	int image_width;
 	int image_height;
+	
+	const char* _uiText;
+
 	YEInput* _input;
 };
 

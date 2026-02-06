@@ -16,6 +16,7 @@ struct SceneUI
 	bool        showUI;
 	int			spriteID;
 	const char* textMsg;
+	const char* textMsg2;
 };
 
 class DX_API YESceneObject: public IYETransformComponentListener

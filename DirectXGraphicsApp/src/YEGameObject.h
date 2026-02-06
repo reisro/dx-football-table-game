@@ -33,6 +33,8 @@ public:
 
 	void SetPosition(YEVector3* pos);
 
+	YEGameContext GetGameContext();
+
 	YEVector3* GetPosition() const;
 
 	int GetNumberOfMeshes() const { return _numberMeshes; }

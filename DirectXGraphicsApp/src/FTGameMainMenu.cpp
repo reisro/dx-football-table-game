@@ -3,7 +3,8 @@
 FTGameMainMenu::FTGameMainMenu(const YEGameContext& _game_context):
 	image_width(1024),
 	image_height(768),
-	_sprite_component(new YESpriteComponent)
+	_sprite_component(new YESpriteComponent),
+	_uiText("\n\t\t\t\t\t\t\t\t\t\tPress SPACE to begin")
 {
 	addComponent(_sprite_component);
 }
@@ -28,10 +29,11 @@ void FTGameMainMenu::shutdown()
 void FTGameMainMenu::update(float _deltaTime)
 {
 	if (_input->keyDown(DIK_SPACE))
-		_sprite_component->RemoveTexture();
+		OnMainMenuKeyPressed();
 }
 
 void FTGameMainMenu::SetGameMenuText()
 {
-	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.textMsg = "Press SPACE to play";
+	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.textMsg = _uiText;
+	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.textMsg2 = "";
 }
