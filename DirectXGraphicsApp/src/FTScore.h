@@ -24,25 +24,23 @@ public:
 	int GetAIScore() const { return _aiScore; }
 	void IncrementScore(const char* player);
 	void PlayGoalSound();
+	void Register() { _active = true; }
 
 	void ResetBall() 
 	{ 
-		YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
-		physics->ResetDynamicSphere();
-
 		_score_marker_ai->ResetMarkerUpdate();
 		_score_marker_player->ResetMarkerUpdate();
+
+		OnScoreGoal();
 	}
 
 	void ResetGameplay()
 	{
-		OnScoreGoal();
-
-		YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
-		physics->AddForceToDynamicRigidBody(*new YEVector3(0.0, 0.0, -10.0));
+		OnGoalUIHide();
 	}
 
 	std::function<void()> OnScoreGoal;
+	std::function<void()> OnGoalUIHide;
 
 private:
 	FTScoreMarker*    _score_marker_player;
@@ -52,6 +50,7 @@ private:
 	const char*       _soundFilename;
 	int               _playerScore;
 	int               _aiScore;
+	bool			  _active;
 };
 
 #endif _H_FT_SCORE_H_

@@ -179,9 +179,23 @@ public:
 
 	void BindEventFunctions()
 	{
-		main_menu->OnMainMenuKeyPressed = std::bind(&FTPlayerInstructions::SetGameMenuText, game_instructions);
-		game_instructions->OnPKeyPressed = std::bind(&FTReferee::BoolWhistle, referee);
-		football_walls->OnCloseGoalWidget = std::bind(&FTReferee::BoolWhistle, referee);
+		main_menu->OnMainMenuKeyPressed =		 std::bind(&FTPlayerInstructions::SetGameMenuText, game_instructions);
+		game_instructions->OnPKeyPressed =		 std::bind(&FTReferee::KickOff, referee);
+		football_walls->OnBallReachGoalTrigger = std::bind(&FTReferee::BallToTheCenter, referee);
+		football_walls->OnCloseGoalWidget =		 std::bind(&FTReferee::PlayAfterGoal, referee);
+
+		// Start Match Event
+		referee->OnStartMatch = [this]
+		{
+			SetGameStatus(GameStatus::Match);
+
+			ai_opponent->Play();
+
+			football_walls->ActiveScore();
+
+			referee->BallToTheCenter();
+			referee->PlayAfterGoal();
+		};
 	}
 
 	void SetGameStatus(GameStatus status)

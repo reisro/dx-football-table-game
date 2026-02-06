@@ -17,7 +17,11 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 
-	void BoolWhistle();
+	void KickOff();
+	void BallToTheCenter();
+	void PlayAfterGoal();
+
+	std::function<void(void)> OnStartMatch;
 
 protected:
 	YEAudioComponent* _audio_component;

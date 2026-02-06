@@ -1,4 +1,5 @@
 #include "FTReferee.h"
+#include "YEPhysX.h"
 
 FTReferee::FTReferee(const YEGameContext& _game_context):
 	YEGameObject("FTReferee", _game_context),
@@ -27,7 +28,25 @@ void FTReferee::update(float _deltaTime)
 {
 }
 
-void FTReferee::BoolWhistle()
+void FTReferee::KickOff()
 {
 	_audio_component->PlaySound("Whistle");
+
+	OnStartMatch();
+}
+
+void FTReferee::BallToTheCenter()
+{
+	_audio_component->PlaySound("Whistle");
+
+	YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+	physics->ResetDynamicSphere();
+}
+
+void FTReferee::PlayAfterGoal()
+{
+	_audio_component->PlaySound("Whistle");
+
+	YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+	physics->AddForceToDynamicRigidBody(*new YEVector3(0.0, 0.0, -10.0));
 }

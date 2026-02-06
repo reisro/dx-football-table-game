@@ -47,30 +47,34 @@ void FTScore::shutdown()
 
 void FTScore::update(float _deltaTime)
 {
-	_goal_widget_ui->update(_deltaTime);
+	if (_active)
+		_goal_widget_ui->update(_deltaTime);
 }
 
 void FTScore::IncrementScore(const char* player)
 {
-	if (strcmp(player, "Net Player") == 0)
+	if (_active)
 	{
-		_score_marker_ai->PlaceMarkerAt(++_aiScore);
+		if (strcmp(player, "Net Player") == 0)
+		{
+			_score_marker_ai->PlaceMarkerAt(++_aiScore);
 
-		PlayGoalSound();
+			PlayGoalSound();
 
-		_goal_widget_ui->Show();
+			_goal_widget_ui->Show();
 
-		ResetBall();
-	}
-	else if (strcmp(player, "Net PlayerAI") == 0)
-	{
-		_score_marker_player->PlaceMarkerAt(++_playerScore);
+			ResetBall();
+		}
+		else if (strcmp(player, "Net PlayerAI") == 0)
+		{
+			_score_marker_player->PlaceMarkerAt(++_playerScore);
 
-		PlayGoalSound();
+			PlayGoalSound();
 
-		_goal_widget_ui->Show();
+			_goal_widget_ui->Show();
 
-		ResetBall();
+			ResetBall();
+		}
 	}
 }
 

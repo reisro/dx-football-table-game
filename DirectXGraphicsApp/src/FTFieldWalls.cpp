@@ -28,6 +28,7 @@ void FTFieldWalls::start()
 
 	football_score->start();
 	football_score->OnScoreGoal = std::bind(&FTFieldWalls::OnGoalScored, this);
+	football_score->OnGoalUIHide = std::bind(&FTFieldWalls::OnScoreGoalUIHide, this);
 	
 	phsyX->Attach(this);
 }
@@ -45,7 +46,17 @@ void FTFieldWalls::update(float _deltaTime)
 
 void FTFieldWalls::OnGoalScored()
 {
+	OnBallReachGoalTrigger();
+}
+
+void FTFieldWalls::OnScoreGoalUIHide()
+{
 	OnCloseGoalWidget();
+}
+
+void FTFieldWalls::ActiveScore()
+{
+	football_score->Register();
 }
 
 void FTFieldWalls::OnNotify(const char* name)

@@ -19,8 +19,12 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 	void OnGoalScored();
+	void OnScoreGoalUIHide();
+	void ActiveScore();
 
 	virtual void OnNotify(const char* name) override;
+
+	std::function<void(void)> OnBallReachGoalTrigger;
 	std::function<void(void)> OnCloseGoalWidget;
 
 private:
