@@ -18,8 +18,10 @@ public:
 	void start() override;
 	void shutdown() override;
 	void update(float _deltaTime) override;
+	void OnGoalScored();
 
 	virtual void OnNotify(const char* name) override;
+	std::function<void(void)> OnCloseGoalWidget;
 
 private:
 	bool _updatedScore;

@@ -8,6 +8,7 @@
 #include "YEAudioComponent.h"
 #include <FTScoreMarker.h>
 #include <FTGoalWidgetUI.h>
+#include <functional>
 
 class FTScore : public YEGameObject
 {
@@ -24,7 +25,7 @@ public:
 	void IncrementScore(const char* player);
 	void PlayGoalSound();
 
-	void ResetScores() 
+	void ResetBall() 
 	{ 
 		YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 		physics->ResetDynamicSphere();
@@ -32,6 +33,16 @@ public:
 		_score_marker_ai->ResetMarkerUpdate();
 		_score_marker_player->ResetMarkerUpdate();
 	}
+
+	void ResetGameplay()
+	{
+		OnScoreGoal();
+
+		YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+		physics->AddForceToDynamicRigidBody(*new YEVector3(0.0, 0.0, -10.0));
+	}
+
+	std::function<void()> OnScoreGoal;
 
 private:
 	FTScoreMarker*    _score_marker_player;

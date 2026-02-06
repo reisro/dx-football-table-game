@@ -5,6 +5,8 @@
 
 #include "YEGameObject.h"
 #include "YESpriteComponent.h"
+#include "YETimer.h"
+#include <functional>
 
 class FTGoalWidgetUI : public YEGameObject
 {
@@ -19,12 +21,17 @@ public:
 	void SetGameMenuText();
 	void Show();
 
+	std::function<void(void)> OnWidgetUIHide;
+
 protected:
 	YESpriteComponent* _sprite_component;
 
 private:
 	int image_width;
 	int image_height;
+	bool _onShow;
+
+	YETimer* _timer;
 };
 
 #endif _FT_GAME_GOAL_H_

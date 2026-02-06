@@ -94,7 +94,7 @@ public:
 	virtual void BuildFX();
 	virtual void CreateVertexLayout();
 	virtual void CreatePixelLayout();
-	virtual void OnRenderUI(bool* open, int spriteid, const char* msg);
+	virtual void OnRenderUI(bool* open, int spriteid, const char* msg, const char* msg2);
 	virtual IUnknown* GetDevice();
 	virtual IUnknown* GetDeviceContext();
 	virtual YESceneObject* GetSceneObject();

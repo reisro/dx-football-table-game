@@ -21,12 +21,13 @@ void FTFieldWalls::start()
 	YEPhysics::GetInstance()->CreateStaticBox("Right Wall", new YEVector3(6.7f, 0.0f, 0.0f), new YEVector3(1.0f, 2.5f, 10.0f));
 
 	// nets
-	YEPhysics::GetInstance()->CreateStaticBox("Net PlayerAI", new YEVector3(0.0f, 0.0f, -12.5f), new YEVector3(1.6f, 2.5f, 1.0f));
-	YEPhysics::GetInstance()->CreateStaticBox("Net Player", new YEVector3(0.0f, 0.0f, 12.5f), new YEVector3(1.6f, 2.5f, 1.0f));
+	YEPhysics::GetInstance()->CreateStaticBox("Net PlayerAI", new YEVector3(0.0f, 0.0f, -12.5f), new YEVector3(1.6f, 1.5f, 1.0f));
+	YEPhysics::GetInstance()->CreateStaticBox("Net Player", new YEVector3(0.0f, 0.0f, 12.5f), new YEVector3(1.6f, 1.5f, 1.0f));
 
 	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
 
 	football_score->start();
+	football_score->OnScoreGoal = std::bind(&FTFieldWalls::OnGoalScored, this);
 	
 	phsyX->Attach(this);
 }
@@ -38,6 +39,13 @@ void FTFieldWalls::shutdown()
 void FTFieldWalls::update(float _deltaTime)
 {
 	YEGameObject::update(_deltaTime);
+
+	football_score->update(_deltaTime);
+}
+
+void FTFieldWalls::OnGoalScored()
+{
+	OnCloseGoalWidget();
 }
 
 void FTFieldWalls::OnNotify(const char* name)

@@ -449,7 +449,7 @@ void YERenderingDirectX11::BeginFrame()
 	static bool show_another_window = false;
 
 	if (_sceneObject->_sceneUI.showUI)
-		OnRenderUI(&_sceneObject->_sceneUI.showUI, _sceneObject->_sceneUI.spriteID, _sceneObject->_sceneUI.textMsg);
+		OnRenderUI(&_sceneObject->_sceneUI.showUI, _sceneObject->_sceneUI.spriteID, _sceneObject->_sceneUI.textMsg, _sceneObject->_sceneUI.textMsg2);
 
 	ImGui::Render();
 
@@ -719,7 +719,7 @@ void YERenderingDirectX11::CreatePixelLayout()
 {
 }
 
-void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg)
+void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg, const char* msg2)
 {
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
 	static float f = 0.0f;
@@ -735,13 +735,14 @@ void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg)
 	ImGui::End();
 
 	ImGui::SetNextWindowBgAlpha(0.0);
-	ImGui::SetNextWindowSize(ImVec2(300, 100));
-	ImGui::SetNextWindowPos(ImVec2(550, 500));
+	ImGui::SetNextWindowSize(ImVec2(700, 200));
+	ImGui::SetNextWindowPos(ImVec2(400, 460));
 	ImGui::GetFont()->Scale = 2.0;
 	{
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
 		ImGui::Begin("Text HUD", NULL, window_flags);
-		ImGui::Text(msg);
+		ImGui::Text((std::string(msg) + "\n").c_str());
+		ImGui::Text(msg2);
 		ImGui::End();
 	}
 }

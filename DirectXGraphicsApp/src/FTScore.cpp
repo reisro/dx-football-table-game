@@ -38,6 +38,7 @@ void FTScore::start()
 	_goal_sound_component->SetPriority(1);
 
 	_goal_widget_ui->start();
+	_goal_widget_ui->OnWidgetUIHide = std::bind(&FTScore::ResetGameplay, this);
 }
 
 void FTScore::shutdown()
@@ -46,6 +47,7 @@ void FTScore::shutdown()
 
 void FTScore::update(float _deltaTime)
 {
+	_goal_widget_ui->update(_deltaTime);
 }
 
 void FTScore::IncrementScore(const char* player)
@@ -54,21 +56,21 @@ void FTScore::IncrementScore(const char* player)
 	{
 		_score_marker_ai->PlaceMarkerAt(++_aiScore);
 
-		ResetScores();
-
 		PlayGoalSound();
 
 		_goal_widget_ui->Show();
+
+		ResetBall();
 	}
 	else if (strcmp(player, "Net PlayerAI") == 0)
 	{
 		_score_marker_player->PlaceMarkerAt(++_playerScore);
 
-		ResetScores();
-
 		PlayGoalSound();
 
 		_goal_widget_ui->Show();
+
+		ResetBall();
 	}
 }
 
