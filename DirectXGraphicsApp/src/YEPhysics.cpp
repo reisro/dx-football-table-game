@@ -34,6 +34,10 @@ void YEPhysics::CreateCustomRigidBody()
 {
 }
 
+void YEPhysics::AddForceToDynamicRigidBody(const YEVector3& force)
+{
+}
+
 void YEPhysics::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer)
 {
 }

@@ -108,6 +108,11 @@ void YEPhysX::CreateCustomRigidBody()
 {
 }
 
+void YEPhysX::AddForceToDynamicRigidBody(const YEVector3& force)
+{
+	_dynamicSphere->addForce(PxVec3(force._x, force._y, force._z), PxForceMode::eIMPULSE);
+}
+
 void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer)
 {
 	PxBoxGeometry boxGeom(0.25f,0.9f, 0.15f);
@@ -281,9 +286,8 @@ void YEPhysX::ResetRotatePulleyJointBody(int id)
 
 void YEPhysX::ResetDynamicSphere()
 {
-	_dynamicSphere->setGlobalPose(PxTransform(PxVec3(0.0f, 3.0f, 0.0f)));
-	_dynamicSphere->setLinearVelocity(PxVec3(0.0f, -1.0f, 1.0f));
-	_dynamicSphere->setAngularVelocity(PxVec3(0.0f, 0.0f, 0.0f));
+	_dynamicSphere->setGlobalPose(PxTransform(PxVec3(0.0f, 0.0f, 0.0f)));
+	_dynamicSphere->putToSleep();
 }
 
 void YEPhysX::Setup()

@@ -78,6 +78,12 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTGoalWidgetUI.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTReferee.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTPlayerInstructions.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
@@ -135,6 +141,12 @@
       <Filter>TableFootball</Filter>
     </ClInclude>
     <ClInclude Include="DirectXGraphicsApp\src\FTGoalWidgetUI.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTReferee.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTPlayerInstructions.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

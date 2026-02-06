@@ -167,7 +167,9 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTHandlePlayer.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTHandleWhite.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayer.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTPlayerInstructions.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayerWhite.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTReferee.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTScore.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTScoreMarker.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTSingleHandle.cpp" />
@@ -188,7 +190,9 @@
     <ClInclude Include="DirectXGraphicsApp\src\FTHandlePlayer.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTHandleWhite.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayer.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTPlayerInstructions.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayerWhite.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTReferee.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTScore.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTScoreMarker.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTSingleHandle.h" />

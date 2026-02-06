@@ -52,6 +52,8 @@ public:
 
 	void CreateCustomRigidBody() override;
 
+	void AddForceToDynamicRigidBody(const YEVector3& force) override;
+
 	void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer) override;
 
 	void RotateJointBody() override;

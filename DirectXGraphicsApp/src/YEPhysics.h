@@ -20,6 +20,7 @@ public:
 	virtual void CreateStaticBox(const char* name, YEVector3* pos, YEVector3* size);
 	virtual void CreateDynamicSphere(const char* name, YEVector3* pos, yeFloat radius);
 	virtual void CreateCustomRigidBody();
+	virtual void AddForceToDynamicRigidBody(const YEVector3& force);
 	virtual void CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numberOfAttached, bool inputPlayer);
 	virtual void RotateJointBody();
 	virtual bool MoveJointBody(int dir, yeFloat left, yeFloat right);
