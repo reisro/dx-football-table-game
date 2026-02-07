@@ -161,6 +161,7 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTField.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTFieldWalls.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTGameMainMenu.cpp" />
+    <ClCompile Include="DirectXGraphicsApp\src\FTGameOverWidget.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTGameRoom.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTGoalWidgetUI.cpp" />
     <ClCompile Include="DirectXGraphicsApp\src\FTHandle.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="DirectXGraphicsApp\src\FTField.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTFieldWalls.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTGameMainMenu.h" />
+    <ClInclude Include="DirectXGraphicsApp\src\FTGameOverWidget.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTGameRoom.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTGoalWidgetUI.h" />
     <ClInclude Include="DirectXGraphicsApp\src\FTHandle.h" />

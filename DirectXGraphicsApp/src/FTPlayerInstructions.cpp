@@ -4,7 +4,7 @@ FTPlayerInstructions::FTPlayerInstructions(const YEGameContext& _game_context):
 	YEGameObject("Football Player Instructions", _game_context),
 	_sprite_component(new YESpriteComponent),
 	_uiText("\t\t\t\t\t\t\t\t\tAD move player W shoot"),
-	_uiText2("\t\t\t\t\tLEFT RIGHT move keeper UP shoot")
+	_uiText2("\t\t\t\t\tLEFT RIGHT move keeper UP shoot\n\t\t\t\t\t\t\t\t Press P to start match")
 {
 }
 

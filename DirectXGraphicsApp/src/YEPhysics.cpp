@@ -68,6 +68,10 @@ void YEPhysics::ResetRotatePulleyJointBody(int id)
 
 }
 
+void YEPhysics::ResetMovePulleyJointBody(int id)
+{
+}
+
 YEPhysics* YEPhysics::GetInstance()
 {
 	return _instance;

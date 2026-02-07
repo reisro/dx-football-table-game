@@ -3,7 +3,9 @@
 
 FTReferee::FTReferee(const YEGameContext& _game_context):
 	YEGameObject("FTReferee", _game_context),
-	_audio_component(new YEAudioComponent(false))
+	_audio_component(new YEAudioComponent(false)),
+	_timerStarts(false),
+	_timer(new YETimer)
 {
 	addComponent(_audio_component);
 }
@@ -45,8 +47,17 @@ void FTReferee::BallToTheCenter()
 
 void FTReferee::PlayAfterGoal()
 {
+	static bool sendBallUp;
+
 	_audio_component->PlaySound("Whistle");
 
 	YEPhysX* physics = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
-	physics->AddForceToDynamicRigidBody(*new YEVector3(0.0, 0.0, -10.0));
+	
+	sendBallUp = !sendBallUp;
+
+	if (!sendBallUp)
+		physics->AddForceToDynamicRigidBody(*new YEVector3(0.0, 0.0, -10.0));
+	else
+		physics->AddForceToDynamicRigidBody(*new YEVector3(0.0, 0.0, 10.0));
+
 }

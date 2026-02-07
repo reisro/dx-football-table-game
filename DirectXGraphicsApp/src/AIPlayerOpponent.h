@@ -21,6 +21,7 @@ public:
 	void shutdown() override;
 	void update(float _deltaTime) override;
 	void Play();
+	void Stop();
 
 	void WatchBallDirection();
 

@@ -38,3 +38,11 @@ void FTHandleWhite::update(float _deltaTime)
 	//phsyX->SetKinematicPulleyJointBody(2);
 	//phsyX->SetKinematicPulleyJointBody(3);
 }
+
+void FTHandleWhite::MoveToCenter()
+{
+	YEPhysX* phsyX = reinterpret_cast<YEPhysX*>(YEPhysics::GetInstance());
+
+	phsyX->ResetMovePulleyJointBody(2);
+	phsyX->ResetMovePulleyJointBody(3);
+}

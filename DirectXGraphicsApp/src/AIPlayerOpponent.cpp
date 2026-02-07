@@ -57,6 +57,11 @@ void AIPlayerOpponent::Play()
 	_active = true;
 }
 
+void AIPlayerOpponent::Stop()
+{
+	_active = false;
+}
+
 void AIPlayerOpponent::WatchBallDirection()
 {
 	_currentBallPos = _target->_transform->getPosition();

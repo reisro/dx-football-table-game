@@ -15,6 +15,7 @@
 #include <FTBackgroundSoundtrack.h>
 #include <FTGameMainMenu.h>
 #include <FTPlayerInstructions.h>
+#include <FTGameOverWidget.h>
 
 using namespace gamentry;
 
@@ -84,6 +85,8 @@ public:
 
 		referee = new FTReferee(GetGameContext());
 
+		game_over_widget = new FTGameOverWidget(GetGameContext());
+
 		// Game Audio Soundtrack
 		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
 
@@ -138,6 +141,7 @@ public:
 
 		main_menu->start();
 		game_instructions->start();
+		game_over_widget->start();
 
 		football_walls->start();
 
@@ -166,6 +170,7 @@ public:
 
 		main_menu->update(static_cast<float>(_deltaTime));
 		game_instructions->update(static_cast<float>(_deltaTime));
+		game_over_widget->update(static_cast<float>(_deltaTime));
 
 		football_walls->update(static_cast<float>(_deltaTime));
 
@@ -182,7 +187,13 @@ public:
 		main_menu->OnMainMenuKeyPressed =		 std::bind(&FTPlayerInstructions::SetGameMenuText, game_instructions);
 		game_instructions->OnPKeyPressed =		 std::bind(&FTReferee::KickOff, referee);
 		football_walls->OnBallReachGoalTrigger = std::bind(&FTReferee::BallToTheCenter, referee);
-		football_walls->OnCloseGoalWidget =		 std::bind(&FTReferee::PlayAfterGoal, referee);
+		
+		football_walls->OnCloseGoalWidget = [=]()
+		{
+			referee->PlayAfterGoal();
+
+			football_handle_player->MoveToCenter();
+		};
 
 		// Start Match Event
 		referee->OnStartMatch = [this]
@@ -194,8 +205,44 @@ public:
 			football_walls->ActiveScore();
 
 			referee->BallToTheCenter();
+
 			referee->PlayAfterGoal();
 		};
+
+		referee->OnTimerRunsOut = [this]()
+		{
+			SetGameStatus(GameStatus::GameOver);
+			
+			game_over_widget->SetGameMenuText("Time's Up!");
+		};
+
+		// Max Goals Reached Event
+		football_walls->OnScoreMaxGoalsReached = [=](const char* winner)
+		{
+			SetGameStatus(GameStatus::GameOver);
+			
+			referee->BallToTheCenter();
+
+			game_over_widget->SetGameMenuText(winner);
+		};
+
+		// Game Over Event
+		game_over_widget->OnWidgetShows = [=]()
+		{
+			football_walls->DeactiveScore();
+			football_walls->RestartScore();
+
+			ai_opponent->Stop();
+
+			referee->BallToTheCenter();
+		};
+
+		// Restart Match Event
+		game_over_widget->OnSpaceKeyPressed = [=]()
+		{
+			SetGameStatus(GameStatus::MainMenu);
+			main_menu->SetGameMenuText();
+			};
 	}
 
 	void SetGameStatus(GameStatus status)
@@ -232,12 +279,9 @@ private:
 	FTBackgroundSoundtrack* background_soundtrack;
 	FTGameMainMenu* main_menu;
 	FTPlayerInstructions* game_instructions;
+	FTGameOverWidget* game_over_widget;
 
 	AIPlayerOpponent* ai_opponent;
-
-	YEVector3* position;
-	YEVector3* newPosition;
-	YEVector3* moveDirection;
 
 	yeFloat    forward_speed = 0.1f;
 	yeFloat    mTheta;

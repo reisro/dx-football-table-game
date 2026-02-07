@@ -22,6 +22,8 @@ public:
 	FTPlayerWhite* GetPlayerLeft() const { return _player_left; }
 	FTPlayerWhite* GetPlayerRight() const { return _player_right; }
 
+	void MoveToCenter();
+
 private:
 	FTPlayerWhite* _player_left;
 	FTPlayerWhite* _player_right;

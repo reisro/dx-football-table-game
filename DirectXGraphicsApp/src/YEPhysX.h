@@ -68,6 +68,8 @@ public:
 
 	void ResetRotatePulleyJointBody(int id) override;
 
+	void ResetMovePulleyJointBody(int id) override;
+
 	void ResetDynamicSphere();
 
 	// Starts up all procedures for a specific susbsystem

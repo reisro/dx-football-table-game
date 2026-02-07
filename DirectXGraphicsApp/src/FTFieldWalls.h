@@ -20,12 +20,16 @@ public:
 	void update(float _deltaTime) override;
 	void OnGoalScored();
 	void OnScoreGoalUIHide();
+	void OnGoalsMaxReached();
 	void ActiveScore();
+	void DeactiveScore();
+	void RestartScore();
 
 	virtual void OnNotify(const char* name) override;
 
 	std::function<void(void)> OnBallReachGoalTrigger;
 	std::function<void(void)> OnCloseGoalWidget;
+	std::function<void(const char*)> OnScoreMaxGoalsReached;
 
 private:
 	bool _updatedScore;

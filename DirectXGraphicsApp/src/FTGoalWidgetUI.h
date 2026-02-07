@@ -22,6 +22,9 @@ public:
 	void Show();
 
 	std::function<void(void)> OnWidgetUIHide;
+	std::function<void(void)> OnCheckScoreCount;
+
+	bool _goal;
 
 protected:
 	YESpriteComponent* _sprite_component;

@@ -84,6 +84,9 @@
     <ClCompile Include="DirectXGraphicsApp\src\FTPlayerInstructions.cpp">
       <Filter>TableFootball</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGraphicsApp\src\FTGameOverWidget.cpp">
+      <Filter>TableFootball</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGraphicsApp\src\FTBall.h">
@@ -147,6 +150,9 @@
       <Filter>TableFootball</Filter>
     </ClInclude>
     <ClInclude Include="DirectXGraphicsApp\src\FTPlayerInstructions.h">
+      <Filter>TableFootball</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphicsApp\src\FTGameOverWidget.h">
       <Filter>TableFootball</Filter>
     </ClInclude>
   </ItemGroup>

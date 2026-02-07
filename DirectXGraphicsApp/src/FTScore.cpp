@@ -39,6 +39,7 @@ void FTScore::start()
 
 	_goal_widget_ui->start();
 	_goal_widget_ui->OnWidgetUIHide = std::bind(&FTScore::ResetGameplay, this);
+	_goal_widget_ui->OnCheckScoreCount = std::bind(&FTScore::IsGoalScoredMaxReached, this);
 }
 
 void FTScore::shutdown()

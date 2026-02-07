@@ -29,6 +29,7 @@ void FTFieldWalls::start()
 	football_score->start();
 	football_score->OnScoreGoal = std::bind(&FTFieldWalls::OnGoalScored, this);
 	football_score->OnGoalUIHide = std::bind(&FTFieldWalls::OnScoreGoalUIHide, this);
+	football_score->OnGoalScoredMaxReached = std::bind(&FTFieldWalls::OnGoalsMaxReached, this);
 	
 	phsyX->Attach(this);
 }
@@ -54,9 +55,26 @@ void FTFieldWalls::OnScoreGoalUIHide()
 	OnCloseGoalWidget();
 }
 
+void FTFieldWalls::OnGoalsMaxReached()
+{
+	const char* message = football_score->_matchResult;
+
+	OnScoreMaxGoalsReached(message);
+}
+
 void FTFieldWalls::ActiveScore()
 {
 	football_score->Register();
+}
+
+void FTFieldWalls::DeactiveScore()
+{
+	football_score->Unregister();
+}
+
+void FTFieldWalls::RestartScore()
+{
+	football_score->ResetScore();
 }
 
 void FTFieldWalls::OnNotify(const char* name)

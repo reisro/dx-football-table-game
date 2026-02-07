@@ -284,6 +284,18 @@ void YEPhysX::ResetRotatePulleyJointBody(int id)
 		pulleyJointAttachedBodiesMap[id].cpuRotInc = 0.0;
 }
 
+void YEPhysX::ResetMovePulleyJointBody(int id)
+{
+	if (pulleyJointAttachedBodiesMap[id].rightMoveDir > 0.0f)
+		pulleyJointAttachedBodiesMap[id].rightMoveDir -= .03f;
+	else
+		pulleyJointAttachedBodiesMap[id].rightMoveDir += .03f;
+
+	if (pulleyJointAttachedBodiesMap[id].rightMoveDir < 0.0f ||
+		pulleyJointAttachedBodiesMap[id].rightMoveDir > 0.0f)
+		pulleyJointAttachedBodiesMap[id].rightMoveDir = 0.0f;
+}
+
 void YEPhysX::ResetDynamicSphere()
 {
 	_dynamicSphere->setGlobalPose(PxTransform(PxVec3(0.0f, 0.0f, 0.0f)));

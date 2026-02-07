@@ -25,27 +25,36 @@ void FTGoalWidgetUI::shutdown()
 
 void FTGoalWidgetUI::update(float _deltaTime)
 {
-	if (_timer->Countdown(2) && _onShow)
+	if (_goal)
 	{
-		YERenderer::GetInstance()->GetSceneObject()->_sceneUI.showUI = false;
+		if (_timer->Countdown(2) && _onShow)
+		{
+			YERenderer::GetInstance()->GetSceneObject()->_sceneUI.showUI = false;
 
-		OnWidgetUIHide();
+			OnWidgetUIHide();
 
-		_onShow = false;
+			OnCheckScoreCount();
+
+			_onShow = false;
+			_goal = false;
+		}
 	}
 }
 
 void FTGoalWidgetUI::SetGameMenuText()
 {
 	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.textMsg = "";
+	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.textMsg2 = "";
 }
 
 void FTGoalWidgetUI::Show()
 {
-	SetGameMenuText();
-
-	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.spriteID = 2;
 	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.showUI = true;
 
+	SetGameMenuText();
+
+	YERenderer::GetInstance()->GetSceneObject()->_sceneUI.spriteID = 3;
+
+	_goal = true;
 	_onShow = true;
 }

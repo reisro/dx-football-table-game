@@ -5,6 +5,7 @@
 
 #include "YEGameObject.h"
 #include "YEAudioComponent.h"
+#include "YETimer.h"
 #include <functional>
 
 class FTReferee : public YEGameObject
@@ -22,12 +23,14 @@ public:
 	void PlayAfterGoal();
 
 	std::function<void(void)> OnStartMatch;
+	std::function<void(void)> OnTimerRunsOut;
 
 protected:
 	YEAudioComponent* _audio_component;
 
 private:
-
+	bool _timerStarts;
+	YETimer* _timer;
 };
 
 #endif _FT_REFEREE_H_
