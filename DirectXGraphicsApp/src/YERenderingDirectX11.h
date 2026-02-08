@@ -127,6 +127,8 @@ private:
 	ComPtr<ID3D11Buffer> m_WorldConstantBuffer = nullptr;
 	ComPtr<ID3D11SamplerState> m_SamplerState;
 
+	std::vector<YEVector3*> _cameraAngles;
+
 	float m_PitchRadians = 0.0f;
 	float m_YawRadians = 0.0f;
 };

@@ -12,6 +12,14 @@ YERenderingDirectX11::YERenderingDirectX11() :
 	XMStoreFloat4x4(&mView, I);
 	XMStoreFloat4x4(&mProj, I);
 
+	_cameraAngles.push_back(new YEVector3(0.28f, 13.86f, 18.27f));
+	_cameraAngles.push_back(new YEVector3(7.119f, 7.619f, 15.750f));
+	_cameraAngles.push_back(new YEVector3(10.72f, 13.860f, 15.750f));
+	_cameraAngles.push_back(new YEVector3(-7.999f, 11.460f, 18.510f));
+	_cameraAngles.push_back(new YEVector3(-8.2399f, 7.499f, 15.750f));
+	_cameraAngles.push_back(new YEVector3(-0.1399f, 4.8599f, 15.090f));
+	_cameraAngles.push_back(new YEVector3(-5.1399f, 4.8599f, 15.090f));
+
 	YELog("\nCreated Renderer instance....");
 }
 
@@ -394,24 +402,52 @@ void YERenderingDirectX11::Render()
 
 void YERenderingDirectX11::BeginFrame()
 {
-	static float y = 4.5f;
-	static float x = 2.2f;
-	static float z = -4.53f;
+	static float y = 13.86f;
+	static float x = 0.28f;
+	static float z = 18.27f;
+	static int id = 0;
 
-	/*if (GetAsyncKeyState('1') & 0x8000)
-		x += 0.06f;
+	if (GetAsyncKeyState('1') & 0x8000)
+	{
+		x = _cameraAngles[0]->_x;
+		y = _cameraAngles[0]->_y;
+		z = _cameraAngles[0]->_z;
+	}
 	if (GetAsyncKeyState('2') & 0x8000)
-		y += 0.06f;
+	{
+		x = _cameraAngles[1]->_x;
+		y = _cameraAngles[1]->_y;
+		z = _cameraAngles[1]->_z;
+	}
 	if (GetAsyncKeyState('3') & 0x8000)
-		z += 0.06f;
+	{
+		x = _cameraAngles[2]->_x;
+		y = _cameraAngles[2]->_y;
+		z = _cameraAngles[2]->_z;
+	}
 	if (GetAsyncKeyState('4') & 0x8000)
-		x -= 0.06f;
-	if (GetAsyncKeyState('5') & 0x8000)
-		y -= 0.06f;
-	if (GetAsyncKeyState('6') & 0x8000)
-		z -= 0.06f;*/
-
-	x -= 0.05f;
+	{
+		x = _cameraAngles[3]->_x;
+		y = _cameraAngles[3]->_y;
+		z = _cameraAngles[3]->_z;
+	}	if (GetAsyncKeyState('5') & 0x8000)
+	{
+		x = _cameraAngles[4]->_x;
+		y = _cameraAngles[4]->_y;
+		z = _cameraAngles[4]->_z;
+	}	if (GetAsyncKeyState('6') & 0x8000)
+	{
+		x = _cameraAngles[5]->_x;
+		y = _cameraAngles[5]->_y;
+		z = _cameraAngles[5]->_z;
+	}	if (GetAsyncKeyState('7') & 0x8000)
+	{
+		x = _cameraAngles[6]->_x;
+		y = _cameraAngles[6]->_y;
+		z = _cameraAngles[6]->_z;
+	}
+	
+	/*x -= 0.05f;
 	if (x <= 0.28f)
 		x = 0.28f;
 	y += 0.02f;
@@ -419,7 +455,7 @@ void YERenderingDirectX11::BeginFrame()
 		y = 13.86f;
 	z += 0.09f;
 	if (z >= 18.27f)
-		z = 18.27f;
+		z = 18.27f;*/
 
 	//0.28 13.86 18.27 gameplay
 	YELog("Camera Position X: %.2f Y: %.2f Z: %.2f" + std::to_string(x) + "," + std::to_string(y) + "," +
@@ -743,6 +779,18 @@ void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg,
 		ImGui::Begin("Text HUD", NULL, window_flags);
 		ImGui::Text((std::string(msg) + "\n").c_str());
 		ImGui::Text(msg2);
+		ImGui::End();
+	}
+
+	ImGui::SetNextWindowBgAlpha(0.0);
+	ImGui::SetNextWindowSize(ImVec2(700, 200));
+	ImGui::SetNextWindowPos(ImVec2(400, 40));
+	ImGui::GetFont()->Scale = 2.0;
+	{
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
+		ImGui::Begin("Text HUD2", NULL, window_flags);
+		ImGui::Text("\t\t\t\tPress P to send ball to center");
+		ImGui::Text("\t\t\t\tPress 1-7 to change camera angle");
 		ImGui::End();
 	}
 }
