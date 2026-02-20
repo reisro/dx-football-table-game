@@ -60,7 +60,7 @@ void YESprite::CreateVertexBuffer()
 
 void YESprite::LoadTexture()
 {
-	std::wstring path = L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\Game Assets\\game_logo.png";
+	std::wstring path = L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\ftgame_logo.png";
 
     // Check if file exists
     if (!std::filesystem::exists(path))

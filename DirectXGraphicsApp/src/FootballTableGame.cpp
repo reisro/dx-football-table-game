@@ -35,6 +35,29 @@ public:
 	{
 		SetGameStatus(GameStatus::MainMenu);
 
+		GameObjectsCreation();
+
+		GameObjectsInitialization();
+
+		BindEventFunctions();
+	}
+
+	bool update(dxDouble _deltaTime) override
+	{				
+		GameObjectsUpdate(_deltaTime);
+
+		return true;
+	}
+
+	virtual void shutdown() override
+	{
+		YELog("Shutdown Football Table Game...");
+	}
+
+	void GameObjectsCreation()
+	{
+		// Game Objects Allocation
+
 		// Game Objects creation
 		football_field = new FTField(GetGameContext());
 		football_field->hasRigidBody = true;
@@ -48,38 +71,38 @@ public:
 
 		football_ball = new FTBall(GetGameContext());
 		football_ball->hasRigidBody = true;
-		
-		football_player = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player.fbx");
+
+		football_player = new FTPlayer(GetGameContext(), L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_player.fbx");
 		football_player->hasParent = true;
 		football_player->hasRigidBody = true;
 
-		football_player2 = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player.fbx");
+		football_player2 = new FTPlayer(GetGameContext(), L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_player.fbx");
 		football_player2->hasParent = true;
 		football_player2->hasRigidBody = true;
 
-		football_player_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx", football_ball);
+		football_player_l = new FTPlayerWhite(GetGameContext(), L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_player_white.fbx", football_ball);
 		football_player_l->hasParent = true;
 		football_player_l->hasRigidBody = true;
 
-		football_player2_l = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_white.fbx", football_ball);
+		football_player2_l = new FTPlayerWhite(GetGameContext(), L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_player_white.fbx", football_ball);
 		football_player2_l->hasParent = true;
 		football_player2_l->hasRigidBody = true;
 
-		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_white.fbx", football_ball);
+		football_keeper_ai = new FTPlayerWhite(GetGameContext(), L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_player_keeper_white.fbx", football_ball);
 		football_keeper_ai->hasRigidBody = true;
 
-		football_keeper_player = new FTPlayer(GetGameContext(), L"C:\\Game Assets\\football_player_keeper_red.fbx");
+		football_keeper_player = new FTPlayer(GetGameContext(), L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_player_keeper_red.fbx");
 		football_keeper_player->hasRigidBody = true;
 
 		// handle Player
-		football_handle = new FTHandlePlayer(GetGameContext(), football_player, football_player2, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle = new FTHandlePlayer(GetGameContext(), football_player, football_player2, L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_handle.fbx");
 
 		// handle AI
-		football_handle_player = new FTHandleWhite(GetGameContext(), football_player_l, football_player2_l, L"C:\\Game Assets\\football_handle.fbx");
-		
-		football_handle_keeper_ai = new FTSingleHandleWhite(GetGameContext(), football_keeper_ai, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle_player = new FTHandleWhite(GetGameContext(), football_player_l, football_player2_l, L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_handle.fbx");
 
-		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper_player, L"C:\\Game Assets\\football_handle.fbx");
+		football_handle_keeper_ai = new FTSingleHandleWhite(GetGameContext(), football_keeper_ai, L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_handle.fbx");
+
+		football_handle_keeper = new FTSingleHandlePlayer(GetGameContext(), football_keeper_player, L"C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\football_handle.fbx");
 
 		ai_opponent = new AIPlayerOpponent(GetGameContext(), football_handle_player, football_handle_keeper_ai, football_ball);
 
@@ -88,8 +111,11 @@ public:
 		game_over_widget = new FTGameOverWidget(GetGameContext());
 
 		// Game Audio Soundtrack
-		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\Game Assets\\footballtable_st.wav");
+		background_soundtrack = new FTBackgroundSoundtrack(GetGameContext(), "C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\footballtable_st.wav");
+	}
 
+	void GameObjectsInitialization()
+	{
 		// Start Game Objects
 		football_field->start();
 		football_field->_transform->setPosition(new YEVector3(0.0f, 0.0f, 0.0f));
@@ -144,12 +170,10 @@ public:
 		game_over_widget->start();
 
 		football_walls->start();
-
-		BindEventFunctions();
 	}
 
-	bool update(dxDouble _deltaTime) override
-	{				
+	void GameObjectsUpdate(dxDouble _deltaTime)
+	{
 		football_ball->update(static_cast<float>(_deltaTime));
 
 		football_handle->update(static_cast<float>(_deltaTime));
@@ -173,13 +197,6 @@ public:
 		game_over_widget->update(static_cast<float>(_deltaTime));
 
 		football_walls->update(static_cast<float>(_deltaTime));
-
-		return true;
-	}
-
-	virtual void shutdown() override
-	{
-		YELog("Shutdown Cube Game...");
 	}
 
 	void BindEventFunctions()
@@ -242,7 +259,7 @@ public:
 		{
 			SetGameStatus(GameStatus::MainMenu);
 			main_menu->SetGameMenuText();
-			};
+		};
 	}
 
 	void SetGameStatus(GameStatus status)

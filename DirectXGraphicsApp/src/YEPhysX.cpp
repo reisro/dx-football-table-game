@@ -180,14 +180,6 @@ void YEPhysX::CreateJoint(const YEVector3& pos, const YEVector3& pos1, int numbe
 	case 3:
 		for (size_t i = 0; i < 3; i++)
 			attachedBodies.push_back(PxCreateDynamic(*_physics, PxTransform(PxVec3(pos._x, pos._y, pos._z)), boxGeom, *_material, 1.0f, PxTransform(PxVec3(0.0, -0.25, 0.0))));
-		
-		/*_joint = new PulleyJoint(*_physics, *attachedBodies[0], PxTransform(PxVec3(0.0f, 0.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
-											*attachedBodies[1], PxTransform(PxVec3(0.0f, 1.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f),
-											*attachedBodies[2], PxTransform(PxVec3(0.0f, 2.0f, 0.0f)), PxVec3(0.0f, 1.0f, 0.0f)); 
-		
-		_joint->mBody[0]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
-		_joint->mBody[1]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
-		_joint->mBody[2]->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);*/
 
 		for (size_t i = 0; i < attachedBodies.size(); i++)
 			_scene->addActor(*attachedBodies[i]);
@@ -386,9 +378,6 @@ void YEPhysX::Simulate(dxDouble deltaTime)
 		if (!pulleyJointAttachedBodiesMap[i].receivesInput)
 			pulleyJointAttachedBodiesMap[i].box->setKinematicTarget(PxTransform(PxVec3(pulleyJointAttachedBodiesMap[i].rightMoveDir + pulleyJointAttachedBodiesMap[i].offset, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.y, pulleyJointAttachedBodiesMap[i].box->getGlobalPose().p.z), PxQuat(PxLerp(0, pulleyJointAttachedBodiesMap[i].cpuRot, pulleyJointAttachedBodiesMap[i].cpuRotInc), PxVec3(1, 0, 0))));
 	}
-
-	//if (!_dynamicSphere->getGlobalPose().p.y < 0.0001f)
-		//_dynamicSphere->setRigidDynamicLockFlag(PxRigidDynamicLockFlag::eLOCK_LINEAR_Y, true);
 
 	// Raycast ignoring Layer mask
 	uint32_t queryMask = ~(LAYER_IGNORE);
