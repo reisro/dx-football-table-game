@@ -16,7 +16,7 @@ FTGoalWidgetUI::~FTGoalWidgetUI()
 
 void FTGoalWidgetUI::start()
 {
-	_sprite_component->LoadTexture("C:\\Game Assets\\TEXTURES\\ftgame_goal_ui.png", image_width, image_height);
+	_sprite_component->LoadTexture("C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\ftgame_goal_ui.png", image_width, image_height);
 }
 
 void FTGoalWidgetUI::shutdown()
