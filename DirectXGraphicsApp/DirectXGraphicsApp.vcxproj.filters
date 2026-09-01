@@ -330,6 +330,9 @@
     <ClInclude Include="src\YEAudioComponent.h">
       <Filter>Arquivos de Cabeçalho\Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\YEFileSystem.h">
+      <Filter>Arquivos de Cabeçalho\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rdparty\dear_imgui\imgui.cpp">
@@ -478,6 +481,9 @@
     </ClCompile>
     <ClCompile Include="src\YEAudioComponent.cpp">
       <Filter>Arquivos de Origem\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YEFileSystem.cpp">
+      <Filter>Arquivos de Origem\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -189,6 +189,7 @@
     <ClInclude Include="src\YEBehaviourTree.h" />
     <ClInclude Include="src\YEComponents.h" />
     <ClInclude Include="src\YEComposites.h" />
+    <ClInclude Include="src\YEFileSystem.h" />
     <ClInclude Include="src\YEGameContext.h" />
     <ClInclude Include="src\YEInput.h" />
     <ClInclude Include="src\YEMesh.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="src\YEBaseComponent.cpp" />
     <ClCompile Include="src\YEBehaviourAction.cpp" />
     <ClCompile Include="src\YEBehaviourTree.cpp" />
+    <ClCompile Include="src\YEFileSystem.cpp" />
     <ClCompile Include="src\YEGame.cpp" />
     <ClCompile Include="src\YEGameContext.cpp" />
     <ClCompile Include="src\YEInput.cpp" />
