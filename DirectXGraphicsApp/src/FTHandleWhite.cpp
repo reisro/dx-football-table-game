@@ -3,7 +3,7 @@
 #include "FTSingleHandleWhite.h"
 #include "YEPhysX.h"
 
-FTHandleWhite::FTHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName)
+FTHandleWhite::FTHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const char* meshName)
 	: FTHandle(_game_context, p1, p2, meshName),
 	_player_right(reinterpret_cast<FTPlayerWhite*>(p1)),
 	_player_left(reinterpret_cast<FTPlayerWhite*>(p2))

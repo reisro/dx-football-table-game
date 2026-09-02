@@ -11,7 +11,7 @@
 class FTPlayerWhite : public FTPlayer
 {
 public:
-	FTPlayerWhite(const YEGameContext& _game_context, const wchar_t* _meshName, YEGameObject* target);
+	FTPlayerWhite(const YEGameContext& _game_context, const char* _meshName, YEGameObject* target);
 	virtual ~FTPlayerWhite();
 
 	void start() override;

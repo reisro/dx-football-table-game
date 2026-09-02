@@ -1,7 +1,7 @@
 #include "FTSingleHandlePlayer.h"
 #include "YEPhysX.h"
 
-FTSingleHandlePlayer::FTSingleHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, const wchar_t* meshName):
+FTSingleHandlePlayer::FTSingleHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, const char* meshName):
 	FTSingleHandle(_game_context, p1, meshName), _yeInput(YEInput::GetInstance())
 {
 }

@@ -6,11 +6,12 @@
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
 #include "YEPhysicsComponent.h"
+#include "YEFileSystem.h"
 
 class FTPlayer : public YEGameObject
 {
 public:
-	FTPlayer(const YEGameContext& _game_context, const wchar_t* _meshName);
+	FTPlayer(const YEGameContext& _game_context, const char* _meshName);
 	virtual ~FTPlayer();
 
 	virtual void start() override;

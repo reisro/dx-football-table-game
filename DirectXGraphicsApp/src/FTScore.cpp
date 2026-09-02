@@ -3,7 +3,7 @@
 FTScore::FTScore(const YEGameContext& _game_context):
 	YEGameObject("Football Score", _game_context),
 	_goal_sound_component(new YEAudioComponent(false)),
-	_soundFilename("C:\\Game Assets\\goal_stadium_cheerin_.wav")
+	_soundFilename("C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\goal_stadium_cheerin_.wav")
 {
 	// Score markers 3D game objects
 	_score_marker_player = new FTScoreMarker(_game_context);

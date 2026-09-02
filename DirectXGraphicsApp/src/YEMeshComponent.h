@@ -11,7 +11,7 @@ class DX_API YEMeshComponent : public YEBaseComponent
 public:
 
 	YEMeshComponent();
-	YEMeshComponent(YEGameObject* owner, const wchar_t* pFileName);
+	YEMeshComponent(YEGameObject* owner, const char* pFileName);
 
 	virtual ~YEMeshComponent();
 
@@ -21,16 +21,16 @@ public:
 
 	YEGameObject* GetGameObjectOwner();
 
-	void LoadModel(const wchar_t* pFileName);
+	void LoadModel(const char* pFileName);
 	void SendToSceneObject();
 
-	void SetFilenamePath(const wchar_t* pFileName);
-	const wchar_t* GetFilenamePath();
+	void SetFilenamePath(const char* pFileName);
+	const char* GetFilenamePath();
 
 private:
 	YEMeshLoader* ModelMesh;
 	YEMesh* _mesh;
-	const wchar_t* _meshFilename;
+	const char* _meshFilename;
 };
 
 #endif

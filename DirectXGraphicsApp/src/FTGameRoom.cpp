@@ -1,6 +1,6 @@
 #include "FTGameRoom.h"
 
-FTGameRoom::FTGameRoom(const YEGameContext& _game_context, const wchar_t* _meshName):
+FTGameRoom::FTGameRoom(const YEGameContext& _game_context, const char* _meshName):
 	YEGameObject("Game Room", _game_context),
 	_mesh_component(new YEMeshComponent(this, _meshName))
 {

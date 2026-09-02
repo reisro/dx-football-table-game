@@ -12,12 +12,13 @@ YEMeshLoader::~YEMeshLoader()
 {
 }
 
-void YEMeshLoader::Load(IUnknown* device, IUnknown* context, const wchar_t* pFileName)
+void YEMeshLoader::Load(IUnknown* device, IUnknown* context, const char* pFileName)
 {
 	_device = device;
 	_context = context;
 
-	std::string filename = YEStringUtils::ConvertLPWSTRToString(pFileName);
+	//std::string filename = YEStringUtils::ConvertLPWSTRToString(pFileName);
+	std::string filename = std::string(pFileName);
 
 	Assimp::Importer importer;
 	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph | aiProcess_SplitLargeMeshes);

@@ -10,7 +10,7 @@ class FTGameRoom : public YEGameObject
 {
 public:
 
-	FTGameRoom(const YEGameContext& _game_context, const wchar_t* _meshName);
+	FTGameRoom(const YEGameContext& _game_context, const char* _meshName);
 	virtual ~FTGameRoom();
 
 	void start() override;

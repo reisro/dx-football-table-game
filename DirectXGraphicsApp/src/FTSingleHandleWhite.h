@@ -11,7 +11,7 @@ class FTSingleHandleWhite : public FTSingleHandle
 {
 public:
 
-	FTSingleHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, const wchar_t* meshName);
+	FTSingleHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, const char* meshName);
 	virtual ~FTSingleHandleWhite();
 
 	void start() override;

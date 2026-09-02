@@ -2,7 +2,7 @@
 #include "YEGameContext.h"
 #include <YEPhysX.h>
 
-FTHandle::FTHandle(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName):
+FTHandle::FTHandle(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const char* meshName):
 	YEGameObject("Football Handle", _game_context),
 	_mesh_component(new YEMeshComponent(this, meshName)),
 	_player_left(p1),

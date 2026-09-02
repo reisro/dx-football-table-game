@@ -9,7 +9,7 @@
 class FTHandlePlayer : public FTHandle
 {
 public:
-	FTHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName);	
+	FTHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const char* meshName);	
 	virtual ~FTHandlePlayer();
 
 	void start() override;

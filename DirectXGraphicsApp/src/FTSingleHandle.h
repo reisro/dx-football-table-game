@@ -11,7 +11,7 @@
 class FTSingleHandle : public YEGameObject
 {
 public:
-	FTSingleHandle(const YEGameContext& _game_context, FTPlayer* p1, const wchar_t* meshName);
+	FTSingleHandle(const YEGameContext& _game_context, FTPlayer* p1, const char* meshName);
 	virtual ~FTSingleHandle();
 
 	void start() override;
@@ -23,7 +23,7 @@ public:
 protected:
 	FTPlayer* _player_left;
 	YEMeshComponent* _mesh_component;
-	const wchar_t* _meshFilename;
+	const char* _meshFilename;
 };
 
 #endif _FT_SINGLE_HANDLE_H_

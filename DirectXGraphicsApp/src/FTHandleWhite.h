@@ -12,7 +12,7 @@ class FTHandleWhite: public FTHandle
 {
 public:
 
-	FTHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const wchar_t* meshName);
+	FTHandleWhite(const YEGameContext& _game_context, FTPlayer* p1, FTPlayer* p2, const char* meshName);
 	virtual ~FTHandleWhite();
 
 	void start() override;

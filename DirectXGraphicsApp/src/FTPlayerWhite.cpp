@@ -4,7 +4,7 @@
 #include <YEPhysX.h>
 #include <functional> 
 
-FTPlayerWhite::FTPlayerWhite(const YEGameContext& _game_context, const wchar_t* _meshName, YEGameObject* target)
+FTPlayerWhite::FTPlayerWhite(const YEGameContext& _game_context, const char* _meshName, YEGameObject* target)
 	: FTPlayer(_game_context, _meshName),
 	_football_ball(target)
 {}

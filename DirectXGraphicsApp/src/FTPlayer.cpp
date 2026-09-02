@@ -1,7 +1,7 @@
 #include "FTPlayer.h"
 #include <YEPhysX.h>
 
-FTPlayer::FTPlayer(const YEGameContext& _game_context, const wchar_t* _meshName):
+FTPlayer::FTPlayer(const YEGameContext& _game_context, const char* _meshName):
 	YEGameObject("Football Player", _game_context),
 	_mesh_component(new YEMeshComponent(this, _meshName)),
 	_physics_component(new YEPhysicsComponent(_game_context))
@@ -16,7 +16,11 @@ FTPlayer::~FTPlayer()
 
 void FTPlayer::start()
 {
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+	const char* _absolutePath = YEFileSystem::FindAssetAt(_mesh_component->GetFilenamePath());
+
+	_mesh_component->LoadModel(_absolutePath);
+
+	free((void*)_absolutePath);
 }
 
 void FTPlayer::shutdown()

@@ -10,7 +10,7 @@ class FTSingleHandlePlayer : public FTSingleHandle
 {
 public:
 
-	FTSingleHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, const wchar_t* meshName);
+	FTSingleHandlePlayer(const YEGameContext& _game_context, FTPlayer* p1, const char* meshName);
 	virtual ~FTSingleHandlePlayer();
 
 	void start() override;
