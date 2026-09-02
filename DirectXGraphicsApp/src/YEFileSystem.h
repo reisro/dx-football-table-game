@@ -15,7 +15,7 @@ public:
 	YEFileSystem() = default;
 	~YEFileSystem();
 
-	static const wchar_t* FindAssetAt(const wchar_t* _assetPath);
+	static const char* FindAssetAt(const char* _assetPath);
 };
 
 #endif
