@@ -16,6 +16,8 @@ public:
 	~YEFileSystem();
 
 	static const char* FindAssetAt(const char* _assetPath);
+	static const char* FindExecutablePath(const char* _assetPath);
+
 };
 
 #endif

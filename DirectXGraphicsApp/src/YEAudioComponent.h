@@ -5,6 +5,7 @@
 
 #include "YEBaseComponent.h"
 #include "YEAudio.h"
+#include "YEFileSystem.h"
 
 class DX_API YEAudioComponent : public YEBaseComponent
 {

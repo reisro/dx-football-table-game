@@ -25,10 +25,12 @@ void YEAudioComponent::update(float _deltaTime)
 
 void YEAudioComponent::LoadSound(const char* name, const char* file)
 {
+	const char* _executablePath = YEFileSystem::FindExecutablePath(file);
+
 	if (_loop)
-		_audioEngine->LoadLoopSound(name, file);
+		_audioEngine->LoadLoopSound(name, _executablePath);
 	else
-		_audioEngine->LoadOneShotSound(name, file);
+		_audioEngine->LoadOneShotSound(name, _executablePath);
 }
 
 void YEAudioComponent::PlaySound(const char* name)

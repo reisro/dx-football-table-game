@@ -13,11 +13,13 @@ FTScoreMarker::~FTScoreMarker()
 
 void FTScoreMarker::start()
 {
-	_mesh_component = new YEMeshComponent(this, "C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\marker_new.fbx");
+	_mesh_component = new YEMeshComponent(this, ".//Game Assets//marker_new.fbx");
+
+	const char* _executablePath = YEFileSystem::FindExecutablePath(_mesh_component->GetFilenamePath());
 
 	addComponent(_mesh_component);
 
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+	_mesh_component->LoadModel(_executablePath);
 }
 
 void FTScoreMarker::shutdown()

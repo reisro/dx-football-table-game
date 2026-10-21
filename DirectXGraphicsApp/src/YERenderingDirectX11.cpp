@@ -766,7 +766,8 @@ void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg,
 
 	if (ImGui::Begin("Main, menu!", open, window_flags))
 	{
-		ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[spriteid]._texture, ImVec2(540, 309));
+		if (!_sceneObject->_spritesToRender.empty())
+			ImGui::Image((ImTextureID)(intptr_t)_sceneObject->_spritesToRender[spriteid]._texture, ImVec2(540, 309));
 	}
 	ImGui::End();
 

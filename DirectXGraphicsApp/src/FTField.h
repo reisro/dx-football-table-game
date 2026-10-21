@@ -6,6 +6,7 @@
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
 #include "YEPhysicsComponent.h"
+#include "YEFileSystem.h"
 
 class FTField : public YEGameObject
 {

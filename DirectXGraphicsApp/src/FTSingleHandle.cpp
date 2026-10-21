@@ -17,10 +17,12 @@ FTSingleHandle::~FTSingleHandle()
 
 void FTSingleHandle::start()
 {
+	const char* _executablePath = YEFileSystem::FindExecutablePath(_mesh_component->GetFilenamePath());
+
 	YEPhysics::GetInstance()->CreateJoint(*_player_left->_transform->getPosition(),
 		*_player_left->_transform->getPosition(), 1, _isCPU);
 
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+	_mesh_component->LoadModel(_executablePath);
 }
 
 void FTSingleHandle::shutdown()

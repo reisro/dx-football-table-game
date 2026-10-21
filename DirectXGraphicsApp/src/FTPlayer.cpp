@@ -16,11 +16,10 @@ FTPlayer::~FTPlayer()
 
 void FTPlayer::start()
 {
-	const char* _absolutePath = YEFileSystem::FindAssetAt(_mesh_component->GetFilenamePath());
+	const char* _executablePath = YEFileSystem::FindExecutablePath(_mesh_component->GetFilenamePath());
 
-	_mesh_component->LoadModel(_absolutePath);
-
-	free((void*)_absolutePath);
+	// initialize mesh component to load its mesh
+	_mesh_component->LoadModel(_executablePath);
 }
 
 void FTPlayer::shutdown()

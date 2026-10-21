@@ -4,7 +4,7 @@
 
 FTBall::FTBall(const YEGameContext& _game_context):
 	YEGameObject("Football Ball", _game_context),
-	_mesh_component(new YEMeshComponent(this, ".//DirectXGraphicsApp//bin//x64//Debug//Game Assets//football_ball.fbx")),
+	_mesh_component(new YEMeshComponent(this, "\\Game Assets\\football_ball.fbx")),
 	_physics_component(new YEPhysicsComponent(_game_context))
 {
 	addComponent(_mesh_component);
@@ -17,8 +17,10 @@ FTBall::~FTBall()
 
 void FTBall::start()
 {
+	const char* _executablePath = YEFileSystem::FindExecutablePath(_mesh_component->GetFilenamePath());
+
 	// initialize mesh component to load its mesh
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+	_mesh_component->LoadModel(_executablePath);
 
 	YEPhysics::GetInstance()->CreateDynamicSphere(_game_object_name, new YEVector3(.0f,0.0f,0.0f), 0.15f);
 }

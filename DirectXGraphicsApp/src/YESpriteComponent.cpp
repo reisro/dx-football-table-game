@@ -34,7 +34,9 @@ void YESpriteComponent::update(float _deltaTime)
 
 void YESpriteComponent::LoadTexture(const char* pFileName, int width, int height)
 {
-	if (_sprite->LoadTextureFromFile(pFileName, &_sprite->_texture, &width, &height))
+	const char* _executablePath = YEFileSystem::FindExecutablePath(pFileName);
+
+	if (_sprite->LoadTextureFromFile(_executablePath, &_sprite->_texture, &width, &height))
 		YELog("YESpriteComponent: Successfull loaded texture.");
 
 	YERenderer* renderer = YERenderer::GetInstance();

@@ -17,7 +17,7 @@ FTReferee::~FTReferee()
 void FTReferee::start()
 {
 	_audio_component->start();
-	_audio_component->LoadSound("Whistle", "C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\referee.wav");
+	_audio_component->LoadSound("Whistle", ".//Game Assets//referee.wav");
 	_audio_component->SetVolume(1.0f);
 	_audio_component->SetPriority(1);
 }

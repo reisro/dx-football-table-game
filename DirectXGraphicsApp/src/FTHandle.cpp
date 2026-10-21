@@ -18,10 +18,12 @@ FTHandle::~FTHandle()
 
 void FTHandle::start()
 {
+	const char* _executablePath = YEFileSystem::FindExecutablePath(_mesh_component->GetFilenamePath());
+
 	YEPhysics::GetInstance()->CreateJoint(*_player_left->_transform->getPosition(),
 										  *_player_right->_transform->getPosition(), 2, _isCPU);
 
-	_mesh_component->LoadModel(_mesh_component->GetFilenamePath());
+	_mesh_component->LoadModel(_executablePath);
 }
 
 void FTHandle::shutdown()

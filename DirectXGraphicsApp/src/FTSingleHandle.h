@@ -7,6 +7,7 @@
 #include "YEMeshComponent.h"
 #include "YEPhysicsComponent.h"
 #include "FTPlayer.h"
+#include "YEFileSystem.h"
 
 class FTSingleHandle : public YEGameObject
 {

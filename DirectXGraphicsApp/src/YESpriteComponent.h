@@ -7,6 +7,7 @@
 #include "YEBaseComponent.h"
 #include "YEGameContext.h"
 #include "YESprite.h"
+#include "YEFileSystem.h"
 
 class YEPhysics;
 

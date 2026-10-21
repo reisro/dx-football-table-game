@@ -5,6 +5,7 @@
 
 #include "YEGameObject.h"
 #include "YEMeshComponent.h"
+#include "YEFileSystem.h"
 
 class FTScoreMarker : public YEGameObject
 {

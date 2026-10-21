@@ -18,7 +18,7 @@ FTGameOverWidget::~FTGameOverWidget()
 
 void FTGameOverWidget::start()
 {
-	_sprite_component->LoadTexture("C:\\DirectX\\graphicsapplication\\DirectXGraphicsApp\\bin\\x64\\Debug\\Game Assets\\ftgame_none.png", image_width, image_height);
+	_sprite_component->LoadTexture(".//Game Assets//ftgame_none.png", image_width, image_height);
 }
 
 void FTGameOverWidget::shutdown()
