@@ -71,6 +71,7 @@ public:
 	void CreateVertexLayout() override;
 	void CreatePixelLayout() override;
 	void OnRenderUI(bool* open, int spriteid, const char* msg, const char* msg2) override;
+	void OnRenderGameplayUI(bool* open, int spriteid, const char* msg, const char* msg2) override;
 	IUnknown* GetDevice() override;
 	IUnknown* GetDeviceContext() override;
 

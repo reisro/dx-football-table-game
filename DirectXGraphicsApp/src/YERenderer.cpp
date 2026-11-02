@@ -91,6 +91,10 @@ void YERenderer::OnRenderUI(bool* open, int spriteid, const char* msg, const cha
 {
 }
 
+void YERenderer::OnRenderGameplayUI(bool* open, int spriteid, const char* msg, const char* msg2)
+{
+}
+
 IUnknown* YERenderer::GetDevice()
 {
     return _device;

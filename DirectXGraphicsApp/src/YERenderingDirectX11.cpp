@@ -486,6 +486,8 @@ void YERenderingDirectX11::BeginFrame()
 
 	if (_sceneObject->_sceneUI.showUI)
 		OnRenderUI(&_sceneObject->_sceneUI.showUI, _sceneObject->_sceneUI.spriteID, _sceneObject->_sceneUI.textMsg, _sceneObject->_sceneUI.textMsg2);
+	else
+		OnRenderGameplayUI(&_sceneObject->_sceneUI.showUI, _sceneObject->_sceneUI.spriteID, _sceneObject->_sceneUI.textMsg, _sceneObject->_sceneUI.textMsg2);
 
 	ImGui::Render();
 
@@ -790,8 +792,23 @@ void YERenderingDirectX11::OnRenderUI(bool* open, int spriteid, const char* msg,
 	{
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
 		ImGui::Begin("Text HUD2", NULL, window_flags);
-		ImGui::Text("\t\t\t\tPress P to send ball to center");
 		ImGui::Text("\t\t\t\tPress 1-7 to change camera angle");
+		ImGui::End();
+	}
+}
+
+void YERenderingDirectX11::OnRenderGameplayUI(bool* open, int spriteid, const char* msg, const char* msg2)
+{
+	ImGui::SetNextWindowBgAlpha(0.0);
+	ImGui::SetNextWindowSize(ImVec2(700, 200));
+	ImGui::SetNextWindowPos(ImVec2(400, 40));
+	ImGui::GetFont()->Scale = 2.0;
+	{
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground;
+		ImGui::Begin("Text HUD3", NULL, window_flags);
+		ImGui::Text("\t\t\t\t\t\t\tPress P to send ball to center");
+		ImGui::Text("\t\t\t\tif outbounds or ball is stationary");
+
 		ImGui::End();
 	}
 }
